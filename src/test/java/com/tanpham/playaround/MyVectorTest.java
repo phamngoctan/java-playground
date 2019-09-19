@@ -2,6 +2,7 @@ package com.tanpham.playaround;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.junit.Assert.assertThat;
+import static org.junit.Assert.assertTrue;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -74,6 +75,19 @@ public class MyVectorTest {
     public void addNewItem_butItIsNotInSequenceOfNextIndex_expectIndexOutBoundException() {
         myVector.add("Java");
         myVector.add(2, "Swift");
+    }
+    
+    @Test
+    public void add_butNextItemIsOverTheCapacity() {
+        for (int i = 0; i < 10; i++) {
+            myVector.add("Item " + i);
+        }
+        assertTrue(myVector.add(10, "Item 10"));
+    }
+    
+    @Test
+    public void add_capacityIncrease_1Point5Time() {
+        
     }
     
 }

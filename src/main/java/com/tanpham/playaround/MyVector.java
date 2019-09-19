@@ -1,15 +1,16 @@
 package com.tanpham.playaround;
 
 public class MyVector<E extends Object> {
-    private static final int DEFAULT_CAPACITY = 10;
+    private static final double DEFAULT_CAPACITY = 10;
+    private static final double FACTOR = 1.5;
     private E arr[];
     private int capacity;
     private int size;
     private int currentIndex;
     
     public MyVector() {
-        arr = (E[]) new Object[DEFAULT_CAPACITY];
-        capacity = DEFAULT_CAPACITY;
+        arr = (E[]) new Object[(int) DEFAULT_CAPACITY];
+        capacity = (int) DEFAULT_CAPACITY;
         size = 0;
         currentIndex = -1;
     }
@@ -43,8 +44,23 @@ public class MyVector<E extends Object> {
         if (index == currentIndexOfTheAddingFunction) {
             size++;
         }
-        arr[index] = item;
         currentIndex = index;
+        
+        if (currentIndexOfTheAddingFunction == capacity) {
+            increaseSize();
+        }
+        
+        arr[index] = item;
         return true;
+    }
+    
+    private void increaseSize() {
+        int newCapacity = (int) (FACTOR * size);
+        System.out.println(newCapacity);
+        E[] newCapacityArr = (E[]) new Object[newCapacity];
+        for (int i = 0; i < capacity; i++) {
+            newCapacityArr[i] = arr[i];
+        }
+        arr = newCapacityArr;
     }
 }
