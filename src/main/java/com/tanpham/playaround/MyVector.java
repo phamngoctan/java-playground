@@ -11,7 +11,7 @@ public class MyVector<E extends Object> {
         arr = (E[]) new Object[DEFAULT_CAPACITY];
         capacity = DEFAULT_CAPACITY;
         size = 0;
-        currentIndex = 0;
+        currentIndex = -1;
     }
     
     public E get(int i) {
@@ -28,8 +28,23 @@ public class MyVector<E extends Object> {
     
     public boolean add(E item) {
         size++;
-        arr[currentIndex] = item;
-        currentIndex++;
+        arr[++currentIndex] = item;
+        return true;
+    }
+    
+    public boolean add(int index, E item) {
+        int currentIndexOfTheAddingFunction = currentIndex + 1;
+        if (index < 0) {
+            throw new ArrayIndexOutOfBoundsException();
+        }
+        if (index > currentIndexOfTheAddingFunction) {
+            throw new ArrayIndexOutOfBoundsException(index + " > " + currentIndexOfTheAddingFunction);
+        }
+        if (index == currentIndexOfTheAddingFunction) {
+            size++;
+        }
+        arr[index] = item;
+        currentIndex = index;
         return true;
     }
 }
