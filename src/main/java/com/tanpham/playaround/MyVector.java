@@ -19,7 +19,7 @@ public class MyVector<E extends Object> {
         return arr[i];
     }
     
-    public int getCapacity() {
+    public int capacity() {
         return capacity;
     }
     
@@ -27,40 +27,55 @@ public class MyVector<E extends Object> {
         return size;
     }
     
-    public boolean add(E item) {
-        size++;
-        arr[++currentIndex] = item;
-        return true;
+    public boolean push(E item) {
+    	int nextIndex = currentIndex + 1;
+        return insert(nextIndex, item);
     }
     
-    public boolean add(int index, E item) {
-        int currentIndexOfTheAddingFunction = currentIndex + 1;
+    //TODO: refactor currentIndex variable, remove it I think
+    // First enhancement, should not replace the item, instead, move the item to the right
+    // add the newly created item to the specific index
+    public boolean insert(int index, E item) {
+        int nextIndexOfArray = currentIndex + 1;
         if (index < 0) {
             throw new ArrayIndexOutOfBoundsException();
         }
-        if (index > currentIndexOfTheAddingFunction) {
-            throw new ArrayIndexOutOfBoundsException(index + " > " + currentIndexOfTheAddingFunction);
+        if (index > nextIndexOfArray) {
+            throw new ArrayIndexOutOfBoundsException(index + " > " + nextIndexOfArray);
         }
-        if (index == currentIndexOfTheAddingFunction) {
-            size++;
-        }
-        currentIndex = index;
-        
-        if (currentIndexOfTheAddingFunction == capacity) {
-            increaseSize();
+                
+        if (nextIndexOfArray == capacity) {
+            increaseCapacity();
         }
         
+        increaseSizeOnlyWhenIndexOfNewItemEqualNextIndexOfArray(index, nextIndexOfArray);
+        currentIndex++;
         arr[index] = item;
         return true;
     }
+
+	private void increaseSizeOnlyWhenIndexOfNewItemEqualNextIndexOfArray(int index,
+			int nextIndexOfArray) {
+		if (index == nextIndexOfArray) {
+            size++;
+        }
+	}
     
-    private void increaseSize() {
-        int newCapacity = (int) (FACTOR * size);
-        System.out.println(newCapacity);
+    private void increaseCapacity() {
+        int newCapacity = (int) (FACTOR * DEFAULT_CAPACITY);
         E[] newCapacityArr = (E[]) new Object[newCapacity];
         for (int i = 0; i < capacity; i++) {
             newCapacityArr[i] = arr[i];
         }
         arr = newCapacityArr;
+        capacity = newCapacity;
     }
+
+	public boolean isEmpty() {
+		return size == 0;
+	}
+
+	public E at(int i) {
+		return arr[i];
+	}
 }

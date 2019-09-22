@@ -5,6 +5,7 @@ import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 public class MyVectorTest {
@@ -18,7 +19,7 @@ public class MyVectorTest {
 
     @Test
     public void myVector_initialSizeShouldBe_10() {
-        assertThat(myVector.getCapacity(), equalTo(10));
+        assertThat(myVector.capacity(), equalTo(10));
     }
     
     @Test
@@ -32,62 +33,89 @@ public class MyVectorTest {
     }
     
     @Test
-    public void addNewItem_shouldReturnTrue() {
-        assertThat(myVector.add("Java"), equalTo(true));
+    public void push_NewItem_shouldReturnTrue() {
+        assertThat(myVector.push("Java"), equalTo(true));
     }
     
     @Test
-    public void addNewItem() {
-        myVector.add("Java");
-        myVector.add("Python");
+    public void push_NewItem() {
+        myVector.push("Java");
+        myVector.push("Python");
         assertThat(myVector.size(), equalTo(2));
         assertThat(myVector.get(0), equalTo("Java"));
         assertThat(myVector.get(1), equalTo("Python"));
     }
     
     @Test
-    public void add_newItem_toSpecificIndex() {
-        myVector.add(0, "Java");
+    public void push_capacityIncrease_1Point5Time() {
+    	for (int i = 0; i < 10; i++) {
+            myVector.push("Item " + i);
+        }
+    	myVector.push("Item " + 11);
+        assertThat(myVector.size(), equalTo(11));
+        assertThat(myVector.capacity(), equalTo(15));
+    }
+    
+    @Test
+    public void insert_newItem_toSpecificIndex() {
+        myVector.insert(0, "Java");
         assertThat(myVector.size(), equalTo(1));
         assertThat(myVector.get(0), equalTo("Java"));
     }
     
     @Test
-    public void add_toExistedItem_sizeShouldNotIncrease() {
-        myVector.add("Java");
-        myVector.add(0, "Java 8");
+    public void insert_toExistedItem_sizeShouldNotIncrease() {
+        myVector.push("Java");
+        myVector.insert(0, "Java 8");
         assertThat(myVector.size(), equalTo(1));
     }
     
+    // Invalid test
+    @Ignore
     @Test
-    public void add_toExistedItem_shouldReplaceTheOldOne() {
-        myVector.add("Java");
-        myVector.add(0, "Java 8");
+    public void insert_toExistedItem_shouldReplaceTheOldOne() {
+        myVector.push("Java");
+        myVector.insert(0, "Java 8");
         assertThat(myVector.get(0), equalTo("Java 8"));
     }
     
-    @Test(expected = java.lang.ArrayIndexOutOfBoundsException.class)
-    public void add_negativeIndex_exceptionShouldBeThrown() {
-        myVector.add(-1, "Python");
+    @Test
+    public void insert_toExistedItem_shouldShiftAllTrailingElementsToTheRight() {
+        myVector.push("Java");
+        myVector.insert(0, "Java 8");
+        assertThat(myVector.size(), equalTo(2));
+        assertThat(myVector.get(0), equalTo("Java 8"));
+        assertThat(myVector.get(1), equalTo("Java"));
     }
     
     @Test(expected = java.lang.ArrayIndexOutOfBoundsException.class)
-    public void addNewItem_butItIsNotInSequenceOfNextIndex_expectIndexOutBoundException() {
-        myVector.add("Java");
-        myVector.add(2, "Swift");
+    public void insert_negativeIndex_exceptionShouldBeThrown() {
+        myVector.insert(-1, "Python");
+    }
+    
+    @Test(expected = java.lang.ArrayIndexOutOfBoundsException.class)
+    public void insert_newItem_butItIsNotInSequenceOfNextIndex_expectIndexOutBoundException() {
+        myVector.push("Java");
+        myVector.insert(2, "Swift");
     }
     
     @Test
-    public void add_butNextItemIsOverTheCapacity() {
+    public void insert_butNextItemIsOverTheCapacity() {
         for (int i = 0; i < 10; i++) {
-            myVector.add("Item " + i);
+            myVector.push("Item " + i);
         }
-        assertTrue(myVector.add(10, "Item 10"));
+        assertTrue(myVector.insert(10, "Item 10"));
     }
     
     @Test
-    public void add_capacityIncrease_1Point5Time() {
-        
+    public void isEmpty() {
+    	assertThat(myVector.isEmpty(), equalTo(true));
+    }
+    
+    @Test
+    public void at() {
+    	myVector.push("Java");
+    	assertThat(myVector.at(0), equalTo("Java"));
     }
     
 }
