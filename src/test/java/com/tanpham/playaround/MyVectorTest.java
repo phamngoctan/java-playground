@@ -2,7 +2,6 @@ package com.tanpham.playaround;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.junit.Assert.assertThat;
-import static org.junit.Assert.assertTrue;
 
 import org.junit.Before;
 import org.junit.Ignore;
@@ -48,12 +47,10 @@ public class MyVectorTest {
     
     @Test
     public void push_capacityIncrease_1Point5Time() {
-    	for (int i = 0; i < 10; i++) {
-            myVector.push("Item " + i);
-        }
+    	makeMyVectorIncreaseTheCapacity();
     	myVector.push("Item " + 11);
         assertThat(myVector.size(), equalTo(11));
-        assertThat(myVector.capacity(), equalTo(15));
+        assertThat(myVector.capacity(), equalTo(20));
     }
     
     @Test
@@ -61,13 +58,6 @@ public class MyVectorTest {
         myVector.insert(0, "Java");
         assertThat(myVector.size(), equalTo(1));
         assertThat(myVector.get(0), equalTo("Java"));
-    }
-    
-    @Test
-    public void insert_toExistedItem_sizeShouldNotIncrease() {
-        myVector.push("Java");
-        myVector.insert(0, "Java 8");
-        assertThat(myVector.size(), equalTo(1));
     }
     
     // Invalid test
@@ -101,10 +91,16 @@ public class MyVectorTest {
     
     @Test
     public void insert_butNextItemIsOverTheCapacity() {
+        makeMyVectorIncreaseTheCapacity();
+        assertThat(myVector.size(), equalTo(11));
+        assertThat(myVector.capacity(), equalTo(20));
+    }
+
+    private void makeMyVectorIncreaseTheCapacity() {
         for (int i = 0; i < 10; i++) {
             myVector.push("Item " + i);
         }
-        assertTrue(myVector.insert(10, "Item 10"));
+        myVector.insert(10, "Item 10");
     }
     
     @Test
@@ -113,9 +109,41 @@ public class MyVectorTest {
     }
     
     @Test
+    public void isEmpty_notEmptyCase() {
+        myVector.push("Java");
+        assertThat(myVector.isEmpty(), equalTo(false));
+    }
+    
+    @Test
     public void at() {
     	myVector.push("Java");
     	assertThat(myVector.at(0), equalTo("Java"));
     }
     
+    @Test
+    public void prepend_zeroIndexInsertion() {
+        myVector.push("Java");
+        myVector.prepend("Java 11");
+        assertThat(myVector.size(), equalTo(2));
+        assertThat(myVector.at(0), equalTo("Java 11"));
+        assertThat(myVector.at(1), equalTo("Java"));
+    }
+    
+    @Test
+    public void pop_getTheVeryTopReturned_removeTheRefToIt() {
+        myVector.push("Java");
+        myVector.push("Python");
+        myVector.push("DotNet");
+        String result = myVector.pop();
+        assertThat(result, equalTo("DotNet"));
+        assertThat(myVector.size(), equalTo(2));
+    }
+    
+    @Test
+    public void pop_expectTheDecreasingSizeBehaviorTrigger() {
+        makeMyVectorIncreaseTheCapacity();
+        assertThat(myVector.capacity(), equalTo(20));
+        myVector.pop();
+        assertThat(myVector.capacity(), equalTo(10));
+    }
 }

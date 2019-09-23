@@ -2,7 +2,7 @@ package com.tanpham.playaround;
 
 public class MyVector<E extends Object> {
     private static final double DEFAULT_CAPACITY = 10;
-    private static final double FACTOR = 1.5;
+    private static final double FACTOR = 2;
     private E arr[];
     private int capacity;
     private int size;
@@ -35,30 +35,34 @@ public class MyVector<E extends Object> {
     //TODO: refactor currentIndex variable, remove it I think
     // First enhancement, should not replace the item, instead, move the item to the right
     // add the newly created item to the specific index
+    /**
+     * when it reaches capacity, resize to double the size
+     */
     public boolean insert(int index, E item) {
         int nextIndexOfArray = currentIndex + 1;
         if (index < 0) {
-            throw new ArrayIndexOutOfBoundsException();
+            throw new ArrayIndexOutOfBoundsException("Position to insert cannot less than Zero");
         }
         if (index > nextIndexOfArray) {
             throw new ArrayIndexOutOfBoundsException(index + " > " + nextIndexOfArray);
         }
-                
-        if (nextIndexOfArray == capacity) {
+
+        if (nextIndexOfArray == capacity - 1) {
             increaseCapacity();
         }
         
         increaseSizeOnlyWhenIndexOfNewItemEqualNextIndexOfArray(index, nextIndexOfArray);
         currentIndex++;
+        shiftElementsToRight(index);
         arr[index] = item;
         return true;
     }
 
 	private void increaseSizeOnlyWhenIndexOfNewItemEqualNextIndexOfArray(int index,
 			int nextIndexOfArray) {
-		if (index == nextIndexOfArray) {
+//		if (index == nextIndexOfArray) {
             size++;
-        }
+//        }
 	}
     
     private void increaseCapacity() {
@@ -78,4 +82,28 @@ public class MyVector<E extends Object> {
 	public E at(int i) {
 		return arr[i];
 	}
+	
+	public void prepend(E value) {
+        insert(0, value);
+    }
+	
+	/**
+	 * when popping an item, if size is 1/4 of capacity, resize to half
+	 */
+	public E pop() {
+	    E value = arr[currentIndex];
+	    arr[currentIndex] = null;
+	    currentIndex--;
+	    size--;
+	    return value;
+	}
+	
+	private void shiftElementsToRight(int index) {
+	    int i = size - 1;
+	    while (i >= index && i < capacity) {
+	        arr[i + 1] = arr[i];
+	        i--;
+	    }
+	}
+    
 }
