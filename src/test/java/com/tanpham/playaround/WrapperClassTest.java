@@ -73,6 +73,26 @@ public class WrapperClassTest {
         assertThat(i1 == i2, equalTo(true));
     }
     
+    @Test
+    public void constructorWays_outOfTheCacheRange_thenTheyShouldNotEqual() {
+        assertThat(Integer.valueOf("128") == Integer.valueOf("128"), equalTo(false));
+    }
     
+    /*
+     * For unboxing, most of the case should be equal
+     */
+    @Test
+    public void intUnboxing() {
+        assertThat(1 == new Integer("1"), equalTo(true));
+        assertThat(128 == new Integer("128"), equalTo(true));
+    }
+    
+    /*
+     * Unboxing a String is a special case, it should not be equal
+     */
+    @Test
+    public void stringUnboxing_shouldNeverEqual() {
+        assertThat("hello" == new String("hello"), equalTo(false));
+    }
     
 }
