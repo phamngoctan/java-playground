@@ -101,14 +101,7 @@ public class MyVector<E extends Object> {
 	 * when popping an item, if size is 1/4 of capacity, resize to half
 	 */
 	public E pop() {
-	    E value = arr[currentIndex];
-	    arr[currentIndex] = null;
-	    currentIndex--;
-	    size--;
-	    if (size <= capacity / 4) {
-	        decreaseCapacity();
-	    }
-	    return value;
+	    return delete(size - 1);
 	}
 	
 	private void shiftElementsToRight(int index) {
@@ -123,5 +116,34 @@ public class MyVector<E extends Object> {
     private E[] createNewArray(int newCapacity) {
         return (E[]) new Object[newCapacity];
     }
+	
+	public E delete(int index) {
+	    E deletedItemValue = arr[index];
+	    shiftTrailingElementsToLeft(index);
+        arr[size - 1] = null;
+        currentIndex--;
+        size--;
+        if (size <= capacity / 4) {
+            decreaseCapacity();
+        }
+        return deletedItemValue;
+	}
+	
+	private void shiftTrailingElementsToLeft(int index) {
+	    int i = index;
+	    while (i < size) {
+	        arr[i] = arr[i + 1];
+            i++;
+	    }
+	}
+	
+	public int find(E value) {
+	    for (int i = 0; i < size; i++) {
+	        if (arr[i] == value) {
+	            return i;
+	        }
+	    }
+	    return -1;
+	}
     
 }

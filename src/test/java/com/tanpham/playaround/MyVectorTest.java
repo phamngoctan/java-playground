@@ -142,14 +142,67 @@ public class MyVectorTest {
     public void pop_expectTheDecreasingSizeBehaviorTrigger() {
         makeMyVectorIncreaseTheCapacity();
         assertThat(myVector.capacity(), equalTo(20));
-        makeMyVectorDecreaseTheCapacity();
+        makeMyVectorDecreaseTheCapacityByPopApproach();
         assertThat(myVector.capacity(), equalTo(10));
     }
 
-    private void makeMyVectorDecreaseTheCapacity() {
+    private void makeMyVectorDecreaseTheCapacityByPopApproach() {
         int sizeToBeResized = myVector.capacity() / 4 + 1;
         for (int i = 0; i < sizeToBeResized; i++) {
             myVector.pop();
         }
+    }
+    
+    private void makeMyVectorDecreaseTheCapacityByDeleteApproach() {
+        int sizeToBeResized = myVector.capacity() / 4 + 1;
+        for (int i = 0; i < sizeToBeResized; i++) {
+            myVector.delete(0);
+        }
+    }
+    
+    @Test
+    public void deleteAtIndex_sizeShouldBeReduced_shiftLeftAllTheTrailingElements() {
+        myVector.push("Java");
+        myVector.push("Python");
+        myVector.push("Swift");
+        myVector.delete(1);
+        assertThat(myVector.size(), equalTo(2));
+        assertThat(myVector.at(0), equalTo("Java"));
+        assertThat(myVector.at(1), equalTo("Swift"));
+        assertThat(myVector.at(2), equalTo(null));
+    }
+    
+    @Test
+    public void deleteAtIndex_capacityReducedTest() {
+        makeMyVectorIncreaseTheCapacity();
+        assertThat(myVector.capacity(), equalTo(20));
+        makeMyVectorDecreaseTheCapacityByDeleteApproach();
+        assertThat(myVector.capacity(), equalTo(10));
+    }
+    
+    @Test
+    public void find_notFoundAnyMatchedItem_shouldReturnMinusOne() {
+        myVector.push("Java");
+        int result = myVector.find("Swift");
+        assertThat(result, equalTo(-1));
+    }
+    
+    @Test
+    public void find_thereIsOneMatchedItem() {
+        myVector.push("C#");
+        myVector.push("Java");
+        int result = myVector.find("Java");
+        assertThat(result, equalTo(1));
+    }
+    
+    @Test
+    public void find_thereIsTwoMatchedItems_returnFirstMatchedItemIndex() {
+        myVector.push("Swift");
+        myVector.push("Python");
+        myVector.push("Java");
+        myVector.push("C#");
+        myVector.push("Java");
+        int result = myVector.find("Java");
+        assertThat(result, equalTo(2));
     }
 }
