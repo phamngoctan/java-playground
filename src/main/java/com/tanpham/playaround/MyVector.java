@@ -9,7 +9,7 @@ public class MyVector<E extends Object> {
     private int currentIndex;
     
     public MyVector() {
-        arr = (E[]) new Object[(int) DEFAULT_CAPACITY];
+        arr = createNewArray((int) DEFAULT_CAPACITY);
         capacity = (int) DEFAULT_CAPACITY;
         size = 0;
         currentIndex = -1;
@@ -67,8 +67,18 @@ public class MyVector<E extends Object> {
     
     private void increaseCapacity() {
         int newCapacity = (int) (FACTOR * DEFAULT_CAPACITY);
-        E[] newCapacityArr = (E[]) new Object[newCapacity];
+        E[] newCapacityArr = createNewArray(newCapacity);
         for (int i = 0; i < capacity; i++) {
+            newCapacityArr[i] = arr[i];
+        }
+        arr = newCapacityArr;
+        capacity = newCapacity;
+    }
+    
+    private void decreaseCapacity() {
+        int newCapacity = (int) (capacity / FACTOR);
+        E[] newCapacityArr = createNewArray(newCapacity);
+        for (int i = 0; i < newCapacity; i++) {
             newCapacityArr[i] = arr[i];
         }
         arr = newCapacityArr;
@@ -95,6 +105,9 @@ public class MyVector<E extends Object> {
 	    arr[currentIndex] = null;
 	    currentIndex--;
 	    size--;
+	    if (size <= capacity / 4) {
+	        decreaseCapacity();
+	    }
 	    return value;
 	}
 	
@@ -105,5 +118,10 @@ public class MyVector<E extends Object> {
 	        i--;
 	    }
 	}
+	
+	@SuppressWarnings("unchecked")
+    private E[] createNewArray(int newCapacity) {
+        return (E[]) new Object[newCapacity];
+    }
     
 }

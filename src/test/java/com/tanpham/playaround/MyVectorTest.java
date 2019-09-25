@@ -48,7 +48,6 @@ public class MyVectorTest {
     @Test
     public void push_capacityIncrease_1Point5Time() {
     	makeMyVectorIncreaseTheCapacity();
-    	myVector.push("Item " + 11);
         assertThat(myVector.size(), equalTo(11));
         assertThat(myVector.capacity(), equalTo(20));
     }
@@ -97,10 +96,10 @@ public class MyVectorTest {
     }
 
     private void makeMyVectorIncreaseTheCapacity() {
-        for (int i = 0; i < 10; i++) {
+        int sizeToBeIncreasedSize = myVector.capacity() + 1;
+        for (int i = 0; i < sizeToBeIncreasedSize; i++) {
             myVector.push("Item " + i);
         }
-        myVector.insert(10, "Item 10");
     }
     
     @Test
@@ -143,7 +142,14 @@ public class MyVectorTest {
     public void pop_expectTheDecreasingSizeBehaviorTrigger() {
         makeMyVectorIncreaseTheCapacity();
         assertThat(myVector.capacity(), equalTo(20));
-        myVector.pop();
+        makeMyVectorDecreaseTheCapacity();
         assertThat(myVector.capacity(), equalTo(10));
+    }
+
+    private void makeMyVectorDecreaseTheCapacity() {
+        int sizeToBeResized = myVector.capacity() / 4 + 1;
+        for (int i = 0; i < sizeToBeResized; i++) {
+            myVector.pop();
+        }
     }
 }
