@@ -9,7 +9,7 @@ public class MyVector<E extends Object> {
     private int currentIndex;
     
     public MyVector() {
-        arr = (E[]) new Object[(int) DEFAULT_CAPACITY];
+        arr = createNewArray((int) DEFAULT_CAPACITY);
         capacity = (int) DEFAULT_CAPACITY;
         size = 0;
         currentIndex = -1;
@@ -67,8 +67,18 @@ public class MyVector<E extends Object> {
     
     private void increaseCapacity() {
         int newCapacity = (int) (FACTOR * DEFAULT_CAPACITY);
-        E[] newCapacityArr = (E[]) new Object[newCapacity];
+        E[] newCapacityArr = createNewArray(newCapacity);
         for (int i = 0; i < capacity; i++) {
+            newCapacityArr[i] = arr[i];
+        }
+        arr = newCapacityArr;
+        capacity = newCapacity;
+    }
+    
+    private void decreaseCapacity() {
+        int newCapacity = (int) (capacity / FACTOR);
+        E[] newCapacityArr = createNewArray(newCapacity);
+        for (int i = 0; i < newCapacity; i++) {
             newCapacityArr[i] = arr[i];
         }
         arr = newCapacityArr;
@@ -91,11 +101,7 @@ public class MyVector<E extends Object> {
 	 * when popping an item, if size is 1/4 of capacity, resize to half
 	 */
 	public E pop() {
-	    E value = arr[currentIndex];
-	    arr[currentIndex] = null;
-	    currentIndex--;
-	    size--;
-	    return value;
+	    return delete(size - 1);
 	}
 	
 	private void shiftElementsToRight(int index) {
@@ -104,6 +110,40 @@ public class MyVector<E extends Object> {
 	        arr[i + 1] = arr[i];
 	        i--;
 	    }
+	}
+	
+	@SuppressWarnings("unchecked")
+    private E[] createNewArray(int newCapacity) {
+        return (E[]) new Object[newCapacity];
+    }
+	
+	public E delete(int index) {
+	    E deletedItemValue = arr[index];
+	    shiftTrailingElementsToLeft(index);
+        arr[size - 1] = null;
+        currentIndex--;
+        size--;
+        if (size <= capacity / 4) {
+            decreaseCapacity();
+        }
+        return deletedItemValue;
+	}
+	
+	private void shiftTrailingElementsToLeft(int index) {
+	    int i = index;
+	    while (i < size) {
+	        arr[i] = arr[i + 1];
+            i++;
+	    }
+	}
+	
+	public int find(E value) {
+	    for (int i = 0; i < size; i++) {
+	        if (arr[i] == value) {
+	            return i;
+	        }
+	    }
+	    return -1;
 	}
     
 }
