@@ -25,4 +25,9 @@ public class MyLinkedListWithTailTest {
         assertThat(linkedList.empty(), equalTo(true));
     }
     
+    @Test(expected = IndexOutOfBoundsException.class)
+    public void valueAt_noItemInLinkedListYet_shouldBeAnException() {
+        linkedList.valueAt(0);
+    }
+    
 }

@@ -9,8 +9,23 @@ public class MyLinkedListWithTail<E> {
         return size;
     }
 
-    public Object empty() {
+    public boolean empty() {
         return true;
+    }
+
+    public E valueAt(int index) {
+        if (index < 0 || index >= size) {
+            throw new IndexOutOfBoundsException();
+        }
+        Node<E> next = head.next();
+        int i = 0;
+        while (next != null) {
+            if (i == index) {
+                return next.value();
+            }
+            i++;
+        }
+        return null;
     }
     
 }
