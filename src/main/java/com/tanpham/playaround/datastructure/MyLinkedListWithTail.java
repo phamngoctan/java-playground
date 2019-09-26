@@ -8,5 +8,9 @@ public class MyLinkedListWithTail<E> {
     public int size() {
         return size;
     }
+
+    public Object empty() {
+        return true;
+    }
     
 }

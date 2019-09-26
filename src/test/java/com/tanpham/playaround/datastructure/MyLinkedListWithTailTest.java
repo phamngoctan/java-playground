@@ -20,4 +20,9 @@ public class MyLinkedListWithTailTest {
         assertThat(linkedList.size(), equalTo(0));
     }
     
+    @Test
+    public void empty_checkIfLinkedListIsEmpty() {
+        assertThat(linkedList.empty(), equalTo(true));
+    }
+    
 }
