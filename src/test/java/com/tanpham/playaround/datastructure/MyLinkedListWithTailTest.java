@@ -123,4 +123,6 @@ public class MyLinkedListWithTailTest {
     	assertThat(linkedList.valueAt(1), equalTo("Python"));
     }
     
+    //TODO: next task: support front() back() methods
+    
 }
