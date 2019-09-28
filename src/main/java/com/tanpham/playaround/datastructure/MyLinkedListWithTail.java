@@ -104,5 +104,12 @@ public class MyLinkedListWithTail<E> {
 		}
 		return next;
 	}
+	
+	public void pushBack(E value) {
+		Node<E> newNode = new Node<>(value);
+		tail.next = newNode;
+		tail = newNode;
+		size++;
+	}
     
 }

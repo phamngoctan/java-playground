@@ -115,4 +115,12 @@ public class MyLinkedListWithTailTest {
     	linkedList.popBack();
     }
     
+    @Test
+    public void pushBack_newItemAdded() {
+    	linkedList.pushFront("Java");
+    	linkedList.pushBack("Python");
+    	assertThat(linkedList.size(), equalTo(2));
+    	assertThat(linkedList.valueAt(1), equalTo("Python"));
+    }
+    
 }
