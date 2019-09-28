@@ -138,6 +138,9 @@ public class MyLinkedListWithTail<E> {
 		//TODO: implement the remaining part for inserting new node at index
 	}
 	
-	//TODO: also implement the method to find the middle item of linkedlist
+	public E getMiddle() {
+		//TODO: also implement the method to find the middle item of linkedlist
+		return null;
+	}
 	
 }
