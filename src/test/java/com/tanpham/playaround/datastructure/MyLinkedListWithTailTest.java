@@ -1,6 +1,7 @@
 package com.tanpham.playaround.datastructure;
 
 import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.CoreMatchers.nullValue;
 import static org.junit.Assert.assertThat;
 
 import org.junit.Before;
@@ -123,6 +124,49 @@ public class MyLinkedListWithTailTest {
     	assertThat(linkedList.valueAt(1), equalTo("Python"));
     }
     
-    //TODO: next task: support front() back() methods
+    @Test
+    public void pushBack_makeSureTheHeadIsUpdatedWhenInitTheLinkedListFromTheTail() {
+    	linkedList.pushBack("Java");
+    	linkedList.pushFront("Python");
+    	assertThat(linkedList.valueAt(1), equalTo("Java"));
+    }
+    
+    @Test
+    public void front_caseNoItemYet_shouldReturnNull() {
+    	assertThat(linkedList.front(), nullValue());
+    }
+    
+    @Test
+    public void front_caseThereIsItemOnHead() {
+    	linkedList.pushBack("Java");
+    	assertThat(linkedList.front(), equalTo("Java"));
+    }
+    
+    @Test
+    public void back_caseNoItemYet_shouldReturnNull() {
+    	assertThat(linkedList.back(), nullValue());
+    }
+    
+    @Test
+    public void back_caseThereIsItemOnHead() {
+    	linkedList.pushFront("Java");
+    	assertThat(linkedList.back(), equalTo("Java"));
+    }
+    
+    @Test(expected = IndexOutOfBoundsException.class)
+    public void insert_withNegativeIndex_exceptionShouldBeThrown() {
+    	linkedList.insert(-1, "Java");
+    }
+    
+    @Test(expected = IndexOutOfBoundsException.class)
+    public void insert_withIndexBiggerThanSize_exceptionShouldBeThrown() {
+    	linkedList.insert(1, "Java");
+    }
+    
+    @Test
+    public void insert_withIndexEqualSize_newItemShouldBeInsertedCorrectly() {
+    	linkedList.insert(0, "Java");
+    	assertThat(linkedList.valueAt(0), equalTo("Java"));
+    }
     
 }

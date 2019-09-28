@@ -40,10 +40,10 @@ public class MyLinkedListWithTail<E> {
 
     public void pushFront(E value) {
         Node<E> newNode = new Node<>(value);
-        if (head != null) {
-            newNode.next = head;
-        } else {
+        if (head == null) {
         	tail = newNode;
+        } else {
+        	newNode.next = head;
         }
         head = newNode;
         
@@ -107,9 +107,35 @@ public class MyLinkedListWithTail<E> {
 	
 	public void pushBack(E value) {
 		Node<E> newNode = new Node<>(value);
-		tail.next = newNode;
+		if (tail == null) {
+			head = newNode;
+		} else {
+			tail.next = newNode;
+		}
 		tail = newNode;
 		size++;
 	}
+	
+	public E front() {
+		if (head == null) {
+			return null;
+		}
+		return head.value;
+	}
+	
+	public E back() {
+		if (tail == null) {
+			return null;
+		}
+		return tail.value;
+	}
     
+	public void insert(int index, E value) {
+		if (index < 0 || index > size) {
+			throw new IndexOutOfBoundsException();
+		}
+		
+		//TODO: implement the remaining part for inserting new node at index
+	}
+	
 }
