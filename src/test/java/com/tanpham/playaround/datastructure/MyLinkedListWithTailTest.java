@@ -57,4 +57,62 @@ public class MyLinkedListWithTailTest {
         assertThat(linkedList.valueAt(1), equalTo("Python"));
     }
     
+    /**
+     * Python -> Java
+     */
+    @Test
+    public void popFront_whenThereAreMoreThanOneItemRemaining() {
+    	linkedList.pushFront("Java");
+    	linkedList.pushFront("Python");
+    	
+    	assertThat(linkedList.popFront(), equalTo("Python"));
+    	assertThat(linkedList.valueAt(0), equalTo("Java"));
+    	assertThat(linkedList.size(), equalTo(1));
+    }
+    
+    @Test
+    public void popFront_whenThereIsNoRemainingItem() {
+    	linkedList.pushFront("Java");
+    	
+    	assertThat(linkedList.popFront(), equalTo("Java"));
+    	assertThat(linkedList.size(), equalTo(0));
+    }
+    
+    @Test
+    public void getItemValueRightBeforeTail_inCaseSizeLessThan1_nullShouldBeReturned() {
+    	assertThat(linkedList.pickValueRightBeforeTail(), equalTo(null));
+    }
+    
+    @Test
+    public void getItemValueRightBeforeTail_inCaseSizeEquals1_nullShouldBeReturned() {
+    	linkedList.pushFront("Java");
+    	assertThat(linkedList.pickValueRightBeforeTail(), equalTo(null));
+    }
+    
+    /**
+     * Python -> Java
+     */
+    @Test
+    public void getItemValueRightBeforeTail_correctValueShouldBeReturned() {
+    	linkedList.pushFront("Java");
+    	linkedList.pushFront("Python");
+    	
+    	assertThat(linkedList.pickValueRightBeforeTail(), equalTo("Python"));
+    }
+    
+    @Test
+    public void popBack_whenThereIsNoRemainingItem() {
+    	linkedList.pushFront("Java");
+    	assertThat(linkedList.popBack(), equalTo("Java"));
+    	assertThat(linkedList.size(), equalTo(0));
+    }
+    
+    @Test(expected = IndexOutOfBoundsException.class)
+    public void popFront_makeSureTheTailIsUpdated_inCaseTheSizeReduceToZero() {
+    	linkedList.pushFront("Java");
+    	linkedList.popFront();
+    	assertThat(linkedList.size(), equalTo(0));
+    	linkedList.popBack();
+    }
+    
 }
