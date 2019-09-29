@@ -143,14 +143,21 @@ public class MyLinkedListWithTail<E> {
 			return;
 		}
 		
+		if (index == 0) {
+			pushFront(value);
+			return;
+		}
+		
 		Node<E> next = head;
 		int i = 0;
-		while (next != null) {
-			if (index == i) {
-				
-			}
+		// Idea is to pick the item before the index to be inserted
+		while (next != null && i != index - 1) {
+			next = next.next;
 			i++;
 		}
+		
+		newNode.next = next.next;
+		next.next = newNode;
 		
 		//TODO: implement the remaining part for inserting new node at index
 	}

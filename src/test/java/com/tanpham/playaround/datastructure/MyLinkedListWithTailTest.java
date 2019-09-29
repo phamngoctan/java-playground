@@ -170,11 +170,50 @@ public class MyLinkedListWithTailTest {
     	assertThat(linkedList.valueAt(0), equalTo("Java"));
     }
     
+    /**
+     * Python -> Java
+     */
     @Test
-    public void insert_normalCase() {
+    public void insert_inTheMiddleOfList() {
     	linkedList.pushFront("Java");
     	linkedList.pushFront("Python");
+    	
     	linkedList.insert(1, "Swift");
+    	
+    	assertThat(linkedList.size(), equalTo(3));
+    	assertThat(linkedList.valueAt(0), equalTo("Python"));
+    	assertThat(linkedList.valueAt(1), equalTo("Swift"));
+    	assertThat(linkedList.valueAt(2), equalTo("Java"));
     }
     
+    /**
+     * Java -> Python -> Swift
+     */
+    @Test
+    public void insert_atTheEndOfListHasManyItem() {
+    	linkedList.pushFront("Java");
+    	linkedList.pushBack("Python");
+    	linkedList.pushBack("Swift");
+    	
+    	linkedList.insert(3, "Android");
+    	
+    	assertThat(linkedList.size(), equalTo(4));
+    	assertThat(linkedList.valueAt(3), equalTo("Android"));
+    }
+    
+    /**
+     * Java -> Python -> Swift
+     */
+    @Test
+    public void insert_atTheHeadOfListHasManyItem() {
+    	linkedList.pushFront("Java");
+    	linkedList.pushBack("Python");
+    	linkedList.pushBack("Swift");
+    	
+    	linkedList.insert(0, "Android");
+    	
+    	assertThat(linkedList.size(), equalTo(4));
+    	assertThat(linkedList.valueAt(0), equalTo("Android"));
+    	assertThat(linkedList.valueAt(3), equalTo("Swift"));
+    }
 }
