@@ -166,7 +166,15 @@ public class MyLinkedListWithTailTest {
     @Test
     public void insert_withIndexEqualSize_newItemShouldBeInsertedCorrectly() {
     	linkedList.insert(0, "Java");
+    	assertThat(linkedList.size(), equalTo(1));
     	assertThat(linkedList.valueAt(0), equalTo("Java"));
+    }
+    
+    @Test
+    public void insert_normalCase() {
+    	linkedList.pushFront("Java");
+    	linkedList.pushFront("Python");
+    	linkedList.insert(1, "Swift");
     }
     
 }

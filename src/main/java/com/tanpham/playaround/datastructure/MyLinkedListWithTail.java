@@ -135,6 +135,23 @@ public class MyLinkedListWithTail<E> {
 			throw new IndexOutOfBoundsException();
 		}
 		
+		Node<E> newNode = new Node<E>(value);
+		size++;
+		if (head == null) {
+			head = newNode;
+			tail = newNode;
+			return;
+		}
+		
+		Node<E> next = head;
+		int i = 0;
+		while (next != null) {
+			if (index == i) {
+				
+			}
+			i++;
+		}
+		
 		//TODO: implement the remaining part for inserting new node at index
 	}
 	
