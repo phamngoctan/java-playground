@@ -174,7 +174,7 @@ public class MyLinkedListWithTailTest {
      * Python -> Java
      */
     @Test
-    public void insert_inTheMiddleOfList() {
+    public void insert_inTheMiddleOfList_allTheTrailingElementsShouldBeShiftedToTheRight() {
     	linkedList.pushFront("Java");
     	linkedList.pushFront("Python");
     	
@@ -216,4 +216,50 @@ public class MyLinkedListWithTailTest {
     	assertThat(linkedList.valueAt(0), equalTo("Android"));
     	assertThat(linkedList.valueAt(3), equalTo("Swift"));
     }
+    
+    @Test
+    public void prepend_alsoShouldBeSupported() {
+    	linkedList.insert(0, "Java");
+    	linkedList.prepend("Python");
+    	
+    	assertThat(linkedList.size(), equalTo(2));
+    	assertThat(linkedList.valueAt(0), equalTo("Python"));
+    }
+    
+    @Test(expected = IndexOutOfBoundsException.class)
+    public void delete_whenLinkedListEmpty_shouldThrowException() {
+    	linkedList.delete(0);
+    }
+    
+    @Test(expected = IndexOutOfBoundsException.class)
+    public void delete_withNegativeIndex_shouldThrowException() {
+    	linkedList.delete(-1);
+    }
+    
+    @Test(expected = IndexOutOfBoundsException.class)
+    public void delete_butTheIndexBiggerThanTheSize() {
+    	linkedList.insert(0, "Java");
+    	linkedList.delete(1);
+    }
+    
+    @Test
+    public void delete_whenThereIsOneItem_listShouldBeEmpty() {
+    	linkedList.insert(0, "Java");
+    	linkedList.delete(0);
+    	
+    	assertThat(linkedList.size(), equalTo(0));
+    	assertThat(linkedList.empty(), equalTo(true));
+    }
+    
+    @Test
+    public void delete_whenThereAreManyItemInside() {
+    	linkedList.insert(0, "Java");
+    	linkedList.insert(1, "Python");
+    	linkedList.insert(2, "Swift");
+    	
+    	linkedList.delete(1);
+    	assertThat(linkedList.size(), equalTo(2));
+    	assertThat(linkedList.valueAt(1), equalTo("Swift"));
+    }
+    
 }

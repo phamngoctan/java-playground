@@ -135,19 +135,22 @@ public class MyLinkedListWithTail<E> {
 			throw new IndexOutOfBoundsException();
 		}
 		
-		Node<E> newNode = new Node<E>(value);
-		size++;
-		if (head == null) {
-			head = newNode;
-			tail = newNode;
-			return;
-		}
-		
-		if (index == 0) {
+		if (head == null || index == 0) {
 			pushFront(value);
 			return;
 		}
 		
+		Node<E> next = getItemRightBefore(index);
+		
+		Node<E> newNode = new Node<E>(value);
+		newNode.next = next.next;
+		next.next = newNode;
+		size++;
+		
+		//TODO: implement the remaining part for inserting new node at index
+	}
+
+	private Node<E> getItemRightBefore(int index) {
 		Node<E> next = head;
 		int i = 0;
 		// Idea is to pick the item before the index to be inserted
@@ -155,11 +158,36 @@ public class MyLinkedListWithTail<E> {
 			next = next.next;
 			i++;
 		}
+		return next;
+	}
+	
+	public void prepend(E value) {
+		pushFront(value);
+	}
+	
+	public void delete(int index) {
+		if (index < 0 || index >= size) {
+			throw new IndexOutOfBoundsException();
+		}
 		
-		newNode.next = next.next;
-		next.next = newNode;
+		if (index == 0) {
+			popFront();
+			return;
+		}
 		
-		//TODO: implement the remaining part for inserting new node at index
+		Node<E> itemRightBefore = getItemRightBefore(index);
+		itemRightBefore.next = itemRightBefore.next.next;
+		itemRightBefore.next.next = null;
+		size--;
+	}
+	
+	public void remove(E value) {
+		Node<E> next = head;
+		while (next != null) {
+			if (next.value == value) {
+				
+			}
+		}
 	}
 	
 	public E getMiddle() {
