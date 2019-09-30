@@ -40,10 +40,10 @@ public class MyLinkedListWithTail<E> {
 
     public void pushFront(E value) {
         Node<E> newNode = new Node<>(value);
-        if (head != null) {
-            newNode.next = head;
-        } else {
+        if (head == null) {
         	tail = newNode;
+        } else {
+        	newNode.next = head;
         }
         head = newNode;
         
@@ -75,13 +75,13 @@ public class MyLinkedListWithTail<E> {
 			tail = itemBeforeTail;
 		} else {
 			// This case happen when there is only one item in the linkedlist
-			resetLinkedList();
+			resetHeadTail();
 		}
 		size--;
 		return value;
 	}
 	
-	private void resetLinkedList() {
+	private void resetHeadTail() {
 		tail = null;
 		head = null;
 	}
@@ -107,9 +107,128 @@ public class MyLinkedListWithTail<E> {
 	
 	public void pushBack(E value) {
 		Node<E> newNode = new Node<>(value);
-		tail.next = newNode;
+		if (tail == null) {
+			head = newNode;
+		} else {
+			tail.next = newNode;
+		}
 		tail = newNode;
 		size++;
 	}
+	
+	public E front() {
+		if (head == null) {
+			return null;
+		}
+		return head.value;
+	}
+	
+	public E back() {
+		if (tail == null) {
+			return null;
+		}
+		return tail.value;
+	}
     
+	public void insert(int index, E value) {
+		if (index < 0 || index > size) {
+			throw new IndexOutOfBoundsException();
+		}
+		
+		if (head == null || index == 0) {
+			pushFront(value);
+			return;
+		}
+		
+		Node<E> next = getItemRightBefore(index);
+		
+		Node<E> newNode = new Node<E>(value);
+		newNode.next = next.next;
+		next.next = newNode;
+		
+		if (newNode.next == null) {
+		    tail = newNode;
+		}
+		size++;
+	}
+
+	private Node<E> getItemRightBefore(int index) {
+		Node<E> next = head;
+		int i = 0;
+		// Idea is to pick the item before the index to be inserted
+		while (next != null && i != index - 1) {
+			next = next.next;
+			i++;
+		}
+		return next;
+	}
+	
+	public void prepend(E value) {
+		pushFront(value);
+	}
+	
+	public void delete(int index) {
+		if (index < 0 || index >= size) {
+			throw new IndexOutOfBoundsException();
+		}
+		
+		if (index == 0) {
+			popFront();
+			return;
+		}
+		
+		Node<E> itemRightBefore = getItemRightBefore(index);
+		itemRightBefore.next = itemRightBefore.next.next;
+		itemRightBefore.next.next = null;
+		size--;
+		
+		// TODO: handle tail & head pointer
+	}
+	
+	public void remove(E value) {
+	    if (size == 0) {
+	        return;
+	    }
+	    
+	    if (size == 1 && value == head.value) {
+	        popFront();
+	        return;
+	    }
+	    
+	    
+	    // Handle the remove for non-head items
+		Node<E> next = head;
+		while (next != null) {
+			if (next.next != null && next.next.value.equals(value)) {
+				next.next = next.next.next;
+				
+				// In-case the item to be removed is at the end of list
+				// So the next item of its is null
+				if (next.next != null) {
+					next.next.next = null;
+				} else {
+				    // In case the next.next item is null, then the current item should be the tail
+				    tail = next;
+				}
+				size--;
+			}
+			next = next.next;
+		}
+		
+		if (value == head.value) {
+		    popFront();
+		}
+		
+		if (value == tail.value) {
+		    popBack();
+		}
+		
+		// handle tail & head pointer
+	}
+	
+	public E getMiddle() {
+		//TODO: also implement the method to find the middle item of linkedlist
+		return null;
+	}
+	
 }
