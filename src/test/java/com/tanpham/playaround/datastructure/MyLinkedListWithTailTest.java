@@ -262,4 +262,38 @@ public class MyLinkedListWithTailTest {
     	assertThat(linkedList.valueAt(1), equalTo("Swift"));
     }
     
+    @Test
+    public void remove_theItemToBeDeletedInTheMiddleOfList() {
+    	linkedList.insert(0, "Python");
+    	linkedList.insert(1, "Java");
+    	linkedList.insert(2, "Swift");
+    	
+    	linkedList.remove("Java");
+    	assertThat(linkedList.size(), equalTo(2));
+    	assertThat(linkedList.valueAt(0), equalTo("Python"));
+    	assertThat(linkedList.valueAt(1), equalTo("Swift"));
+    }
+    
+    @Test
+    public void remove_theItemToBeDeletedInTheEndOfList() {
+    	linkedList.insert(0, "Python");
+    	linkedList.insert(1, "Java");
+    	linkedList.insert(2, "Swift");
+    	
+    	linkedList.remove("Swift");
+    	assertThat(linkedList.size(), equalTo(2));
+    	assertThat(linkedList.valueAt(0), equalTo("Python"));
+    	assertThat(linkedList.valueAt(1), equalTo("Java"));
+    }
+    
+    @Test
+    public void remove_inCaseAtTheHeadIsTheItemNeedToBeDeleted() {
+    	linkedList.insert(0, "Java");
+    	linkedList.insert(1, "Python");
+    	
+    	linkedList.remove("Java");
+    	assertThat(linkedList.size(), equalTo(1));
+    	assertThat(linkedList.valueAt(0), equalTo("Python"));
+    }
+    
 }

@@ -75,13 +75,13 @@ public class MyLinkedListWithTail<E> {
 			tail = itemBeforeTail;
 		} else {
 			// This case happen when there is only one item in the linkedlist
-			resetLinkedList();
+			resetHeadTail();
 		}
 		size--;
 		return value;
 	}
 	
-	private void resetLinkedList() {
+	private void resetHeadTail() {
 		tail = null;
 		head = null;
 	}
@@ -179,15 +179,27 @@ public class MyLinkedListWithTail<E> {
 		itemRightBefore.next = itemRightBefore.next.next;
 		itemRightBefore.next.next = null;
 		size--;
+		
+		// TODO: handle tail & head pointer
 	}
 	
 	public void remove(E value) {
 		Node<E> next = head;
 		while (next != null) {
-			if (next.value == value) {
+			if (next.next != null && next.next.value == value) {
+				next.next = next.next.next;
 				
+				// In-case the item to be removed is at the end of list
+				// So the next item of its is null
+				if (next.next != null) {
+					next.next.next = null;
+				}
+				size--;
 			}
+			next = next.next;
 		}
+		// TODO: handle head case
+		// handle tail & head pointer
 	}
 	
 	public E getMiddle() {
