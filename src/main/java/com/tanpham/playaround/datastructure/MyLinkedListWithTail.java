@@ -145,9 +145,11 @@ public class MyLinkedListWithTail<E> {
 		Node<E> newNode = new Node<E>(value);
 		newNode.next = next.next;
 		next.next = newNode;
-		size++;
 		
-		//TODO: implement the remaining part for inserting new node at index
+		if (newNode.next == null) {
+		    tail = newNode;
+		}
+		size++;
 	}
 
 	private Node<E> getItemRightBefore(int index) {
