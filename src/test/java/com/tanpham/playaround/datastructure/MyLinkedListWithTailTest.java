@@ -263,6 +263,13 @@ public class MyLinkedListWithTailTest {
     }
     
     @Test
+    public void remove_butTheListIsEmpty_nothingHappened() {
+        linkedList.remove("Java");
+        
+        assertThat(linkedList.size(), equalTo(0));
+    }
+    
+    @Test
     public void remove_theItemToBeDeletedInTheMiddleOfList() {
     	linkedList.insert(0, "Python");
     	linkedList.insert(1, "Java");
@@ -289,11 +296,46 @@ public class MyLinkedListWithTailTest {
     @Test
     public void remove_inCaseAtTheHeadIsTheItemNeedToBeDeleted() {
     	linkedList.insert(0, "Java");
-    	linkedList.insert(1, "Python");
     	
     	linkedList.remove("Java");
-    	assertThat(linkedList.size(), equalTo(1));
-    	assertThat(linkedList.valueAt(0), equalTo("Python"));
+    	assertThat(linkedList.size(), equalTo(0));
+    }
+    
+    @Test
+    public void remove_inCaseAtTheHeadIsTheItemNeedToBeDeleted_allTheTrailingElementsShouldBeShiftedLeft() {
+        linkedList.insert(0, "Java");
+        linkedList.insert(1, "Python");
+
+        linkedList.remove("Java");
+        assertThat(linkedList.size(), equalTo(1));
+        assertThat(linkedList.valueAt(0), equalTo("Python"));
+    }
+    
+    @Test
+    public void remove_makeSureTheTailIsCorrectlyShiftLeft() {
+        linkedList.insert(0, "Java");
+        linkedList.insert(1, "Python");
+        linkedList.insert(2, "Swift");
+        
+        // This should make the tail point to Python
+        linkedList.remove("Swift");
+        
+        // this action depend on the tail, so we can rely on to test the tail pointer
+        linkedList.pushBack("Android");
+
+        assertThat(linkedList.size(), equalTo(3));
+        assertThat(linkedList.valueAt(2), equalTo("Android"));
+    }
+    
+    @Test
+    public void remove_multipleItemsAreRemovedInARow() {
+        linkedList.insert(0, "Java");
+        linkedList.insert(1, "Java");
+        linkedList.insert(2, "Java");
+        
+        // This should make the tail point to Python
+        linkedList.remove("Java");
+        assertThat(linkedList.size(), equalTo(0));
     }
     
 }

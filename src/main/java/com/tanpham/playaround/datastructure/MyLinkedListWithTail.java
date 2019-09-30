@@ -184,21 +184,43 @@ public class MyLinkedListWithTail<E> {
 	}
 	
 	public void remove(E value) {
+	    if (size == 0) {
+	        return;
+	    }
+	    
+	    if (size == 1 && value == head.value) {
+	        popFront();
+	        return;
+	    }
+	    
+	    
+	    // Handle the remove for non-head items
 		Node<E> next = head;
 		while (next != null) {
-			if (next.next != null && next.next.value == value) {
+			if (next.next != null && next.next.value.equals(value)) {
 				next.next = next.next.next;
 				
 				// In-case the item to be removed is at the end of list
 				// So the next item of its is null
 				if (next.next != null) {
 					next.next.next = null;
+				} else {
+				    // In case the next.next item is null, then the current item should be the tail
+				    tail = next;
 				}
 				size--;
 			}
 			next = next.next;
 		}
-		// TODO: handle head case
+		
+		if (value == head.value) {
+		    popFront();
+		}
+		
+		if (value == tail.value) {
+		    popBack();
+		}
+		
 		// handle tail & head pointer
 	}
 	
