@@ -23,9 +23,7 @@ public class MyLinkedListWithTail<E> {
     }
 
     public E valueAt(int index) {
-        if (index < 0 || index >= size) {
-            throw new IndexOutOfBoundsException();
-        }
+        validateBoundaryOfIndex(index);
         Node<E> next = head;
         int i = 0;
         while (next != null) {
@@ -51,8 +49,16 @@ public class MyLinkedListWithTail<E> {
     }
     
     public E popFront() {
+    	if (size <= 0) {
+    		throw new IndexOutOfBoundsException();
+    	}
     	E value = head.value;
-    	head = head.next;
+    	
+    	// Need to make sure the old head point to NOWHERE
+    	Node<E> tmp = head.next;
+		head.next = null;
+    	
+    	head = tmp;
     	consistentHeadOrTailNull();
     	size--;
     	return value;
@@ -167,33 +173,15 @@ public class MyLinkedListWithTail<E> {
 		pushFront(value);
 	}
 	
-	public void delete(int index) {
-		if (index < 0 || index >= size) {
-			throw new IndexOutOfBoundsException();
-		}
-		
-		if (index == 0) {
-			popFront();
-			return;
-		}
-		
-		Node<E> itemRightBefore = getItemRightBefore(index);
-		itemRightBefore.next = itemRightBefore.next.next;
-		itemRightBefore.next.next = null;
-		size--;
-		
-		// TODO: handle tail & head pointer
-	}
-	
 	public void remove(E value) {
 	    if (size == 0) {
 	        return;
 	    }
 	    
-	    if (size == 1 && value == head.value) {
-	        popFront();
-	        return;
-	    }
+//	    if (size == 1 && value == head.value) {
+//	        popFront();
+//	        return;
+//	    }
 	    
 	    
 	    // Handle the remove for non-head items
@@ -219,7 +207,7 @@ public class MyLinkedListWithTail<E> {
 		    popFront();
 		}
 		
-		if (value == tail.value) {
+		if (tail != null && value == tail.value) {
 		    popBack();
 		}
 		
@@ -229,6 +217,63 @@ public class MyLinkedListWithTail<E> {
 	public E getMiddle() {
 		//TODO: also implement the method to find the middle item of linkedlist
 		return null;
+	}
+	
+	//Not up-to-date like erase method
+	public void delete(int index) {
+		validateBoundaryOfIndex(index);
+		
+		if (index == 0) {
+			popFront();
+			return;
+		}
+		
+		Node<E> itemRightBefore = getItemRightBefore(index);
+		itemRightBefore.next = itemRightBefore.next.next;
+		itemRightBefore.next.next = null;
+		size--;
+		
+		// TODO: handle tail & head pointer
+	}
+
+	public E erase(int index) {
+		validateBoundaryOfIndex(index);
+		
+		Node<E> next = head;
+		int i = 0;
+		while (next != null && i < index - 1) {
+			i++;
+		}
+		
+		// index is right at the head
+		if (next.next == null) {
+			return popFront();
+		}
+		
+		// index is right at the tail
+		// a -> b -> null
+		// b is our index and its next item is null
+		if (next.next.next == null) {
+			tail = next.next;
+		} else {
+			next.next = next.next.next;
+			next.next.next = null;
+		}
+		
+		size--;
+		return next.next.value;
+	}
+
+	private void validateBoundaryOfIndex(int index) {
+		if (index < 0 || index >= size) {
+			throw new IndexOutOfBoundsException();
+		}
+	}
+	
+	// Cheat people
+	public E valueOfIndexCountFromEnd(int indexFromEnd) {
+		int valueCountFromHead = size - 1 - indexFromEnd;
+		return valueAt(valueCountFromHead);
 	}
 	
 }
