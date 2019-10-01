@@ -226,9 +226,16 @@ public class MyLinkedListWithTail<E> {
 		// handle tail & head pointer
 	}
 	
+	// The idea to implement this method can be use to implement the reverse linkedlist
 	public E getMiddle() {
 		//TODO: also implement the method to find the middle item of linkedlist
 		return null;
 	}
+
+    public void reverse() {
+        if (size <= 1) {
+            return;
+        }
+    }
 	
 }

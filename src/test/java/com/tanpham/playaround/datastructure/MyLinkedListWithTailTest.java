@@ -338,4 +338,28 @@ public class MyLinkedListWithTailTest {
         assertThat(linkedList.size(), equalTo(0));
     }
     
+    @Test
+    public void reverse_inCaseEmptyList() {
+        linkedList.reverse();
+        assertThat(linkedList.size(), equalTo(0));
+    }
+    
+    @Test
+    public void reverse_inCaseOneItem() {
+        linkedList.prepend("Java");
+        
+        linkedList.reverse();
+        assertThat(linkedList.size(), equalTo(1));
+        assertThat(linkedList.valueAt(0), equalTo("Java"));
+    }
+    
+    @Test
+    public void reverse_inCaseTwoItems() {
+        linkedList.insert(0, "Java");
+        linkedList.insert(1, "Python");
+        
+        linkedList.reverse();
+        assertThat(linkedList.valueAt(0), equalTo("Python"));
+        assertThat(linkedList.valueAt(1), equalTo("Java"));
+    }
 }
