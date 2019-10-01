@@ -72,11 +72,26 @@ public class MyLinkedListWithTailTest {
     }
     
     @Test
-    public void popFront_whenThereIsNoRemainingItem() {
+    public void popFront_whenThereOneItem() {
     	linkedList.pushFront("Java");
     	
     	assertThat(linkedList.popFront(), equalTo("Java"));
     	assertThat(linkedList.size(), equalTo(0));
+    }
+    
+    @Test
+    public void popFront_twoItemsInList() {
+    	linkedList.pushFront("Java");
+    	linkedList.pushFront("Python");
+    	
+    	linkedList.popFront();
+    	assertThat(linkedList.size(), equalTo(1));
+    	assertThat(linkedList.valueAt(0), equalTo("Java"));
+    }
+    
+    @Test(expected = IndexOutOfBoundsException.class)
+    public void popFront_whenThereIsNoRemainingItem() {
+    	linkedList.popFront();
     }
     
     @Test
@@ -109,7 +124,7 @@ public class MyLinkedListWithTailTest {
     }
     
     @Test(expected = IndexOutOfBoundsException.class)
-    public void popFront_makeSureTheTailIsUpdated_inCaseTheSizeReduceToZero() {
+    public void popBack_makeSureTheTailIsUpdated_inCaseTheSizeReduceToZero() {
     	linkedList.pushFront("Java");
     	linkedList.popFront();
     	assertThat(linkedList.size(), equalTo(0));
@@ -362,4 +377,55 @@ public class MyLinkedListWithTailTest {
         assertThat(linkedList.valueAt(0), equalTo("Python"));
         assertThat(linkedList.valueAt(1), equalTo("Java"));
     }
+    @Test(expected = IndexOutOfBoundsException.class)
+    public void erase_inCaseEmptyList() {
+    	linkedList.erase(0);
+    }
+    
+    @Test
+    public void erase_atTheHead() {
+    	linkedList.pushFront("Java");
+    	linkedList.erase(0);
+    	
+    	assertThat(linkedList.size(), equalTo(0));
+    }
+    
+    @Test
+    public void erase_atTheTail() {
+    	linkedList.pushFront("Python");
+    	linkedList.pushFront("Java");
+    	linkedList.erase(1);
+    	
+    	assertThat(linkedList.size(), equalTo(1));
+    	assertThat(linkedList.valueAt(0), equalTo("Java"));
+    }
+    
+    @Test(expected = IndexOutOfBoundsException.class)
+    public void valueOfIndexCountFromEnd_emptyList() {
+    	linkedList.valueOfIndexCountFromEnd(0);
+    }
+    
+    @Test(expected = IndexOutOfBoundsException.class)
+    public void valueOfIndexCountFromEnd_indexOutOfUpperBound() {
+    	linkedList.valueOfIndexCountFromEnd(5);
+    }
+    
+    @Test(expected = IndexOutOfBoundsException.class)
+    public void valueOfIndexCountFromEnd_indexOutOfLowerBound() {
+    	linkedList.valueOfIndexCountFromEnd(-1);
+    }
+    
+    @Test
+    public void valueOfIndexCountFromEnd_rightAtTheTail() {
+    	linkedList.pushFront("Java");
+    	assertThat(linkedList.valueOfIndexCountFromEnd(0), equalTo("Java"));
+    }
+    
+    @Test
+    public void valueOfIndexCountFromEnd_manyItems() {
+    	linkedList.pushFront("Java");
+    	linkedList.pushBack("Python");
+    	assertThat(linkedList.valueOfIndexCountFromEnd(0), equalTo("Python"));
+    }
+    
 }
