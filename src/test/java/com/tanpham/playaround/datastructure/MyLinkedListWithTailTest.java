@@ -369,13 +369,45 @@ public class MyLinkedListWithTailTest {
     }
     
     @Test
-    public void reverse_inCaseTwoItems() {
+    public void reverse_inCaseTwoItems_evenNumberCase() {
         linkedList.insert(0, "Java");
         linkedList.insert(1, "Python");
         
         linkedList.reverse();
         assertThat(linkedList.valueAt(0), equalTo("Python"));
         assertThat(linkedList.valueAt(1), equalTo("Java"));
+    }
+    
+    @Test
+    public void reverse_inCaseThreeItems_oddNumberCase() {
+        linkedList.insert(0, "Java");
+        linkedList.insert(1, "Python");
+        linkedList.insert(2, "Swift");
+        
+        linkedList.reverse();
+        assertThat(linkedList.valueAt(0), equalTo("Swift"));
+        assertThat(linkedList.valueAt(1), equalTo("Python"));
+        assertThat(linkedList.valueAt(2), equalTo("Java"));
+    }
+    
+    @Test
+    public void reverse_makeSureTailStillPointToTheCorrectOne() {
+        linkedList.insert(0, "Java");
+        linkedList.insert(1, "Python");
+        linkedList.insert(2, "Swift");
+        
+        linkedList.reverse();
+        assertThat(linkedList.popBack(), equalTo("Java"));
+    }
+    
+    @Test
+    public void reverse_makeSureHeadStillPointToTheCorrectOne() {
+        linkedList.insert(0, "Java");
+        linkedList.insert(1, "Python");
+        linkedList.insert(2, "Swift");
+        
+        linkedList.reverse();
+        assertThat(linkedList.popFront(), equalTo("Swift"));
     }
     
     @Test(expected = IndexOutOfBoundsException.class)
