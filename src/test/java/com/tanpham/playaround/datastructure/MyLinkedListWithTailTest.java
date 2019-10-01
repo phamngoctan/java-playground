@@ -377,6 +377,7 @@ public class MyLinkedListWithTailTest {
         assertThat(linkedList.valueAt(0), equalTo("Python"));
         assertThat(linkedList.valueAt(1), equalTo("Java"));
     }
+    
     @Test(expected = IndexOutOfBoundsException.class)
     public void erase_inCaseEmptyList() {
     	linkedList.erase(0);
