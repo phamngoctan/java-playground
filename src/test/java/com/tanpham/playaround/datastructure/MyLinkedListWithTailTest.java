@@ -353,6 +353,63 @@ public class MyLinkedListWithTailTest {
         assertThat(linkedList.size(), equalTo(0));
     }
     
+    @Test
+    public void reverse_inCaseEmptyList() {
+        linkedList.reverse();
+        assertThat(linkedList.size(), equalTo(0));
+    }
+    
+    @Test
+    public void reverse_inCaseOneItem() {
+        linkedList.prepend("Java");
+        
+        linkedList.reverse();
+        assertThat(linkedList.size(), equalTo(1));
+        assertThat(linkedList.valueAt(0), equalTo("Java"));
+    }
+    
+    @Test
+    public void reverse_inCaseTwoItems_evenNumberCase() {
+        linkedList.insert(0, "Java");
+        linkedList.insert(1, "Python");
+        
+        linkedList.reverse();
+        assertThat(linkedList.valueAt(0), equalTo("Python"));
+        assertThat(linkedList.valueAt(1), equalTo("Java"));
+    }
+    
+    @Test
+    public void reverse_inCaseThreeItems_oddNumberCase() {
+        linkedList.insert(0, "Java");
+        linkedList.insert(1, "Python");
+        linkedList.insert(2, "Swift");
+        
+        linkedList.reverse();
+        assertThat(linkedList.valueAt(0), equalTo("Swift"));
+        assertThat(linkedList.valueAt(1), equalTo("Python"));
+        assertThat(linkedList.valueAt(2), equalTo("Java"));
+    }
+    
+    @Test
+    public void reverse_makeSureTailStillPointToTheCorrectOne() {
+        linkedList.insert(0, "Java");
+        linkedList.insert(1, "Python");
+        linkedList.insert(2, "Swift");
+        
+        linkedList.reverse();
+        assertThat(linkedList.popBack(), equalTo("Java"));
+    }
+    
+    @Test
+    public void reverse_makeSureHeadStillPointToTheCorrectOne() {
+        linkedList.insert(0, "Java");
+        linkedList.insert(1, "Python");
+        linkedList.insert(2, "Swift");
+        
+        linkedList.reverse();
+        assertThat(linkedList.popFront(), equalTo("Swift"));
+    }
+    
     @Test(expected = IndexOutOfBoundsException.class)
     public void erase_inCaseEmptyList() {
     	linkedList.erase(0);
@@ -402,6 +459,48 @@ public class MyLinkedListWithTailTest {
     	linkedList.pushFront("Java");
     	linkedList.pushBack("Python");
     	assertThat(linkedList.valueOfIndexCountFromEnd(0), equalTo("Python"));
+    }
+    
+    @Test
+    public void findMiddle_inEmptyList() {
+        assertThat(linkedList.findMiddle(), nullValue());
+    }
+    
+    @Test
+    public void findMiddle_inOneItemList() {
+        linkedList.insert(0, "Java");
+        assertThat(linkedList.findMiddle(), equalTo("Java"));
+    }
+    
+    @Test
+    public void findMiddle_inTwoItemsList_shouldReturnTheSecondOne() {
+        linkedList.insert(0, "Java");
+        linkedList.insert(1, "DotNet");
+        
+        assertThat(linkedList.findMiddle(), equalTo("DotNet"));
+    }
+    
+    @Test
+    public void findMiddle_inThreeItemsList_shouldReturnTheSecondOne() {
+        linkedList.insert(0, "Java");
+        linkedList.insert(1, "DotNet");
+        linkedList.insert(2, "Python");
+        
+        assertThat(linkedList.findMiddle(), equalTo("DotNet"));
+    }
+    
+    @Test
+    public void findMiddle_inManyItemsList_shouldReturnTheMiddleOne() {
+        linkedList.insert(0, "Java");
+        linkedList.insert(1, "DotNet");
+        linkedList.insert(2, "Android");
+        linkedList.insert(3, "Python");
+        linkedList.insert(4, "Swift");
+        linkedList.insert(5, "Javascript");
+        linkedList.insert(6, "Go Lang");
+        linkedList.insert(7, "IOS");
+        
+        assertThat(linkedList.findMiddle(), equalTo("Swift"));
     }
     
 }

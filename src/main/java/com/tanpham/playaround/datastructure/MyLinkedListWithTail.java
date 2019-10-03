@@ -214,10 +214,45 @@ public class MyLinkedListWithTail<E> {
 		// handle tail & head pointer
 	}
 	
-	public E getMiddle() {
-		//TODO: also implement the method to find the middle item of linkedlist
-		return null;
+	public E findMiddle() {
+	    if (size == 0) {
+	        return null;
+	    }
+	    
+	    if (size == 1) {
+	        return head.value;
+	    }
+	    
+	    Node<E> next = head;
+	    Node<E> fasterNode = head;
+	    while (fasterNode != null && fasterNode.next != null) {
+	        next = next.next;
+	        fasterNode = fasterNode.next.next;
+	    }
+		return next.value;
 	}
+
+    public void reverse() {
+        if (size <= 1) {
+            return;
+        }
+        
+        Node<E> newLinkedListNode = null;
+        Node<E> next = head;
+        while (next != null) {
+        	
+        	Node<E> nodeToBeAdded = new Node<>(next.value);
+        	if (newLinkedListNode == null) {
+        		tail = nodeToBeAdded;
+        	}
+        	
+        	nodeToBeAdded.next = newLinkedListNode;
+        	newLinkedListNode = nodeToBeAdded;
+    		
+        	next = next.next;
+        }
+        head = newLinkedListNode;
+    }
 	
 	//Not up-to-date like erase method
 	public void delete(int index) {
