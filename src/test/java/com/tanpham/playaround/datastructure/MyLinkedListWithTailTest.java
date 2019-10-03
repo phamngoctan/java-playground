@@ -462,35 +462,35 @@ public class MyLinkedListWithTailTest {
     }
     
     @Test
-    public void getMiddle_inEmptyList() {
-        assertThat(linkedList.getMiddle(), nullValue());
+    public void findMiddle_inEmptyList() {
+        assertThat(linkedList.findMiddle(), nullValue());
     }
     
     @Test
-    public void getMiddle_inOneItemList() {
+    public void findMiddle_inOneItemList() {
         linkedList.insert(0, "Java");
-        assertThat(linkedList.getMiddle(), equalTo("Java"));
+        assertThat(linkedList.findMiddle(), equalTo("Java"));
     }
     
     @Test
-    public void getMiddle_inTwoItemsList_shouldReturnTheSecondOne() {
+    public void findMiddle_inTwoItemsList_shouldReturnTheSecondOne() {
         linkedList.insert(0, "Java");
         linkedList.insert(1, "DotNet");
         
-        assertThat(linkedList.getMiddle(), equalTo("DotNet"));
+        assertThat(linkedList.findMiddle(), equalTo("DotNet"));
     }
     
     @Test
-    public void getMiddle_inThreeItemsList_shouldReturnTheSecondOne() {
+    public void findMiddle_inThreeItemsList_shouldReturnTheSecondOne() {
         linkedList.insert(0, "Java");
         linkedList.insert(1, "DotNet");
         linkedList.insert(2, "Python");
         
-        assertThat(linkedList.getMiddle(), equalTo("DotNet"));
+        assertThat(linkedList.findMiddle(), equalTo("DotNet"));
     }
     
     @Test
-    public void getMiddle_inManyItemsList_shouldReturnTheMiddleOne() {
+    public void findMiddle_inManyItemsList_shouldReturnTheMiddleOne() {
         linkedList.insert(0, "Java");
         linkedList.insert(1, "DotNet");
         linkedList.insert(2, "Android");
@@ -500,7 +500,7 @@ public class MyLinkedListWithTailTest {
         linkedList.insert(6, "Go Lang");
         linkedList.insert(7, "IOS");
         
-        assertThat(linkedList.getMiddle(), equalTo("Swift"));
+        assertThat(linkedList.findMiddle(), equalTo("Swift"));
     }
     
 }
