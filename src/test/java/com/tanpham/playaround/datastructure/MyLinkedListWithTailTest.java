@@ -461,4 +461,46 @@ public class MyLinkedListWithTailTest {
     	assertThat(linkedList.valueOfIndexCountFromEnd(0), equalTo("Python"));
     }
     
+    @Test
+    public void getMiddle_inEmptyList() {
+        assertThat(linkedList.getMiddle(), nullValue());
+    }
+    
+    @Test
+    public void getMiddle_inOneItemList() {
+        linkedList.insert(0, "Java");
+        assertThat(linkedList.getMiddle(), equalTo("Java"));
+    }
+    
+    @Test
+    public void getMiddle_inTwoItemsList_shouldReturnTheSecondOne() {
+        linkedList.insert(0, "Java");
+        linkedList.insert(1, "DotNet");
+        
+        assertThat(linkedList.getMiddle(), equalTo("DotNet"));
+    }
+    
+    @Test
+    public void getMiddle_inThreeItemsList_shouldReturnTheSecondOne() {
+        linkedList.insert(0, "Java");
+        linkedList.insert(1, "DotNet");
+        linkedList.insert(2, "Python");
+        
+        assertThat(linkedList.getMiddle(), equalTo("DotNet"));
+    }
+    
+    @Test
+    public void getMiddle_inManyItemsList_shouldReturnTheMiddleOne() {
+        linkedList.insert(0, "Java");
+        linkedList.insert(1, "DotNet");
+        linkedList.insert(2, "Android");
+        linkedList.insert(3, "Python");
+        linkedList.insert(4, "Swift");
+        linkedList.insert(5, "Javascript");
+        linkedList.insert(6, "Go Lang");
+        linkedList.insert(7, "IOS");
+        
+        assertThat(linkedList.getMiddle(), equalTo("Swift"));
+    }
+    
 }

@@ -216,8 +216,20 @@ public class MyLinkedListWithTail<E> {
 	
 	// The idea to implement this method can be use to implement the reverse linkedlist
 	public E getMiddle() {
-		//TODO: also implement the method to find the middle item of linkedlist
-		return null;
+	    if (size == 0) {
+	        return null;
+	    }
+	    if (size == 1) {
+	        return head.value;
+	    }
+	    
+	    Node<E> next = head;
+	    Node<E> fasterNode = head;
+	    while (fasterNode != null && fasterNode.next != null) {
+	        next = next.next;
+	        fasterNode = fasterNode.next.next;
+	    }
+		return next.value;
 	}
 
     public void reverse() {
