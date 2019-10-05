@@ -503,4 +503,59 @@ public class MyLinkedListWithTailTest {
         assertThat(linkedList.findMiddle(), equalTo("Swift"));
     }
     
+    @Test
+    public void detectCircularDependency_emptyList() {
+    	assertThat(linkedList.detectCircularDependency(), equalTo(false));
+    }
+    
+    @Test
+    public void detectCircularDependency_oneItemInList() {
+    	linkedList.pushFront("Java");
+    	assertThat(linkedList.detectCircularDependency(), equalTo(false));
+    }
+    
+    @Test
+    public void detectCircularDependency_twoItemsInList_no() {
+    	linkedList.pushFront("Java");
+    	linkedList.pushBack("Python");
+    	assertThat(linkedList.detectCircularDependency(), equalTo(false));
+    }
+    
+    @Test
+    public void detectCircularDependency_twoItems_yes() {
+    	Node<String> node = new Node<>("Python");
+    	Node<String> node2 = new Node<>("Java");
+    	node2.next = node;
+    	linkedList.pushBackNode(node);
+    	linkedList.pushBackNode(node2);
+    	assertThat(linkedList.detectCircularDependency(), equalTo(true));
+    }
+    
+    @Test
+    public void detectCircularDependency_manyItems_yes() {
+    	Node<String> node = new Node<>("Python");
+    	Node<String> node2 = new Node<>("Java");
+    	Node<String> node3 = new Node<>("Android");
+    	Node<String> node4 = new Node<>("IOS");
+    	node4.next = node2;
+    	linkedList.pushBackNode(node);
+    	linkedList.pushBackNode(node2);
+    	linkedList.pushBackNode(node3);
+    	linkedList.pushBackNode(node4);
+    	assertThat(linkedList.detectCircularDependency(), equalTo(true));
+    }
+    
+    @Test
+    public void detectCircularDependency_manyItems_no() {
+    	Node<String> node = new Node<>("Python");
+    	Node<String> node2 = new Node<>("Java");
+    	Node<String> node3 = new Node<>("Android");
+    	Node<String> node4 = new Node<>("IOS");
+    	linkedList.pushBackNode(node);
+    	linkedList.pushBackNode(node2);
+    	linkedList.pushBackNode(node3);
+    	linkedList.pushBackNode(node4);
+    	assertThat(linkedList.detectCircularDependency(), equalTo(false));
+    }
+    
 }
