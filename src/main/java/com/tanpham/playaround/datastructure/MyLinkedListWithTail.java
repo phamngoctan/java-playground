@@ -5,15 +5,6 @@ public class MyLinkedListWithTail<E> {
     private Node<E> head;
     private Node<E> tail;
     
-    private class Node<E> {
-        Node<E> next;
-        E value;
-        
-        public Node(E value) {
-            this.value = value;
-        }
-    }
-    
     public int size() {
         return size;
     }
@@ -315,7 +306,31 @@ public class MyLinkedListWithTail<E> {
 		if (size == 0 || size == 1) {
 			return false;
 		}
-		return true;
+		Node<E> slowerNode = head;
+		Node<E> fasterNode = head;
+		while (slowerNode != null && fasterNode != null && fasterNode.next != null) {
+			slowerNode = slowerNode.next;
+			fasterNode = fasterNode.next.next;
+			if (slowerNode == fasterNode) {
+				return true;
+			}
+		}
+		
+		return false;
+	}
+	
+	protected void pushBackNode(Node<E> node) {
+		if (size == 0) {
+			head = node;
+			tail = node;
+			size++;
+			return;
+		}
+		
+		Node<E> nodeBeforeTail = getItemRightBefore(size);
+		nodeBeforeTail.next = node;
+		tail = node;
+		size++;
 	}
 	
 }
