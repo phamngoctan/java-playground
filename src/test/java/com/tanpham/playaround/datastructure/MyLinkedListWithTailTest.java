@@ -503,4 +503,22 @@ public class MyLinkedListWithTailTest {
         assertThat(linkedList.findMiddle(), equalTo("Swift"));
     }
     
+    @Test
+    public void detectCircularDependency_emptyList() {
+    	assertThat(linkedList.detectCircularDependency(), equalTo(false));
+    }
+    
+    @Test
+    public void detectCircularDependency_oneItemInList() {
+    	linkedList.pushFront("Java");
+    	assertThat(linkedList.detectCircularDependency(), equalTo(false));
+    }
+    
+    @Test
+    public void detectCircularDependency_twoItemsInList() {
+    	linkedList.pushFront("Java");
+    	linkedList.pushBack("Python");
+    	assertThat(linkedList.detectCircularDependency(), equalTo(false));
+    }
+    
 }

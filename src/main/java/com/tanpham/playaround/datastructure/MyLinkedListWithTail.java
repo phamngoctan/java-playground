@@ -310,5 +310,12 @@ public class MyLinkedListWithTail<E> {
 		int valueCountFromHead = size - 1 - indexFromEnd;
 		return valueAt(valueCountFromHead);
 	}
+
+	public boolean detectCircularDependency() {
+		if (size == 0 || size == 1) {
+			return false;
+		}
+		return true;
+	}
 	
 }
