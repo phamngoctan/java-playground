@@ -21,9 +21,9 @@ public class MyStackTest {
 		assertThat(myStack.empty(), equalTo(true));
 	}
 	
-	@Test
+	@Test(expected = IndexOutOfBoundsException.class)
 	public void peek_inCaseEmptyStack() {
-		assertThat(myStack.peek(), equalTo(null));
+		myStack.peek();
 	}
 	
 	@Test
