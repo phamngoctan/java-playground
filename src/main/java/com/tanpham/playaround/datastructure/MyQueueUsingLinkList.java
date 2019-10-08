@@ -1,14 +1,5 @@
 package com.tanpham.playaround.datastructure;
 
-/**
- * This kind of data structure can be implemented in two ways.<br/>
- * First one is following the idea of LinkedList which is the list of Node<E> point to next one.
- * The insertion time will cost O(1) but the search will be linear time O(n), that means dequeue at tail would be O(n) because you'd need the next to last element, causing a full traversal each dequeue. <br/>
- * Secondly, following the idea of Vector to use the dynamic array of items.<br/><br/>
- * 
- * In this class implementation, I would go with option enqueue the new item to the tail.<br/>
- * The dequeue will be beneficial from this step because it takes O(1).
- */
 public class MyQueueUsingLinkList<E> implements MyQueue<E> {
 
     private int size;
