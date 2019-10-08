@@ -12,12 +12,12 @@ public class MyQueueTest {
     
     @Before
     public void init() {
-        myQueue = new MyQueue<>();
+        myQueue = new MyQueueUsingLinkList<>();
     }
     
     @Test
-    public void enqueue_toTheEmptyQueue() {
-        
+    public void sizeShouldBeZero_whenQueueIsEmpty() {
+    	assertThat(myQueue.size(), equalTo(0));
     }
     
     @Test
@@ -29,6 +29,41 @@ public class MyQueueTest {
     public void empty_inCaseNotEmptyQueue() {
         myQueue.enqueue("Java");
         assertThat(myQueue.empty(), equalTo(false));
+    }
+    
+    @Test
+    public void size_inCaseNotEmptyQueue() {
+        myQueue.enqueue("Java");
+        assertThat(myQueue.size(), equalTo(1));
+    }
+    
+    @Test
+    public void size_inCaseManyItemsInQueue() {
+        myQueue.enqueue("Java");
+        myQueue.enqueue("Python");
+        assertThat(myQueue.size(), equalTo(2));
+    }
+    
+    @Test(expected = IndexOutOfBoundsException.class)
+    public void dequeue_inCaseTheQueueHasNoItem() {
+    	myQueue.dequeue();
+    	assertThat(myQueue.size(), equalTo(1));
+    }
+    
+    @Test
+    public void dequeue_inCaseQueueHasOneItem() {
+        myQueue.enqueue("Java");
+        assertThat(myQueue.dequeue(), equalTo("Java"));
+        assertThat(myQueue.size(), equalTo(0));
+    }
+    
+    @Test
+    public void enqueue_manyItemsToTheQueue() {
+        myQueue.enqueue("Java");
+        myQueue.enqueue("Python");
+        assertThat(myQueue.size(), equalTo(2));
+        assertThat(myQueue.dequeue(), equalTo("Java"));
+        assertThat(myQueue.dequeue(), equalTo("Python"));
     }
     
 }
