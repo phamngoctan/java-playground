@@ -2,18 +2,18 @@ package com.tanpham.playaround.datastructure;
 
 public class MyQueueUsingDynamicArray<E> implements MyQueue<E> {
 	
-	private double DEFAULT_CAPACITY = 10;
-	private double DEFAULT_FACTOR = 1.5;
+	private int DEFAULT_CAPACITY = 10;
+	private int DEFAULT_FACTOR = 2;
 	private E[] arr;
 	private int size;
 	
 	public MyQueueUsingDynamicArray() {
-		arr = createNewGenericArray();
+		arr = createNewGenericArray((int) DEFAULT_CAPACITY);
 	}
 
 	@SuppressWarnings("unchecked")
-	private E[] createNewGenericArray() {
-		return (E[]) new Object[(int) DEFAULT_CAPACITY];
+	private E[] createNewGenericArray(int capacity) {
+		return (E[]) new Object[capacity];
 	}
 
 	@Override
@@ -28,9 +28,11 @@ public class MyQueueUsingDynamicArray<E> implements MyQueue<E> {
 
 	@Override
 	public void enqueue(E value) {
+		if (size == arr.length) {
+			resize(arr.length * DEFAULT_FACTOR);
+		}
 		arr[size] = value;
 		size++;
-		//TODO: please extend the array in case it reaches the full of capacity
 	}
 
 	@Override
@@ -48,6 +50,15 @@ public class MyQueueUsingDynamicArray<E> implements MyQueue<E> {
 		// TODO: please reduce the capacity in case it shrinks to 1/4 of the current capacity
 		
 		return value;
+	}
+	
+	private void resize(int sizeToAdjust) {
+		E[] newArray = createNewGenericArray(sizeToAdjust);
+		int toWhatSize = sizeToAdjust > arr.length ? arr.length : sizeToAdjust;
+		for (int i = 0; i < toWhatSize; i++) {
+			newArray[i] = arr[i];
+		}
+		arr = newArray;
 	}
 
 }
