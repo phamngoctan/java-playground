@@ -8,7 +8,7 @@ import org.junit.Test;
 
 public abstract class MyQueueBaseTest {
 
-    private MyQueue<String> myQueue;
+    protected MyQueue<String> myQueue;
     
     @Before
     public void init() {
