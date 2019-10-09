@@ -1,6 +1,6 @@
 package com.tanpham.playaround.datastructure;
 
-public class MyQueueUsingDynamicArray<E> implements MyQueue<E> {
+public class MyQueueUsingDynamicArray<E> implements MyDynamicArrayQueue<E> {
 	
 	private int DEFAULT_CAPACITY = 10;
 	private int DEFAULT_FACTOR = 2;
@@ -40,6 +40,10 @@ public class MyQueueUsingDynamicArray<E> implements MyQueue<E> {
 		if (size == 0) {
 			throw new IndexOutOfBoundsException();
 		}
+		if (size - 1 == (arr.length / 4)) {
+			resize(arr.length / DEFAULT_FACTOR);
+		}
+		
 		E value = arr[0];
 		
 		for (int i = 0; i < size - 1; i++) {
@@ -47,7 +51,6 @@ public class MyQueueUsingDynamicArray<E> implements MyQueue<E> {
 		}
 		arr[size] = null;
 		size--;
-		// TODO: please reduce the capacity in case it shrinks to 1/4 of the current capacity
 		
 		return value;
 	}
@@ -59,6 +62,11 @@ public class MyQueueUsingDynamicArray<E> implements MyQueue<E> {
 			newArray[i] = arr[i];
 		}
 		arr = newArray;
+	}
+	
+	@Override
+	public int capacity() {
+		return arr.length;
 	}
 
 }
