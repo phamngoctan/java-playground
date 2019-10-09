@@ -40,7 +40,7 @@ public class MyQueueUsingDynamicArray<E> implements MyDynamicArrayQueue<E> {
 		if (size == 0) {
 			throw new IndexOutOfBoundsException();
 		}
-		if (size - 1 == (arr.length / 4)) {
+		if (arr.length > DEFAULT_CAPACITY && size - 1 == (arr.length / 4)) {
 			resize(arr.length / DEFAULT_FACTOR);
 		}
 		
