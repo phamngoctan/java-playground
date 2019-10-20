@@ -45,7 +45,7 @@ public class DeadLockWithStaticVariables {
 		}
 	}
 	
-	private static void sleepForSeconds(int seconds) {
+	public static void sleepForSeconds(int seconds) {
 		try {
 			Thread.sleep(seconds);
 		} catch (InterruptedException e) {
