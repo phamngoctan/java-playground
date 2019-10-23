@@ -8,6 +8,8 @@ mvn clean test
 ## LinkedList
 ## Queue
 ## Stack
+## HashTable
+This implementation follows this tutorial https://dzone.com/articles/custom-hashmap-implementation-in-java
 
 # Multi-threads
 ## Sleep
