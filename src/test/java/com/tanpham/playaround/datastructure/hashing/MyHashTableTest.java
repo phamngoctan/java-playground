@@ -1,5 +1,8 @@
 package com.tanpham.playaround.datastructure.hashing;
 
+import static org.hamcrest.Matchers.equalTo;
+import static org.junit.Assert.assertThat;
+
 import org.junit.Before;
 import org.junit.Test;
 
@@ -15,8 +18,13 @@ public class MyHashTableTest {
 	}
 
 	@Test
-	public void put_happyPath_putNewItem() {
-		hashTable.put("vietnam", "Ha noi");
+	public void add_happyPath_newItem() {
+		hashTable.add("vietnam", "Ha noi");
+	}
+	
+	@Test
+	public void hash_function() {
+		assertThat(hashTable.hash("vietnam", 16), equalTo(8));
 	}
 	
 }
