@@ -9,7 +9,13 @@ mvn clean test
 ## Queue
 ## Stack
 ## HashTable
-This implementation follows this tutorial https://dzone.com/articles/custom-hashmap-implementation-in-java
+This implementation follows this tutorial https://dzone.com/articles/custom-hashmap-implementation-in-java  
+It includes:
+ - hash(k, m) - m is size of hash table
+ - add(key, value) - if key already exists, update value
+ - exists(key)
+ - get(key)
+ - remove(key)
 
 # Multi-threads
 ## Sleep
