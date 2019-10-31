@@ -25,5 +25,17 @@ It includes:
 ## Thread deadlock
 Don't run it on any online IDE.  
 Just run it on our local machine.  
-To trace the deadlock, we can use JMC (java mission control) or JVisualVM in bin folder of our JDK installation.  
+To trace the deadlock, we can use JMC (java mission control) or JVisualVM in bin folder of our JDK installation. 
+
+# Miscellaneous
+## Bit's complement
+### Ones' complement
+How to calculate the binary of a number into it's ones' complement  
+It is the same like positive number, but use the first bit to mark the number is negative or not.  
+ - If the first number is 1, it is negative.
+ - If it is 0, it is positive. 
+
+### Two's complement
+How to calculate the binary of a number into it's twos' complement  
+Reverse all its bits, then plus 1 to the result of the previous reverse step
 
