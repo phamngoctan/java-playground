@@ -20,6 +20,7 @@ public class MyHashTableTest {
 	@Test
 	public void add_happyPath_newItem() {
 		hashTable.add("vietnam", "Ha noi");
+		hashTable.add("australia", "melbourn");
 	}
 	
 	@Test

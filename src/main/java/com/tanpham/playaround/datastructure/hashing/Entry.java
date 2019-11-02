@@ -1,9 +1,10 @@
 package com.tanpham.playaround.datastructure.hashing;
 
 public class Entry<K, V> {
-	final K key;
-	V value;
+	private final K key;
+	private V value;
 //	Entry<K, V> next;
+	private int hash;
 
 	public Entry(K key, V value) {
 		this.key = key;
@@ -20,6 +21,14 @@ public class Entry<K, V> {
 
 	public K getKey() {
 		return key;
+	}
+
+	public int getHash() {
+		return hash;
+	}
+
+	public void setHash(int hash) {
+		this.hash = hash;
 	}
 
 	@Override
