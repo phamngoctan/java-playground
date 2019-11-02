@@ -4,7 +4,8 @@ import java.util.Arrays;
 
 public class MyHashTable<K, V> {
 	
-	private int capacity = 16;
+	private int capacity = 4;
+	private int size = 0;
 	private Entry<K, V>[] buckets;
 	
 	public MyHashTable() {
@@ -17,8 +18,11 @@ public class MyHashTable<K, V> {
 	}
 
 	public void add(K key, V value) {
-		// TODO Auto-generated method stub
-		buckets[hash(key, capacity)] = new Entry<>(key, value);
+		buckets[hash(key, capacity - 1)] = new Entry<>(key, value);
+		size++;
+		if (size >= capacity) {
+			throw new RuntimeException("not support");
+		}
 	}
 	
 	public int hash(K key, int sizeOfHashTable) {

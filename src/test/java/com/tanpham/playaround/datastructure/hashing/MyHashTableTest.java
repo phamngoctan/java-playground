@@ -19,13 +19,15 @@ public class MyHashTableTest {
 
 	@Test
 	public void add_happyPath_newItem() {
-		hashTable.add("vietnam", "Ha noi");
-		hashTable.add("australia", "melbourn");
+		hashTable.add("Vietnam", "Hanoi");
+		hashTable.add("Australia", "Melbourne");
+		hashTable.add("Switzerland", "Bern");
+		hashTable.add("USA", "Washington");
 	}
 	
 	@Test
 	public void hash_function() {
-		assertThat(hashTable.hash("vietnam", 16), equalTo(8));
+		assertThat(hashTable.hash("vietnam", 4), equalTo(0));
 	}
 	
 }
