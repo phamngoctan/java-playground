@@ -3,7 +3,7 @@ package com.tanpham.playaround.datastructure.hashing;
 public class Entry<K, V> {
 	private final K key;
 	private V value;
-//	Entry<K, V> next;
+	Entry<K, V> next;
 	private int hash;
 
 	public Entry(K key, V value) {
@@ -29,6 +29,14 @@ public class Entry<K, V> {
 
 	public void setHash(int hash) {
 		this.hash = hash;
+	}
+
+	public Entry<K, V> getNext() {
+		return next;
+	}
+
+	public void setNext(Entry<K, V> next) {
+		this.next = next;
 	}
 
 	@Override

@@ -23,11 +23,11 @@ public class MyHashTableTest {
 		hashTable.add("Australia", "Melbourne");
 		hashTable.add("Switzerland", "Bern");
 		hashTable.add("USA", "Washington");
-	}
-	
-	@Test
-	public void hash_function() {
-		assertThat(hashTable.hash("vietnam", 4), equalTo(0));
+		
+		// By accident, the "Switzerland" and "USA" have the same hashcode and it's in third position =))
+		// This means we will have collision in third position, we have to make sure
+		// the Washington does not override Bern
+		assertThat(hashTable.get("Switzerland"), equalTo("Bern"));
 	}
 	
 }
