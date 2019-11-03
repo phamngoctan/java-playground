@@ -16,6 +16,8 @@ It includes:
  - exists(key)
  - get(key)
  - remove(key)
+ 
+Notes: support null key
 
 # Multi-threads
 ## Sleep
