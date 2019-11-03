@@ -28,6 +28,13 @@ public class MyHashTableTest {
 		// This means we will have collision in third position, we have to make sure
 		// the Washington does not override Bern
 		assertThat(hashTable.get("Switzerland"), equalTo("Bern"));
+		assertThat(hashTable.get("USA"), equalTo("Washington"));
+	}
+	
+	@Test
+	public void add_nullKey() {
+		hashTable.add(null, "Hanoi");
+		assertThat(hashTable.get(null), equalTo("Hanoi"));
 	}
 	
 }

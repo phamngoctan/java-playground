@@ -45,7 +45,8 @@ public class MyHashTable<K, V> {
 	
 	public int indexFor(K key, int capacity) {
 		int maximumNumberOfSignedInteger = 0x7fffffff;
-		int maskOutTheSignedBitFromAnyValueToZero = key.hashCode() & maximumNumberOfSignedInteger;
+		int hashCode = key == null ? 0 : key.hashCode();
+		int maskOutTheSignedBitFromAnyValueToZero = hashCode & maximumNumberOfSignedInteger;
 		// More effective than the modulus %
 		return maskOutTheSignedBitFromAnyValueToZero & capacity;
 	}
@@ -54,7 +55,7 @@ public class MyHashTable<K, V> {
 		int index = indexFor(key, capacity - 1);
 		Entry<K, V> next = buckets[index];
 		while (next != null) {
-			if (key.equals(next.getKey())) {
+			if (key == next.getKey() || key.equals(next.getKey())) {
 				return next.getValue();
 			}
 			next = next.getNext();
