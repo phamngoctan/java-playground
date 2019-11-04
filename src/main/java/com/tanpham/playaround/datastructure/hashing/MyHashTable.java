@@ -6,8 +6,6 @@ public class MyHashTable<K, V> {
 	
 	// this default capacity can increase the possibilities of collision
 	// consider to change to a prime number
-	// but if you change to a prime number. the increasing of capacity must re-hash every single
-	// item inside each bucket
 	private int capacity = 16;
 	private int size = 0;
 	private Entry<K, V>[] buckets;
@@ -64,7 +62,11 @@ public class MyHashTable<K, V> {
 		Entry<K, V>[] newBuckets = new Entry[newCapacity];
 		for (int i = 0; i < capacity; i++) {
 			if (buckets[i] != null) {
-				newBuckets[indexFor(buckets[i].getHash(), newCapacity)] = buckets[i];
+				Entry<K, V> next = buckets[i];
+				while (next != null) {
+					newBuckets[indexFor(next.getHash(), newCapacity)] = next;
+					next = next.getNext();
+				}
 			}
 		}
 		buckets = newBuckets;
