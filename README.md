@@ -41,3 +41,6 @@ It is the same like positive number, but use the first bit to mark the number is
 How to calculate the binary of a number into it's twos' complement  
 Reverse all its bits, then plus 1 to the result of the previous reverse step
 
+### Bit utils
+Add absolute function of an integer variable in bit approach, the performance could be better than Math.abs. But only use it when you really need to improve the performance of the system.
+
