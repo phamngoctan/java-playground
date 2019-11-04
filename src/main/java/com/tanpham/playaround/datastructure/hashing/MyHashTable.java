@@ -8,6 +8,7 @@ public class MyHashTable<K, V> {
 	private int size = 0;
 	private Entry<K, V>[] buckets;
 	
+	@SuppressWarnings("unchecked")
 	public MyHashTable() {
 		buckets = new Entry[capacity];
 	}
@@ -17,42 +18,54 @@ public class MyHashTable<K, V> {
 		return "MyHashTable [buckets=" + Arrays.toString(buckets) + "]";
 	}
 
-	//TODO: handle case null key
-	public void add(K key, V value) {
+	public V add(K key, V value) {
+		throwExceptionIfValueIsNull(value);
+		
 		Entry<K, V> entry = new Entry<>(key, value);
-		int index = indexFor(key, capacity - 1);
-		System.out.println(index);
+		int index = indexFor(key, capacity);
 		
 		Entry<K, V> next = buckets[index];
 		boolean isKeyExisted = false;
+		V previousValue = null;
 		while (next != null && isKeyExisted == false) {
-			if (key.equals(next.getKey())) {
+			if (key == next.getKey() || key.equals(next.getKey())) {
+				previousValue = next.getValue();
 				next.setValue(value);
 				isKeyExisted = true;
 			}
 			next = next.getNext();
 		}
+		
 		if (!isKeyExisted) {
 			entry.setNext(buckets[index]);
 		}
-		
 		buckets[index] = entry;
 		size++;
-		if (size >= capacity) {
-			throw new RuntimeException("not support");
+		if (!isKeyExisted) {
+			return null;
+		} else {
+			return previousValue;
 		}
 	}
 	
+	private void throwExceptionIfValueIsNull(V value) {
+		if (value == null) {
+			throw new RuntimeException("Hash table does not allow null value");
+		}
+	}
+
 	public int indexFor(K key, int capacity) {
 		int maximumNumberOfSignedInteger = 0x7fffffff;
 		int hashCode = key == null ? 0 : key.hashCode();
 		int maskOutTheSignedBitFromAnyValueToZero = hashCode & maximumNumberOfSignedInteger;
 		// More effective than the modulus %
-		return maskOutTheSignedBitFromAnyValueToZero & capacity;
+		// hash value H the index generated with the bitwise formula “H AND 16” 
+		// is going to be either capacity minus 1 or 0
+		return maskOutTheSignedBitFromAnyValueToZero & (capacity - 1);
 	}
 
 	public V get(K key) {
-		int index = indexFor(key, capacity - 1);
+		int index = indexFor(key, capacity);
 		Entry<K, V> next = buckets[index];
 		while (next != null) {
 			if (key == next.getKey() || key.equals(next.getKey())) {
@@ -61,6 +74,14 @@ public class MyHashTable<K, V> {
 			next = next.getNext();
 		}
 		return null;
+	}
+
+	public int getCapacity() {
+		return capacity;
+	}
+
+	public int getSize() {
+		return size;
 	}
 	
 }
