@@ -18,6 +18,8 @@ It includes:
  - exists(key)
  - get(key)
  - remove(key)
+ - capacity() //testing purpose
+ - size() //testing purpose
  
 Notes:  
  - support null key
