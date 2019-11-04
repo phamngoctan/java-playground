@@ -53,11 +53,20 @@ public class MyHashTableTest {
 	}
 	
 	@Test
-	public void add_entriesUntilReachingDefaultCapacity() {
-		for (int i = 0; i < 20; i++) {
+	public void add_entriesDoesNotReachDefaultCapacity() {
+		for (int i = 0; i < 12; i++) {
 			hashTable.add(i + "", "value " + i);
 		}
-		assertThat(hashTable.size(), equalTo(20));
+		assertThat(hashTable.size(), equalTo(10));
+		assertThat(hashTable.capacity(), equalTo(16));
+	}
+	
+	@Test
+	public void add_entriesUntilReachingDefaultCapacity() {
+		for (int i = 0; i < 16; i++) {
+			hashTable.add(i + "", "value " + i);
+		}
+		assertThat(hashTable.size(), equalTo(15));
 		assertThat(hashTable.capacity(), equalTo(32));
 	}
 	
