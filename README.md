@@ -1,5 +1,7 @@
 # java-playground
-java-playground project to test all the concern about java core
+java-playground project to test all the concern about java core.  
+
+*Because this repository just reflects the view of author, please feedback me via email phamngoctan.com@gmail.com if you have any concern*.
 # how to run
 mvn clean test
 
@@ -21,6 +23,7 @@ Notes:
  - support null key
  - in Java 8, to improve the performance of HashMap, put() method’s implementation has been updated to use a Red Black Tree if there are more than 8 Entries in the same bucket.
  - having more than one Entry in a bucket is called Hash Collision and the Linked list approach to contain Entries with same hash values in the same bucket is called chaining.
+ - consider implementing the capacity as a prime number, this can prevent the collision better (https://web.archive.org/web/19990903133921/http://www.concentric.net/~Ttwang/tech/primehash.htm). 
 
 # Multi-threads
 ## Sleep
