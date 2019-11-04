@@ -57,6 +57,8 @@ public class MyHashTableTest {
 		for (int i = 0; i < 20; i++) {
 			hashTable.add(i + "", "value " + i);
 		}
+		assertThat(hashTable.size(), equalTo(20));
+		assertThat(hashTable.capacity(), equalTo(32));
 	}
 	
 }

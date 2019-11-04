@@ -17,7 +17,10 @@ It includes:
  - get(key)
  - remove(key)
  
-Notes: support null key
+Notes:  
+ - support null key
+ - in Java 8, to improve the performance of HashMap, put() method’s implementation has been updated to use a Red Black Tree if there are more than 8 Entries in the same bucket.
+ - having more than one Entry in a bucket is called Hash Collision and the Linked list approach to contain Entries with same hash values in the same bucket is called chaining.
 
 # Multi-threads
 ## Sleep

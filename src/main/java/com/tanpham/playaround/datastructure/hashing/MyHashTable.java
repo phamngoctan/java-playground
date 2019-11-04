@@ -20,6 +20,9 @@ public class MyHashTable<K, V> {
 
 	public V add(K key, V value) {
 		throwExceptionIfValueIsNull(value);
+		if (size == capacity - 1) {
+			increaseHashTableCapacity(capacity * 2);
+		}
 		
 		Entry<K, V> entry = new Entry<>(key, value);
 		int index = indexFor(key, capacity);
@@ -48,6 +51,10 @@ public class MyHashTable<K, V> {
 		}
 	}
 	
+	private void increaseHashTableCapacity(int newCapacity) {
+		
+	}
+
 	private void throwExceptionIfValueIsNull(V value) {
 		if (value == null) {
 			throw new RuntimeException("Hash table does not allow null value");
@@ -76,11 +83,12 @@ public class MyHashTable<K, V> {
 		return null;
 	}
 
-	public int getCapacity() {
+	//Exposing two methods for testing purpose
+	public int capacity() {
 		return capacity;
 	}
 
-	public int getSize() {
+	public int size() {
 		return size;
 	}
 	
