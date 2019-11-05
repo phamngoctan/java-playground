@@ -103,6 +103,19 @@ public class MyHashTable<K, V> {
 		}
 		return null;
 	}
+	
+	public void remove(K key) {
+		int index = indexFor(getProcessedHashCode(key), capacity);
+		Entry<K, V> next = buckets[index];
+		while (next != null) {
+			
+			if (key == next.getKey() || key.equals(next.getKey())) {
+//				return next.getValue();
+			}
+			next = next.getNext();
+		}
+//		return null;
+	}
 
 	//Exposing two methods for testing purpose
 	public int capacity() {
@@ -112,5 +125,5 @@ public class MyHashTable<K, V> {
 	public int size() {
 		return size;
 	}
-	
+
 }
