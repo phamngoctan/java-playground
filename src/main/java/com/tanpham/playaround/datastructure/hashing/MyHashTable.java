@@ -32,6 +32,7 @@ public class MyHashTable<K, V> {
 		Entry<K, V> entry = new Entry<>(key, value);
 		entry.setHash(processedHashCode);
 		int index = indexFor(processedHashCode, capacity);
+		System.out.println(index);
 		
 		Entry<K, V> next = buckets[index];
 		boolean isKeyExisted = false;
@@ -107,14 +108,22 @@ public class MyHashTable<K, V> {
 	public void remove(K key) {
 		int index = indexFor(getProcessedHashCode(key), capacity);
 		Entry<K, V> next = buckets[index];
+		Entry<K, V> previousEntry = null;
 		while (next != null) {
-			
 			if (key == next.getKey() || key.equals(next.getKey())) {
-//				return next.getValue();
+				if (previousEntry == null) {
+					// No item before the matched key found
+					buckets[index] = next.getNext();
+					// Remove the next pointer of to be removed item
+					next.setNext(null);
+				} else {
+					previousEntry.setNext(next.getNext());
+				}
+				break;
 			}
+			previousEntry = next;
 			next = next.getNext();
 		}
-//		return null;
 	}
 
 	//Exposing two methods for testing purpose

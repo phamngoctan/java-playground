@@ -82,10 +82,28 @@ public class MyHashTableTest {
 		assertThat(hashTable.get("Vietnam"), equalTo(null));
 	}
 	
+	// By accident, the "Switzerland" and "USA" have the same hashcode and it's in third position
+	@Test
+	public void remove_incaseThereIsACollision() {
+		hashTable.add("Switzerland", "Bern");
+		hashTable.add("USA", "Washington");
+		hashTable.remove("USA");
+		assertThat(hashTable.get("USA"), equalTo(null));
+		assertThat(hashTable.get("Switzerland"), equalTo("Bern"));
+	}
+	
 	@Test
 	public void remove_nullKey() {
 		hashTable.add(null, "Hanoi");
-		hashTable.remove("Vietnam");
+		hashTable.remove(null);
+		assertThat(hashTable.get(null), equalTo(null));
+	}
+	
+	@Test
+	public void remove_nullKey_withCollisionAtIndexZero() {
+		hashTable.add("0", "AnyCapital");
+		hashTable.add(null, "Hanoi");
+		hashTable.remove(null);
 		assertThat(hashTable.get(null), equalTo(null));
 	}
 }
