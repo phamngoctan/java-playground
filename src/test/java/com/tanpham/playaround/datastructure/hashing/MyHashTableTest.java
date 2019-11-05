@@ -34,6 +34,11 @@ public class MyHashTableTest {
 	}
 	
 	@Test
+	public void get_notExistedKey() {
+		assertThat(hashTable.get("Vietnam"), equalTo(null));
+	}
+	
+	@Test
 	public void add_nullKey() {
 		hashTable.add(null, "Hanoi");
 		assertThat(hashTable.get(null), equalTo("Hanoi"));
@@ -53,10 +58,34 @@ public class MyHashTableTest {
 	}
 	
 	@Test
-	public void add_entriesUntilReachingDefaultCapacity() {
-		for (int i = 0; i < 20; i++) {
+	public void add_entriesDoesNotReachDefaultCapacity() {
+		for (int i = 0; i < 12; i++) {
 			hashTable.add(i + "", "value " + i);
 		}
+		assertThat(hashTable.size(), equalTo(12));
+		assertThat(hashTable.capacity(), equalTo(16));
 	}
 	
+	@Test
+	public void add_entriesUntilReachingDefaultCapacity() {
+		for (int i = 0; i < 16; i++) {
+			hashTable.add(i + "", "value " + i);
+		}
+		assertThat(hashTable.size(), equalTo(16));
+		assertThat(hashTable.capacity(), equalTo(32));
+	}
+	
+	@Test
+	public void remove_happyPath() {
+		hashTable.add("Vietnam", "Hanoi");
+		hashTable.remove("Vietnam");
+		assertThat(hashTable.get("Vietnam"), equalTo(null));
+	}
+	
+	@Test
+	public void remove_nullKey() {
+		hashTable.add(null, "Hanoi");
+		hashTable.remove("Vietnam");
+		assertThat(hashTable.get(null), equalTo(null));
+	}
 }
