@@ -44,4 +44,6 @@ Reverse all its bits, then plus 1 to the result of the previous reverse step
 ### Bit utils
  - Add absolute function of an integer variable in bit approach, the performance could be better than Math.abs. But only use it when you really need to improve the performance of the system.
  - Add fetch bit at a position from an integer
-
+ - Check if a given number is a power of 2
+ - Find missing pair item of a given array
+ - Find the number of set bits in a binary representation of a number
