@@ -17,4 +17,13 @@ public final class BitUtils {
 		return ((n + mask) ^ mask);
 	}
 	
+	/**
+	 * Main idea is that we set all the other bits to zero by & operator.<br/>
+	 * So if the position with 1 value & with x, the result is 1 so x must be 1. Otherwise, x is 0.
+	 */
+	public static String fetchBitAtPosition(int number, int position) {
+		int numberUsedForAndOperator = 1 << (position - 1);
+		return (numberUsedForAndOperator & number) == 0 ? "0" : "1";
+	}
+	
 }
