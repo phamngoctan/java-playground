@@ -105,5 +105,6 @@ public class MyHashTableTest {
 		hashTable.add(null, "Hanoi");
 		hashTable.remove(null);
 		assertThat(hashTable.get(null), equalTo(null));
+		assertThat(hashTable.get("0"), equalTo("AnyCapital"));
 	}
 }

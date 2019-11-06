@@ -38,7 +38,7 @@ public class MyHashTable<K, V> {
 		boolean isKeyExisted = false;
 		V previousValue = null;
 		while (next != null && isKeyExisted == false) {
-			if (key == next.getKey() || key.equals(next.getKey())) {
+			if (isMatchedKey(key, next)) {
 				previousValue = next.getValue();
 				next.setValue(value);
 				isKeyExisted = true;
@@ -56,6 +56,17 @@ public class MyHashTable<K, V> {
 		} else {
 			return previousValue;
 		}
+	}
+
+	private boolean isMatchedKey(K key, Entry<K, V> next) {
+		if (key == null) {
+			if (next == null || key != next.getKey()) {
+				return false;
+			}
+		} else if (!key.equals(next.getKey())) {
+			return false;
+		}
+		return true;
 	}
 	
 	@SuppressWarnings("unchecked")
@@ -97,7 +108,7 @@ public class MyHashTable<K, V> {
 		int index = indexFor(getProcessedHashCode(key), capacity);
 		Entry<K, V> next = buckets[index];
 		while (next != null) {
-			if (key == next.getKey() || key.equals(next.getKey())) {
+			if (isMatchedKey(key, next)) {
 				return next.getValue();
 			}
 			next = next.getNext();
@@ -110,7 +121,7 @@ public class MyHashTable<K, V> {
 		Entry<K, V> next = buckets[index];
 		Entry<K, V> previousEntry = null;
 		while (next != null) {
-			if (key == next.getKey() || key.equals(next.getKey())) {
+			if (isMatchedKey(key, next)) {
 				if (previousEntry == null) {
 					// No item before the matched key found
 					buckets[index] = next.getNext();
