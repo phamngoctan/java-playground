@@ -118,4 +118,36 @@ public class MyHashTableTest {
 		assertThat(hashTable.get("Switzerland"), equalTo(null));
 		assertThat(hashTable.size(), equalTo(0));
 	}
+	
+	@Test
+	public void remove__theCapacityShouldNotBeReduced_inCaseTheSizeLessThenDefaultOne() {
+		hashTable.add("Vietnam", "Hanoi");
+		hashTable.add("Australia", "Melbourne");
+		hashTable.add("Switzerland", "Bern");
+		hashTable.add("Singapore", "Singapore");
+		hashTable.remove("Singapore");
+		assertThat(hashTable.size(), equalTo(3));
+		assertThat(hashTable.capacity(), equalTo(16));
+	}
+	
+	@Test
+	public void remove__capacityShouldBeReduced() {
+		for (int i = 0; i < 16; i++) {
+			hashTable.add(i + "", "value " + i);
+		}
+		assertThat(hashTable.size(), equalTo(16));
+		assertThat(hashTable.capacity(), equalTo(32));
+		
+		hashTable.remove("15");
+		hashTable.remove("14");
+		hashTable.remove("13");
+		hashTable.remove("12");
+		hashTable.remove("11");
+		hashTable.remove("10");
+		hashTable.remove("9");
+		hashTable.remove("8");
+		
+		assertThat(hashTable.size(), equalTo(8));
+		assertThat(hashTable.capacity(), equalTo(16));
+	}
 }
