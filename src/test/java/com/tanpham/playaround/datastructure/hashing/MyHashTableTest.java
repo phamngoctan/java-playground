@@ -82,10 +82,72 @@ public class MyHashTableTest {
 		assertThat(hashTable.get("Vietnam"), equalTo(null));
 	}
 	
+	// By accident, the "Switzerland" and "USA" have the same hashcode and it's in third position
+	@Test
+	public void remove_incaseThereIsACollision() {
+		hashTable.add("Switzerland", "Bern");
+		hashTable.add("USA", "Washington");
+		hashTable.remove("USA");
+		assertThat(hashTable.get("USA"), equalTo(null));
+		assertThat(hashTable.get("Switzerland"), equalTo("Bern"));
+	}
+	
 	@Test
 	public void remove_nullKey() {
 		hashTable.add(null, "Hanoi");
-		hashTable.remove("Vietnam");
+		hashTable.remove(null);
 		assertThat(hashTable.get(null), equalTo(null));
+	}
+	
+	@Test
+	public void remove_nullKey_withCollisionAtIndexZero() {
+		hashTable.add("0", "AnyCapital");
+		hashTable.add(null, "Hanoi");
+		hashTable.remove(null);
+		assertThat(hashTable.get(null), equalTo(null));
+		assertThat(hashTable.get("0"), equalTo("AnyCapital"));
+	}
+	
+	@Test
+	public void remove__makeSureSizeIsDeducted() {
+		hashTable.add("Switzerland", "Bern");
+		hashTable.add("USA", "Washington");
+		hashTable.remove("USA");
+		hashTable.remove("Switzerland");
+		assertThat(hashTable.get("USA"), equalTo(null));
+		assertThat(hashTable.get("Switzerland"), equalTo(null));
+		assertThat(hashTable.size(), equalTo(0));
+	}
+	
+	@Test
+	public void remove__theCapacityShouldNotBeReduced_inCaseTheSizeLessThenDefaultOne() {
+		hashTable.add("Vietnam", "Hanoi");
+		hashTable.add("Australia", "Melbourne");
+		hashTable.add("Switzerland", "Bern");
+		hashTable.add("Singapore", "Singapore");
+		hashTable.remove("Singapore");
+		assertThat(hashTable.size(), equalTo(3));
+		assertThat(hashTable.capacity(), equalTo(16));
+	}
+	
+	@Test
+	public void remove__capacityShouldBeReduced() {
+		for (int i = 0; i < 16; i++) {
+			hashTable.add(i + "", "value " + i);
+		}
+		assertThat(hashTable.size(), equalTo(16));
+		assertThat(hashTable.capacity(), equalTo(32));
+		
+		hashTable.remove("15");
+		hashTable.remove("14");
+		hashTable.remove("13");
+		hashTable.remove("12");
+		hashTable.remove("11");
+		hashTable.remove("10");
+		hashTable.remove("9");
+		hashTable.remove("8");
+		
+		assertThat(hashTable.size(), equalTo(8));
+		assertThat(hashTable.capacity(), equalTo(16));
 	}
 }

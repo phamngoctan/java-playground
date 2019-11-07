@@ -3,10 +3,10 @@ package com.tanpham.playaround.datastructure.hashing;
 import java.util.Arrays;
 
 public class MyHashTable<K, V> {
-	
+	private static final int DEFAULT_CAPACITY = 16;
 	// this default capacity can increase the possibilities of collision
 	// consider to change to a prime number
-	private int capacity = 16;
+	private int capacity = DEFAULT_CAPACITY;
 	private int size = 0;
 	private Entry<K, V>[] buckets;
 	
@@ -24,8 +24,7 @@ public class MyHashTable<K, V> {
 		throwExceptionIfValueIsNull(value);
 		if (size == capacity - 1) {
 			int newCapacity = capacity * 2;
-			increaseHashTableCapacity(newCapacity);
-			capacity = newCapacity;
+			adjustHashTableCapacity(newCapacity);
 		}
 		
 		int processedHashCode = getProcessedHashCode(key);
@@ -37,7 +36,7 @@ public class MyHashTable<K, V> {
 		boolean isKeyExisted = false;
 		V previousValue = null;
 		while (next != null && isKeyExisted == false) {
-			if (key == next.getKey() || key.equals(next.getKey())) {
+			if (isMatchedKey(key, next)) {
 				previousValue = next.getValue();
 				next.setValue(value);
 				isKeyExisted = true;
@@ -56,22 +55,18 @@ public class MyHashTable<K, V> {
 			return previousValue;
 		}
 	}
-	
-	@SuppressWarnings("unchecked")
-	private void increaseHashTableCapacity(int newCapacity) {
-		Entry<K, V>[] newBuckets = new Entry[newCapacity];
-		for (int i = 0; i < capacity; i++) {
-			if (buckets[i] != null) {
-				Entry<K, V> next = buckets[i];
-				while (next != null) {
-					newBuckets[indexFor(next.getHash(), newCapacity)] = next;
-					next = next.getNext();
-				}
-			}
-		}
-		buckets = newBuckets;
-	}
 
+	private boolean isMatchedKey(K key, Entry<K, V> next) {
+		if (key == null) {
+			if (next == null || key != next.getKey()) {
+				return false;
+			}
+		} else if (!key.equals(next.getKey())) {
+			return false;
+		}
+		return true;
+	}
+	
 	private void throwExceptionIfValueIsNull(V value) {
 		if (value == null) {
 			throw new RuntimeException("Hash table does not allow null value");
@@ -96,7 +91,7 @@ public class MyHashTable<K, V> {
 		int index = indexFor(getProcessedHashCode(key), capacity);
 		Entry<K, V> next = buckets[index];
 		while (next != null) {
-			if (key == next.getKey() || key.equals(next.getKey())) {
+			if (isMatchedKey(key, next)) {
 				return next.getValue();
 			}
 			next = next.getNext();
@@ -107,14 +102,47 @@ public class MyHashTable<K, V> {
 	public void remove(K key) {
 		int index = indexFor(getProcessedHashCode(key), capacity);
 		Entry<K, V> next = buckets[index];
+		Entry<K, V> previousEntry = null;
 		while (next != null) {
-			
-			if (key == next.getKey() || key.equals(next.getKey())) {
-//				return next.getValue();
+			if (isMatchedKey(key, next)) {
+				removeItemOutOfTheLinkedList(index, next, previousEntry);
+				if (capacity > DEFAULT_CAPACITY
+						&& size <= (capacity / 4)) {
+					adjustHashTableCapacity(capacity / 2);
+				}
+				break;
 			}
+			previousEntry = next;
 			next = next.getNext();
 		}
-//		return null;
+	}
+	
+	@SuppressWarnings("unchecked")
+	private void adjustHashTableCapacity(int newCapacity) {
+		Entry<K, V>[] newBuckets = new Entry[newCapacity];
+		for (int i = 0; i < capacity; i++) {
+			if (buckets[i] != null) {
+				Entry<K, V> next = buckets[i];
+				while (next != null) {
+					newBuckets[indexFor(next.getHash(), newCapacity)] = next;
+					next = next.getNext();
+				}
+			}
+		}
+		capacity = newCapacity;
+		buckets = newBuckets;
+	}
+
+	private void removeItemOutOfTheLinkedList(int index, Entry<K, V> next, Entry<K, V> previousEntry) {
+		if (previousEntry == null) {
+			// No item before the matched key found
+			buckets[index] = next.getNext();
+		} else {
+			previousEntry.setNext(next.getNext());
+		}
+		// Remove the next pointer of to be removed item
+		next.setNext(null);
+		size--;
 	}
 
 	//Exposing two methods for testing purpose
