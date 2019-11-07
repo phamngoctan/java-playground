@@ -107,4 +107,15 @@ public class MyHashTableTest {
 		assertThat(hashTable.get(null), equalTo(null));
 		assertThat(hashTable.get("0"), equalTo("AnyCapital"));
 	}
+	
+	@Test
+	public void remove__makeSureSizeIsDeducted() {
+		hashTable.add("Switzerland", "Bern");
+		hashTable.add("USA", "Washington");
+		hashTable.remove("USA");
+		hashTable.remove("Switzerland");
+		assertThat(hashTable.get("USA"), equalTo(null));
+		assertThat(hashTable.get("Switzerland"), equalTo(null));
+		assertThat(hashTable.size(), equalTo(0));
+	}
 }

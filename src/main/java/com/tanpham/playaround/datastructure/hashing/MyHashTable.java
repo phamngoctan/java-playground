@@ -122,19 +122,24 @@ public class MyHashTable<K, V> {
 		Entry<K, V> previousEntry = null;
 		while (next != null) {
 			if (isMatchedKey(key, next)) {
-				if (previousEntry == null) {
-					// No item before the matched key found
-					buckets[index] = next.getNext();
-					// Remove the next pointer of to be removed item
-					next.setNext(null);
-				} else {
-					previousEntry.setNext(next.getNext());
-				}
+				removeItemOutOfTheLinkedList(index, next, previousEntry);
 				break;
 			}
 			previousEntry = next;
 			next = next.getNext();
 		}
+	}
+
+	private void removeItemOutOfTheLinkedList(int index, Entry<K, V> next, Entry<K, V> previousEntry) {
+		if (previousEntry == null) {
+			// No item before the matched key found
+			buckets[index] = next.getNext();
+		} else {
+			previousEntry.setNext(next.getNext());
+		}
+		// Remove the next pointer of to be removed item
+		next.setNext(null);
+		size--;
 	}
 
 	//Exposing two methods for testing purpose
