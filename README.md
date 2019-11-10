@@ -1,7 +1,11 @@
 # java-playground
-java-playground project to test all the concern about java core.  
+java-playground project to test, to play round all the concerns about:
+ - java core
+ - data structures
+ - algorithms
 
 *Because this repository just reflects the view of author, please feedback me via email phamngoctan.com@gmail.com if you have any concern*.
+
 # how to run
 mvn clean test
 
@@ -30,6 +34,8 @@ Notes:
  
 ## Binary search
 Add implementation for binary search using recursive approach
+
+## Binary search tree
 
 # Multi-threads
 ## Sleep
