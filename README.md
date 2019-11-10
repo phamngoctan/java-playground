@@ -1,5 +1,9 @@
 # java-playground
-java-playground project to test all the concern about java core
+java-playground project to test, to play round all the concerns about:
+ - java core
+ - data structures
+ - algorithms
+
 # how to run
 mvn clean test
 
