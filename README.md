@@ -4,6 +4,8 @@ java-playground project to test, to play round all the concerns about:
  - data structures
  - algorithms
 
+*Because this repository just reflects the view of author, please feedback me via email phamngoctan.com@gmail.com if you have any concern*.
+
 # how to run
 mvn clean test
 
@@ -20,6 +22,18 @@ It includes:
  - exists(key)
  - get(key)
  - remove(key)
+ - capacity() //testing purpose
+ - size() //testing purpose
+ 
+Notes:  
+ - support null key
+ - in Java 8, to improve the performance of HashMap, put() method’s implementation has been updated to use a Red Black Tree if there are more than 8 Entries in the same bucket.
+ - having more than one Entry in a bucket is called Hash Collision and the Linked list approach to contain Entries with same hash values in the same bucket is called chaining.
+ - consider implementing the capacity as a prime number, this can prevent the collision better (https://web.archive.org/web/19990903133921/http://www.concentric.net/~Ttwang/tech/primehash.htm).
+ - why the remove method checks if the size = current_capacity / 4 to do the re-index? Because it would prevent the situation that someone adds one more item at the increasing_point. Then, he/she again deletes item at the decreasing_point. This would make the add/remove O(n) always. At least, divide for 4 would prevent that.
+ 
+## Binary search
+Add implementation for binary search using recursive approach
 
 ## Binary search tree
 
@@ -45,3 +59,9 @@ It is the same like positive number, but use the first bit to mark the number is
 How to calculate the binary of a number into it's twos' complement  
 Reverse all its bits, then plus 1 to the result of the previous reverse step
 
+### Bit utils
+ - Add absolute function of an integer variable in bit approach, the performance could be better than Math.abs. But only use it when you really need to improve the performance of the system.
+ - Add fetch bit at a position from an integer
+ - Check if a given number is a power of 2
+ - Find missing pair item of a given array
+ - Find the number of set bits in a binary representation of a number
