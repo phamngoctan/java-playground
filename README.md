@@ -17,6 +17,8 @@ It includes:
  - get(key)
  - remove(key)
 
+## Binary search tree
+
 # Multi-threads
 ## Sleep
 ## Join
