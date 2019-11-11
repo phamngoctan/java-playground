@@ -40,8 +40,26 @@ public class BinarySearchTree<T extends Comparable<T>> {
 		}
 	}
 
-	public void toStringFollowingInsertionOrder() {
-		// TODO Auto-generated method stub
+	public String toStringFollowingPreOrder() {
+		if (root == null) {
+			return null;
+		}
 		
+		return toStringFollowingPreOrder(root).trim().replaceAll(" +", " ");
+	}
+	
+	private String toStringFollowingPreOrder(Node<T> node) {
+//		System.out.println(node.getData());
+		String rootData = node.getData().toString();
+		String leftData = null;
+		if (node.getLeftChild() != null) {
+			leftData = toStringFollowingPreOrder(node.getLeftChild());
+		}
+		
+		String rightData = null;
+		if (node.getRightChild() != null) {
+			rightData = toStringFollowingPreOrder(node.getRightChild());
+		}
+		return rootData + " " + (leftData == null ? "" : leftData) + " " + (rightData == null ? "" : rightData);
 	}
 }
