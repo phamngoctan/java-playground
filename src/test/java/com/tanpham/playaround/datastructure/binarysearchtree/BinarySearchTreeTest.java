@@ -144,6 +144,12 @@ public class BinarySearchTreeTest {
 		assertThat(leftChild.getData(), Matchers.equalTo(6));
 	}
 	
+	@Test
+	public void toString__nullRoot() {
+		String result = binarySearchTree.toStringFollowingPreOrder();
+		assertThat(result, Matchers.nullValue());
+	}
+	
 	/*
 	 *      5
 	 *    /
