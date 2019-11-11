@@ -143,4 +143,68 @@ public class BinarySearchTreeTest {
 		assertThat(leftChild, Matchers.notNullValue());
 		assertThat(leftChild.getData(), Matchers.equalTo(6));
 	}
+	
+	@Test
+	public void toString__nullRoot() {
+		String result = binarySearchTree.toStringFollowingPreOrder();
+		assertThat(result, Matchers.nullValue());
+	}
+	
+	/*
+	 *      5
+	 *    /
+	 *   3
+	 *    \
+	 *      4
+	 */
+	@Test
+	public void toString__followingPreOrder() {
+		binarySearchTree.insert(5);
+		binarySearchTree.insert(3);
+		binarySearchTree.insert(4);
+		
+		String result = binarySearchTree.toStringFollowingPreOrder();
+		assertThat(result, Matchers.equalTo("5 3 4"));
+	}
+	
+	/*
+	 *        5
+	 *       /
+	 *      3
+	 *     / \
+	 *   2     4
+	 */
+	@Test
+	public void toString__followingPreOrder__rootWithBothChildren() {
+		binarySearchTree.insert(5);
+		binarySearchTree.insert(3);
+		binarySearchTree.insert(4);
+		binarySearchTree.insert(2);
+		
+		String result = binarySearchTree.toStringFollowingPreOrder();
+		assertThat(result, Matchers.equalTo("5 3 4 2"));
+	}
+	
+	/*
+	 *          5
+	 *       /     \
+	 *      3        10
+	 *     / \      /  \ 
+	 *   2     4  8     15
+	 */
+	@Test
+	public void toString__followingPreOrder__rootWithBothChildren2() {
+		binarySearchTree.insert(5);
+		binarySearchTree.insert(3);
+		binarySearchTree.insert(4);
+		binarySearchTree.insert(2);
+		
+		binarySearchTree.insert(10);
+		binarySearchTree.insert(8);
+		binarySearchTree.insert(15);
+		
+		String result = binarySearchTree.toStringFollowingPreOrder();
+		assertThat(result, Matchers.equalTo("5 3 2 4 10 8 15"));
+	}
+	
 }
