@@ -147,7 +147,7 @@ public class BinarySearchTreeTest {
 	@Test
 	public void toString__nullRoot() {
 		String result = binarySearchTree.toStringFollowingPreOrder();
-		assertThat(result, Matchers.nullValue());
+		assertThat(result, Matchers.equalTo(""));
 	}
 	
 	/*
@@ -182,7 +182,7 @@ public class BinarySearchTreeTest {
 		binarySearchTree.insert(2);
 		
 		String result = binarySearchTree.toStringFollowingPreOrder();
-		assertThat(result, Matchers.equalTo("5 3 4 2"));
+		assertThat(result, Matchers.equalTo("5 3 2 4"));
 	}
 	
 	/*
@@ -205,6 +205,78 @@ public class BinarySearchTreeTest {
 		
 		String result = binarySearchTree.toStringFollowingPreOrder();
 		assertThat(result, Matchers.equalTo("5 3 2 4 10 8 15"));
+	}
+	
+	@Test
+	public void delete__emptyTree() {
+		binarySearchTree.delete(5);
+		assertThat(binarySearchTree.toStringFollowingPreOrder(), Matchers.equalTo(""));
+	}
+	
+	/*
+	 *        5
+	 */
+	@Test
+	public void delete__correctlyOneRemainingNode() {
+		binarySearchTree.insert(5);
+		binarySearchTree.delete(5);
+		assertThat(binarySearchTree.toStringFollowingPreOrder(), Matchers.equalTo(""));
+	}
+	
+	/*
+	 *        5
+	 *       /
+	 *      3
+	 *     / \
+	 *   2     4
+	 */
+	@Test
+	public void delete__leftLeave() {
+		binarySearchTree.insert(5);
+		binarySearchTree.insert(3);
+		binarySearchTree.insert(4);
+		binarySearchTree.insert(2);
+		
+		binarySearchTree.delete(2);
+		assertThat(binarySearchTree.getRoot().getLeftChild().getLeftChild(), Matchers.nullValue());
+		assertThat(binarySearchTree.toStringFollowingPreOrder(), Matchers.equalTo("5 3 4"));
+	}
+	
+	/*
+	 *        5
+	 *       /
+	 *      3
+	 *     /
+	 *   2 
+	 */
+	@Test
+	public void delete__leftNode_singleLeftChildType() {
+		binarySearchTree.insert(5);
+		binarySearchTree.insert(3);
+		binarySearchTree.insert(2);
+		
+		binarySearchTree.delete(3);
+		assertThat(binarySearchTree.toStringFollowingPreOrder(), Matchers.equalTo("5 2"));
+	}
+	
+	/*
+	 *        5
+	 *       /
+	 *      3
+	 *     /
+	 *    2
+	 *   /
+	 *  1
+	 */
+	@Test
+	public void delete__leftNode_singleLeftChildType__theChildAlsoARootOfAnotherChild() {
+		binarySearchTree.insert(5);
+		binarySearchTree.insert(3);
+		binarySearchTree.insert(2);
+		binarySearchTree.insert(1);
+		
+		binarySearchTree.delete(3);
+		assertThat(binarySearchTree.toStringFollowingPreOrder(), Matchers.equalTo("5 2 1"));
 	}
 	
 }
