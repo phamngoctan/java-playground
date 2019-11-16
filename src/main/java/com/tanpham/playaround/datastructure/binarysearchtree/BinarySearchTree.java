@@ -107,6 +107,18 @@ public class BinarySearchTree<T extends Comparable<T>> {
 		}
 	}
 	
+	public T findSmallestValue() {
+		if (root == null) {
+			return null;
+		}
+		
+		Node<T> next = root;
+		while(next.getLeftChild() != null) {
+			next = next.getLeftChild();
+		}
+		return next.getData();
+	}
+	
 	//TODO: implement this method
 	public int getDepthLevel() {
 		return 0;
