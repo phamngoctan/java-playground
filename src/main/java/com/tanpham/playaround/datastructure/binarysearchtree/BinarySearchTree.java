@@ -91,9 +91,10 @@ public class BinarySearchTree<T extends Comparable<T>> {
 			} else {
 				previous.delete(next);
 			}
+			return;
 		} else if (next.getType() == NodeType.SINGLE_LEFT_CHILD) {
-			// FIXME: here
-			next.setData(next.getLeftChild().getData());
+			Node<T> leftChild = next.getLeftChild();
+			previous.setLeftChild(leftChild);
 			next.setLeftChild(null);
 		} else if (next.getType() == NodeType.SINGLE_RIGHT_CHILD) {
 			// TODO: implement here

@@ -101,5 +101,9 @@ public class Node<T> {
 			rightChild = null;
 		}
 	}
+
+	public boolean hasChild() {
+		return leftChild != null || rightChild != null;
+	}
 	
 }
