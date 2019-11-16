@@ -1,5 +1,7 @@
 package com.tanpham.playaround.datastructure.binarysearchtree;
 
+import java.util.Objects;
+
 public class BinarySearchTree<T extends Comparable<T>> {
 	private Node<T> root;
 
@@ -101,9 +103,8 @@ public class BinarySearchTree<T extends Comparable<T>> {
 			previous.setRightChild(rightChild);
 			next.setRightChild(null);
 		} else {
-			// TODO: find the smallest value on the right tree
-			// put it data to the to be deleted node
-			// finally, delete the node which has smallest value
+			Node<T> smallestRightNode = popSmallestNodeOfRightChild(next, next.getRightChild());
+			next.setData(smallestRightNode.getData());
 		}
 	}
 	
@@ -122,5 +123,32 @@ public class BinarySearchTree<T extends Comparable<T>> {
 	//TODO: implement this method
 	public int getDepthLevel() {
 		return 0;
+	}
+	
+	/**
+	 * Because the idea of this method is of finding the smallest node, so the previous node cannot be null
+	 */
+	private Node<T> popSmallestNodeOfRightChild(Node<T> previousOfCheckingNode, Node<T> node) {
+		Objects.requireNonNull(previousOfCheckingNode);
+		if (node == null) {
+			return null;
+		}
+		
+		Node<T> previous = previousOfCheckingNode;
+		Node<T> next = node;
+		// in case the input node is the smallest one
+		if (next.getLeftChild() == null) {
+			previous.setRightChild(next.getRightChild());
+			next.setRightChild(null);
+			return next;
+		}
+		
+		while (next.getLeftChild() != null) {
+			previous = next;
+			next = next.getLeftChild();
+		}
+		// Do the popping node out of the tree
+		previous.setLeftChild(null);
+		return next;
 	}
 }
