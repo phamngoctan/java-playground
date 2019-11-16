@@ -97,8 +97,9 @@ public class BinarySearchTree<T extends Comparable<T>> {
 			previous.setLeftChild(leftChild);
 			next.setLeftChild(null);
 		} else if (next.getType() == NodeType.SINGLE_RIGHT_CHILD) {
-			// TODO: implement here
-			
+			Node<T> rightChild = next.getRightChild();
+			previous.setRightChild(rightChild);
+			next.setRightChild(null);
 		} else {
 			// TODO: find the smallest value on the right tree
 			// put it data to the to be deleted node

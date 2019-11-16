@@ -279,4 +279,78 @@ public class BinarySearchTreeTest {
 		assertThat(binarySearchTree.toStringFollowingPreOrder(), Matchers.equalTo("5 2 1"));
 	}
 	
+	/*
+	 *        5
+	 *       /
+	 *      3
+	 *     / \
+	 *   2     4
+	 */
+	@Test
+	public void delete__rightLeave() {
+		binarySearchTree.insert(5);
+		binarySearchTree.insert(3);
+		binarySearchTree.insert(4);
+		binarySearchTree.insert(2);
+		
+		binarySearchTree.delete(4);
+		assertThat(binarySearchTree.getRoot().getLeftChild().getRightChild(), Matchers.nullValue());
+		assertThat(binarySearchTree.toStringFollowingPreOrder(), Matchers.equalTo("5 3 2"));
+	}
+	
+	/*
+	 *        5
+	 *         \
+	 *          8 
+	 *            \
+	 *             16
+	 */
+	@Test
+	public void delete__rightNode_singleLeftChildType() {
+		binarySearchTree.insert(5);
+		binarySearchTree.insert(8);
+		binarySearchTree.insert(16);
+		
+		binarySearchTree.delete(8);
+		assertThat(binarySearchTree.toStringFollowingPreOrder(), Matchers.equalTo("5 16"));
+	}
+	
+	/*
+	 *        5
+	 *          \
+	 *           9
+	 *            \
+	 *            15
+	 *              \
+	 *              18
+	 */
+	@Test
+	public void delete__leftNode_singleRightChildType__theChildAlsoARootOfAnotherChild() {
+		binarySearchTree.insert(5);
+		binarySearchTree.insert(9);
+		binarySearchTree.insert(15);
+		binarySearchTree.insert(18);
+		
+		binarySearchTree.delete(9);
+		assertThat(binarySearchTree.toStringFollowingPreOrder(), Matchers.equalTo("5 15 18"));
+	}
+	
+	/*
+	 *        5
+	 *       /
+	 *      3
+	 *     / \
+	 *   2     4
+	 */
+	@Test
+	public void delete__root() {
+		binarySearchTree.insert(5);
+		binarySearchTree.insert(3);
+		binarySearchTree.insert(4);
+		binarySearchTree.insert(2);
+		
+		binarySearchTree.delete(3);
+		assertThat(binarySearchTree.toStringFollowingPreOrder(), Matchers.equalTo("5 4 2"));
+	}
+	
 }
