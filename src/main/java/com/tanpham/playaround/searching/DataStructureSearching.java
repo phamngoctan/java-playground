@@ -2,7 +2,7 @@ package com.tanpham.playaround.searching;
 
 public class DataStructureSearching {
 
-	public static boolean binarySearch(int[] arr, int toBeSearched) {
+	public static boolean binarySearchRecursive(int[] arr, int toBeSearched) {
 		if (arr == null || arr.length == 0) {
 			return false;
 		}
