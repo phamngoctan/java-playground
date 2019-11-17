@@ -33,7 +33,9 @@ Notes:
  - why the remove method checks if the size = current_capacity / 4 to do the re-index? Because it would prevent the situation that someone adds one more item at the increasing_point. Then, he/she again deletes item at the decreasing_point. This would make the add/remove O(n) always. At least, divide for 4 would prevent that.
  
 ## Binary search
-Add implementation for binary search using recursive approach
+Add implementation for binary search using:
+ - recursive approach
+ - while loop
 
 ## Binary search tree
 Idea of deleting a Node, we separates it into three cases:

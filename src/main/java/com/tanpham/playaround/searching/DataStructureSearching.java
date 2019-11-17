@@ -25,5 +25,26 @@ public class DataStructureSearching {
 			return binarySearchApplyRecursive(arr, toBeSearched, middlePoint + 1, max);
 		}
 	}
+	
+	public static boolean binarySearch(int[] arr, int toBeSearched) {
+		if (arr == null || arr.length == 0) {
+			return false;
+		}
+		int min = 0;
+		int max = arr.length;
+
+		while (min <= max) {
+			int middlePoint = (max - min) / 2;
+			if (toBeSearched == arr[middlePoint + min]) {
+				return true;
+			} else if (toBeSearched < arr[middlePoint + min]) {
+				max = middlePoint;
+			} else {
+				min = middlePoint + 1;
+			}
+		}
+		
+		return false;
+	}
 
 }
