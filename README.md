@@ -35,7 +35,7 @@ Notes:
 ## Binary search
 Add implementation for binary search using:
  - recursive approach
- - while loop
+ - while loop approach
 
 ## Binary search tree
 Idea of deleting a Node, we separates it into three cases:
