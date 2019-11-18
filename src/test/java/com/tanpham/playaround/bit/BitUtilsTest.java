@@ -89,4 +89,15 @@ public class BitUtilsTest {
 		BitUtils.swapUsingXor(a, b);
 	}
 	
+	/*
+	 * 10 = 1010 -> 2 bits
+	 * 7 = 0111 -> 3 bits
+	 * 
+	 */
+	@Test
+	public void countTotalBitSets() {
+//		assertThat(BitUtils.findBitSet__shiftOperator(10), Matchers.equalTo(2));
+		assertThat(BitUtils.findBitSet__shiftOperator(7), Matchers.equalTo(3));
+	}
+	
 }
