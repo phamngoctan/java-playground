@@ -78,4 +78,20 @@ public final class BitUtils {
 		return counter;
 	}
 	
+	public static void swapUsingXor(Integer a, Integer b) {
+		// anew = a XOR b
+		// We don't care the result of this operation
+		a = a ^ b;
+		
+		// bswapped = b XOR anew = b XOR (a XOR b) = a
+		// b XOR b = 0 ==> 0 XOR a = a
+		b = b ^ a;
+		
+		// aswapped = anew XOR bswapped = (a XOR b) XOR a = b
+		// a XOR a = 0 ==> 0 XOR b = b
+		a = a ^ b;
+		System.out.println(a);
+		System.out.println(b);
+	}
+	
 }

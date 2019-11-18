@@ -79,4 +79,14 @@ public class BitUtilsTest {
 		assertThat(BitUtils.findNumberOfSetBits(11), Matchers.equalTo(4));
 		assertThat(BitUtils.findNumberOfSetBits(33), Matchers.equalTo(6));
 	}
+	
+	// support integer only
+	// must not be used with same variable twice, e.g., swapXor(a,a)
+	@Test
+	public void swapIntUsingXor__happyPath() {
+		Integer a = new Integer(5);
+		Integer b = new Integer(10);
+		BitUtils.swapUsingXor(a, b);
+	}
+	
 }
