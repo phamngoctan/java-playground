@@ -71,3 +71,4 @@ Reverse all its bits, then plus 1 to the result of the previous reverse step
  - Check if a given number is a power of 2
  - Find missing pair item of a given array
  - Find the number of set bits in a binary representation of a number
+ - Swap two integers
