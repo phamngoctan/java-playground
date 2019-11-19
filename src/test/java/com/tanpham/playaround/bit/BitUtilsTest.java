@@ -89,4 +89,34 @@ public class BitUtilsTest {
 		BitUtils.swapUsingXor(a, b);
 	}
 	
+	/*
+	 * 10 = 1010 -> 2 bits
+	 */
+	@Test
+	public void countTotalBitSets__testWith10() {
+		assertThat(BitUtils.findBitSetUsingShiftOperator(10), Matchers.equalTo(2));
+	}
+	
+	/*
+	 * 7 = 0111 -> 3 bits
+	 */
+	@Test
+	public void countTotalBitSets__testWith7() {
+		assertThat(BitUtils.findBitSetUsingShiftOperator(7), Matchers.equalTo(3));
+	}
+	
+	@Test
+	public void countTotalBitSets__testWithZero() {
+		assertThat(BitUtils.findBitSetUsingShiftOperator(0), Matchers.equalTo(0));
+	}
+	
+	@Test
+	public void countTotalBitSets__testWithMinusOne__biggestBitSetNumber__becauseOfTheTwoComplement() {
+		assertThat(BitUtils.findBitSetUsingShiftOperator(-1), Matchers.equalTo(32));
+	}
+	
+	@Test
+	public void countTotalBitSets__testWithOne() {
+		assertThat(BitUtils.findBitSetUsingShiftOperator(1), Matchers.equalTo(1));
+	}
 }

@@ -64,17 +64,24 @@ public final class BitUtils {
 	public static int findNumberOfSetBits(int number) {
 		int counter = 0;
 
-		// first approach
 		while (number != 0) {
 			number = number >> 1;
 			counter++;
 		}
 		
-		// second approach
-//		while (number > 0) {
-//            number &= (number - 1);
-//            counter++; 
-//        }
+		return counter;
+	}
+	
+	public static int findBitSetUsingShiftOperator(int number) {
+		int counter = 0;
+		
+		for (int i = 0; i < SIZE_INT; i++) {
+			int currentOneBit = SIZE_INT - i - 1;
+			int andValue = (1 << currentOneBit) & number;
+			if (andValue != 0) {
+				counter++;
+			}
+		}
 		return counter;
 	}
 	
