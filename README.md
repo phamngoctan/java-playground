@@ -61,7 +61,7 @@ It is the same like positive number, but use the first bit to mark the number is
  - If the first number is 1, it is negative.
  - If it is 0, it is positive. 
 Declaring a byte in java, two ways:
- - byte x = 0b10 --> 2, 0b1000 --> 8
+ - byte x = 0b10 --> 2, 0b1000 --> 8, -0b10 --> -2
  - byte x = 8 --> equivalent to 0b1000
 
 ### Two's complement
