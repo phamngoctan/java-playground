@@ -119,4 +119,36 @@ public class BitUtilsTest {
 	public void countTotalBitSets__testWithOne() {
 		assertThat(BitUtils.findBitSetUsingShiftOperator(1), Matchers.equalTo(1));
 	}
+	
+	/*
+	 * 10 = 1010 -> 2 bits
+	 */
+	@Test
+	public void countTotalBitSetsUsingSubtraction__testWith10() {
+		assertThat(BitUtils.findBitSetUsingSubtraction(10), Matchers.equalTo(2));
+	}
+	
+	/*
+	 * 7 = 0111 -> 3 bits
+	 */
+	@Test
+	public void countTotalBitSetsUsingSubtraction__testWith7() {
+		assertThat(BitUtils.findBitSetUsingSubtraction(7), Matchers.equalTo(3));
+	}
+	
+	@Test
+	public void countTotalBitSetsUsingSubtraction__testWithZero() {
+		assertThat(BitUtils.findBitSetUsingSubtraction(0), Matchers.equalTo(0));
+	}
+	
+	@Test
+	public void countTotalBitSetsUsingSubtraction__testWithMinusOne__biggestBitSetNumber__becauseOfTheTwoComplement() {
+		assertThat(BitUtils.findBitSetUsingSubtraction(-1), Matchers.equalTo(32));
+	}
+	
+	@Test
+	public void countTotalBitSetsUsingSubtraction__testWithOne() {
+		assertThat(BitUtils.findBitSetUsingSubtraction(1), Matchers.equalTo(1));
+	}
+	
 }

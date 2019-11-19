@@ -72,6 +72,10 @@ public final class BitUtils {
 		return counter;
 	}
 	
+	/**
+	 * Set the other bit to zero and assign the current checking bit to one. </br>
+	 * So if the & operator is not zero, the current checking bit must be set. ==> increase the counter
+	 */
 	public static int findBitSetUsingShiftOperator(int number) {
 		int counter = 0;
 		
@@ -81,6 +85,23 @@ public final class BitUtils {
 			if (andValue != 0) {
 				counter++;
 			}
+		}
+		return counter;
+	}
+	
+	/**
+	 * The main idea is that: </br>
+	 * 1000    =    8      </br>
+	 *    &         &      </br>
+	 * 0111    =    (8 - 1)</br>
+	 * 0000                </br>
+	 * Kernighan's Bit Counting: the number of time we loop, the number of bit is set
+	 */
+	public static int findBitSetUsingSubtraction(int number) {
+		int counter = 0;
+		while (number != 0) {
+			counter++;
+			number = number & (number - 1);
 		}
 		return counter;
 	}
