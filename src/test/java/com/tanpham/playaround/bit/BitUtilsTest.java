@@ -17,6 +17,16 @@ public class BitUtilsTest {
 		assertThat(BitUtils.abs(10), Matchers.equalTo(10));
 	}
 	
+	@Test
+	public void abs_reverseComplementTwoApproach__bitVersion_negativeInput() {
+		assertThat(BitUtils.abs_reverseComplementTwoApproach(-0b1000), Matchers.equalTo(8));
+	}
+	
+	@Test
+	public void abs_reverseComplementTwoApproach__bitVersion_positiveInput() {
+		assertThat(BitUtils.abs_reverseComplementTwoApproach(0b1000), Matchers.equalTo(8));
+	}
+	
 	/*
 	 * 10 => 1010
 	 */

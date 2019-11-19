@@ -11,10 +11,25 @@ public final class BitUtils {
 	
 	public static int abs(int n) {
 		int mask = n >> (SIZE_INT * CHAR_BIT - 1);
-		System.out.println(Integer.toBinaryString(mask));
-		System.out.println(Integer.toBinaryString(n + mask));
-		System.out.println(Integer.toBinaryString((n + mask) ^ mask));
+//		System.out.println(Integer.toBinaryString(mask));
+//		System.out.println(Integer.toBinaryString(n + mask));
+//		System.out.println(Integer.toBinaryString((n + mask) ^ mask));
 		return ((n + mask) ^ mask);
+	}
+	
+	/**
+	 * n xor 0 = n </br>
+	 * n xor -1 = reverse all the bit of n, then plus 1 --> output would be the absolute of n, this is the reverse way to calculate the complement two of a number </br>
+	 *
+	 * @param n
+	 * @return
+	 */
+	public static int abs_reverseComplementTwoApproach(int n) {
+		int bit31 = n >> 31;
+//		System.out.println(-0b10 >> 31);
+//		System.out.println(-0b10 ^ -0b1);
+//		System.out.println((-0b10 ^ -0b1) - (-0b1));
+		return (n ^ bit31) - bit31;
 	}
 	
 	/**
