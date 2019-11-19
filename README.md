@@ -60,6 +60,9 @@ How to calculate the binary of a number into it's ones' complement
 It is the same like positive number, but use the first bit to mark the number is negative or not.  
  - If the first number is 1, it is negative.
  - If it is 0, it is positive. 
+Declaring a byte in java, two ways:
+ - byte x = 0b10 --> 2, 0b1000 --> 8
+ - byte x = 8 --> equivalent to 0b1000
 
 ### Two's complement
 How to calculate the binary of a number into it's twos' complement  
@@ -72,3 +75,4 @@ Reverse all its bits, then plus 1 to the result of the previous reverse step
  - Find missing pair item of a given array
  - Find the number of set bits in a binary representation of a number
  - Swap two integers
+ - Kernighan's Bit Counting (**really cool idea**)
