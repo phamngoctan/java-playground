@@ -11,10 +11,25 @@ public final class BitUtils {
 	
 	public static int abs(int n) {
 		int mask = n >> (SIZE_INT * CHAR_BIT - 1);
-		System.out.println(Integer.toBinaryString(mask));
-		System.out.println(Integer.toBinaryString(n + mask));
-		System.out.println(Integer.toBinaryString((n + mask) ^ mask));
+//		System.out.println(Integer.toBinaryString(mask));
+//		System.out.println(Integer.toBinaryString(n + mask));
+//		System.out.println(Integer.toBinaryString((n + mask) ^ mask));
 		return ((n + mask) ^ mask);
+	}
+	
+	/**
+	 * n xor 0 = n </br>
+	 * n xor -1 = reverse all the bit of n, then plus 1 --> output would be the absolute of n, this is the reverse way to calculate the complement two of a number </br>
+	 *
+	 * @param n
+	 * @return
+	 */
+	public static int abs_reverseComplementTwoApproach(int n) {
+		int bit31 = n >> 31;
+//		System.out.println(-0b10 >> 31);
+//		System.out.println(-0b10 ^ -0b1);
+//		System.out.println((-0b10 ^ -0b1) - (-0b1));
+		return (n ^ bit31) - bit31;
 	}
 	
 	/**
@@ -72,6 +87,10 @@ public final class BitUtils {
 		return counter;
 	}
 	
+	/**
+	 * Set the other bit to zero and assign the current checking bit to one. </br>
+	 * So if the & operator is not zero, the current checking bit must be set. ==> increase the counter
+	 */
 	public static int findBitSetUsingShiftOperator(int number) {
 		int counter = 0;
 		
@@ -81,6 +100,23 @@ public final class BitUtils {
 			if (andValue != 0) {
 				counter++;
 			}
+		}
+		return counter;
+	}
+	
+	/**
+	 * The main idea is that: </br>
+	 * 1000    =    8      </br>
+	 *    &         &      </br>
+	 * 0111    =    (8 - 1)</br>
+	 * 0000                </br>
+	 * Kernighan's Bit Counting: the number of time we loop, the number of bit is set
+	 */
+	public static int findBitSetUsingSubtraction(int number) {
+		int counter = 0;
+		while (number != 0) {
+			counter++;
+			number = number & (number - 1);
 		}
 		return counter;
 	}
