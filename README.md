@@ -76,3 +76,9 @@ Reverse all its bits, then plus 1 to the result of the previous reverse step
  - Find the number of set bits in a binary representation of a number
  - Swap two integers
  - Kernighan's Bit Counting (**really cool idea**)
+ 
+## Reference
+ - https://github.com/jwasham/coding-interview-university
+ - https://www.youtube.com/watch?v=Hzuzo9NJrlc&feature=youtu.be - counting bit sets
+ - https://bits.stephan-brumme.com/absInteger.html
+
