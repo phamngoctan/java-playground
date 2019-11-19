@@ -64,37 +64,21 @@ public final class BitUtils {
 	public static int findNumberOfSetBits(int number) {
 		int counter = 0;
 
-		// first approach
 		while (number != 0) {
 			number = number >> 1;
 			counter++;
 		}
 		
-		// second approach
-//		while (number > 0) {
-//            number &= (number - 1);
-//            counter++; 
-//        }
 		return counter;
 	}
 	
-	public static void main(String[] args) {
-		System.out.println(Integer.toBinaryString(1 << (32 - 0 - 1)));
-		System.out.println(Integer.toBinaryString(1 << (32 - 0 - 2)));
-		System.out.println(Integer.toBinaryString(1 << (32 - 0 - 3)));
-		System.out.println(Integer.toBinaryString(1 << (32 - 0 - 4)));
-	}
-	
-	// TODO: 
-	public static int findBitSet__shiftOperator(int number) {
+	public static int findBitSetUsingShiftOperator(int number) {
 		int counter = 0;
-		for (int i = 0; i < 32; i++) {
+		
+		for (int i = 0; i < SIZE_INT; i++) {
 			int currentOneBit = SIZE_INT - i - 1;
-			System.out.println("Current 1 position: " + currentOneBit);
-			int xorValue = (1 << currentOneBit) & number;
-			System.out.println("Current 1 bit: " + Integer.toBinaryString(currentOneBit));
-			System.out.println(Integer.toBinaryString(xorValue));
-			if (xorValue == 1) {
+			int andValue = (1 << currentOneBit) & number;
+			if (andValue != 0) {
 				counter++;
 			}
 		}

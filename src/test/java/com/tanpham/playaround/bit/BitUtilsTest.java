@@ -91,13 +91,32 @@ public class BitUtilsTest {
 	
 	/*
 	 * 10 = 1010 -> 2 bits
-	 * 7 = 0111 -> 3 bits
-	 * 
 	 */
 	@Test
-	public void countTotalBitSets() {
-//		assertThat(BitUtils.findBitSet__shiftOperator(10), Matchers.equalTo(2));
-		assertThat(BitUtils.findBitSet__shiftOperator(7), Matchers.equalTo(3));
+	public void countTotalBitSets__testWith10() {
+		assertThat(BitUtils.findBitSetUsingShiftOperator(10), Matchers.equalTo(2));
 	}
 	
+	/*
+	 * 7 = 0111 -> 3 bits
+	 */
+	@Test
+	public void countTotalBitSets__testWith7() {
+		assertThat(BitUtils.findBitSetUsingShiftOperator(7), Matchers.equalTo(3));
+	}
+	
+	@Test
+	public void countTotalBitSets__testWithZero() {
+		assertThat(BitUtils.findBitSetUsingShiftOperator(0), Matchers.equalTo(0));
+	}
+	
+	@Test
+	public void countTotalBitSets__testWithMinusOne__biggestBitSetNumber__becauseOfTheTwoComplement() {
+		assertThat(BitUtils.findBitSetUsingShiftOperator(-1), Matchers.equalTo(32));
+	}
+	
+	@Test
+	public void countTotalBitSets__testWithOne() {
+		assertThat(BitUtils.findBitSetUsingShiftOperator(1), Matchers.equalTo(1));
+	}
 }
