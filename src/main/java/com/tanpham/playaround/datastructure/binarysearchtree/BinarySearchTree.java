@@ -3,6 +3,8 @@ package com.tanpham.playaround.datastructure.binarysearchtree;
 import java.util.Objects;
 
 public class BinarySearchTree<T extends Comparable<T>> {
+	private static final String ONE_SPACE = " ";
+	private static final String REGEX_MULTIPLE_SPACES = " +";
 	private Node<T> root;
 
 	public Node<T> getRoot() {
@@ -47,7 +49,7 @@ public class BinarySearchTree<T extends Comparable<T>> {
 			return "";
 		}
 		
-		return toStringFollowingPreOrder(root).trim().replaceAll(" +", " ");
+		return toStringFollowingPreOrder(root).trim().replaceAll(REGEX_MULTIPLE_SPACES, ONE_SPACE);
 	}
 	
 	private String toStringFollowingPreOrder(Node<T> node) {
@@ -61,7 +63,7 @@ public class BinarySearchTree<T extends Comparable<T>> {
 		if (node.getRightChild() != null) {
 			rightData = toStringFollowingPreOrder(node.getRightChild());
 		}
-		return rootData + " " + (leftData == null ? "" : leftData) + " " + (rightData == null ? "" : rightData);
+		return rootData + ONE_SPACE + (leftData == null ? "" : leftData) + ONE_SPACE + (rightData == null ? "" : rightData);
 	}
 
 	public void delete(T value) {
@@ -120,11 +122,6 @@ public class BinarySearchTree<T extends Comparable<T>> {
 		return next.getData();
 	}
 	
-	//TODO: implement this method
-	public int getDepthLevel() {
-		return 0;
-	}
-	
 	/**
 	 * Because the idea of this method is of finding the smallest node, so the previous node cannot be null
 	 */
@@ -151,4 +148,50 @@ public class BinarySearchTree<T extends Comparable<T>> {
 		previous.setLeftChild(null);
 		return next;
 	}
+
+	public String getValue() {
+		if (root == null) {
+			return null;
+		}
+		
+		return getValue(root).trim().replaceAll(REGEX_MULTIPLE_SPACES, ONE_SPACE);
+	}
+
+	private String getValue(Node<T> node) {
+		String treeValue = "";
+		if (node.getLeftChild() != null) {
+			treeValue += getValue(node.getLeftChild()) + ONE_SPACE;
+		}
+		
+		treeValue += ONE_SPACE + node.getData();
+		
+		if (node.getRightChild() != null) {
+			treeValue += getValue(node.getRightChild()) + ONE_SPACE;
+		}
+		return treeValue;
+	}
+	
+	public int getHeight() {
+		if (root == null) {
+			return 0;
+		}
+		
+		return getHeight(root);
+	}
+
+	private int getHeight(Node<T> node) {
+		int leftHeight = 0;
+		if (node.getLeftChild() != null) {
+			leftHeight = getHeight(node.getLeftChild());
+		}
+		
+		int rightHeight = 0;
+		if (node.getRightChild() != null) {
+			rightHeight = getHeight(node.getRightChild());
+		}
+		
+		return leftHeight > rightHeight ? leftHeight + 1 : rightHeight + 1;
+	}
+	
+	
 }
