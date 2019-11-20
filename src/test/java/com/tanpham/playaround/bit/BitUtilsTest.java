@@ -17,6 +17,16 @@ public class BitUtilsTest {
 		assertThat(BitUtils.abs(10), Matchers.equalTo(10));
 	}
 	
+	@Test
+	public void abs_reverseComplementTwoApproach__bitVersion_negativeInput() {
+		assertThat(BitUtils.abs_reverseComplementTwoApproach(-0b1000), Matchers.equalTo(8));
+	}
+	
+	@Test
+	public void abs_reverseComplementTwoApproach__bitVersion_positiveInput() {
+		assertThat(BitUtils.abs_reverseComplementTwoApproach(0b1000), Matchers.equalTo(8));
+	}
+	
 	/*
 	 * 10 => 1010
 	 */
@@ -79,4 +89,76 @@ public class BitUtilsTest {
 		assertThat(BitUtils.findNumberOfSetBits(11), Matchers.equalTo(4));
 		assertThat(BitUtils.findNumberOfSetBits(33), Matchers.equalTo(6));
 	}
+	
+	// support integer only
+	// must not be used with same variable twice, e.g., swapXor(a,a)
+	@Test
+	public void swapIntUsingXor__happyPath() {
+		Integer a = new Integer(5);
+		Integer b = new Integer(10);
+		BitUtils.swapUsingXor(a, b);
+	}
+	
+	/*
+	 * 10 = 1010 -> 2 bits
+	 */
+	@Test
+	public void countTotalBitSets__testWith10() {
+		assertThat(BitUtils.findBitSetUsingShiftOperator(10), Matchers.equalTo(2));
+	}
+	
+	/*
+	 * 7 = 0111 -> 3 bits
+	 */
+	@Test
+	public void countTotalBitSets__testWith7() {
+		assertThat(BitUtils.findBitSetUsingShiftOperator(7), Matchers.equalTo(3));
+	}
+	
+	@Test
+	public void countTotalBitSets__testWithZero() {
+		assertThat(BitUtils.findBitSetUsingShiftOperator(0), Matchers.equalTo(0));
+	}
+	
+	@Test
+	public void countTotalBitSets__testWithMinusOne__biggestBitSetNumber__becauseOfTheTwoComplement() {
+		assertThat(BitUtils.findBitSetUsingShiftOperator(-1), Matchers.equalTo(32));
+	}
+	
+	@Test
+	public void countTotalBitSets__testWithOne() {
+		assertThat(BitUtils.findBitSetUsingShiftOperator(1), Matchers.equalTo(1));
+	}
+	
+	/*
+	 * 10 = 1010 -> 2 bits
+	 */
+	@Test
+	public void countTotalBitSetsUsingSubtraction__testWith10() {
+		assertThat(BitUtils.findBitSetUsingSubtraction(10), Matchers.equalTo(2));
+	}
+	
+	/*
+	 * 7 = 0111 -> 3 bits
+	 */
+	@Test
+	public void countTotalBitSetsUsingSubtraction__testWith7() {
+		assertThat(BitUtils.findBitSetUsingSubtraction(7), Matchers.equalTo(3));
+	}
+	
+	@Test
+	public void countTotalBitSetsUsingSubtraction__testWithZero() {
+		assertThat(BitUtils.findBitSetUsingSubtraction(0), Matchers.equalTo(0));
+	}
+	
+	@Test
+	public void countTotalBitSetsUsingSubtraction__testWithMinusOne__biggestBitSetNumber__becauseOfTheTwoComplement() {
+		assertThat(BitUtils.findBitSetUsingSubtraction(-1), Matchers.equalTo(32));
+	}
+	
+	@Test
+	public void countTotalBitSetsUsingSubtraction__testWithOne() {
+		assertThat(BitUtils.findBitSetUsingSubtraction(1), Matchers.equalTo(1));
+	}
+	
 }

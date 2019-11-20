@@ -11,10 +11,25 @@ public final class BitUtils {
 	
 	public static int abs(int n) {
 		int mask = n >> (SIZE_INT * CHAR_BIT - 1);
-		System.out.println(Integer.toBinaryString(mask));
-		System.out.println(Integer.toBinaryString(n + mask));
-		System.out.println(Integer.toBinaryString((n + mask) ^ mask));
+//		System.out.println(Integer.toBinaryString(mask));
+//		System.out.println(Integer.toBinaryString(n + mask));
+//		System.out.println(Integer.toBinaryString((n + mask) ^ mask));
 		return ((n + mask) ^ mask);
+	}
+	
+	/**
+	 * n xor 0 = n </br>
+	 * n xor -1 = reverse all the bit of n, then plus 1 --> output would be the absolute of n, this is the reverse way to calculate the complement two of a number </br>
+	 *
+	 * @param n
+	 * @return
+	 */
+	public static int abs_reverseComplementTwoApproach(int n) {
+		int bit31 = n >> 31;
+//		System.out.println(-0b10 >> 31);
+//		System.out.println(-0b10 ^ -0b1);
+//		System.out.println((-0b10 ^ -0b1) - (-0b1));
+		return (n ^ bit31) - bit31;
 	}
 	
 	/**
@@ -64,18 +79,62 @@ public final class BitUtils {
 	public static int findNumberOfSetBits(int number) {
 		int counter = 0;
 
-		// first approach
 		while (number != 0) {
 			number = number >> 1;
 			counter++;
 		}
 		
-		// second approach
-//		while (number > 0) {
-//            number &= (number - 1);
-//            counter++; 
-//        }
 		return counter;
+	}
+	
+	/**
+	 * Set the other bit to zero and assign the current checking bit to one. </br>
+	 * So if the & operator is not zero, the current checking bit must be set. ==> increase the counter
+	 */
+	public static int findBitSetUsingShiftOperator(int number) {
+		int counter = 0;
+		
+		for (int i = 0; i < SIZE_INT; i++) {
+			int currentOneBit = SIZE_INT - i - 1;
+			int andValue = (1 << currentOneBit) & number;
+			if (andValue != 0) {
+				counter++;
+			}
+		}
+		return counter;
+	}
+	
+	/**
+	 * The main idea is that: </br>
+	 * 1000    =    8      </br>
+	 *    &         &      </br>
+	 * 0111    =    (8 - 1)</br>
+	 * 0000                </br>
+	 * Kernighan's Bit Counting: the number of time we loop, the number of bit is set
+	 */
+	public static int findBitSetUsingSubtraction(int number) {
+		int counter = 0;
+		while (number != 0) {
+			counter++;
+			number = number & (number - 1);
+		}
+		return counter;
+	}
+	
+	public static void swapUsingXor(Integer a, Integer b) {
+		// anew = a XOR b
+		// We don't care the result of this operation
+		a = a ^ b;
+		
+		// bswapped = b XOR anew = b XOR (a XOR b) = a
+		// b XOR b = 0 ==> 0 XOR a = a
+		b = b ^ a;
+		
+		// aswapped = anew XOR bswapped = (a XOR b) XOR a = b
+		// a XOR a = 0 ==> 0 XOR b = b
+		a = a ^ b;
+		System.out.println(a);
+		System.out.println(b);
 	}
 	
 }
