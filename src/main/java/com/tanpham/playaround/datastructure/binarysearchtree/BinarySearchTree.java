@@ -122,11 +122,6 @@ public class BinarySearchTree<T extends Comparable<T>> {
 		return next.getData();
 	}
 	
-	//TODO: implement this method
-	public int getDepthLevel() {
-		return 0;
-	}
-	
 	/**
 	 * Because the idea of this method is of finding the smallest node, so the previous node cannot be null
 	 */
@@ -174,6 +169,28 @@ public class BinarySearchTree<T extends Comparable<T>> {
 			treeValue += getValue(node.getRightChild()) + ONE_SPACE;
 		}
 		return treeValue;
+	}
+	
+	public int getHeight() {
+		if (root == null) {
+			return 0;
+		}
+		
+		return getHeight(root);
+	}
+
+	private int getHeight(Node<T> node) {
+		int leftHeight = 0;
+		if (node.getLeftChild() != null) {
+			leftHeight = getHeight(node.getLeftChild());
+		}
+		
+		int rightHeight = 0;
+		if (node.getRightChild() != null) {
+			rightHeight = getHeight(node.getRightChild());
+		}
+		
+		return leftHeight > rightHeight ? leftHeight + 1 : rightHeight + 1;
 	}
 	
 	

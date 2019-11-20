@@ -512,5 +512,74 @@ public class BinarySearchTreeTest {
 		assertThat(result, Matchers.equalTo("10 12 16"));
 	}
 	
+	@Test
+	public void getHeight__nullRoot() {
+		assertThat(binarySearchTree.getHeight(), Matchers.equalTo(0));
+	}
+	
+	@Test
+	public void getHeight__justOnlyRootAvailable() {
+		binarySearchTree.insert(10);
+		assertThat(binarySearchTree.getHeight(), Matchers.equalTo(1));
+	}
+	
+	/*
+	 *        10
+	 *       /
+	 *      1
+	 */
+	@Test
+	public void getHeight__leftTreeAvailableOnly() {
+		binarySearchTree.insert(10);
+		binarySearchTree.insert(1);
+		assertThat(binarySearchTree.getHeight(), Matchers.equalTo(2));
+	}
+	
+	/*
+	 *        10
+	 *       /  \
+	 *      5    19
+	 */
+	@Test
+	public void getHeight__leftAndRightOnlyOneChild() {
+		binarySearchTree.insert(10);
+		binarySearchTree.insert(5);
+		binarySearchTree.insert(19);
+		assertThat(binarySearchTree.getHeight(), Matchers.equalTo(2));
+	}
+	
+	/*
+	 *        10
+	 *       /  \
+	 *      5    19
+	 *          /
+	 *         14
+	 */        
+	@Test
+	public void getHeight__rightTreeTallerThanLeftTree() {
+		binarySearchTree.insert(10);
+		binarySearchTree.insert(5);
+		binarySearchTree.insert(19);
+		binarySearchTree.insert(14);
+		assertThat(binarySearchTree.getHeight(), Matchers.equalTo(3));
+	}
+	
+	/*
+	 *        10
+	 *       /  \
+	 *      5    19
+	 *       \
+	 *        8
+	 *         \
+	 *          9
+	 */        
+	@Test
+	public void getHeight__leftTreeTallerThanRightTree() {
+		binarySearchTree.insert(10);
+		binarySearchTree.insert(5);
+		binarySearchTree.insert(8);
+		binarySearchTree.insert(9);
+		assertThat(binarySearchTree.getHeight(), Matchers.equalTo(4));
+	}
 	
 }
