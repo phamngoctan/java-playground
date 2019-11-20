@@ -440,4 +440,77 @@ public class BinarySearchTreeTest {
 		assertThat(binarySearchTree.toStringFollowingPreOrder(), Matchers.equalTo("10 3 1 4 8"));
 	}
 	
+	@Test
+	public void getValue__nullRoot() {
+		String result = binarySearchTree.getValue();
+		assertThat(result, Matchers.nullValue());
+	}
+	
+	/*
+	 *        10
+	 *       /
+	 *      2
+	 *     / \
+	 *   1     4
+	 *        / \
+	 *       3   8
+	 */
+	@Test
+	public void getValue__minToMaxOrder_happyPath() {
+		binarySearchTree.insert(10);
+		binarySearchTree.insert(2);
+		binarySearchTree.insert(1);
+		binarySearchTree.insert(4);
+		binarySearchTree.insert(8);
+		binarySearchTree.insert(3);
+		
+		String result = binarySearchTree.getValue();
+		assertThat(result, Matchers.equalTo("1 2 3 4 8 10"));
+	}
+	
+	/*
+	 *        10
+	 */
+	@Test
+	public void getValue__onlyRoot() {
+		binarySearchTree.insert(10);
+		String result = binarySearchTree.getValue();
+		assertThat(result, Matchers.equalTo("10"));
+	}
+	
+	/*
+	 *        10
+	 *       /
+	 *      2
+	 *     /
+	 *    1
+	 */
+	@Test
+	public void getValue__onlyLeftTree() {
+		binarySearchTree.insert(10);
+		binarySearchTree.insert(2);
+		binarySearchTree.insert(1);
+		
+		String result = binarySearchTree.getValue();
+		assertThat(result, Matchers.equalTo("1 2 10"));
+	}
+	
+	/*
+	 *        10
+	 *          \
+	 *           16
+	 *           /
+	 *         12 
+	 */
+	@Test
+	public void getValue__onlyRightTree() {
+		binarySearchTree.insert(10);
+		binarySearchTree.insert(16);
+		binarySearchTree.insert(12);
+		
+		String result = binarySearchTree.getValue();
+		assertThat(result, Matchers.equalTo("10 12 16"));
+	}
+	
+	
 }
