@@ -42,6 +42,8 @@ Idea of deleting a Node, we separates it into three cases:
  - the deleting node is a leave, keep the previous node and just set its pointer to null
  - the deleting node is root but it has only a child. Get its child and use the previous node point to its child. Done.
  - the deleting node is root with two children. Find the smallest right child Node data, put it to the deleting node data. Finally, remove the smallest right node.
+ - get height of the tree
+ - getValue of tree from min to max order
 
 # Multi-threads
 ## Sleep
