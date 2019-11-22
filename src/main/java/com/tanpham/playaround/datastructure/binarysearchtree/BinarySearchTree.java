@@ -193,5 +193,9 @@ public class BinarySearchTree<T extends Comparable<T>> {
 		return leftHeight > rightHeight ? leftHeight + 1 : rightHeight + 1;
 	}
 	
+	public int getNodeCount() {
+		//TODO:
+		return 0;
+	}
 	
 }
