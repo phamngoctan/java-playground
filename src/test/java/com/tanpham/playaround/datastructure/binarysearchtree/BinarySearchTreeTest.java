@@ -703,4 +703,42 @@ public class BinarySearchTreeTest {
 		
 		assertThat(binarySearchTree.isInTree(14), Matchers.equalTo(false));
 	}
+	
+	@Test
+	public void getMax__nullTree() {
+		assertThat(binarySearchTree.getMax(), Matchers.equalTo(null));
+	}
+	
+	@Test
+	public void getMax__onlyOneNode() {
+		binarySearchTree.insert(10);
+		assertThat(binarySearchTree.getMax(), Matchers.equalTo(10));
+	}
+
+	/*
+	 *    10
+	 *   /
+	 *  5
+	 */
+	@Test
+	public void getMax__onlyLeftChild__shouldStopAtRoot() {
+		binarySearchTree.insert(10);
+		binarySearchTree.insert(5);
+		
+		assertThat(binarySearchTree.getMax(), Matchers.equalTo(10));
+	}
+	
+	/*
+	 *    10
+	 *      \
+	 *       15
+	 */
+	@Test
+	public void getMax__oneRightChild__shouldReturnRightNode() {
+		binarySearchTree.insert(10);
+		binarySearchTree.insert(15);
+		
+		assertThat(binarySearchTree.getMax(), Matchers.equalTo(15));
+	}
+	
 }

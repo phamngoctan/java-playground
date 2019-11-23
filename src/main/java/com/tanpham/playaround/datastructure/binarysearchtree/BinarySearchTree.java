@@ -235,5 +235,13 @@ public class BinarySearchTree<T extends Comparable<T>> {
 			return isInTree(node.getLeftChild(), value);
 		}
 	}
+
+	public T getMax() {
+		if (root == null) {
+			return null;
+		}
+		
+		return root.getData();
+	}
 	
 }
