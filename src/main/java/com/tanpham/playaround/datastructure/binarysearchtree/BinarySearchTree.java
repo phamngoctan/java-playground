@@ -29,7 +29,7 @@ public class BinarySearchTree<T extends Comparable<T>> {
 			return;
 		}
 
-		if (root.getData().compareTo(newNode.getData()) > 0) {
+		if (root.getData().compareTo(newNode.getData()) >= 0) {
 			if (root.getLeftChild() == null) {
 				root.setLeftChild(newNode);
 			} else {
@@ -110,7 +110,7 @@ public class BinarySearchTree<T extends Comparable<T>> {
 		}
 	}
 	
-	public T findSmallestValue() {
+	public T getMin() {
 		if (root == null) {
 			return null;
 		}
@@ -193,5 +193,60 @@ public class BinarySearchTree<T extends Comparable<T>> {
 		return leftHeight > rightHeight ? leftHeight + 1 : rightHeight + 1;
 	}
 	
+	public int getNodeCount(T value) {
+		return getNodeCount(root, value);
+	}
+
+	private int getNodeCount(Node<T> node, T value) {
+		// Stop point
+		if (node == null) {
+			return 0;
+		}
+		
+		int count = 0;
+		int compareTo = node.getData().compareTo(value);
+		if (compareTo == 0) {
+			count++;
+		}
+		
+		if (compareTo >= 0) {
+			count += getNodeCount(node.getLeftChild(), value);
+		} else {
+			count += getNodeCount(node.getRightChild(), value);
+		}
+		return count;
+	}
+
+	public boolean isInTree(T value) {
+		return isInTree(root, value);
+	}
+
+	private boolean isInTree(Node<T> node, T value) {
+		if (node == null) {
+			return false;
+		}
+		
+		int compareTo = node.getData().compareTo(value);
+		if (compareTo == 0) {
+			return true;
+		} else if (compareTo < 0) {
+			return isInTree(node.getRightChild(), value);
+		} else {
+			return isInTree(node.getLeftChild(), value);
+		}
+	}
+
+	//TODO: update this
+	public T getMax() {
+		if (root == null) {
+			return null;
+		}
+		
+		Node<T> next = root;
+		while (next.getRightChild() != null) {
+			next = next.getRightChild();
+		}
+		return next.getData();
+	}
 	
 }

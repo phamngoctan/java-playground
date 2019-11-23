@@ -336,46 +336,46 @@ public class BinarySearchTreeTest {
 	}
 	
 	@Test
-	public void findSmallestValue_nullBinaryTree() {
-		assertThat(binarySearchTree.findSmallestValue(), Matchers.nullValue());
+	public void getMin_nullBinaryTree() {
+		assertThat(binarySearchTree.getMin(), Matchers.nullValue());
 	}
 	
 	@Test
-	public void findSmallestValue() {
+	public void getMin() {
 		binarySearchTree.insert(5);
 		binarySearchTree.insert(3);
 		binarySearchTree.insert(4);
 		binarySearchTree.insert(2);
 		
-		Integer smallestValue = binarySearchTree.findSmallestValue();
+		Integer smallestValue = binarySearchTree.getMin();
 		assertThat(smallestValue, Matchers.equalTo(2));
 	}
 	
 	@Test
-	public void findSmallestValue__onlyRoot() {
+	public void getMin__onlyRoot() {
 		binarySearchTree.insert(5);
 		
-		Integer smallestValue = binarySearchTree.findSmallestValue();
+		Integer smallestValue = binarySearchTree.getMin();
 		assertThat(smallestValue, Matchers.equalTo(5));
 	}
 	
 	@Test
-	public void findSmallestValue__onlyLeftChild() {
+	public void getMin__onlyLeftChild() {
 		binarySearchTree.insert(5);
 		binarySearchTree.insert(3);
 		binarySearchTree.insert(4);
 		
-		Integer smallestValue = binarySearchTree.findSmallestValue();
+		Integer smallestValue = binarySearchTree.getMin();
 		assertThat(smallestValue, Matchers.equalTo(3));
 	}
 	
 	@Test
-	public void findSmallestValue__onlyRightChild() {
+	public void getMin__onlyRightChild() {
 		binarySearchTree.insert(5);
 		binarySearchTree.insert(8);
 		binarySearchTree.insert(100);
 		
-		Integer smallestValue = binarySearchTree.findSmallestValue();
+		Integer smallestValue = binarySearchTree.getMin();
 		assertThat(smallestValue, Matchers.equalTo(5));
 	}
 	
@@ -580,6 +580,182 @@ public class BinarySearchTreeTest {
 		binarySearchTree.insert(8);
 		binarySearchTree.insert(9);
 		assertThat(binarySearchTree.getHeight(), Matchers.equalTo(4));
+	}
+	
+	@Test
+	public void getNodeCount__onlyOneNodeMatchValue__inRoot() {
+		binarySearchTree.insert(10);
+		
+		assertThat(binarySearchTree.getNodeCount(10), Matchers.equalTo(1));
+	}
+	
+	@Test
+	public void getNodeCount__nullRoot() {
+		assertThat(binarySearchTree.getNodeCount(10), Matchers.equalTo(0));
+	}
+	
+	/*
+	 *    10
+	 *   /
+	 *  5
+	 */
+	@Test
+	public void getNodeCount__onlyOneNodeMatchValue__inLeftChild() {
+		binarySearchTree.insert(10);
+		binarySearchTree.insert(5);
+		
+		assertThat(binarySearchTree.getNodeCount(5), Matchers.equalTo(1));
+	}
+	
+	/*
+	 *    10
+	 *      \
+	 *       15
+	 */
+	@Test
+	public void getNodeCount__onlyOneNodeMatchValue__inRightChild() {
+		binarySearchTree.insert(10);
+		binarySearchTree.insert(15);
+		
+		assertThat(binarySearchTree.getNodeCount(15), Matchers.equalTo(1));
+	}
+	
+	/*
+	 *    10
+	 *   /  \ 
+	 *  5    15
+	 */
+	@Test
+	public void getNodeCount__noValueMatched() {
+		binarySearchTree.insert(10);
+		binarySearchTree.insert(5);
+		binarySearchTree.insert(15);
+		
+		assertThat(binarySearchTree.getNodeCount(1), Matchers.equalTo(0));
+	}
+	
+	/*
+	 *         5
+	 *        /
+	 *       5
+	 *      /
+	 *     5
+	 */
+	@Test
+	public void getNodeCount__multipleMatchedValue() {
+		binarySearchTree.insert(5);
+		binarySearchTree.insert(5);
+		binarySearchTree.insert(5);
+		
+		assertThat(binarySearchTree.getNodeCount(5), Matchers.equalTo(3));
+	}
+	
+	@Test
+	public void isInTree__happyPath() {
+		binarySearchTree.insert(10);
+		
+		assertThat(binarySearchTree.isInTree(10), Matchers.equalTo(true));
+	}
+	
+	@Test
+	public void isInTree__notInTree() {
+		binarySearchTree.insert(10);
+		assertThat(binarySearchTree.isInTree(5), Matchers.equalTo(false));
+	}
+	
+	/*
+	 *    10
+	 *   /
+	 *  5
+	 */
+	@Test
+	public void isInTree__matchedNodeOnTheLeft() {
+		binarySearchTree.insert(10);
+		binarySearchTree.insert(5);
+		
+		assertThat(binarySearchTree.isInTree(5), Matchers.equalTo(true));
+	}
+	
+	/*
+	 *    10
+	 *   /  \
+	 *  5   16
+	 */
+	@Test
+	public void isInTree__matchedNodeOnTheRight() {
+		binarySearchTree.insert(10);
+		binarySearchTree.insert(5);
+		binarySearchTree.insert(16);
+		
+		assertThat(binarySearchTree.isInTree(16), Matchers.equalTo(true));
+	}
+	
+	/*
+	 *    10
+	 *   /  \
+	 *  5   16
+	 */
+	@Test
+	public void isInTree__notMatchedWithFullTree() {
+		binarySearchTree.insert(10);
+		binarySearchTree.insert(5);
+		binarySearchTree.insert(16);
+		
+		assertThat(binarySearchTree.isInTree(14), Matchers.equalTo(false));
+	}
+	
+	@Test
+	public void getMax__nullTree() {
+		assertThat(binarySearchTree.getMax(), Matchers.equalTo(null));
+	}
+	
+	@Test
+	public void getMax__onlyOneNode() {
+		binarySearchTree.insert(10);
+		assertThat(binarySearchTree.getMax(), Matchers.equalTo(10));
+	}
+
+	/*
+	 *    10
+	 *   /
+	 *  5
+	 */
+	@Test
+	public void getMax__onlyLeftChild__shouldStopAtRoot() {
+		binarySearchTree.insert(10);
+		binarySearchTree.insert(5);
+		
+		assertThat(binarySearchTree.getMax(), Matchers.equalTo(10));
+	}
+	
+	/*
+	 *    10
+	 *      \
+	 *       15
+	 */
+	@Test
+	public void getMax__oneRightChild__shouldReturnRightNode() {
+		binarySearchTree.insert(10);
+		binarySearchTree.insert(15);
+		
+		assertThat(binarySearchTree.getMax(), Matchers.equalTo(15));
+	}
+	
+	/*
+	 *    10
+	 *      \
+	 *       15
+	 *      /  \
+	 *     13  19
+	 */
+	@Test
+	public void getMax__multipleRightNode() {
+		binarySearchTree.insert(10);
+		binarySearchTree.insert(15);
+		binarySearchTree.insert(13);
+		binarySearchTree.insert(19);
+		
+		assertThat(binarySearchTree.getMax(), Matchers.equalTo(19));
 	}
 	
 }
