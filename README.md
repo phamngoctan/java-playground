@@ -44,6 +44,8 @@ Idea of deleting a Node, we separates it into three cases:
  - the deleting node is root with two children. Find the smallest right child Node data, put it to the deleting node data. Finally, remove the smallest right node.
  - get height of the tree
  - getValue of tree from min to max order
+ - isInTree for checking a value is in the tree or not
+ - getNodeCount for counting how many time a value matches inside the binary search tree
 
 # Multi-threads
 ## Sleep
