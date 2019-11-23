@@ -110,7 +110,7 @@ public class BinarySearchTree<T extends Comparable<T>> {
 		}
 	}
 	
-	public T findSmallestValue() {
+	public T getMin() {
 		if (root == null) {
 			return null;
 		}

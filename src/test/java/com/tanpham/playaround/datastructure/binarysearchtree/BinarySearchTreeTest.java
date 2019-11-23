@@ -336,46 +336,46 @@ public class BinarySearchTreeTest {
 	}
 	
 	@Test
-	public void findSmallestValue_nullBinaryTree() {
-		assertThat(binarySearchTree.findSmallestValue(), Matchers.nullValue());
+	public void getMin_nullBinaryTree() {
+		assertThat(binarySearchTree.getMin(), Matchers.nullValue());
 	}
 	
 	@Test
-	public void findSmallestValue() {
+	public void getMin() {
 		binarySearchTree.insert(5);
 		binarySearchTree.insert(3);
 		binarySearchTree.insert(4);
 		binarySearchTree.insert(2);
 		
-		Integer smallestValue = binarySearchTree.findSmallestValue();
+		Integer smallestValue = binarySearchTree.getMin();
 		assertThat(smallestValue, Matchers.equalTo(2));
 	}
 	
 	@Test
-	public void findSmallestValue__onlyRoot() {
+	public void getMin__onlyRoot() {
 		binarySearchTree.insert(5);
 		
-		Integer smallestValue = binarySearchTree.findSmallestValue();
+		Integer smallestValue = binarySearchTree.getMin();
 		assertThat(smallestValue, Matchers.equalTo(5));
 	}
 	
 	@Test
-	public void findSmallestValue__onlyLeftChild() {
+	public void getMin__onlyLeftChild() {
 		binarySearchTree.insert(5);
 		binarySearchTree.insert(3);
 		binarySearchTree.insert(4);
 		
-		Integer smallestValue = binarySearchTree.findSmallestValue();
+		Integer smallestValue = binarySearchTree.getMin();
 		assertThat(smallestValue, Matchers.equalTo(3));
 	}
 	
 	@Test
-	public void findSmallestValue__onlyRightChild() {
+	public void getMin__onlyRightChild() {
 		binarySearchTree.insert(5);
 		binarySearchTree.insert(8);
 		binarySearchTree.insert(100);
 		
-		Integer smallestValue = binarySearchTree.findSmallestValue();
+		Integer smallestValue = binarySearchTree.getMin();
 		assertThat(smallestValue, Matchers.equalTo(5));
 	}
 	
