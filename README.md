@@ -46,6 +46,8 @@ Idea of deleting a Node, we separates it into three cases:
  - getValue of tree from min to max order
  - isInTree for checking a value is in the tree or not
  - getNodeCount for counting how many time a value matches inside the binary search tree
+ - getMin
+ - getMax
 
 # Multi-threads
 ## Sleep
