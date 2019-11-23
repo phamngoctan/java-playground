@@ -216,5 +216,24 @@ public class BinarySearchTree<T extends Comparable<T>> {
 		}
 		return count;
 	}
+
+	public boolean isInTree(T value) {
+		return isInTree(root, value);
+	}
+
+	private boolean isInTree(Node<T> node, T value) {
+		if (node == null) {
+			return false;
+		}
+		
+		int compareTo = node.getData().compareTo(value);
+		if (compareTo == 0) {
+			return true;
+		} else if (compareTo < 0) {
+			return isInTree(node.getRightChild(), value);
+		} else {
+			return isInTree(node.getLeftChild(), value);
+		}
+	}
 	
 }

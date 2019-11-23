@@ -650,4 +650,57 @@ public class BinarySearchTreeTest {
 		assertThat(binarySearchTree.getNodeCount(5), Matchers.equalTo(3));
 	}
 	
+	@Test
+	public void isInTree__happyPath() {
+		binarySearchTree.insert(10);
+		
+		assertThat(binarySearchTree.isInTree(10), Matchers.equalTo(true));
+	}
+	
+	@Test
+	public void isInTree__notInTree() {
+		binarySearchTree.insert(10);
+		assertThat(binarySearchTree.isInTree(5), Matchers.equalTo(false));
+	}
+	
+	/*
+	 *    10
+	 *   /
+	 *  5
+	 */
+	@Test
+	public void isInTree__matchedNodeOnTheLeft() {
+		binarySearchTree.insert(10);
+		binarySearchTree.insert(5);
+		
+		assertThat(binarySearchTree.isInTree(5), Matchers.equalTo(true));
+	}
+	
+	/*
+	 *    10
+	 *   /  \
+	 *  5   16
+	 */
+	@Test
+	public void isInTree__matchedNodeOnTheRight() {
+		binarySearchTree.insert(10);
+		binarySearchTree.insert(5);
+		binarySearchTree.insert(16);
+		
+		assertThat(binarySearchTree.isInTree(16), Matchers.equalTo(true));
+	}
+	
+	/*
+	 *    10
+	 *   /  \
+	 *  5   16
+	 */
+	@Test
+	public void isInTree__notMatchedWithFullTree() {
+		binarySearchTree.insert(10);
+		binarySearchTree.insert(5);
+		binarySearchTree.insert(16);
+		
+		assertThat(binarySearchTree.isInTree(14), Matchers.equalTo(false));
+	}
 }
