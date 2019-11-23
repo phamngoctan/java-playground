@@ -741,4 +741,21 @@ public class BinarySearchTreeTest {
 		assertThat(binarySearchTree.getMax(), Matchers.equalTo(15));
 	}
 	
+	/*
+	 *    10
+	 *      \
+	 *       15
+	 *      /  \
+	 *     13  19
+	 */
+	@Test
+	public void getMax__multipleRightNode() {
+		binarySearchTree.insert(10);
+		binarySearchTree.insert(15);
+		binarySearchTree.insert(13);
+		binarySearchTree.insert(19);
+		
+		assertThat(binarySearchTree.getMax(), Matchers.equalTo(19));
+	}
+	
 }
