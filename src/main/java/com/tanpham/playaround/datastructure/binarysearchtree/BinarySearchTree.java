@@ -29,7 +29,7 @@ public class BinarySearchTree<T extends Comparable<T>> {
 			return;
 		}
 
-		if (root.getData().compareTo(newNode.getData()) > 0) {
+		if (root.getData().compareTo(newNode.getData()) >= 0) {
 			if (root.getLeftChild() == null) {
 				root.setLeftChild(newNode);
 			} else {
@@ -209,7 +209,7 @@ public class BinarySearchTree<T extends Comparable<T>> {
 			count++;
 		}
 		
-		if (compareTo > 0) {
+		if (compareTo >= 0) {
 			count += getNodeCount(node.getLeftChild(), value);
 		} else {
 			count += getNodeCount(node.getRightChild(), value);
