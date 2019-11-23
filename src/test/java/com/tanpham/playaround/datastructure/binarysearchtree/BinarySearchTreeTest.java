@@ -582,4 +582,72 @@ public class BinarySearchTreeTest {
 		assertThat(binarySearchTree.getHeight(), Matchers.equalTo(4));
 	}
 	
+	@Test
+	public void getNodeCount__onlyOneNodeMatchValue__inRoot() {
+		binarySearchTree.insert(10);
+		
+		assertThat(binarySearchTree.getNodeCount(10), Matchers.equalTo(1));
+	}
+	
+	@Test
+	public void getNodeCount__nullRoot() {
+		assertThat(binarySearchTree.getNodeCount(10), Matchers.equalTo(0));
+	}
+	
+	/*
+	 *    10
+	 *   /
+	 *  5
+	 */
+	@Test
+	public void getNodeCount__onlyOneNodeMatchValue__inLeftChild() {
+		binarySearchTree.insert(10);
+		binarySearchTree.insert(5);
+		
+		assertThat(binarySearchTree.getNodeCount(5), Matchers.equalTo(1));
+	}
+	
+	/*
+	 *    10
+	 *      \
+	 *       15
+	 */
+	@Test
+	public void getNodeCount__onlyOneNodeMatchValue__inRightChild() {
+		binarySearchTree.insert(10);
+		binarySearchTree.insert(15);
+		
+		assertThat(binarySearchTree.getNodeCount(15), Matchers.equalTo(1));
+	}
+	
+	/*
+	 *    10
+	 *   /  \ 
+	 *  5    15
+	 */
+	@Test
+	public void getNodeCount__noValueMatched() {
+		binarySearchTree.insert(10);
+		binarySearchTree.insert(5);
+		binarySearchTree.insert(15);
+		
+		assertThat(binarySearchTree.getNodeCount(1), Matchers.equalTo(0));
+	}
+	
+	/*
+	 *         5
+	 *        /
+	 *       5
+	 *      /
+	 *     5
+	 */
+	@Test
+	public void getNodeCount__multipleMatchedValue() {
+		binarySearchTree.insert(5);
+		binarySearchTree.insert(5);
+		binarySearchTree.insert(5);
+		
+		assertThat(binarySearchTree.getNodeCount(5), Matchers.equalTo(3));
+	}
+	
 }

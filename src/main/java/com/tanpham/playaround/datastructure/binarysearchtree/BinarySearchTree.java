@@ -193,9 +193,28 @@ public class BinarySearchTree<T extends Comparable<T>> {
 		return leftHeight > rightHeight ? leftHeight + 1 : rightHeight + 1;
 	}
 	
-	public int getNodeCount() {
-		//TODO:
-		return 0;
+	public int getNodeCount(T value) {
+		return getNodeCount(root, value);
+	}
+
+	private int getNodeCount(Node<T> node, T value) {
+		// Stop point
+		if (node == null) {
+			return 0;
+		}
+		
+		int count = 0;
+		int compareTo = node.getData().compareTo(value);
+		if (compareTo == 0) {
+			count++;
+		}
+		
+		if (compareTo > 0) {
+			count += getNodeCount(node.getLeftChild(), value);
+		} else {
+			count += getNodeCount(node.getRightChild(), value);
+		}
+		return count;
 	}
 	
 }
