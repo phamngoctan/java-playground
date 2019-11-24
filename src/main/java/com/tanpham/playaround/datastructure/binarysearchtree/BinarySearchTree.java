@@ -236,7 +236,6 @@ public class BinarySearchTree<T extends Comparable<T>> {
 		}
 	}
 
-	//TODO: update this
 	public T getMax() {
 		if (root == null) {
 			return null;
