@@ -49,6 +49,9 @@ Idea of deleting a Node, we separates it into three cases:
  - getMin
  - getMax
  - getSuccessor //returns next-highest value in tree after given value, -1 if none. If the matched node has the right node, find smallest node of that right child. If the matched node has the left child only, we have to loop from the root to the matched node again. If the checking node has child which makes the matchedNode on the its left side, make it as ancestor. Do it until reach the matched node. Check the implementation and test cases for more details.
+ 
+## Heap
+
 
 # Multi-threads
 ## Sleep
