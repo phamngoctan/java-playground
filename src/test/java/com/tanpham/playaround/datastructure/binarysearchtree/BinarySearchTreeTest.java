@@ -758,4 +758,122 @@ public class BinarySearchTreeTest {
 		assertThat(binarySearchTree.getMax(), Matchers.equalTo(19));
 	}
 	
+	@Test
+	public void getSuccessor__nullRoot() {
+		assertThat(binarySearchTree.getSuccessor(5), Matchers.equalTo(null));
+	}
+	
+	@Test
+	public void getSuccessor__nullInput() {
+		assertThat(binarySearchTree.getSuccessor(null), Matchers.equalTo(null));
+	}
+	
+	@Test
+	public void getSuccessor__notMatchedAnyNode() {
+		binarySearchTree.insert(10);
+		assertThat(binarySearchTree.getSuccessor(5), Matchers.equalTo(null));
+	}
+	
+	@Test
+	public void getSuccessor__matchedNodeButNoNodeBiggerThanInput() {
+		binarySearchTree.insert(10);
+		assertThat(binarySearchTree.getSuccessor(10), Matchers.equalTo(null));
+	}
+	
+	/*
+	 *       10
+	 *      /  \
+	 *     5   15
+	 */
+	@Test
+	public void getSuccessor__case1__matchedNodeHasRightChild__happyPath() {
+		binarySearchTree.insert(10);
+		binarySearchTree.insert(5);
+		binarySearchTree.insert(15);
+		assertThat(binarySearchTree.getSuccessor(10), Matchers.equalTo(15));
+	}
+	
+	/*
+	 *       10
+	 *      /  \
+	 *     5   15
+	 *        /  \
+	 *       13   20
+	 *      /
+	 *     11
+	 */
+	@Test
+	public void getSuccessor__case1__matchedNodeHasRightChild__rightNodeHasManyLeftChildren() {
+		binarySearchTree.insert(10);
+		binarySearchTree.insert(5);
+		binarySearchTree.insert(15);
+		binarySearchTree.insert(13);
+		binarySearchTree.insert(20);
+		binarySearchTree.insert(11);
+		assertThat(binarySearchTree.getSuccessor(10), Matchers.equalTo(11));
+	}
+	
+	/*
+	 *            25
+	 *           /  \
+	 *         15   50
+	 *        /  \
+	 *       13   20
+	 *      /
+	 *     11
+	 */
+	@Test
+	public void getSuccessor__case2__matchedNodeHasLeftChildOnly__theSuccessorRightBeforeTheMatchedNode() {
+		binarySearchTree.insert(25);
+		binarySearchTree.insert(15);
+		binarySearchTree.insert(50);
+		binarySearchTree.insert(13);
+		binarySearchTree.insert(20);
+		binarySearchTree.insert(11);
+		
+		assertThat(binarySearchTree.getSuccessor(13), Matchers.equalTo(15));
+	}
+	
+	/*
+	 *            25
+	 *           /  \
+	 *         15   50
+	 *        /  \
+	 *       13   20
+	 *      /
+	 *     11
+	 */
+	@Test
+	public void getSuccessor__case2__matchedNodeHasLeftChildOnly__theSuccessorNotRightBeforeTheMatchedNode() {
+		binarySearchTree.insert(25);
+		binarySearchTree.insert(15);
+		binarySearchTree.insert(50);
+		binarySearchTree.insert(13);
+		binarySearchTree.insert(20);
+		binarySearchTree.insert(11);
+		
+		assertThat(binarySearchTree.getSuccessor(20), Matchers.equalTo(25));
+	}
+	
+	/*
+	 *            25
+	 *           /  \
+	 *         15   50
+	 *        /  \
+	 *       13   20
+	 *      /
+	 *     11
+	 */
+	@Test
+	public void getSuccessor__cannotFindTheSuccessor() {
+		binarySearchTree.insert(25);
+		binarySearchTree.insert(15);
+		binarySearchTree.insert(50);
+		binarySearchTree.insert(13);
+		binarySearchTree.insert(20);
+		binarySearchTree.insert(11);
+		
+		assertThat(binarySearchTree.getSuccessor(50), Matchers.equalTo(null));
+	}
+	
 }

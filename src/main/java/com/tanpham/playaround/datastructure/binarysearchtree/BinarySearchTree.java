@@ -1,7 +1,5 @@
 package com.tanpham.playaround.datastructure.binarysearchtree;
 
-import java.util.Objects;
-
 public class BinarySearchTree<T extends Comparable<T>> {
 	private static final String ONE_SPACE = " ";
 	private static final String REGEX_MULTIPLE_SPACES = " +";
@@ -122,11 +120,7 @@ public class BinarySearchTree<T extends Comparable<T>> {
 		return next.getData();
 	}
 	
-	/**
-	 * Because the idea of this method is of finding the smallest node, so the previous node cannot be null
-	 */
 	private Node<T> popSmallestNodeOfRightChild(Node<T> previousOfCheckingNode, Node<T> node) {
-		Objects.requireNonNull(previousOfCheckingNode);
 		if (node == null) {
 			return null;
 		}
@@ -146,6 +140,14 @@ public class BinarySearchTree<T extends Comparable<T>> {
 		}
 		// Do the popping node out of the tree
 		previous.setLeftChild(null);
+		return next;
+	}
+
+	private Node<T> getSmallestNode(Node<T> node) {
+		Node<T> next = node;
+		while (next.getLeftChild() != null) {
+			next = next.getLeftChild();
+		}
 		return next;
 	}
 
@@ -236,7 +238,6 @@ public class BinarySearchTree<T extends Comparable<T>> {
 		}
 	}
 
-	//TODO: update this
 	public T getMax() {
 		if (root == null) {
 			return null;
@@ -247,6 +248,55 @@ public class BinarySearchTree<T extends Comparable<T>> {
 			next = next.getRightChild();
 		}
 		return next.getData();
+	}
+
+	/*
+	 * get next-highest value in tree after given value, -1 if none
+	 */
+	public T getSuccessor(T value) {
+		if (root == null || value == null) {
+			return null;
+		}
+		
+		Node<T> matchedNode = findMatchedNode(root, value);
+		if (matchedNode == null) {
+			return null;
+		}
+		
+		// case 1: the matched node has right child
+		if (matchedNode.getRightChild() != null) {
+			return getSmallestNode(matchedNode.getRightChild()).getData();
+		} else {
+			// case 2: the matched node has only left child
+			// on the way to the matched node, we have to find the lowest ancestor which makes the matched node become left child
+			Node<T> next = root;
+			Node<T> ancestor = null;
+			while (next != matchedNode) {
+				if (next.getData().compareTo(value) < 0) {
+					next = next.getRightChild();
+				} else {
+					ancestor = next;
+					next = next.getLeftChild();
+				}
+			}
+			return ancestor == null ? null : ancestor.getData();
+		}
+	}
+	
+	private Node<T> findMatchedNode(Node<T> node, T value) {
+		// Stop point
+		if (node == null) {
+			return null;
+		}
+		
+		int compareTo = node.getData().compareTo(value);
+		if (compareTo == 0) {
+			return node;
+		} else if (compareTo < 0) {
+			return findMatchedNode(node.getRightChild(), value);
+		} else {
+			return findMatchedNode(node.getLeftChild(), value);
+		}
 	}
 	
 }
