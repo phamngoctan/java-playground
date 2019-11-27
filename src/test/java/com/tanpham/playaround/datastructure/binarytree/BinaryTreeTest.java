@@ -92,4 +92,9 @@ public class BinaryTreeTest {
 		assertThat(binaryTree.getTreeByLevelOrderTravelling(), Matchers.equalTo("Harry John Wick Terry Chef Lucy Pink"));
 	}
 	
+	@Test
+	public void getTreeByDeepFirstSearchApproach__emptyTree() {
+		assertThat(binaryTree.getTreeByDeepFirstSearchApproach(), Matchers.nullValue());
+	}
+	
 }

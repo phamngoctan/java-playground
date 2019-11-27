@@ -45,4 +45,10 @@ public class BinaryTree<T> {
 		
 		return result.trim().replaceAll(" +", " ");
 	}
+
+	public String getTreeByDeepFirstSearchApproach() {
+		// TODO Add implementation here
+		return null;
+	}
+	
 }
