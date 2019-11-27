@@ -34,6 +34,7 @@ Notes:
 
 ## Binary tree
 Implement core binary trees
+ - getTreeByLevelOrderTravelling // get the tree by level order traversal
 
 ## Binary search tree
 Idea of deleting a Node, we separates it into three cases:
