@@ -6,6 +6,14 @@ public class TreeNode<T> {
 	private TreeNode<T> leftChild;
 	private TreeNode<T> rightChild;
 	private T value;
+	
+	public TreeNode() {
+		// Empty constructor
+	}
+	
+	public TreeNode(T value) {
+		this.value = value;
+	}
 
 	public TreeNode<T> getParent() {
 		return parent;
