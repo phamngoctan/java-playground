@@ -31,11 +31,10 @@ Notes:
  - having more than one Entry in a bucket is called Hash Collision and the Linked list approach to contain Entries with same hash values in the same bucket is called chaining.
  - consider implementing the capacity as a prime number, this can prevent the collision better (https://web.archive.org/web/19990903133921/http://www.concentric.net/~Ttwang/tech/primehash.htm).
  - why the remove method checks if the size = current_capacity / 4 to do the re-index? Because it would prevent the situation that someone adds one more item at the increasing_point. Then, he/she again deletes item at the decreasing_point. This would make the add/remove O(n) always. At least, divide for 4 would prevent that.
- 
-## Binary search
-Add implementation for binary search using:
- - recursive approach
- - while loop approach
+
+## Binary tree
+Implement core binary trees
+ - getTreeByLevelOrderTravelling // get the tree by level order traversal
 
 ## Binary search tree
 Idea of deleting a Node, we separates it into three cases:
@@ -49,6 +48,9 @@ Idea of deleting a Node, we separates it into three cases:
  - getMin
  - getMax
  - getSuccessor //returns next-highest value in tree after given value, -1 if none. If the matched node has the right node, find smallest node of that right child. If the matched node has the left child only, we have to loop from the root to the matched node again. If the checking node has child which makes the matchedNode on the its left side, make it as ancestor. Do it until reach the matched node. Check the implementation and test cases for more details.
+ 
+## Heap
+
 
 # Multi-threads
 ## Sleep
@@ -61,6 +63,11 @@ Just run it on our local machine.
 To trace the deadlock, we can use JMC (java mission control) or JVisualVM in bin folder of our JDK installation. 
 
 # Miscellaneous
+## Binary search
+Add implementation for binary search using:
+ - recursive approach
+ - while loop approach
+
 ## Bit's complement
 ### Ones' complement
 How to calculate the binary of a number into it's ones' complement  
