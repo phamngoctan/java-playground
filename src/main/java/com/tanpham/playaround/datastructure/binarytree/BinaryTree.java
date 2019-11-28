@@ -24,6 +24,7 @@ public class BinaryTree<T> {
 		return root;
 	}
 
+	// Breadth-first search
 	public String getTreeByLevelOrderTravelling() {
 		if (root == null) {
 			return null;
@@ -46,8 +47,18 @@ public class BinaryTree<T> {
 		return result.trim().replaceAll(" +", " ");
 	}
 
-	public String getTreeByDeepFirstSearchApproach() {
-		// TODO Add implementation here
+	// 3 Deep-first search approaches
+	public String getTreeByInOrder() {
+		return null;
+	}
+
+	public String getTreeByPreOrder() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public String getTreeByPostOrder() {
+		// TODO Auto-generated method stub
 		return null;
 	}
 	

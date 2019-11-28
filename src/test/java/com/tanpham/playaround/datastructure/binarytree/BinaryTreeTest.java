@@ -93,8 +93,18 @@ public class BinaryTreeTest {
 	}
 	
 	@Test
-	public void getTreeByDeepFirstSearchApproach__emptyTree() {
-		assertThat(binaryTree.getTreeByDeepFirstSearchApproach(), Matchers.nullValue());
+	public void getTreeByInOrder__emptyTree() {
+		assertThat(binaryTree.getTreeByInOrder(), Matchers.nullValue());
+	}
+	
+	@Test
+	public void getTreeByPreOrder__emptyTree() {
+		assertThat(binaryTree.getTreeByPreOrder(), Matchers.nullValue());
+	}
+	
+	@Test
+	public void getTreeByPostOrder__emptyTree() {
+		assertThat(binaryTree.getTreeByPostOrder(), Matchers.nullValue());
 	}
 	
 }
