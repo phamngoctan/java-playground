@@ -24,6 +24,7 @@ public class BinaryTree<T> {
 		return root;
 	}
 
+	// Breadth-first search
 	public String getTreeByLevelOrderTravelling() {
 		if (root == null) {
 			return null;
@@ -46,9 +47,86 @@ public class BinaryTree<T> {
 		return result.trim().replaceAll(" +", " ");
 	}
 
-	public String getTreeByDeepFirstSearchApproach() {
-		// TODO Add implementation here
-		return null;
+	// 3 Deep-first search approaches
+	/**
+	 * left/self/right
+	 */
+	public String getTreeByInOrder() {
+		return getTreeInOrder(root).trim().replaceAll(" +", " ");
+	}
+	
+	private String getTreeInOrder(TreeNode<T> node) {
+		// Stop point
+		if (node == null) {
+			return "";
+		}
+		
+		String result = "";
+		if (node.getLeftChild() != null) {
+			result = result + " " + getTreeInOrder(node.getLeftChild());
+		}
+		result = result + " " + node.getValue().toString();
+		if (node.getRightChild() != null) {
+			result = result + " " + getTreeInOrder(node.getRightChild());
+		}
+		
+		return result;
+	}
+
+	
+	/**
+	 * self/left/right
+	 */
+	public String getTreeByPreOrder() {
+		return getTreeByPreOrder(root).trim().replaceAll(" +", " ");
+	}
+	
+	private String getTreeByPreOrder(TreeNode<T> node) {
+		// Stop point
+		if (node == null) {
+			return "";
+		}
+		
+		String result = "";
+		result = result + " " + node.getValue().toString();
+		
+		if (node.getLeftChild() != null) {
+			result = result + " " + getTreeByPreOrder(node.getLeftChild());
+		}
+		
+		if (node.getRightChild() != null) {
+			result = result + " " + getTreeByPreOrder(node.getRightChild());
+		}
+		
+		return result;
+	}
+
+	/**
+	 * left/right/self
+	 */
+	public String getTreeByPostOrder() {
+		return getTreeByPostOrder(root).trim().replaceAll(" +", " ");
+	}
+	
+	private String getTreeByPostOrder(TreeNode<T> node) {
+		// Stop point
+		if (node == null) {
+			return "";
+		}
+		
+		String result = "";
+		
+		if (node.getLeftChild() != null) {
+			result = result + " " + getTreeByPostOrder(node.getLeftChild());
+		}
+		
+		if (node.getRightChild() != null) {
+			result = result + " " + getTreeByPostOrder(node.getRightChild());
+		}
+		
+		result = result + " " + node.getValue().toString();
+		
+		return result;
 	}
 	
 }

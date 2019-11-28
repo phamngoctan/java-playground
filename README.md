@@ -34,7 +34,10 @@ Notes:
 
 ## Binary tree
 Implement core binary trees
- - getTreeByLevelOrderTravelling // get the tree by level order traversal
+ - getTreeByLevelOrderTravelling // get the tree by level order traversal so called breadth-first search
+ - getTreeByInOrder // one in three deep-first search approaches, left/self/right
+ - getTreeByPreOrder // self/left/right
+ - getTreeByPostOrder // left/right/self
 
 ## Binary search tree
 Idea of deleting a Node, we separates it into three cases:
