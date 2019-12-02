@@ -53,7 +53,10 @@ Idea of deleting a Node, we separates it into three cases:
  - getSuccessor //returns next-highest value in tree after given value, -1 if none. If the matched node has the right node, find smallest node of that right child. If the matched node has the left child only, we have to loop from the root to the matched node again. If the checking node has child which makes the matchedNode on the its left side, make it as ancestor. Do it until reach the matched node. Check the implementation and test cases for more details.
  
 ## Heap
-
+An array visualized as a nearly complete binary tree (MIT course)
+Issues when implementing a heap:
+ - How to maintain the sorted heap when modifying the heap
+ - How do we build the max-heap out of unsorted initial array
 
 # Multi-threads
 ## Sleep
