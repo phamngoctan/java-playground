@@ -1,22 +1,11 @@
 package com.tanpham.playaround.datastructure.heap;
 
-import com.tanpham.playaround.datastructure.binarytree.TreeNode;
-
 public class Heap<T> {
-	private TreeNode<T>[] arr;
-	private TreeNode<T> root;
+	private T[] arr;
 	
 	@SuppressWarnings("unchecked")
 	public Heap() {
-		arr = new TreeNode[16];
-	}
-	
-	public TreeNode<T> getRoot() {
-		return root;
-	}
-
-	public void setRoot(TreeNode<T> root) {
-		this.root = root;
+		arr = (T[]) new Object[16];
 	}
 	
 	// TODO: add more method for the heap
@@ -37,7 +26,7 @@ public class Heap<T> {
 	 * Correct the subtree at position
 	 * @param atPosition
 	 */
-	private void maxHeapify(TreeNode<T>[] visualizedArray, int atPosition) {
+	private void maxHeapify(T[] visualizedArray, int atPosition) {
 //		visualizedArray[atPosition].getValue().equals(obj)
 //		if (visualizedArray[atPosition].getValue()) {
 //			

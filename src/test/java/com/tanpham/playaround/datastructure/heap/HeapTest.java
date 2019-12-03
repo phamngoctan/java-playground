@@ -6,8 +6,6 @@ import org.hamcrest.Matchers;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.tanpham.playaround.datastructure.binarytree.TreeNode;
-
 public class HeapTest {
 
 	private Heap<Integer> heap;
@@ -28,15 +26,15 @@ public class HeapTest {
 	 */
 	@Test
 	public void maxHeapify__happyPath() {
-		heap.setRoot(new TreeNode<>(16));
-		heap.getRoot().addLeftChild(4);
-		heap.getRoot().getLeftChild().addLeftChild(14);
-		heap.getRoot().getLeftChild().getLeftChild().addLeftChild(2);
-		heap.getRoot().getLeftChild().getLeftChild().addRightChild(8);
-		heap.getRoot().getLeftChild().addRightChild(7);
-		heap.getRoot().addRightChild(10);
-		heap.getRoot().getRightChild().addLeftChild(9);
-		heap.getRoot().getRightChild().addRightChild(3);
+//		heap.setRoot(new TreeNode<>(16));
+//		heap.getRoot().addLeftChild(4);
+//		heap.getRoot().getLeftChild().addLeftChild(14);
+//		heap.getRoot().getLeftChild().getLeftChild().addLeftChild(2);
+//		heap.getRoot().getLeftChild().getLeftChild().addRightChild(8);
+//		heap.getRoot().getLeftChild().addRightChild(7);
+//		heap.getRoot().addRightChild(10);
+//		heap.getRoot().getRightChild().addLeftChild(9);
+//		heap.getRoot().getRightChild().addRightChild(3);
 		
 		heap.heapify();
 		assertThat("temp", Matchers.equalTo(""));
