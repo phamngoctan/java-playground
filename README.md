@@ -54,6 +54,11 @@ Idea of deleting a Node, we separates it into three cases:
  
 ## Heap
 An array visualized as a nearly complete binary tree (MIT course)
+Heap properties:
+ - Every node has a value at least as large as the values in that node's children.
+ - Index from 1: i left = 2i; i right = 2i + 1; i parent = i/2
+ - Index from 0: i left = 2i + 1; i right = 2i + 2; i parent = (i - 1)/2
+ 
 Issues when implementing a heap:
  - How to maintain the sorted heap when modifying the heap
  - How do we build the max-heap out of unsorted initial array

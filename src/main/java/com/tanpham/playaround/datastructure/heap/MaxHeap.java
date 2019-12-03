@@ -1,14 +1,23 @@
 package com.tanpham.playaround.datastructure.heap;
 
-public class Heap<T> {
+public class MaxHeap<T> {
 	private T[] arr;
 	
 	@SuppressWarnings("unchecked")
-	public Heap() {
+	public MaxHeap() {
 		arr = (T[]) new Object[16];
 	}
 	
 	// TODO: add more method for the heap
+	
+	public void insert(T value) {
+		//TODO: implement the insertion
+	}
+	
+	public void extractMax(T value) {
+		// TODO: implement the deletion
+		// Special case: delete the root, swap with the last leaf
+	}
 	
 	public void heapify() {
 		// Original idea from Professor Srini Devadas

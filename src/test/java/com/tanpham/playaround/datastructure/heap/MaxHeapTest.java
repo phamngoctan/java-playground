@@ -6,13 +6,13 @@ import org.hamcrest.Matchers;
 import org.junit.Before;
 import org.junit.Test;
 
-public class HeapTest {
+public class MaxHeapTest {
 
-	private Heap<Integer> heap;
+	private MaxHeap<Integer> heap;
 	
 	@Before
 	public void init() {
-		heap = new Heap<>();
+		heap = new MaxHeap<>();
 	}
 	
 	/*
