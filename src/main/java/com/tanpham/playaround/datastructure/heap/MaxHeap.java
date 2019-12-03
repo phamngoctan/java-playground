@@ -5,11 +5,15 @@ public class MaxHeap<T> {
 	
 	@SuppressWarnings("unchecked")
 	public MaxHeap() {
-		arr = (T[]) new Object[16];
+		arr = (T[]) new Object[32];
 	}
 	
 	// TODO: add more method for the heap
 	
+	/**
+	 * Given a Binary Heap and a new element to be added to this Heap. <br/>
+	 * The task is to insert the new element to the Heap maintaining the properties of Heap.
+	 */
 	public void insert(T value) {
 		//TODO: implement the insertion
 	}
