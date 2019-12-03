@@ -58,10 +58,26 @@ Heap properties:
  - Every node has a value at least as large as the values in that node's children.
  - Index from 1: i left = 2i; i right = 2i + 1; i parent = i/2
  - Index from 0: i left = 2i + 1; i right = 2i + 2; i parent = (i - 1)/2
- 
+
 Issues when implementing a heap:
  - How to maintain the sorted heap when modifying the heap
  - How do we build the max-heap out of unsorted initial array
+
+Implementation:
+ - insert
+ - sift_up - needed for insert
+ - get_max - returns the max item, without removing it
+ - get_size() - return number of elements stored
+ - is_empty() - returns true if heap contains no elements
+ - extract_max - returns the max item, removing it
+ - sift_down - needed for extract_max
+ - remove(i) - removes item at index x
+ - heapify - create a heap from an array of elements, needed for heap_sort
+ - heap_sort() - take an unsorted array and turn it into a sorted array in-place using a max heap
+    - note: using a min heap instead would save operations, but double the space needed (cannot do in-place).
+
+### Heap sort
+One of the nice properties of HeapSort is that it is an in-place algorithm. It only needs a fixed amount of memory beyond what is used to store the data being sorted.
 
 # Multi-threads
 ## Sleep
