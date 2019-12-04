@@ -12,7 +12,7 @@ public class MaxHeapTest {
 	
 	@Before
 	public void init() {
-		heap = new MaxHeap<>();
+		heap = new MaxHeap<Integer>();
 	}
 	
 	/*
@@ -46,12 +46,20 @@ public class MaxHeapTest {
 		assertThat("temp", Matchers.equalTo(""));
 	}
 	
+	/*
+	 *                14
+	 *             /     \
+	 *            4       10
+	 *          /   \
+	 *         16    2
+	 */
 	@Test
-	public void heapify__happyPath() {
-		Integer[] inputArr = new Integer[] {3, 19, 1, 14, 8, 7};
-		heap.setArr(inputArr).heapify();
+	public void maxHeapify__happyPath__() {
+		Integer[] inputArr = new Integer[] {14, 4, 10, 16, 2};
+		heap.setArr(inputArr).maxHeapify(inputArr, 1);
 		
-		
+		Integer[] result = heap.getArr();
+		assertThat(result[1], Matchers.equalTo(16));
 	}
 	
 }
