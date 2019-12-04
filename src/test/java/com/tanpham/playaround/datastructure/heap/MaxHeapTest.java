@@ -46,4 +46,12 @@ public class MaxHeapTest {
 		assertThat("temp", Matchers.equalTo(""));
 	}
 	
+	@Test
+	public void heapify__happyPath() {
+		Integer[] inputArr = new Integer[] {3, 19, 1, 14, 8, 7};
+		heap.setArr(inputArr).heapify();
+		
+		
+	}
+	
 }

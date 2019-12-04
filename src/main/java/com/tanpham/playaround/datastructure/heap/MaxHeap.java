@@ -8,6 +8,11 @@ public class MaxHeap<T> {
 		arr = (T[]) new Object[32];
 	}
 	
+	public MaxHeap<T> setArr(T[] inputArr) {
+		arr = inputArr;
+		return this;
+	}
+	
 	// TODO: add more method for the heap
 	
 	/**
