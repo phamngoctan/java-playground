@@ -50,16 +50,32 @@ public class MaxHeapTest {
 	 *                14
 	 *             /     \
 	 *            4       10
-	 *          /   \
-	 *         16    2
+	 *          /   \     /
+	 *         16    2   8
 	 */
 	@Test
-	public void maxHeapify__happyPath__() {
-		Integer[] inputArr = new Integer[] {14, 4, 10, 16, 2};
+	public void maxHeapify__atNodeWithTwoChildren_noMoreSubTree() {
+		Integer[] inputArr = new Integer[] {14, 4, 10, 16, 2, 8};
 		heap.setArr(inputArr).maxHeapify(inputArr, 1);
 		
 		Integer[] result = heap.getArr();
 		assertThat(result[1], Matchers.equalTo(16));
+	}
+	
+	/*
+	 *                14
+	 *             /     \
+	 *            4       8
+	 *          /   \     /
+	 *         1     2   19
+	 */
+	@Test
+	public void maxHeapify__heapifyTheRootButTheRightChildTreeIsNotHeapifiedYet() {
+		Integer[] inputArr = new Integer[] {14, 4, 8, 1, 2, 19};
+		heap.setArr(inputArr).maxHeapify(inputArr, 0);
+		
+		Integer[] result = heap.getArr();
+		assertThat(result[0], Matchers.equalTo(14));
 	}
 	
 }
