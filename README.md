@@ -129,4 +129,5 @@ Storing .pem file in database, to test it:
  - https://github.com/jwasham/coding-interview-university
  - https://www.youtube.com/watch?v=Hzuzo9NJrlc&feature=youtu.be - counting bit sets
  - https://bits.stephan-brumme.com/absInteger.html
+ - https://github.com/jeffemandel/storecert
 
