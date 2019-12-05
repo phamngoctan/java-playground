@@ -120,6 +120,13 @@ Reverse all its bits, then plus 1 to the result of the previous reverse step
  - Swap two integers
  - Kernighan's Bit Counting (**really cool idea**)
  
+## .PEM extension file
+Storing .pem file in database, to test it:
+ - create postgres database, set up the database connection "jdbc:postgresql://localhost:5454/test"
+ - execute the src/main/resources/sql/cryptography.sql in public schema of test database
+ - run main method in Cryptography class
+ - To check the result, you can go to the database to check the encrypted content in new inserted row. Or maybe you can check the console log
+ 
 ## Reference
  - https://github.com/jwasham/coding-interview-university
  - https://www.youtube.com/watch?v=Hzuzo9NJrlc&feature=youtu.be - counting bit sets
