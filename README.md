@@ -58,6 +58,8 @@ Heap properties:
  - Every node has a value at least as large as the values in that node's children.
  - Index from 1: i left = 2i; i right = 2i + 1; i parent = i/2
  - Index from 0: i left = 2i + 1; i right = 2i + 2; i parent = (i - 1)/2
+ 
+Heapify assume that - **Given a node at index i whose left and right subtrees are max-heaps** - MAX-HEAPIFY moves the node at i down the max-heap until it no longer violates the max-heap property (that is, the node is not smaller than its children).
 
 Issues when implementing a heap:
  - How to maintain the sorted heap when modifying the heap
