@@ -1,11 +1,15 @@
 package com.tanpham.playaround.datastructure.heap;
 
+/**
+ * This MaxHeap does not consider the dynamic array. Just hard code the default length is 100. </br>
+ * Out of this length would not be covered.
+ */
 public class MaxHeap<T extends Comparable<? super T>> {
 	private T[] arr;
 	
 	@SuppressWarnings("unchecked")
 	public MaxHeap() {
-		arr = (T[]) new Comparable[32];
+		arr = (T[]) new Comparable[100];
 	}
 	
 	public MaxHeap<T> setArr(T[] inputArr) {
@@ -13,16 +17,9 @@ public class MaxHeap<T extends Comparable<? super T>> {
 		return this;
 	}
 	
+
 	public T[] getArr() {
 		return arr;
-	}
-	
-	/**
-	 * Given a Binary Heap and a new element to be added to this Heap. <br/>
-	 * The task is to insert the new element to the Heap maintaining the properties of Heap.
-	 */
-	public void insert(T value) {
-		//TODO: implement the insertion
 	}
 	
 	public void extractMax(T value) {
@@ -87,6 +84,18 @@ public class MaxHeap<T extends Comparable<? super T>> {
 		T temp = visualizedArray[firstItemIndex];
 		visualizedArray[firstItemIndex] = visualizedArray[secondItemIndex];
 		visualizedArray[secondItemIndex] = temp;
+	}
+	
+	/**
+	 * Given a Binary Heap and a new element to be added to this Heap. <br/>
+	 * The task is to insert the new element to the Heap maintaining the properties of Heap.
+	 */
+	public void insert(T value) {
+		int positionToAddNewValue = arr.length;
+		arr[positionToAddNewValue] = arr[0];
+		
+		arr[0] = value;
+		buildMaxHeap();
 	}
 	
 }

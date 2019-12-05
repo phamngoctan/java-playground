@@ -120,4 +120,22 @@ public class MaxHeapTest {
 		assertThat(heap.getArr(), Matchers.equalTo(expectedArr));
 	}
 	
+	/*
+	 *                14            14     
+	 *             /     \  -->  /     \   
+	 *            4       8     4       8  
+	 *                         /
+	 *                        1
+	 */
+	@Test
+	public void insert__intoMaxHeap__thereIsNoChangeInsideTheHeap() {
+		Integer[] inputArr = new Integer[] {14, 4, 8};
+		heap.setArr(inputArr);
+		
+		heap.insert(1);
+		
+		Integer[] expectedArr = new Integer[] {14, 4, 8, 1};
+		assertThat(heap.getArr(), Matchers.equalTo(expectedArr));
+	}
+	
 }
