@@ -26,11 +26,11 @@ public class MaxHeapTest {
 	 */
 	@Test
 	public void maxHeapify__happyPath() {
-		Integer[] inputArr = new Integer[] {16, 4, 10, 14, 7, 9, 3, 2, 8, 1};
-		heap.setArr(inputArr).buildMaxHeap();
+		Integer[] expectedArr = new Integer[] {16, 4, 10, 14, 7, 9, 3, 2, 8, 1};
 		
-		Integer[] expectedArr = new Integer[] {16, 14, 10, 8, 7, 9, 3, 2, 4, 1};
-		assertThat(inputArr, Matchers.equalTo(expectedArr));
+		heap.setArr(16, 4, 10, 14, 7, 9, 3, 2, 8, 1).buildMaxHeap();
+		Integer[] actual = heap.getArr();
+		assertThat(expectedArr, Matchers.equalTo(actual));
 	}
 	
 	/*
