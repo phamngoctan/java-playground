@@ -131,13 +131,56 @@ public class MaxHeapTest {
 	 *                        1
 	 */
 	@Test
-	public void insert__intoMaxHeap__thereIsNoChangeInsideTheHeap() {
+	public void insert__intoMaxHeap__leftChildInserted__thereIsNoChangeInsideTheHeap() {
 		heap.setArr(14, 4, 8);
 		
 		heap.insert(1);
 		
 		Integer[] expectedArr = new Integer[] {14, 4, 8, 1};
 		makeSureArrayEquals(heap.getArr(), expectedArr);
+	}
+	
+	/*
+	 *                14            18     
+	 *             /     \  -->  /     \   
+	 *            4       8    14       8  
+	 *                         /
+	 *                        4
+	 */
+	@Test
+	public void insert__intoMaxHeap__leftChildInserted__theRootIsChanged() {
+		heap.setArr(14, 4, 8);
+		
+		heap.insert(18);
+		
+		Integer[] expectedArr = new Integer[] {18, 14, 8, 4};
+		makeSureArrayEquals(heap.getArr(), expectedArr);
+	}
+	
+	/*
+	 *                14            14     
+	 *             /     \  -->  /     \   
+	 *            4       8     9       8  
+	 *                         /
+	 *                        4
+	 */
+	@Test
+	public void insert__intoMaxHeap__leftChildInserted__theNodeAboveIsChanged() {
+		heap.setArr(14, 4, 8);
+		
+		heap.insert(9);
+		
+		Integer[] expectedArr = new Integer[] {14, 9, 8, 4};
+		makeSureArrayEquals(heap.getArr(), expectedArr);
+	}
+	
+	@Test
+	public void insert__completeTree_fromScratch() {
+		heap.insert(19);
+		heap.insert(29);
+		heap.insert(1);
+		heap.insert(40);
+		makeSureArrayEquals(heap.getArr(), new Integer[] {40, 29, 1, 19});
 	}
 	
 }
