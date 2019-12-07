@@ -1,20 +1,28 @@
 package com.tanpham.playaround.datastructure.heap;
 
+import java.lang.reflect.Array;
 import java.util.Objects;
 
 /**
  * This MaxHeap does not consider the dynamic array. Just hard code the default length is 100. </br>
  * Out of this length would not be covered.
  */
-public class MaxHeap<T extends Number & Comparable<? super T>> {
+public class MaxHeap<T extends Comparable<T>> {
 	private static final int DEFAULT_CAPACITY = 16;
 	private T[] arr;
 	private int size;
+	final Class<T> typeParameterClass;
 	
-	@SuppressWarnings("unchecked")
-	public MaxHeap() {
+	public MaxHeap(Class<T> typeClass) {
 		size = 0;
-		arr = (T[]) new Object[DEFAULT_CAPACITY];
+		//arr = (T[]) new Comparable[DEFAULT_CAPACITY];
+		typeParameterClass = typeClass;
+		arr = createNewGenericArray(DEFAULT_CAPACITY);
+	}
+
+	@SuppressWarnings("unchecked")
+	private T[] createNewGenericArray(int capacity) {
+		return (T[]) Array.newInstance(typeParameterClass, capacity);
 	}
 	
 	public MaxHeap<T> setArr(T... inputArr) {
@@ -81,7 +89,10 @@ public class MaxHeap<T extends Number & Comparable<? super T>> {
 			leftChild = 2 * atPosition + 1;
 			righChild = leftChild + 1;
 
-			if (leftChild < max && visualizedArray[leftChild].compareTo(visualizedArray[index]) > 0) {
+			if (leftChild < max 
+					&& Objects.nonNull(visualizedArray[leftChild])
+					&& Objects.nonNull(visualizedArray[index])
+					&& visualizedArray[leftChild].compareTo(visualizedArray[index]) > 0) {
 				index = leftChild;
 			}
 
@@ -114,7 +125,7 @@ public class MaxHeap<T extends Number & Comparable<? super T>> {
 			increaseSize();
 		}
 		
-		int positionToAddNewValue = size - 1;
+		int positionToAddNewValue = size;
 		arr[positionToAddNewValue] = arr[0];
 		
 		arr[0] = value;
@@ -122,9 +133,8 @@ public class MaxHeap<T extends Number & Comparable<? super T>> {
 		buildMaxHeap();
 	}
 	
-	@SuppressWarnings("unchecked")
 	private void increaseSize() {
-		T[] newArr = (T[]) new Comparable[arr.length * 2];
+		T[] newArr = createNewGenericArray(arr.length * 2);
 		for (int i = 0; i <= arr.length; i++) {
 			newArr[i] = arr[i];
 		}

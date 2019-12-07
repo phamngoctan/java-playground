@@ -2,6 +2,8 @@ package com.tanpham.playaround.datastructure.heap;
 
 import static org.junit.Assert.assertThat;
 
+import java.util.stream.IntStream;
+
 import org.hamcrest.Matchers;
 import org.junit.Before;
 import org.junit.Test;
@@ -12,7 +14,7 @@ public class MaxHeapTest {
 	
 	@Before
 	public void init() {
-		heap = new MaxHeap<Integer>();
+		heap = new MaxHeap<>(Integer.class);
 	}
 	
 	/*
@@ -26,11 +28,17 @@ public class MaxHeapTest {
 	 */
 	@Test
 	public void maxHeapify__happyPath() {
-		Integer[] expectedArr = new Integer[] {16, 4, 10, 14, 7, 9, 3, 2, 8, 1};
-		
 		heap.setArr(16, 4, 10, 14, 7, 9, 3, 2, 8, 1).buildMaxHeap();
+		Integer[] expectedArr = new Integer[] {16, 14, 10, 8, 7, 9, 3, 2, 4, 1};
 		Integer[] actual = heap.getArr();
-		assertThat(expectedArr, Matchers.equalTo(actual));
+		makeSureArrayEquals(actual, expectedArr);
+	}
+	
+	private void makeSureArrayEquals(Integer[] actual, Integer[] expected) {
+		IntStream.range(0, expected.length).forEach(i -> {
+			assertThat(String.format("Wrong value detected at position %s", i),
+						actual[i], Matchers.equalTo(expected[i]));
+		});
 	}
 	
 	/*
@@ -40,10 +48,9 @@ public class MaxHeapTest {
 	 */
 	@Test
 	public void buildMaxHeap__doNothing_itIsAlreadyAMaxHeap() {
-		Integer[] inputArr = new Integer[] {14, 4, 8};
-		heap.setArr(inputArr).buildMaxHeap();
+		heap.setArr(14, 4, 8).buildMaxHeap();
 		
-		assertThat(heap.getArr(), Matchers.equalTo(new Integer[] {14, 4, 8}));
+		makeSureArrayEquals(heap.getArr(), new Integer[] {14, 4, 8});
 	}
 	
 	/*
@@ -53,10 +60,9 @@ public class MaxHeapTest {
 	 */
 	@Test
 	public void buildMaxHeap__maxItemIsOnTheRightChild() {
-		Integer[] inputArr = new Integer[] {8, 4, 14};
-		heap.setArr(inputArr).buildMaxHeap();
+		heap.setArr(8, 4, 14).buildMaxHeap();
 		
-		assertThat(heap.getArr(), Matchers.equalTo(new Integer[] {14, 4, 8}));
+		makeSureArrayEquals(heap.getArr(), new Integer[] {14, 4, 8});
 	}
 	
 	/*
@@ -66,10 +72,9 @@ public class MaxHeapTest {
 	 */
 	@Test
 	public void buildMaxHeap__maxItemIsOnTheLeftChild() {
-		Integer[] inputArr = new Integer[] {4, 14, 8};
-		heap.setArr(inputArr).buildMaxHeap();
+		heap.setArr(4, 14, 8).buildMaxHeap();
 		
-		assertThat(heap.getArr(), Matchers.equalTo(new Integer[] {14, 4, 8}));
+		makeSureArrayEquals(heap.getArr(), new Integer[] {14, 4, 8});
 	}
 	
 	/*
@@ -97,8 +102,7 @@ public class MaxHeapTest {
 	 */
 	@Test
 	public void maxHeapify__heapifyTheRootButTheRightChildTreeIsNotHeapifiedYet() {
-		Integer[] inputArr = new Integer[] {14, 4, 8, 1, 2, 19};
-		heap.setArr(inputArr).maxHeapify(inputArr, 0);
+		heap.setArr(14, 4, 8, 1, 2, 19).maxHeapify(heap.getArr(), 0);
 		
 		Integer[] result = heap.getArr();
 		assertThat(result[0], Matchers.equalTo(14));
@@ -113,11 +117,10 @@ public class MaxHeapTest {
 	 */
 	@Test
 	public void maxHeapify__anotherHappyCase() {
-		Integer[] inputArr = new Integer[] {14, 4, 10, 16, 2, 8};
-		heap.setArr(inputArr).buildMaxHeap();
+		heap.setArr(14, 4, 10, 16, 2, 8).buildMaxHeap();
 		
 		Integer[] expectedArr = new Integer[] {16, 14, 10, 4, 2, 8};
-		assertThat(heap.getArr(), Matchers.equalTo(expectedArr));
+		makeSureArrayEquals(heap.getArr(), expectedArr);
 	}
 	
 	/*
@@ -129,13 +132,12 @@ public class MaxHeapTest {
 	 */
 	@Test
 	public void insert__intoMaxHeap__thereIsNoChangeInsideTheHeap() {
-		Integer[] inputArr = new Integer[] {14, 4, 8};
-		heap.setArr(inputArr);
+		heap.setArr(14, 4, 8);
 		
 		heap.insert(1);
 		
 		Integer[] expectedArr = new Integer[] {14, 4, 8, 1};
-		assertThat(heap.getArr(), Matchers.equalTo(expectedArr));
+		makeSureArrayEquals(heap.getArr(), expectedArr);
 	}
 	
 }
