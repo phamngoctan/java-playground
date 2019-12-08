@@ -169,12 +169,31 @@ public class MaxHeap<T extends Comparable<T>> {
 			return null;
 		}
 		
-		T max = arr[0];
-		swap(arr, 0, size - 1);
-		arr[size - 1] = null;
+		return removeItemAt(0);
+	}
+
+	private T removeItemAt(int toBeDeletedPosition) {
+		T max = arr[toBeDeletedPosition];
+		int lastItemPosition = size - 1;
+		swap(arr, toBeDeletedPosition, lastItemPosition);
+		arr[lastItemPosition] = null;
 		size--;
-		maxHeapify(0);
+		maxHeapify(toBeDeletedPosition);
 		return max;
+	}
+	
+	public T remove(int position) {
+		if (position < 0) {
+			throw new RuntimeException(String.format("Negative position %s is not accepted", position));
+		}
+		
+		if (size == 0) {
+			throw new RuntimeException(String.format("Cannot trigger the removing at position %s because the heap is empty", position));
+		} else if (size - 1 < position) {
+			throw new RuntimeException(String.format("Cannot trigger the removing at position %s because the heap size is just only %s", position, size - 1));
+		}
+		
+		return removeItemAt(position);
 	}
 	
 }

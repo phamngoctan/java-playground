@@ -6,12 +6,17 @@ import java.util.stream.IntStream;
 
 import org.hamcrest.Matchers;
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
 
 public class MaxHeapTest {
 
 	private static final Integer[] EMPTY_ARRAY = new Integer[] {};
 	private MaxHeap<Integer> heap;
+	
+	@Rule
+    public ExpectedException thrown = ExpectedException.none();
 	
 	@Before
 	public void init() {
@@ -310,6 +315,59 @@ public class MaxHeapTest {
 		assertThat(heap.size(), Matchers.equalTo(0));
 		assertThat(heap.isEmpty(), Matchers.equalTo(true));
 		
+		makeSureArrayEquals(heap.getArr(), EMPTY_ARRAY);
+	}
+	
+	@Test
+	public void remove__emptyHeap() {
+		thrown.expect(RuntimeException.class);
+		thrown.expectMessage("Cannot trigger the removing at position 0 because the heap is empty");
+		heap.remove(0);
+	}
+	
+	@Test
+	public void remove__negativePosition() {
+		thrown.expect(RuntimeException.class);
+		thrown.expectMessage("Negative position -1 is not accepted");
+		heap.remove(-1);
+	}
+	
+	@Test
+	public void remove__outOfScopePosition() {
+		heap.insert(10);
+		thrown.expect(RuntimeException.class);
+		thrown.expectMessage("Cannot trigger the removing at position 1 because the heap size is just only 0");
+		heap.remove(1);
+	}
+	
+	@Test
+	public void remove__oneItemHeap() {
+		heap.insert(10);
+		
+		assertThat(heap.remove(0), Matchers.equalTo(10));
+		assertThat(heap.isEmpty(), Matchers.equalTo(true));
+	}
+
+	@Test
+	public void remove__twoItemsHeap() {
+		heap.insert(10);
+		heap.insert(20);
+		assertThat(heap.remove(1), Matchers.equalTo(10));
+		assertThat(heap.size(), Matchers.equalTo(1));
+		makeSureArrayEquals(heap.getArr(), new Integer[] {20});
+	}
+	
+	@Test
+	public void remove__untilTheLastItemOfTheHeap() {
+		heap.initWith(10, 100, 50, 35, 90).buildMaxHeap();
+		
+		assertThat(heap.remove(0), Matchers.equalTo(100));
+		assertThat(heap.remove(0), Matchers.equalTo(90));
+		assertThat(heap.remove(0), Matchers.equalTo(50));
+		assertThat(heap.remove(0), Matchers.equalTo(35));
+		assertThat(heap.remove(0), Matchers.equalTo(10));
+		
+		assertThat(heap.isEmpty(), Matchers.equalTo(true));
 		makeSureArrayEquals(heap.getArr(), EMPTY_ARRAY);
 	}
 	
