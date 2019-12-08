@@ -25,7 +25,7 @@ public class MaxHeap<T extends Comparable<T>> {
 		return (T[]) Array.newInstance(typeParameterClass, capacity);
 	}
 	
-	public MaxHeap<T> setArr(T... inputArr) {
+	public MaxHeap<T> initWith(T... inputArr) {
 		if (Objects.isNull(inputArr)) {
 			return this;
 		}
@@ -147,5 +147,7 @@ public class MaxHeap<T extends Comparable<T>> {
 		}
 		arr = newArr;
 	}
+	
+	
 	
 }
