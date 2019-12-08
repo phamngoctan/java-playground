@@ -180,4 +180,51 @@ public class MaxHeapTest {
 		makeSureArrayEquals(heap.getArr(), new Integer[] {40, 29, 1, 19});
 	}
 	
+	@Test
+	public void size__emptyHeap() {
+		assertThat(heap.size(), Matchers.equalTo(0));
+	}
+	
+	@Test
+	public void size__oneItemHeap() {
+		heap.insert(10);
+		assertThat(heap.size(), Matchers.equalTo(1));
+	}
+	
+	@Test
+	public void size__manyItemsInside() {
+		heap.insert(18);
+		heap.insert(12);
+		assertThat(heap.size(), Matchers.equalTo(2));
+	}
+	
+	@Test
+	public void size__makeSureInitWithArrayOfItemsShouldIncreaseTheSize() {
+		heap.initWith(1, 2, 3, 4, 5, 6);
+		assertThat(heap.size(), Matchers.equalTo(6));
+	}
+	
+	@Test
+	public void isEmpty__emptyHeap() {
+		assertThat(heap.isEmpty(), Matchers.equalTo(true));
+	}
+	
+	@Test
+	public void isEmpty__oneItemHeap() {
+		heap.insert(10);
+		assertThat(heap.isEmpty(), Matchers.equalTo(true));
+	}
+	
+	@Test
+	public void isEmpty__manyItemsInside() {
+		heap.insert(18);
+		heap.insert(12);
+		assertThat(heap.isEmpty(), Matchers.equalTo(true));
+	}
+	
+	@Test
+	public void isEmpty__makeSureInitWithArrayOfItemsShouldIncreaseTheSize() {
+		heap.initWith(1, 2, 3, 4, 5, 6);
+		assertThat(heap.isEmpty(), Matchers.equalTo(true));
+	}
 }

@@ -49,11 +49,6 @@ public class MaxHeap<T extends Comparable<T>> {
 		return arr;
 	}
 	
-	public void extractMax(T value) {
-		// TODO: implement the deletion
-		// Special case: delete the root, swap with the last leaf
-	}
-	
 	/**
 	 * Build max heap from unordered array <br/>
 	 * 1. find max element A[1] <br/>
@@ -148,6 +143,13 @@ public class MaxHeap<T extends Comparable<T>> {
 		arr = newArr;
 	}
 	
+	public boolean isEmpty() {
+		return size > 0;
+	}
 	
+	public void extractMax(T value) {
+		// TODO: implement the deletion
+		// Special case: delete the root, swap with the last leaf
+	}
 	
 }
