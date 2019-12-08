@@ -72,12 +72,16 @@ public class MaxHeap<T extends Comparable<T>> {
 		}
 	}
 
+	public void maxHeapify(int atPosition) {
+		maxHeapify(arr, atPosition);
+	}
+	
 	// TODO: consider to implement it again :)
 	/**
 	 * Correct the subtree at position
 	 * @param atPosition
 	 */
-	public void maxHeapify(T[] visualizedArray, int atPosition) {
+	private void maxHeapify(T[] visualizedArray, int atPosition) {
 		int max = size;
 		int index = 0;
 		int leftChild = 0;
@@ -96,7 +100,10 @@ public class MaxHeap<T extends Comparable<T>> {
 				index = leftChild;
 			}
 
-			if (righChild < max && visualizedArray[righChild].compareTo(visualizedArray[index]) > 0) {
+			if (righChild < max 
+					&& Objects.nonNull(visualizedArray[righChild])
+					&& Objects.nonNull(visualizedArray[index])
+					&& visualizedArray[righChild].compareTo(visualizedArray[index]) > 0) {
 				index = righChild;
 			}
 

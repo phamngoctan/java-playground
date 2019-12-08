@@ -86,8 +86,7 @@ public class MaxHeapTest {
 	 */
 	@Test
 	public void maxHeapify__atNodeWithTwoChildren_noMoreSubTree() {
-		Integer[] inputArr = new Integer[] {14, 4, 10, 16, 2, 8};
-		heap.setArr(inputArr).maxHeapify(inputArr, 1);
+		heap.setArr(14, 4, 10, 16, 2, 8).maxHeapify(1);
 		
 		Integer[] result = heap.getArr();
 		assertThat(result[1], Matchers.equalTo(16));
@@ -102,7 +101,7 @@ public class MaxHeapTest {
 	 */
 	@Test
 	public void maxHeapify__heapifyTheRootButTheRightChildTreeIsNotHeapifiedYet() {
-		heap.setArr(14, 4, 8, 1, 2, 19).maxHeapify(heap.getArr(), 0);
+		heap.setArr(14, 4, 8, 1, 2, 19).maxHeapify(0);
 		
 		Integer[] result = heap.getArr();
 		assertThat(result[0], Matchers.equalTo(14));
