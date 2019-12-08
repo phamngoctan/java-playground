@@ -144,7 +144,7 @@ public class MaxHeap<T extends Comparable<T>> {
 	}
 	
 	public boolean isEmpty() {
-		return size > 0;
+		return size == 0;
 	}
 	
 	public void extractMax(T value) {
@@ -164,6 +164,17 @@ public class MaxHeap<T extends Comparable<T>> {
 		return arr[0];
 	}
 	
-	
+	public T extractMax() {
+		if (size == 0) {
+			return null;
+		}
+		
+		T max = arr[0];
+		swap(arr, 0, size - 1);
+		arr[size - 1] = null;
+		size--;
+		maxHeapify(0);
+		return max;
+	}
 	
 }

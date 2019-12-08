@@ -10,6 +10,7 @@ import org.junit.Test;
 
 public class MaxHeapTest {
 
+	private static final Integer[] EMPTY_ARRAY = new Integer[] {};
 	private MaxHeap<Integer> heap;
 	
 	@Before
@@ -212,20 +213,20 @@ public class MaxHeapTest {
 	@Test
 	public void isEmpty__oneItemHeap() {
 		heap.insert(10);
-		assertThat(heap.isEmpty(), Matchers.equalTo(true));
+		assertThat(heap.isEmpty(), Matchers.equalTo(false));
 	}
 	
 	@Test
 	public void isEmpty__manyItemsInside() {
 		heap.insert(18);
 		heap.insert(12);
-		assertThat(heap.isEmpty(), Matchers.equalTo(true));
+		assertThat(heap.isEmpty(), Matchers.equalTo(false));
 	}
 	
 	@Test
 	public void isEmpty__makeSureInitWithArrayOfItemsShouldIncreaseTheSize() {
 		heap.initWith(1, 2, 3, 4, 5, 6);
-		assertThat(heap.isEmpty(), Matchers.equalTo(true));
+		assertThat(heap.isEmpty(), Matchers.equalTo(false));
 	}
 	
 	@Test
@@ -250,4 +251,66 @@ public class MaxHeapTest {
 		heap.initWith(10, 15).buildMaxHeap();
 		assertThat(heap.getMax(), Matchers.equalTo(15));
 	}
+	
+	@Test
+	public void extractMax__emptyHeap() {
+		assertThat(heap.extractMax(), Matchers.nullValue());
+	}
+	
+	@Test
+	public void extractMax__oneItemHeap() {
+		heap.insert(10);
+		assertThat(heap.extractMax(), Matchers.equalTo(10));
+		assertThat(heap.size(), Matchers.equalTo(0));
+		assertThat(heap.isEmpty(), Matchers.equalTo(true));
+		makeSureArrayEquals(heap.getArr(), EMPTY_ARRAY);
+	}
+	
+	/*
+	 *         16                          14      
+	 *      /     \        -->          /     \    
+	 *     14       10                 8       10 
+	 *   /   \     /                 /   \   
+	 *  4    2   8                  4     2      
+	 */
+	@Test
+	public void extractMax__deletedItemIsOnTheLeftChild() {
+		heap.initWith(16, 14, 10, 4, 2, 8).buildMaxHeap();
+		assertThat(heap.extractMax(), Matchers.equalTo(16));
+		assertThat(heap.size(), Matchers.equalTo(5));
+		makeSureArrayEquals(heap.getArr(), new Integer[] {14, 8, 10, 4, 2});
+	}
+	
+	/*
+	 *         16        
+	 *      /     \      
+	 *     14       10   
+	 *   /   \     /     
+	 *  4    2   8       
+	 */
+	@Test
+	public void extractMax__toTheVeryEndOfHeap() {
+		heap.initWith(16, 14, 10, 4, 2, 8).buildMaxHeap();
+		assertThat(heap.extractMax(), Matchers.equalTo(16));
+		assertThat(heap.size(), Matchers.equalTo(5));
+		
+		assertThat(heap.extractMax(), Matchers.equalTo(14));
+		assertThat(heap.size(), Matchers.equalTo(4));
+
+		assertThat(heap.extractMax(), Matchers.equalTo(10));
+		assertThat(heap.size(), Matchers.equalTo(3));
+
+		assertThat(heap.extractMax(), Matchers.equalTo(8));
+		assertThat(heap.size(), Matchers.equalTo(2));
+		
+		assertThat(heap.extractMax(), Matchers.equalTo(4));
+		assertThat(heap.size(), Matchers.equalTo(1));
+
+		assertThat(heap.extractMax(), Matchers.equalTo(2));
+		assertThat(heap.size(), Matchers.equalTo(0));
+		assertThat(heap.isEmpty(), Matchers.equalTo(true));
+		
+		makeSureArrayEquals(heap.getArr(), EMPTY_ARRAY);
+	}
+	
 }
