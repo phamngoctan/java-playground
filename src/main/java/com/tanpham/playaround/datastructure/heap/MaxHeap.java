@@ -152,4 +152,18 @@ public class MaxHeap<T extends Comparable<T>> {
 		// Special case: delete the root, swap with the last leaf
 	}
 	
+	/**
+	 * Assume that the current heap is heapified. Just simply return first item of the heap.
+	 * @return
+	 */
+	public T getMax() {
+		if (size == 0) {
+			return null;
+		}
+		
+		return arr[0];
+	}
+	
+	
+	
 }

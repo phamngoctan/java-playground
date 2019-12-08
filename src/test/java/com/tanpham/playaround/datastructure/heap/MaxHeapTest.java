@@ -227,4 +227,27 @@ public class MaxHeapTest {
 		heap.initWith(1, 2, 3, 4, 5, 6);
 		assertThat(heap.isEmpty(), Matchers.equalTo(true));
 	}
+	
+	@Test
+	public void getMax__emptyHeap() {
+		assertThat(heap.getMax(), Matchers.nullValue());
+	}
+	
+	@Test
+	public void getMax__oneItem() {
+		heap.insert(1);
+		assertThat(heap.getMax(), Matchers.equalTo(1));
+	}
+	
+	@Test
+	public void getMax__twoItemsWithoutBeingHeapified__shouldDeliverWrongResult() {
+		heap.initWith(10, 15);
+		assertThat(heap.getMax(), Matchers.equalTo(10));
+	}
+	
+	@Test
+	public void getMax__twoItemsBeingHeapified__shouldDeliverWrongResult() {
+		heap.initWith(10, 15).buildMaxHeap();
+		assertThat(heap.getMax(), Matchers.equalTo(15));
+	}
 }
