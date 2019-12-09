@@ -12,6 +12,7 @@ mvn clean test
 # Data structures
 ## Vector
 ## LinkedList
+Reverse a linkedlist using two pointers approach
 ## Queue
 ## Stack
 ## HashTable
