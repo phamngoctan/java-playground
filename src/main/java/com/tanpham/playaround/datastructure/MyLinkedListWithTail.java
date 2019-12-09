@@ -223,27 +223,46 @@ public class MyLinkedListWithTail<E> {
 		return next.value;
 	}
 
+//    public void reverse() {
+//        if (size <= 1) {
+//            return;
+//        }
+//        
+//        Node<E> newLinkedListNode = null;
+//        Node<E> next = head;
+//        while (next != null) {
+//        	
+//        	Node<E> nodeToBeAdded = new Node<>(next.value);
+//        	if (newLinkedListNode == null) {
+//        		tail = nodeToBeAdded;
+//        	}
+//        	
+//        	nodeToBeAdded.next = newLinkedListNode;
+//        	newLinkedListNode = nodeToBeAdded;
+//    		
+//        	next = next.next;
+//        }
+//        head = newLinkedListNode;
+//    }
+    
     public void reverse() {
-        if (size <= 1) {
+        reverseUsingTwoPointer();
+    }
+
+    //TODO: continue to implement this
+	private void reverseUsingTwoPointer() {
+		if (size <= 1) {
             return;
         }
         
         Node<E> newLinkedListNode = null;
+        Node<E> prev = null;
         Node<E> next = head;
         while (next != null) {
         	
-        	Node<E> nodeToBeAdded = new Node<>(next.value);
-        	if (newLinkedListNode == null) {
-        		tail = nodeToBeAdded;
-        	}
-        	
-        	nodeToBeAdded.next = newLinkedListNode;
-        	newLinkedListNode = nodeToBeAdded;
-    		
-        	next = next.next;
         }
         head = newLinkedListNode;
-    }
+	}
 	
 	//Not up-to-date like erase method
 	public void delete(int index) {
