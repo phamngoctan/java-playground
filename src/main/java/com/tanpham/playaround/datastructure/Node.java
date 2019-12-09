@@ -7,4 +7,10 @@ public class Node<E> {
     public Node(E value) {
         this.value = value;
     }
+
+	@Override
+	public String toString() {
+		return "Node [value=" + value + "]";
+	}
+    
 }

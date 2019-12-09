@@ -5,7 +5,12 @@ public class MyLinkedListWithTail<E> {
     private Node<E> head;
     private Node<E> tail;
     
-    public int size() {
+    @Override
+	public String toString() {
+		return "MyLinkedListWithTail [size=" + size + ", head=" + head + ", tail=" + tail + "]";
+	}
+
+	public int size() {
         return size;
     }
 
@@ -249,19 +254,30 @@ public class MyLinkedListWithTail<E> {
         reverseUsingTwoPointer();
     }
 
-    //TODO: continue to implement this
 	private void reverseUsingTwoPointer() {
 		if (size <= 1) {
             return;
         }
         
-        Node<E> newLinkedListNode = null;
-        Node<E> prev = null;
+        Node<E> newLinkedList = null;
+        Node<E> temp = null;
+        Node<E> temp2 = null;
         Node<E> next = head;
+        
         while (next != null) {
+        	if (newLinkedList == null) {
+        		tail = next;
+        	}
         	
+        	temp = next.next;
+        	
+        	temp2 = next;
+        	temp2.next = newLinkedList;
+        	newLinkedList = temp2;
+        	
+        	next = temp;
         }
-        head = newLinkedListNode;
+        head = newLinkedList;
 	}
 	
 	//Not up-to-date like erase method
