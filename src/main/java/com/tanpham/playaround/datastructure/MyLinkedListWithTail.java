@@ -5,7 +5,12 @@ public class MyLinkedListWithTail<E> {
     private Node<E> head;
     private Node<E> tail;
     
-    public int size() {
+    @Override
+	public String toString() {
+		return "MyLinkedListWithTail [size=" + size + ", head=" + head + ", tail=" + tail + "]";
+	}
+
+	public int size() {
         return size;
     }
 
@@ -223,27 +228,59 @@ public class MyLinkedListWithTail<E> {
 		return next.value;
 	}
 
+//    public void reverse() {
+//        if (size <= 1) {
+//            return;
+//        }
+//        
+//        Node<E> newLinkedListNode = null;
+//        Node<E> next = head;
+//        while (next != null) {
+//        	
+//        	Node<E> nodeToBeAdded = new Node<>(next.value);
+//        	if (newLinkedListNode == null) {
+//        		tail = nodeToBeAdded;
+//        	}
+//        	
+//        	nodeToBeAdded.next = newLinkedListNode;
+//        	newLinkedListNode = nodeToBeAdded;
+//    		
+//        	next = next.next;
+//        }
+//        head = newLinkedListNode;
+//    }
+    
     public void reverse() {
-        if (size <= 1) {
+        reverseUsingTwoPointer();
+    }
+
+	private void reverseUsingTwoPointer() {
+		if (size <= 1) {
             return;
         }
         
-        Node<E> newLinkedListNode = null;
+        Node<E> newLinkedList = null;
+        Node<E> nextNodeStoringOtherwiseItWillBeLostInNextStep = null;
         Node<E> next = head;
+        
         while (next != null) {
-        	
-        	Node<E> nodeToBeAdded = new Node<>(next.value);
-        	if (newLinkedListNode == null) {
-        		tail = nodeToBeAdded;
+        	if (newLinkedList == null) {
+        		tail = next;
         	}
         	
-        	nodeToBeAdded.next = newLinkedListNode;
-        	newLinkedListNode = nodeToBeAdded;
-    		
-        	next = next.next;
+        	nextNodeStoringOtherwiseItWillBeLostInNextStep = next.next;
+        	newLinkedList = changeThePointerOfCurrentNodeToNewLinkedList(newLinkedList, next);
+        	
+        	next = nextNodeStoringOtherwiseItWillBeLostInNextStep;
         }
-        head = newLinkedListNode;
-    }
+        head = newLinkedList;
+	}
+
+	private Node<E> changeThePointerOfCurrentNodeToNewLinkedList(Node<E> newLinkedList, Node<E> next) {
+		next.next = newLinkedList;
+		newLinkedList = next;
+		return newLinkedList;
+	}
 	
 	//Not up-to-date like erase method
 	public void delete(int index) {
