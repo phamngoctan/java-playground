@@ -260,8 +260,7 @@ public class MyLinkedListWithTail<E> {
         }
         
         Node<E> newLinkedList = null;
-        Node<E> temp = null;
-        Node<E> temp2 = null;
+        Node<E> nextNodeStoringOtherwiseItWillBeLostInNextStep = null;
         Node<E> next = head;
         
         while (next != null) {
@@ -269,15 +268,18 @@ public class MyLinkedListWithTail<E> {
         		tail = next;
         	}
         	
-        	temp = next.next;
+        	nextNodeStoringOtherwiseItWillBeLostInNextStep = next.next;
+        	newLinkedList = changeThePointerOfCurrentNodeToNewLinkedList(newLinkedList, next);
         	
-        	temp2 = next;
-        	temp2.next = newLinkedList;
-        	newLinkedList = temp2;
-        	
-        	next = temp;
+        	next = nextNodeStoringOtherwiseItWillBeLostInNextStep;
         }
         head = newLinkedList;
+	}
+
+	private Node<E> changeThePointerOfCurrentNodeToNewLinkedList(Node<E> newLinkedList, Node<E> next) {
+		next.next = newLinkedList;
+		newLinkedList = next;
+		return newLinkedList;
 	}
 	
 	//Not up-to-date like erase method
