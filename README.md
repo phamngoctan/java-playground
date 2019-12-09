@@ -76,8 +76,17 @@ Implementation:
  - heap_sort() - take an unsorted array and turn it into a sorted array in-place using a max heap
     - note: using a min heap instead would save operations, but double the space needed (cannot do in-place).
 
+## Sorting
+### Bubble sort
+This implementation is just for playing around with sorting algorithms. Bubble's terrible - O(n^2), except when n <= 16.
+
 ### Heap sort
 One of the nice properties of HeapSort is that it is an in-place algorithm. It only needs a fixed amount of memory beyond what is used to store the data being sorted.
+### Selection
+### Insertion
+### Heap sort
+### Quick sort
+### Merge sort
 
 # Multi-threads
 ## Sleep
