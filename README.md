@@ -77,8 +77,14 @@ Implementation:
     - note: using a min heap instead would save operations, but double the space needed (cannot do in-place).
 
 ## Sorting
+Stability in sorting algorithms.
+Which algorithms can be used on linked lists? Which on arrays? Which on both?
+
 ### Bubble sort
 This implementation is just for playing around with sorting algorithms. Bubble's terrible - O(n^2), except when n <= 16.
+
+### Merge sort
+Applying on LinkedList. I wouldn't recommend sorting a linked list, but merge sort is doable.
 
 ### Heap sort
 One of the nice properties of HeapSort is that it is an in-place algorithm. It only needs a fixed amount of memory beyond what is used to store the data being sorted.
