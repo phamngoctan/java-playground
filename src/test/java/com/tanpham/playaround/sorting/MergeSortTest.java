@@ -47,4 +47,17 @@ public class MergeSortTest {
 		assertThat(newHeadResult, Matchers.equalTo(5));
 	}
 	
+	//========================================
+	// test the small part of the mergesort, merge two sorted list
+	@Test
+	public void mergeTwoSortedList__eachListOneItem() {
+		Node<Integer> firstHead = new Node<Integer>(5);
+		Node<Integer> secondHead = new Node<Integer>(10);
+		
+		Node<Integer> sortedList = mergeSort.mergeTwoSortedList(firstHead , secondHead);
+		assertThat(sortedList, Matchers.notNullValue());
+		assertThat(sortedList.getValue(), Matchers.equalTo(5));
+		assertThat(sortedList.getNext().getValue(), Matchers.equalTo(10));
+	}
+	
 }
