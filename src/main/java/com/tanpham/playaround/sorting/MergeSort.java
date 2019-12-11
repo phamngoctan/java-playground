@@ -31,23 +31,42 @@ public class MergeSort<T extends Comparable<T>> {
 				if (currentPositionOfFinalSortedList == null) {
 					if (INCREASING_ORDER) {
 						finalSortedList = secondHead;
-						currentPositionOfFinalSortedList = finalSortedList;
+						currentPositionOfFinalSortedList = finalSortedList.setNext(firstHead);
 					} else {
 						finalSortedList = firstHead;
-						currentPositionOfFinalSortedList = finalSortedList;
+						currentPositionOfFinalSortedList = finalSortedList.setNext(secondHead);
 					}
+					continue;
+				}
+				
+				if (INCREASING_ORDER) {
+					currentPositionOfFinalSortedList.setNext(secondHead).setNext(firstHead);
 				} else {
+					currentPositionOfFinalSortedList.setNext(firstHead).setNext(secondHead);
+				}
+			} else {
+				if (currentPositionOfFinalSortedList == null) {
 					if (INCREASING_ORDER) {
-						currentPositionOfFinalSortedList.setNext(secondHead);
+						finalSortedList = firstHead;
+						currentPositionOfFinalSortedList = finalSortedList.setNext(secondHead);
 					} else {
-						currentPositionOfFinalSortedList.setNext(firstHead);
+						finalSortedList = secondHead;
+						currentPositionOfFinalSortedList = finalSortedList.setNext(firstHead);
 					}
+					continue;
+				}
+
+				if (INCREASING_ORDER) {
+					currentPositionOfFinalSortedList = currentPositionOfFinalSortedList.setNext(firstHead).setNext(secondHead);
+				} else {
+					currentPositionOfFinalSortedList = currentPositionOfFinalSortedList.setNext(secondHead).setNext(firstHead);
 				}
 			}
+			
 			firstHead = firstHead.getNext();
 			secondHead = secondHead.getNext();
 		}
-		return firstHead;
+		return finalSortedList;
 	}
 
 	private boolean isFirstNodeBiggerThanSecondOneWithNullTolerant(Node<T> firstHead, Node<T> secondHead) {
