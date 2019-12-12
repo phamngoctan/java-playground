@@ -12,6 +12,25 @@ mvn clean test
 # Data structures
 ## Vector
 ## LinkedList
+Reverse a linkedlist using two pointers approach
+ - reverse
+ - size
+ - empty
+ - valueAt
+ - pushFront
+ - popFront
+ - popBack
+ - pickValueRightBeforeTail
+ - pushBack
+ - front
+ - back
+ - insert
+ - prepend
+ - remove
+ - findMiddle
+ - delete at position
+ - detectCircularDependency using two pointers, one pointer run at 1 node speed, another point run at 2 nodes speed. if the second pointer reach the first one, this linkedlist is circular dependency
+
 ## Queue
 ## Stack
 ## HashTable

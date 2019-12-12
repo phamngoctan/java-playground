@@ -34,4 +34,10 @@ public class Node<E> {
 		this.value = value;
 	}
 
+
+	@Override
+	public String toString() {
+		return "Node [value=" + value + "]";
+	}
+    
 }
