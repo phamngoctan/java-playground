@@ -122,8 +122,8 @@ public class MergeSortTest {
 	
 	@Test
 	public void mergeTwoSortedListDecreasingOrder__firstListLongerThanSecondOne() {
-		Node<Integer> firstHead = new Node<>(5);
-		firstHead.setNext(new Node<>(15));
+		Node<Integer> firstHead = new Node<>(15);
+		firstHead.setNext(new Node<>(5));
 		Node<Integer> secondHead = new Node<>(10);
 		
 		Node<Integer> sortedList = mergeSort.mergeTwoSortedListDecreasingOrder(firstHead, secondHead);
@@ -135,9 +135,22 @@ public class MergeSortTest {
 	
 	@Test
 	public void mergeTwoSortedListDecreasingOrder__secondListLongerThanFirstOne() {
+		Node<Integer> firstHead = new Node<>(10);
+		Node<Integer> secondHead = new Node<>(15);
+		firstHead.setNext(new Node<>(5));
+		
+		Node<Integer> sortedList = mergeSort.mergeTwoSortedListDecreasingOrder(firstHead, secondHead);
+		assertThat(sortedList, Matchers.notNullValue());
+		assertThat(sortedList.getValue(), Matchers.equalTo(15));
+		assertThat(sortedList.getNext().getValue(), Matchers.equalTo(10));
+		assertThat(sortedList.getNext().getNext().getValue(), Matchers.equalTo(5));
+	}
+	
+	@Test
+	public void mergeTwoSortedListDecreasingOrder__pointerShouldSkipTheFirstNodeTwice__inTheFirstPosition() {
 		Node<Integer> firstHead = new Node<>(5);
-		Node<Integer> secondHead = new Node<>(10);
-		firstHead.setNext(new Node<>(15));
+		firstHead.setNext(new Node<>(10));
+		Node<Integer> secondHead = new Node<>(15);
 		
 		Node<Integer> sortedList = mergeSort.mergeTwoSortedListDecreasingOrder(firstHead, secondHead);
 		assertThat(sortedList, Matchers.notNullValue());

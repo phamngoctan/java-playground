@@ -36,7 +36,12 @@ public class MergeSort<T extends Comparable<T>> {
 		Node<T> currentPositionOfFinalSortedList = null;
 		Node<T> tempFirstHead = null;
 		Node<T> tempSecondHead = null;
+		boolean shouldSkipJumpingFirstHead = false;
+		boolean shouldSkipJumpingSecondHead = false;
 		while (firstHead != null || secondHead != null) {
+			shouldSkipJumpingFirstHead = false;
+			shouldSkipJumpingSecondHead = false;
+			
 			// without this line, the next item will not be considered because the next pointer is lost in the process
 			tempFirstHead = firstHead == null ? null : firstHead.getNext();
 			tempSecondHead = secondHead == null ? null : secondHead.getNext();
@@ -52,9 +57,9 @@ public class MergeSort<T extends Comparable<T>> {
 					}
 				} else {
 					if (increasingOrder) {
-						currentPositionOfFinalSortedList.setNext(secondHead).setNext(firstHead);
+						currentPositionOfFinalSortedList = currentPositionOfFinalSortedList.setNext(secondHead).setNext(firstHead);
 					} else {
-						currentPositionOfFinalSortedList.setNext(firstHead).setNext(secondHead);
+						currentPositionOfFinalSortedList = currentPositionOfFinalSortedList.setNext(firstHead).setNext(secondHead);
 					}
 				}
 				
@@ -77,8 +82,13 @@ public class MergeSort<T extends Comparable<T>> {
 
 			}
 			
-			firstHead = tempFirstHead;
-			secondHead = tempSecondHead;
+			if (!shouldSkipJumpingFirstHead) {
+				firstHead = tempFirstHead;
+			}
+			
+			if (!shouldSkipJumpingSecondHead) {
+				secondHead = tempSecondHead;
+			}
 		}
 		return finalSortedList;
 	}
