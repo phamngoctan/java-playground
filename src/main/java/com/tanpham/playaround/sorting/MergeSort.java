@@ -26,7 +26,13 @@ public class MergeSort<T extends Comparable<T>> {
 	public Node<T> mergeTwoSortedList(Node<T> firstHead, Node<T> secondHead) {
 		Node<T> finalSortedList = null;
 		Node<T> currentPositionOfFinalSortedList = null;
+		Node<T> tempFirstHead = null;
+		Node<T> tempSecondHead = null;
 		while (firstHead != null || secondHead != null) {
+			// without this line, the next item will not be considered because the next pointer is lost in the process
+			tempFirstHead = firstHead.getNext();
+			tempSecondHead = secondHead.getNext();
+			
 			if (isFirstNodeBiggerThanSecondOneWithNullTolerant(firstHead, secondHead)) {
 				if (currentPositionOfFinalSortedList == null) {
 					if (INCREASING_ORDER) {
@@ -36,14 +42,14 @@ public class MergeSort<T extends Comparable<T>> {
 						finalSortedList = firstHead;
 						currentPositionOfFinalSortedList = finalSortedList.setNext(secondHead);
 					}
-					continue;
+				} else {
+					if (INCREASING_ORDER) {
+						currentPositionOfFinalSortedList.setNext(secondHead).setNext(firstHead);
+					} else {
+						currentPositionOfFinalSortedList.setNext(firstHead).setNext(secondHead);
+					}
 				}
 				
-				if (INCREASING_ORDER) {
-					currentPositionOfFinalSortedList.setNext(secondHead).setNext(firstHead);
-				} else {
-					currentPositionOfFinalSortedList.setNext(firstHead).setNext(secondHead);
-				}
 			} else {
 				if (currentPositionOfFinalSortedList == null) {
 					if (INCREASING_ORDER) {
@@ -53,18 +59,18 @@ public class MergeSort<T extends Comparable<T>> {
 						finalSortedList = secondHead;
 						currentPositionOfFinalSortedList = finalSortedList.setNext(firstHead);
 					}
-					continue;
+				} else {
+					if (INCREASING_ORDER) {
+						currentPositionOfFinalSortedList = currentPositionOfFinalSortedList.setNext(firstHead).setNext(secondHead);
+					} else {
+						currentPositionOfFinalSortedList = currentPositionOfFinalSortedList.setNext(secondHead).setNext(firstHead);
+					}
 				}
 
-				if (INCREASING_ORDER) {
-					currentPositionOfFinalSortedList = currentPositionOfFinalSortedList.setNext(firstHead).setNext(secondHead);
-				} else {
-					currentPositionOfFinalSortedList = currentPositionOfFinalSortedList.setNext(secondHead).setNext(firstHead);
-				}
 			}
 			
-			firstHead = firstHead.getNext();
-			secondHead = secondHead.getNext();
+			firstHead = tempFirstHead;
+			secondHead = tempSecondHead;
 		}
 		return finalSortedList;
 	}

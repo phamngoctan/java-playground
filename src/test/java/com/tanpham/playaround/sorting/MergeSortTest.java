@@ -54,10 +54,23 @@ public class MergeSortTest {
 		Node<Integer> firstHead = new Node<Integer>(5);
 		Node<Integer> secondHead = new Node<Integer>(10);
 		
-		Node<Integer> sortedList = mergeSort.mergeTwoSortedList(firstHead , secondHead);
+		Node<Integer> sortedList = mergeSort.mergeTwoSortedList(firstHead, secondHead);
 		assertThat(sortedList, Matchers.notNullValue());
 		assertThat(sortedList.getValue(), Matchers.equalTo(5));
 		assertThat(sortedList.getNext().getValue(), Matchers.equalTo(10));
+	}
+	
+	@Test
+	public void mergeTwoSortedList__firstListLongerThanSecondOne() {
+		Node<Integer> firstHead = new Node<Integer>(5);
+		firstHead.setNext(new Node<>(15));
+		Node<Integer> secondHead = new Node<Integer>(10);
+		
+		Node<Integer> sortedList = mergeSort.mergeTwoSortedList(firstHead, secondHead);
+		assertThat(sortedList, Matchers.notNullValue());
+		assertThat(sortedList.getValue(), Matchers.equalTo(5));
+		assertThat(sortedList.getNext().getValue(), Matchers.equalTo(10));
+		assertThat(sortedList.getNext().getNext().getValue(), Matchers.equalTo(15));
 	}
 	
 }
