@@ -18,6 +18,10 @@ public class Node<E> {
 	}
 	
 	public Node<E> setNext(Node<E> node) {
+		// this makes a trick when handling the merge of two sorted list
+		if (node == null) {
+			return this;
+		}
 		this.next = node;
 		return this.next;
 	}
