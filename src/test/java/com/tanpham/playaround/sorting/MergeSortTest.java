@@ -10,6 +10,8 @@ import com.tanpham.playaround.datastructure.Node;
 
 public class MergeSortTest {
 	
+	private static final boolean INCREASING_ORDER = true;
+	private static final boolean DECREASING_ORDER = !INCREASING_ORDER;
 	private MergeSort<Integer> mergeSort;
 	
 	@Before
@@ -87,8 +89,9 @@ public class MergeSortTest {
 	@Test
 	public void mergeTwoSortedList__secondListLongerThanFirstOne() {
 		Node<Integer> firstHead = new Node<>(5);
-		Node<Integer> secondHead = new Node<>(10);
 		firstHead.setNext(new Node<>(15));
+
+		Node<Integer> secondHead = new Node<>(10);
 		
 		Node<Integer> sortedList = mergeSort.mergeTwoSortedList(firstHead, secondHead);
 		assertThat(sortedList, Matchers.notNullValue());
@@ -149,14 +152,72 @@ public class MergeSortTest {
 	@Test
 	public void mergeTwoSortedListDecreasingOrder__pointerShouldSkipTheFirstNodeTwice__inTheFirstPosition() {
 		Node<Integer> firstHead = new Node<>(5);
-		firstHead.setNext(new Node<>(10));
 		Node<Integer> secondHead = new Node<>(15);
+		secondHead.setNext(new Node<>(10));
 		
 		Node<Integer> sortedList = mergeSort.mergeTwoSortedListDecreasingOrder(firstHead, secondHead);
 		assertThat(sortedList, Matchers.notNullValue());
 		assertThat(sortedList.getValue(), Matchers.equalTo(15));
 		assertThat(sortedList.getNext().getValue(), Matchers.equalTo(10));
 		assertThat(sortedList.getNext().getNext().getValue(), Matchers.equalTo(5));
+	}
+	
+	/// complete new approach
+	@Test
+	public void mergeTwoSortedList__nullInput() {
+		assertThat(mergeSort.mergeTwoSortedList(null, null), Matchers.nullValue());
+	}
+	
+	/*
+	 * 
+	 *           ^
+	 * 5    15   |
+	 * x
+	 * 
+	 */
+	@Test
+	public void shouldPickFirstItem__secondBigger_increaseOrder() {
+		boolean shouldPickFirstItem = mergeSort.shouldPickFirstItem(new Node<>(5), new Node<>(15), INCREASING_ORDER);
+		assertThat(shouldPickFirstItem, Matchers.equalTo(true));
+	}
+
+	/*
+	 * 
+	 *           
+	 * 5    15   |
+	 * x         v
+	 * 
+	 */
+	@Test
+	public void shouldPickFirstItem__secondBigger_decreaseOrder() {
+		boolean shouldPickFirstItem = mergeSort.shouldPickFirstItem(new Node<>(5), new Node<>(15), DECREASING_ORDER);
+		assertThat(shouldPickFirstItem, Matchers.equalTo(false));
+	}
+	
+	/*
+	 * 
+	 *           ^
+	 * 15    5   |
+	 *       x
+	 * 
+	 */
+	@Test
+	public void shouldPickFirstItem__firstBigger_increaseOrder() {
+		boolean shouldPickFirstItem = mergeSort.shouldPickFirstItem(new Node<>(15), new Node<>(5), INCREASING_ORDER);
+		assertThat(shouldPickFirstItem, Matchers.equalTo(false));
+	}
+
+	/*
+	 * 
+	 *           
+	 * 15    5   |
+	 * x         v
+	 * 
+	 */
+	@Test
+	public void shouldPickFirstItem__firstBigger_decreaseOrder() {
+		boolean shouldPickFirstItem = mergeSort.shouldPickFirstItem(new Node<>(15), new Node<>(5), DECREASING_ORDER);
+		assertThat(shouldPickFirstItem, Matchers.equalTo(true));
 	}
 	
 }

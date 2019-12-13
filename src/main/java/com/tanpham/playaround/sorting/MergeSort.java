@@ -32,65 +32,44 @@ public class MergeSort<T extends Comparable<T>> {
 	}
 	
 	private Node<T> mergeTwoSortedList(Node<T> firstHead, Node<T> secondHead, boolean increasingOrder) {
+		if (firstHead == null && secondHead == null) {
+			return null;
+		}
+		
 		Node<T> finalSortedList = null;
 		Node<T> currentPositionOfFinalSortedList = null;
-		Node<T> tempFirstHead = null;
-		Node<T> tempSecondHead = null;
-		boolean shouldSkipJumpingFirstHead = false;
-		boolean shouldSkipJumpingSecondHead = false;
+		
 		while (firstHead != null || secondHead != null) {
-			shouldSkipJumpingFirstHead = false;
-			shouldSkipJumpingSecondHead = false;
-			
-			// without this line, the next item will not be considered because the next pointer is lost in the process
-			tempFirstHead = firstHead == null ? null : firstHead.getNext();
-			tempSecondHead = secondHead == null ? null : secondHead.getNext();
-			
-			if (isFirstNodeBiggerThanSecondOneWithNullTolerant(firstHead, secondHead)) {
-				if (currentPositionOfFinalSortedList == null) {
-					if (increasingOrder) {
-						finalSortedList = secondHead;
-						currentPositionOfFinalSortedList = finalSortedList.setNext(firstHead);
-					} else {
-						finalSortedList = firstHead;
-						currentPositionOfFinalSortedList = finalSortedList.setNext(secondHead);
-					}
+			boolean shouldPickFirstItemCurrent = shouldPickFirstItem(firstHead, secondHead, increasingOrder);
+			boolean shouldPickFirstItemNext = shouldPickFirstItem(firstHead, getNextNullTolerant(secondHead), increasingOrder);
+			if (shouldPickFirstItemCurrent && shouldPickFirstItemNext) {
+				if (finalSortedList == null) {
+					finalSortedList = firstHead;
+					currentPositionOfFinalSortedList = firstHead;
 				} else {
-					if (increasingOrder) {
-						currentPositionOfFinalSortedList = currentPositionOfFinalSortedList.setNext(secondHead).setNext(firstHead);
-					} else {
-						currentPositionOfFinalSortedList = currentPositionOfFinalSortedList.setNext(firstHead).setNext(secondHead);
-					}
+					currentPositionOfFinalSortedList = currentPositionOfFinalSortedList.setNext(firstHead);
 				}
-				
+				firstHead = getNextNullTolerant(firstHead);
 			} else {
-				if (currentPositionOfFinalSortedList == null) {
-					if (increasingOrder) {
-						finalSortedList = firstHead;
-						currentPositionOfFinalSortedList = finalSortedList.setNext(secondHead);
-					} else {
-						finalSortedList = secondHead;
-						currentPositionOfFinalSortedList = finalSortedList.setNext(firstHead);
-					}
+				if (finalSortedList == null) {
+					finalSortedList = secondHead;
+					currentPositionOfFinalSortedList = secondHead;
 				} else {
-					if (increasingOrder) {
-						currentPositionOfFinalSortedList = currentPositionOfFinalSortedList.setNext(firstHead).setNext(secondHead);
-					} else {
-						currentPositionOfFinalSortedList = currentPositionOfFinalSortedList.setNext(secondHead).setNext(firstHead);
-					}
+					currentPositionOfFinalSortedList = currentPositionOfFinalSortedList.setNext(secondHead);
 				}
-
-			}
-			
-			if (!shouldSkipJumpingFirstHead) {
-				firstHead = tempFirstHead;
-			}
-			
-			if (!shouldSkipJumpingSecondHead) {
-				secondHead = tempSecondHead;
+				secondHead = getNextNullTolerant(secondHead);
 			}
 		}
+		
 		return finalSortedList;
+	}
+	
+	public boolean shouldPickFirstItem(Node<T> firstHead, Node<T> secondHead, boolean increasingOrder) {
+		return isFirstNodeBiggerThanSecondOneWithNullTolerant(firstHead, secondHead) && !increasingOrder;
+	}
+	
+	private Node<T> getNextNullTolerant(Node<T> node) {
+		return node == null ? null : node.getNext();
 	}
 
 	private boolean isFirstNodeBiggerThanSecondOneWithNullTolerant(Node<T> firstHead, Node<T> secondHead) {
