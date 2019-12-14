@@ -1,5 +1,7 @@
 package com.tanpham.playaround.sorting;
 
+import java.util.Optional;
+
 import com.tanpham.playaround.datastructure.Node;
 
 public class MergeSort<T extends Comparable<T>> {
@@ -20,9 +22,24 @@ public class MergeSort<T extends Comparable<T>> {
 		// 2: call recursively the proceed for first part & second part
 		// 3: merge the two sorted parts & return the sorted linkedlist
 		
+		Node<T> middleItem = findMiddleItem(inputHead);
+		
 		return null;
 	}
 	
+	public Node<T> findMiddleItem(Node<T> inputHead) {
+		Node<T> next = inputHead;
+		Node<T> twoXNext = inputHead;
+		
+		while (twoXNext != null) {
+			
+			next = next.getNext();
+			twoXNext = Optional.ofNullable(twoXNext.getNext())
+									.map(Node::getNext).orElse(null);
+		}
+		return next;
+	}
+
 	public Node<T> mergeTwoSortedList(Node<T> firstHead, Node<T> secondHead) {
 		return mergeTwoSortedList(firstHead, secondHead, INCREASING_ORDER);
 	}

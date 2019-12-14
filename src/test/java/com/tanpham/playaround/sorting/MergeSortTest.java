@@ -48,6 +48,7 @@ public class MergeSortTest {
 		assertThat(newHeadResult, Matchers.equalTo(10));
 		assertThat(newHeadResult, Matchers.equalTo(5));
 	}
+	//TODO: add more test for mergeSort here
 	
 	//========================================
 	// test the small part of the mergesort, merge two sorted list
@@ -271,5 +272,18 @@ public class MergeSortTest {
 		boolean shouldPickFirstItem = mergeSort.shouldPickFirstItem(null, new Node<>(5), DECREASING_ORDER);
 		assertThat(shouldPickFirstItem, Matchers.equalTo(false));
 	}
+	
+	// =================
+	// For support the mergeSort, we have to split it into two parts
+	// To do it, we need to find the middle item of linkedlist
+	
+	@Test
+	public void findMiddleItem__oneItem() {
+		Node<Integer> inputHead = new Node<Integer>(10);
+		Node<Integer> middleItem = mergeSort.findMiddleItem(inputHead);
+		
+		assertThat(middleItem, Matchers.equalTo(inputHead));
+	}
+	
 	
 }
