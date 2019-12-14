@@ -220,4 +220,56 @@ public class MergeSortTest {
 		assertThat(shouldPickFirstItem, Matchers.equalTo(true));
 	}
 	
+	/*
+	 * 
+	 *             ^
+	 * 5    null   |
+	 * x
+	 * 
+	 */
+	@Test
+	public void shouldPickFirstItem__secondNull_increaseOrder() {
+		boolean shouldPickFirstItem = mergeSort.shouldPickFirstItem(new Node<>(5), null, INCREASING_ORDER);
+		assertThat(shouldPickFirstItem, Matchers.equalTo(true));
+	}
+
+	/*
+	 * 
+	 *           
+	 * 5    null   |
+	 * x           v
+	 * 
+	 */
+	@Test
+	public void shouldPickFirstItem__secondNull_decreaseOrder() {
+		boolean shouldPickFirstItem = mergeSort.shouldPickFirstItem(new Node<>(5), null, DECREASING_ORDER);
+		assertThat(shouldPickFirstItem, Matchers.equalTo(true));
+	}
+	
+	/*
+	 * 
+	 *             ^
+	 * null    5   |
+	 *         x
+	 * 
+	 */
+	@Test
+	public void shouldPickFirstItem__firstNull_increaseOrder() {
+		boolean shouldPickFirstItem = mergeSort.shouldPickFirstItem(null, new Node<>(5), INCREASING_ORDER);
+		assertThat(shouldPickFirstItem, Matchers.equalTo(false));
+	}
+
+	/*
+	 * 
+	 *           
+	 * null    5   |
+	 *         x   v
+	 * 
+	 */
+	@Test
+	public void shouldPickFirstItem__firstNull_decreaseOrder() {
+		boolean shouldPickFirstItem = mergeSort.shouldPickFirstItem(null, new Node<>(5), DECREASING_ORDER);
+		assertThat(shouldPickFirstItem, Matchers.equalTo(false));
+	}
+	
 }

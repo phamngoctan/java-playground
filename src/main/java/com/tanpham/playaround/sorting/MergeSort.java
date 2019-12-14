@@ -65,14 +65,6 @@ public class MergeSort<T extends Comparable<T>> {
 	}
 	
 	public boolean shouldPickFirstItem(Node<T> firstHead, Node<T> secondHead, boolean increasingOrder) {
-		return isFirstNodeBiggerThanSecondOneWithNullTolerant(firstHead, secondHead) && !increasingOrder;
-	}
-	
-	private Node<T> getNextNullTolerant(Node<T> node) {
-		return node == null ? null : node.getNext();
-	}
-
-	private boolean isFirstNodeBiggerThanSecondOneWithNullTolerant(Node<T> firstHead, Node<T> secondHead) {
 		if (firstHead == null) {
 			return false;
 		}
@@ -81,6 +73,25 @@ public class MergeSort<T extends Comparable<T>> {
 			return true;
 		}
 		
+		boolean firstNodeBiggerThanSecondOne = isFirstNodeBiggerThanSecondOneWithNullTolerant(firstHead, secondHead);
+		
+		//TODO: refactor this if else statement
+		if (firstNodeBiggerThanSecondOne && increasingOrder) {
+			return false;
+		} else if (firstNodeBiggerThanSecondOne && !increasingOrder) {
+			return true;
+		} else if (!firstNodeBiggerThanSecondOne && increasingOrder) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+	
+	private Node<T> getNextNullTolerant(Node<T> node) {
+		return node == null ? null : node.getNext();
+	}
+
+	private boolean isFirstNodeBiggerThanSecondOneWithNullTolerant(Node<T> firstHead, Node<T> secondHead) {
 		return firstHead.getValue().compareTo(secondHead.getValue()) > 0;
 	}
 	
