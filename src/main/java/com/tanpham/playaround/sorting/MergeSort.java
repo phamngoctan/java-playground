@@ -54,7 +54,6 @@ public class MergeSort<T extends Comparable<T>> {
 	}
 	
 	
-	
 	// Dynamic this, change the middle item to the first part
 	// 4 items -> the second item should be returned
 	public Node<T> findMiddleItem(Node<T> inputHead) {
@@ -65,8 +64,7 @@ public class MergeSort<T extends Comparable<T>> {
 		Node<T> next = inputHead;
 		Node<T> twoXNext = inputHead;
 		
-		while (twoXNext != null
-				&& twoXNext.getNext() != null
+		while (twoXNext.getNext() != null
 				&& twoXNext.getNext().getNext() != null) {
 			next = next.getNext();
 			twoXNext = twoXNext.getNext().getNext();
