@@ -7,6 +7,9 @@ public class MergeSort<T extends Comparable<T>> {
 	private static final boolean INCREASING_ORDER = true;
 	private static final boolean DECREASING_ORDER = !INCREASING_ORDER;
 	
+	//======================================
+	//======Merge sort for linkedlist=======
+	//======================================
 	/**
 	 * Merge sort with increasing order
 	 */
@@ -143,6 +146,26 @@ public class MergeSort<T extends Comparable<T>> {
 
 	private boolean isFirstNodeBiggerThanSecondOneWithNullTolerant(Node<T> firstHead, Node<T> secondHead) {
 		return firstHead.getValue().compareTo(secondHead.getValue()) > 0;
+	}
+	
+	//======================================
+	//========Merge sort for array==========
+	//======================================
+	
+	/*
+	 * Precondition:
+	 * arr[low..mid] sorted
+	 * arr[mid+1...high] sorted
+	 */
+	private void mergeSortedArray(Comparable[] arr, Comparable auxiliary[], int low, int mid, int high) {
+		for (int k = low; k <= high; k++) { // copy to another array & sort it
+			auxiliary[k] = arr[k];
+		}
+		
+		int i = low;
+		int j = mid + 1;
+		
+		// TODO: 
 	}
 	
 }
