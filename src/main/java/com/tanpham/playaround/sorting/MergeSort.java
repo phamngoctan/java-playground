@@ -1,14 +1,32 @@
 package com.tanpham.playaround.sorting;
 
-import java.util.Optional;
-
 import com.tanpham.playaround.datastructure.Node;
 
 public class MergeSort<T extends Comparable<T>> {
 	
 	private static final boolean INCREASING_ORDER = true;
-
+	private static final boolean DECREASING_ORDER = !INCREASING_ORDER;
+	
+	/**
+	 * Merge sort with increasing order
+	 */
 	public Node<T> proceed(Node<T> inputHead) {
+		
+		
+		// Idea to implement the Merge sort
+		// 1: split the linkedlist into two parts
+		// 2: call recursively the proceed for first part & second part
+		// 3: merge the two sorted parts & return the sorted linkedlist
+		
+		
+		return mergeSortWithSpecificOrder(inputHead, INCREASING_ORDER);
+	}
+	
+	public Node<T> proceedInDecreasingOrder(Node<T> inputHead) {
+		return mergeSortWithSpecificOrder(inputHead, DECREASING_ORDER);
+	}
+
+	private Node<T> mergeSortWithSpecificOrder(Node<T> inputHead, boolean increasingOrder) {
 		if (inputHead == null) {
 			return null;
 		}
@@ -22,10 +40,20 @@ public class MergeSort<T extends Comparable<T>> {
 		// 2: call recursively the proceed for first part & second part
 		// 3: merge the two sorted parts & return the sorted linkedlist
 		
-		Node<T> middleItem = findMiddleItem(inputHead);
 		
-		return null;
+		// 1: split the linkedlist into two parts
+		Node<T> middleItem = findMiddleItem(inputHead);
+		Node<T> firstPart = inputHead;
+		Node<T> secondPart = middleItem.getNext();
+		middleItem.setNext(null);
+		
+		Node<T> firstSortedPart = mergeSortWithSpecificOrder(firstPart, increasingOrder);
+		Node<T> secondSortedPart = mergeSortWithSpecificOrder(secondPart, increasingOrder);
+		
+		return mergeTwoSortedList(firstSortedPart, secondSortedPart, increasingOrder);
 	}
+	
+	
 	
 	// Dynamic this, change the middle item to the first part
 	// 4 items -> the second item should be returned
@@ -54,6 +82,7 @@ public class MergeSort<T extends Comparable<T>> {
 		return mergeTwoSortedList(firstHead, secondHead, !INCREASING_ORDER);
 	}
 	
+	// This can be improved 
 	private Node<T> mergeTwoSortedList(Node<T> firstHead, Node<T> secondHead, boolean increasingOrder) {
 		if (firstHead == null && secondHead == null) {
 			return null;
@@ -70,7 +99,7 @@ public class MergeSort<T extends Comparable<T>> {
 					finalSortedList = firstHead;
 					currentPositionOfFinalSortedList = firstHead;
 				} else {
-					currentPositionOfFinalSortedList = currentPositionOfFinalSortedList.setNext(firstHead);
+					currentPositionOfFinalSortedList = currentPositionOfFinalSortedList.setNextNodeIgnoringNullValue(firstHead);
 				}
 				firstHead = getNextNullTolerant(firstHead);
 			} else {
@@ -78,7 +107,7 @@ public class MergeSort<T extends Comparable<T>> {
 					finalSortedList = secondHead;
 					currentPositionOfFinalSortedList = secondHead;
 				} else {
-					currentPositionOfFinalSortedList = currentPositionOfFinalSortedList.setNext(secondHead);
+					currentPositionOfFinalSortedList = currentPositionOfFinalSortedList.setNextNodeIgnoringNullValue(secondHead);
 				}
 				secondHead = getNextNullTolerant(secondHead);
 			}

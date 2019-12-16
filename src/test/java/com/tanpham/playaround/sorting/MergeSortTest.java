@@ -33,22 +33,52 @@ public class MergeSortTest {
 	@Test
 	public void mergeSort__twoNodesToFacilitateTheRecursiveCall() {
 		Node<Integer> head = new Node<>(10);
-		head.setNext(15);
+		head.initNextNodeByValue(15);
 		Node<Integer> proceededList = mergeSort.proceed(head);
-		assertThat(proceededList.getValue(), Matchers.equalTo(15));
-		assertThat(proceededList.getNext(), Matchers.equalTo(10));
+		assertThat(proceededList.getValue(), Matchers.equalTo(10));
+		assertThat(proceededList.getNext().getValue(), Matchers.equalTo(15));
 	}
 	
 	@Test
-	public void mergeSort__multipleNodes() {
+	public void mergeSort__threeNodes() {
 		Node<Integer> head = new Node<>(10);
-		head.setNext(20).setNext(5);
+		head.initNextNodeByValue(20)
+			.initNextNodeByValue(5);
 		Node<Integer> newHeadResult = mergeSort.proceed(head);
-		assertThat(newHeadResult, Matchers.equalTo(20));
-		assertThat(newHeadResult, Matchers.equalTo(10));
-		assertThat(newHeadResult, Matchers.equalTo(5));
+		assertThat(newHeadResult.getValue(), Matchers.equalTo(5));
+		assertThat(newHeadResult.getNext().getValue(), Matchers.equalTo(10));
+		assertThat(newHeadResult.getNext().getNext().getValue(), Matchers.equalTo(20));
 	}
-	//TODO: add more test for mergeSort here
+	
+	@Test
+	public void mergeSort__fiveNodes() {
+		Node<Integer> head = new Node<>(10);
+		head.initNextNodeByValue(20)
+			.initNextNodeByValue(5)
+			.initNextNodeByValue(100)
+			.initNextNodeByValue(1);
+		Node<Integer> newHeadResult = mergeSort.proceed(head);
+		assertThat(newHeadResult.getValue(), Matchers.equalTo(1));
+		assertThat(newHeadResult.getNext().getValue(), Matchers.equalTo(5));
+		assertThat(newHeadResult.getNext().getNext().getValue(), Matchers.equalTo(10));
+		assertThat(newHeadResult.getNext().getNext().getNext().getValue(), Matchers.equalTo(20));
+		assertThat(newHeadResult.getNext().getNext().getNext().getNext().getValue(), Matchers.equalTo(100));
+	}
+	
+	@Test
+	public void mergeSort__fiveNodes_decreasingOrder() {
+		Node<Integer> head = new Node<>(10);
+		head.initNextNodeByValue(20)
+			.initNextNodeByValue(5)
+			.initNextNodeByValue(100)
+			.initNextNodeByValue(1);
+		Node<Integer> newHeadResult = mergeSort.proceed(head);
+		assertThat(newHeadResult.getValue(), Matchers.equalTo(1));
+		assertThat(newHeadResult.getNext().getValue(), Matchers.equalTo(5));
+		assertThat(newHeadResult.getNext().getNext().getValue(), Matchers.equalTo(10));
+		assertThat(newHeadResult.getNext().getNext().getNext().getValue(), Matchers.equalTo(20));
+		assertThat(newHeadResult.getNext().getNext().getNext().getNext().getValue(), Matchers.equalTo(100));
+	}
 	
 	//========================================
 	// test the small part of the mergesort, merge two sorted list
@@ -77,7 +107,7 @@ public class MergeSortTest {
 	@Test
 	public void mergeTwoSortedList__firstListLongerThanSecondOne() {
 		Node<Integer> firstHead = new Node<>(5);
-		firstHead.setNext(new Node<>(15));
+		firstHead.setNextNodeIgnoringNullValue(new Node<>(15));
 		Node<Integer> secondHead = new Node<>(10);
 		
 		Node<Integer> sortedList = mergeSort.mergeTwoSortedList(firstHead, secondHead);
@@ -90,7 +120,7 @@ public class MergeSortTest {
 	@Test
 	public void mergeTwoSortedList__secondListLongerThanFirstOne() {
 		Node<Integer> firstHead = new Node<>(5);
-		firstHead.setNext(new Node<>(15));
+		firstHead.setNextNodeIgnoringNullValue(new Node<>(15));
 
 		Node<Integer> secondHead = new Node<>(10);
 		
@@ -127,7 +157,7 @@ public class MergeSortTest {
 	@Test
 	public void mergeTwoSortedListDecreasingOrder__firstListLongerThanSecondOne() {
 		Node<Integer> firstHead = new Node<>(15);
-		firstHead.setNext(new Node<>(5));
+		firstHead.setNextNodeIgnoringNullValue(new Node<>(5));
 		Node<Integer> secondHead = new Node<>(10);
 		
 		Node<Integer> sortedList = mergeSort.mergeTwoSortedListDecreasingOrder(firstHead, secondHead);
@@ -141,7 +171,7 @@ public class MergeSortTest {
 	public void mergeTwoSortedListDecreasingOrder__secondListLongerThanFirstOne() {
 		Node<Integer> firstHead = new Node<>(10);
 		Node<Integer> secondHead = new Node<>(15);
-		firstHead.setNext(new Node<>(5));
+		firstHead.setNextNodeIgnoringNullValue(new Node<>(5));
 		
 		Node<Integer> sortedList = mergeSort.mergeTwoSortedListDecreasingOrder(firstHead, secondHead);
 		assertThat(sortedList, Matchers.notNullValue());
@@ -154,7 +184,7 @@ public class MergeSortTest {
 	public void mergeTwoSortedListDecreasingOrder__pointerShouldSkipTheFirstNodeTwice__inTheFirstPosition() {
 		Node<Integer> firstHead = new Node<>(5);
 		Node<Integer> secondHead = new Node<>(15);
-		secondHead.setNext(new Node<>(10));
+		secondHead.setNextNodeIgnoringNullValue(new Node<>(10));
 		
 		Node<Integer> sortedList = mergeSort.mergeTwoSortedListDecreasingOrder(firstHead, secondHead);
 		assertThat(sortedList, Matchers.notNullValue());
@@ -298,7 +328,7 @@ public class MergeSortTest {
 	@Test
 	public void findMiddleItem__twoItems() {
 		Node<Integer> inputHead = new Node<Integer>(10);
-		inputHead.setNext(5);
+		inputHead.initNextNodeByValue(5);
 		Node<Integer> middleItem = mergeSort.findMiddleItem(inputHead);
 		
 		assertThat(middleItem.getValue(), Matchers.equalTo(10));
@@ -310,7 +340,7 @@ public class MergeSortTest {
 	@Test
 	public void findMiddleItem__threeItems() {
 		Node<Integer> inputHead = new Node<Integer>(10);
-		inputHead.setNext(5).setNext(20);
+		inputHead.initNextNodeByValue(5).initNextNodeByValue(20);
 		Node<Integer> middleItem = mergeSort.findMiddleItem(inputHead);
 		
 		assertThat(middleItem.getValue(), Matchers.equalTo(5));
@@ -322,7 +352,7 @@ public class MergeSortTest {
 	@Test
 	public void findMiddleItem__fourItems() {
 		Node<Integer> inputHead = new Node<Integer>(10);
-		inputHead.setNext(5).setNext(20).setNext(11);
+		inputHead.initNextNodeByValue(5).initNextNodeByValue(20).initNextNodeByValue(11);
 		Node<Integer> middleItem = mergeSort.findMiddleItem(inputHead);
 		
 		assertThat(middleItem.getValue(), Matchers.equalTo(5));
@@ -334,7 +364,7 @@ public class MergeSortTest {
 	@Test
 	public void findMiddleItem__fiveItems() {
 		Node<Integer> inputHead = new Node<Integer>(10);
-		inputHead.setNext(5).setNext(20).setNext(11).setNext(18);
+		inputHead.initNextNodeByValue(5).initNextNodeByValue(20).initNextNodeByValue(11).initNextNodeByValue(18);
 		Node<Integer> middleItem = mergeSort.findMiddleItem(inputHead);
 		
 		assertThat(middleItem.getValue(), Matchers.equalTo(20));
@@ -346,7 +376,7 @@ public class MergeSortTest {
 	@Test
 	public void findMiddleItem__sixItems() {
 		Node<Integer> inputHead = new Node<Integer>(10);
-		inputHead.setNext(5).setNext(20).setNext(11).setNext(18).setNext(25);
+		inputHead.initNextNodeByValue(5).initNextNodeByValue(20).initNextNodeByValue(11).initNextNodeByValue(18).initNextNodeByValue(25);
 		Node<Integer> middleItem = mergeSort.findMiddleItem(inputHead);
 		
 		assertThat(middleItem.getValue(), Matchers.equalTo(20));

@@ -12,12 +12,16 @@ public class Node<E> {
 		return next;
 	}
 	
-	public Node<E> setNext(E value) {
+	public void setNext(Node<E> next) {
+		this.next = next;
+	}
+	
+	public Node<E> initNextNodeByValue(E value) {
 		this.next = new Node<>(value);
 		return this.next;
 	}
 	
-	public Node<E> setNext(Node<E> node) {
+	public Node<E> setNextNodeIgnoringNullValue(Node<E> node) {
 		// this makes a trick when handling the merge of two sorted list
 		if (node == null) {
 			return this;
