@@ -27,15 +27,21 @@ public class MergeSort<T extends Comparable<T>> {
 		return null;
 	}
 	
+	// Dynamic this, change the middle item to the first part
+	// 4 items -> the second item should be returned
 	public Node<T> findMiddleItem(Node<T> inputHead) {
+		if (inputHead == null) {
+			return null;
+		}
+		
 		Node<T> next = inputHead;
 		Node<T> twoXNext = inputHead;
 		
-		while (twoXNext != null) {
-			
+		while (twoXNext != null
+				&& twoXNext.getNext() != null
+				&& twoXNext.getNext().getNext() != null) {
 			next = next.getNext();
-			twoXNext = Optional.ofNullable(twoXNext.getNext())
-									.map(Node::getNext).orElse(null);
+			twoXNext = twoXNext.getNext().getNext();
 		}
 		return next;
 	}

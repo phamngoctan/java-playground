@@ -278,12 +278,77 @@ public class MergeSortTest {
 	// To do it, we need to find the middle item of linkedlist
 	
 	@Test
+	public void findMiddleItem__nullHead() {
+		Node<Integer> middleItem = mergeSort.findMiddleItem(null);
+		
+		assertThat(middleItem, Matchers.equalTo(null));
+	}
+	
+	@Test
 	public void findMiddleItem__oneItem() {
 		Node<Integer> inputHead = new Node<Integer>(10);
 		Node<Integer> middleItem = mergeSort.findMiddleItem(inputHead);
 		
-		assertThat(middleItem, Matchers.equalTo(inputHead));
+		assertThat(middleItem.getValue(), Matchers.equalTo(10));
 	}
 	
+	/*
+	 * 10 -> 5
+	 */
+	@Test
+	public void findMiddleItem__twoItems() {
+		Node<Integer> inputHead = new Node<Integer>(10);
+		inputHead.setNext(5);
+		Node<Integer> middleItem = mergeSort.findMiddleItem(inputHead);
+		
+		assertThat(middleItem.getValue(), Matchers.equalTo(10));
+	}
 	
+	/*
+	 * 10 -> 5 -> 20
+	 */
+	@Test
+	public void findMiddleItem__threeItems() {
+		Node<Integer> inputHead = new Node<Integer>(10);
+		inputHead.setNext(5).setNext(20);
+		Node<Integer> middleItem = mergeSort.findMiddleItem(inputHead);
+		
+		assertThat(middleItem.getValue(), Matchers.equalTo(5));
+	}
+	
+	/*
+	 * 10 -> 5 -> 20 -> 11
+	 */
+	@Test
+	public void findMiddleItem__fourItems() {
+		Node<Integer> inputHead = new Node<Integer>(10);
+		inputHead.setNext(5).setNext(20).setNext(11);
+		Node<Integer> middleItem = mergeSort.findMiddleItem(inputHead);
+		
+		assertThat(middleItem.getValue(), Matchers.equalTo(5));
+	}
+	
+	/*
+	 * 10 -> 5 -> 20 -> 11 -> 18
+	 */
+	@Test
+	public void findMiddleItem__fiveItems() {
+		Node<Integer> inputHead = new Node<Integer>(10);
+		inputHead.setNext(5).setNext(20).setNext(11).setNext(18);
+		Node<Integer> middleItem = mergeSort.findMiddleItem(inputHead);
+		
+		assertThat(middleItem.getValue(), Matchers.equalTo(20));
+	}
+	
+	/*
+	 * 10 -> 5 -> 20 -> 11 -> 18 -> 25
+	 */
+	@Test
+	public void findMiddleItem__sixItems() {
+		Node<Integer> inputHead = new Node<Integer>(10);
+		inputHead.setNext(5).setNext(20).setNext(11).setNext(18).setNext(25);
+		Node<Integer> middleItem = mergeSort.findMiddleItem(inputHead);
+		
+		assertThat(middleItem.getValue(), Matchers.equalTo(20));
+	}
 }
