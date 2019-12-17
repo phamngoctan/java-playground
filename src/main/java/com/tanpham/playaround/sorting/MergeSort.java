@@ -152,6 +152,14 @@ public class MergeSort<T extends Comparable<T>> {
 	//========Merge sort for array==========
 	//======================================
 	
+	/**
+	 * This just support the increasing order
+	 */
+	public void proceedAnArray(Comparable[] arr) {
+		Comparable[] auxiliary = new Comparable[arr.length];
+		sort(arr, auxiliary, 0, arr.length - 1);
+	}
+	
 	/*
 	 * Precondition:
 	 * arr[low..mid] sorted

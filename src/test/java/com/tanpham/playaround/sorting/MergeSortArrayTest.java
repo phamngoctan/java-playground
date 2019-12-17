@@ -34,7 +34,7 @@ public class MergeSortArrayTest {
 	}
 	
 	@Test
-	public void sort_() {
+	public void sort_happyPath() {
 		Comparable[] arr = new Integer[] {5, 2, 8, 7, 4, 3};
 		Comparable[] auxiliary = new Integer[6];
 		int low = 0;
@@ -47,5 +47,20 @@ public class MergeSortArrayTest {
 		assertThat(arr[3], Matchers.equalTo(5));
 		assertThat(arr[4], Matchers.equalTo(7));
 		assertThat(arr[5], Matchers.equalTo(8));
+	}
+	
+	@Test
+	public void mergeSort_oneItem() {
+		Comparable[] arr = new Integer[] {5};
+		mergeSort.proceedAnArray(arr);
+		assertThat(arr[0], Matchers.equalTo(5));
+	}
+	
+	@Test
+	public void mergeSort_twoItem() {
+		Comparable[] arr = new Integer[] {5, 2};
+		mergeSort.proceedAnArray(arr);
+		assertThat(arr[0], Matchers.equalTo(2));
+		assertThat(arr[1], Matchers.equalTo(5));
 	}
 }

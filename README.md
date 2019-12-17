@@ -104,6 +104,8 @@ This implementation is just for playing around with sorting algorithms. Bubble's
 
 ### Merge sort
 Applying on LinkedList. I wouldn't recommend sorting a linked list, but merge sort is doable.
+Applying on an Array. The idea is that we have to maintain the index correctly each time we split the array.
+TODO: implement the mergeSort on an array again, do it several times.
 
 ### Heap sort
 One of the nice properties of HeapSort is that it is an in-place algorithm. It only needs a fixed amount of memory beyond what is used to store the data being sorted.
