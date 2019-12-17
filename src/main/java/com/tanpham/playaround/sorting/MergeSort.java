@@ -7,6 +7,9 @@ public class MergeSort<T extends Comparable<T>> {
 	private static final boolean INCREASING_ORDER = true;
 	private static final boolean DECREASING_ORDER = !INCREASING_ORDER;
 	
+	//======================================
+	//======Merge sort for linkedlist=======
+	//======================================
 	/**
 	 * Merge sort with increasing order
 	 */
@@ -143,6 +146,58 @@ public class MergeSort<T extends Comparable<T>> {
 
 	private boolean isFirstNodeBiggerThanSecondOneWithNullTolerant(Node<T> firstHead, Node<T> secondHead) {
 		return firstHead.getValue().compareTo(secondHead.getValue()) > 0;
+	}
+	
+	//======================================
+	//========Merge sort for array==========
+	//======================================
+	
+	/**
+	 * This just support the increasing order
+	 */
+	public void proceedAnArray(Comparable[] arr) {
+		Comparable[] auxiliary = new Comparable[arr.length];
+		sort(arr, auxiliary, 0, arr.length - 1);
+	}
+	
+	/*
+	 * Precondition:
+	 * arr[low..mid] sorted
+	 * arr[mid+1...high] sorted
+	 */
+	public void mergeSortedArrays(Comparable[] arr, Comparable auxiliary[], int low, int mid, int high) {
+		for (int k = low; k <= high; k++) { // copy to another array & sort it
+			auxiliary[k] = arr[k];
+		}
+		
+		int i = low;
+		int j = mid + 1;
+		
+		for (int k = low; k <= high; k++) {
+			if (i > mid) { // first array is out of items
+				arr[k] = auxiliary[j]; j++;
+			} else if (j > high) { // second array is out of items
+				arr[k] = auxiliary[i]; i++;
+			} else if (less(auxiliary[j], auxiliary[i])) {
+				arr[k] = auxiliary[j]; j++;
+			} else {
+				arr[k] = auxiliary[i]; i++;
+			}
+		}
+	}
+	
+	public void sort(Comparable[] arr, Comparable[] auxiliary, int low, int high) {
+		if (high <= low) {
+			return;
+		}
+		int mid = low + (high - low)/2;
+		sort(arr, auxiliary, low, mid);
+		sort(arr, auxiliary, mid + 1, high);
+		mergeSortedArrays(arr, auxiliary, low, mid, high);
+	}
+
+	private boolean less(Comparable item1, Comparable item2) {
+		return item1.compareTo(item2) < 0;
 	}
 	
 }
