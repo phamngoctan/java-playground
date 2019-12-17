@@ -157,7 +157,7 @@ public class MergeSort<T extends Comparable<T>> {
 	 * arr[low..mid] sorted
 	 * arr[mid+1...high] sorted
 	 */
-	private void mergeSortedArray(Comparable[] arr, Comparable auxiliary[], int low, int mid, int high) {
+	public void mergeSortedArrays(Comparable[] arr, Comparable auxiliary[], int low, int mid, int high) {
 		for (int k = low; k <= high; k++) { // copy to another array & sort it
 			auxiliary[k] = arr[k];
 		}
@@ -165,7 +165,31 @@ public class MergeSort<T extends Comparable<T>> {
 		int i = low;
 		int j = mid + 1;
 		
-		// TODO: 
+		for (int k = low; k <= high; k++) {
+			if (i > mid) { // first array is out of items
+				arr[k] = auxiliary[j]; j++;
+			} else if (j > high) { // second array is out of items
+				arr[k] = auxiliary[i]; i++;
+			} else if (less(auxiliary[j], auxiliary[i])) {
+				arr[k] = auxiliary[j]; j++;
+			} else {
+				arr[k] = auxiliary[i]; i++;
+			}
+		}
+	}
+	
+	public void sort(Comparable[] arr, Comparable[] auxiliary, int low, int high) {
+		if (high <= low) {
+			return;
+		}
+		int mid = low + (high - low)/2;
+		sort(arr, auxiliary, low, mid);
+		sort(arr, auxiliary, mid + 1, high);
+		mergeSortedArrays(arr, auxiliary, low, mid, high);
+	}
+
+	private boolean less(Comparable item1, Comparable item2) {
+		return item1.compareTo(item2) < 0;
 	}
 	
 }
