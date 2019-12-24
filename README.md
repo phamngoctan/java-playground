@@ -124,6 +124,9 @@ The idea to implement it is that:
  - call recursively the proceed for first part & second part
  - merge the two sorted parts & return the sorted one
 
+One of the most important method is the merge two sorted arrays, the recursive calls to the splitted arrays will make it finally reach to the smallest unit of an item. One single item would be a sorted array, so from that moment, the mergeTwoSortedArrays will do its job.
+ 
+
 # Multi-threads
 ## Sleep
 ## Join
