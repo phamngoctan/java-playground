@@ -104,12 +104,15 @@ This implementation is just for playing around with sorting algorithms. Bubble's
 
 ### Merge sort
 Applying on LinkedList. I wouldn't recommend sorting a linked list, but merge sort is doable.
-
 Applying on an Array. The idea is that we have to maintain the index correctly each time we split the array.
-
-TODO: implement the mergeSort on an array again, do it several times.
-
 For merge sort, we have the possibility to sort without using recursive. By using level, each time we increase one level. 
+
+The idea to implement it is that:
+ - split into two parts
+ - call recursively the proceed for first part & second part
+ - merge the two sorted parts & return the sorted one
+
+One of the most important method is the merge two sorted arrays, the recursive calls to the splitted arrays will make it finally reach to the smallest unit of an item. One single item would be a sorted array, so from that moment, the mergeTwoSortedArrays will do its job.
 
 ### Heap sort
 One of the nice properties of HeapSort is that it is an in-place algorithm. It only needs a fixed amount of memory beyond what is used to store the data being sorted.
@@ -118,11 +121,7 @@ One of the nice properties of HeapSort is that it is an in-place algorithm. It o
 ### Quick sort
 The idea to implement it is that: for every j (partition point), every item in the left should be smaller than the arr[j], every item in the right should be bigger than the arr[j]. The most important method should be the partition(...) method.
 
-### Merge sort
-The idea to implement it is that:
- - split into two parts
- - call recursively the proceed for first part & second part
- - merge the two sorted parts & return the sorted one
+ 
 
 # Multi-threads
 ## Sleep
@@ -175,4 +174,6 @@ Storing .pem file in database, to test it:
  - https://www.youtube.com/watch?v=Hzuzo9NJrlc&feature=youtu.be - counting bit sets
  - https://bits.stephan-brumme.com/absInteger.html
  - https://github.com/jeffemandel/storecert
-
+ - https://en.wikipedia.org/wiki/Fisher%E2%80%93Yates_shuffle#The_modern_algorithm
+ - https://www.coursera.org/learn/algorithms-part1/lecture/vjvnC/quicksort
+ 
