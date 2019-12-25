@@ -118,6 +118,7 @@ One of the most important method is the merge two sorted arrays, the recursive c
 One of the nice properties of HeapSort is that it is an in-place algorithm. It only needs a fixed amount of memory beyond what is used to store the data being sorted.
 ### Selection
 ### Insertion
+For the sake of implementing sorting idea, it does not support generic approach. Basically, it maintains two partitions, first part is always sorted. So we will check the second part and move the unsorted item from it to the sorted one of the first part.
 ### Quick sort
 The idea to implement it is that: for every j (partition point), every item in the left should be smaller than the arr[j], every item in the right should be bigger than the arr[j]. The most important method should be the partition(...) method.
 
