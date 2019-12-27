@@ -5,7 +5,7 @@ import java.util.concurrent.Executors;
 
 public class FixedThreadPoolCheck {
 
-	private Executor loadingChartsExecutor;
+	private Executor executor;
 	
 	private FixedThreadPoolCheck() {
 //		loadingChartsExecutor = Executors.newSingleThreadExecutor(new ThreadFactory() {
@@ -17,7 +17,7 @@ public class FixedThreadPoolCheck {
 //				return thread;
 //			}
 //		});
-		loadingChartsExecutor = Executors.newFixedThreadPool(3);
+		executor = Executors.newFixedThreadPool(3);
 	}
 	
 	public static FixedThreadPoolCheck builder() {
@@ -25,7 +25,7 @@ public class FixedThreadPoolCheck {
 	}
 	
 	public void action() {
-		loadingChartsExecutor.execute(() -> {
+		executor.execute(() -> {
 			System.out.println("hello");
 		});
 	}
