@@ -150,6 +150,10 @@ Don't run it on any online IDE.
 Just run it on our local machine.  
 To trace the deadlock, we can use JMC (java mission control) or JVisualVM in bin folder of our JDK installation. 
 
+## Exception handling in the java.util.concurrent.Executor
+### FixedThreadPoolCheck
+Check without shutdown() explicitly, the threadpool still there, this could lead to the situation that we run out of maximum thread pool allowed
+
 # Miscellaneous
 ## Binary search
 Add implementation for binary search using:
@@ -193,4 +197,5 @@ Storing .pem file in database, to test it:
  - https://github.com/jeffemandel/storecert
  - https://en.wikipedia.org/wiki/Fisher%E2%80%93Yates_shuffle#The_modern_algorithm
  - https://www.coursera.org/learn/algorithms-part1/lecture/vjvnC/quicksort
- 
+ - https://www.geeksforgeeks.org/thread-pools-java/
+ - https://stackify.com/java-thread-pools/#wpautbox_about
