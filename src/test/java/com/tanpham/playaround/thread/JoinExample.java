@@ -60,7 +60,6 @@ class MyJoinThread extends Thread {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		// TODO Auto-generated method stub
 		System.out.println(name);
 	}
 	
