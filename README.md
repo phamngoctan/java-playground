@@ -114,11 +114,27 @@ The idea to implement it is that:
 
 One of the most important method is the merge two sorted arrays, the recursive calls to the splitted arrays will make it finally reach to the smallest unit of an item. One single item would be a sorted array, so from that moment, the mergeTwoSortedArrays will do its job.
 
+Complexity: n log n
+
+Performance consideration:
+ - in Python, 2.2 n log n (microsecond)
 ### Heap sort
 One of the nice properties of HeapSort is that it is an in-place algorithm. It only needs a fixed amount of memory beyond what is used to store the data being sorted.
-### Selection
-### Insertion
+### Selection sort
+### Insertion sort
 For the sake of implementing sorting idea, it does not support generic approach. Basically, it maintains two partitions, first part is always sorted. So we will check the second part and move the unsorted item from it to the sorted one of the first part.
+
+Complexity: n square.
+
+Performance consideration:
+ - in Python, 0.2 n square (microsecond)
+ - in C, 0.01 n square (microsecond)
+### Binary Insertion sort - improved from Insertion sort
+Check & swap can be replaced with binary search and swap, because the first part is already sorted. 
+So we can perform binary search on the part. 
+And it is resulted in a better result. 
+n log n. But even we can find the correct position, we also have to shift the array. So the swap still be needed. 
+
 ### Quick sort
 The idea to implement it is that: for every j (partition point), every item in the left should be smaller than the arr[j], every item in the right should be bigger than the arr[j]. The most important method should be the partition(...) method.
 
@@ -133,6 +149,10 @@ The idea to implement it is that: for every j (partition point), every item in t
 Don't run it on any online IDE.  
 Just run it on our local machine.  
 To trace the deadlock, we can use JMC (java mission control) or JVisualVM in bin folder of our JDK installation. 
+
+## Exception handling in the java.util.concurrent.Executor
+### FixedThreadPoolCheck
+Check without shutdown() explicitly, the threadpool still there, this could lead to the situation that we run out of maximum thread pool allowed
 
 # Miscellaneous
 ## Binary search
@@ -177,4 +197,5 @@ Storing .pem file in database, to test it:
  - https://github.com/jeffemandel/storecert
  - https://en.wikipedia.org/wiki/Fisher%E2%80%93Yates_shuffle#The_modern_algorithm
  - https://www.coursera.org/learn/algorithms-part1/lecture/vjvnC/quicksort
- 
+ - https://www.geeksforgeeks.org/thread-pools-java/
+ - https://stackify.com/java-thread-pools/#wpautbox_about
