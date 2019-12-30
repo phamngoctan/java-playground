@@ -141,6 +141,8 @@ The idea to implement it is that: for every j (partition point), every item in t
  
 
 # Multi-threads
+Create one sidecar thread to proceed the data, one main thread to hold the result, one client to get the real-processed data, support the timeout also
+
 ## Sleep
 ## Join
 ## Wait
