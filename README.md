@@ -143,6 +143,8 @@ This repo has two implementations of QuickSort:
  - One with supporting duplicate keys handling
 
 # Multi-threads
+Create one sidecar thread to proceed the data, one main thread to hold the result, one client to get the real-processed data, support the timeout also
+
 ## Sleep
 ## Join
 ## Wait

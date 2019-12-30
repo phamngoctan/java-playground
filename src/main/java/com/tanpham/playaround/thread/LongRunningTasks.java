@@ -49,59 +49,39 @@ public class LongRunningTasks {
 	}
 
 	public CompletableFuture<List<String>> performTaskCreating(List<String> input) {
-		return supplyAsync(() -> {
+		CompletableFuture<List<String>> completableFuture = supplyAsync(() -> {
 			try {
 				return createTasks(input);
 			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+//				e.printStackTrace();
+				throw new RuntimeException("Interrupted exception happens", e);
 			}
-			return null;
+//			finally {
+//				shutdownEverything();
+//			}
+//			return null;
 		}, timeoutValue, timeUnit, Collections.emptyList());
-		
-//		final CompletableFuture<List<String>> cf = new CompletableFuture<List<String>>();
-//
-//	    Future<?> future = executorService.submit(() -> {
-//	        try {
-//	            cf.complete(createTasks(input));
-//	        } catch (Throwable ex) {
-//	            cf.completeExceptionally(ex);
-//	        }
-//	    });
-//
-//	    //schedule watcher
-//	    schedulerExecutor.schedule(() -> {
-//	        if (!cf.isDone()) {
-//	            cf.complete(Collections.emptyList());
-//	            future.cancel(true);
-//	            System.out.println("Cancel the executor service from the scheduler executor");
-//	        }
-//
-//	    }, timeoutValue, timeUnit);
-//
-//	    return cf;
-	    
-//		return CompletableFuture.supplyAsync(() -> createTasks(input), executorService);
+		return completableFuture;
 	}
 
 	private List<String> createTasks(List<String> inputList) throws InterruptedException {
 		List<String> finishedList = new ArrayList<>();
 		for (String string : inputList) {
 //			try {
-				Thread.sleep(1000);
+//				Thread.sleep(10);
+				Thread.sleep(100);
 //			} catch (InterruptedException e) {
 ////				e.printStackTrace();
 //				e.printStackTrace();
 //				throw new RuntimeException("exception happens");
 //			}
-			controller.getResult().add(string);
+			controller.getTaskStorage().add(string);
 			finishedList.add(string);
 		}
-		System.out.println("Finish the parallel thread with result: " + finishedList);
-//		executor.shutdown();
+		System.out.println("Finish the parallel thread with");
+		shutdownEverything();
 		return finishedList;
 	}
-	
 	
 	public <T> CompletableFuture<T> supplyAsync(final Supplier<T> supplier, long timeoutValue, TimeUnit timeUnit,
 	        T defaultValue) {
@@ -122,15 +102,30 @@ public class LongRunningTasks {
 
 		// schedule watcher
 		schedulerExecutor.schedule(() -> {
+			System.out.println("TIMEOUT HAPPENS");
 			if (!cf.isDone()) {
+				System.out.println("Runner is NOT finished but faces timeout exception");
 				cf.complete(defaultValue);
 				future.cancel(true);
+			} else {
+				System.out.println("Runner is finished");
 			}
-//			executorService.shutdown();
-//			schedulerExecutor.shutdown();
+			
+			shutdownEverything();
 		}, timeoutValue, timeUnit);
 
 		return cf;
+	}
+	
+	private void shutdownEverything() {
+		executorService.shutdown();
+		// schedulerExecutor.shutdown just works if timeout happens first
+		// if task runner finishes before the timeout, then the schedulerExecutor.showdown will wait to the timeout time happened
+		// because the schedulerExecutor for timeout is still running
+		// In this case, we can change to shutdownNow without any side-effect to the current business
+//		schedulerExecutor.shutdown();
+		schedulerExecutor.shutdownNow();
+		controller.getTaskRunnerStarted().getAndSet(false);
 	}
 
 }
