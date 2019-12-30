@@ -17,8 +17,24 @@ public class QuickSortWithDuplicateKeysHandling {
 	}
 
 	//TODO: implement it
-	private int partition(int[] arr, int low, int high) {
-		return 0;
+	public int partition(int[] arr, int low, int high) {
+		int i = low;
+		int lt = low;
+		int gt = high;
+		int checkPointValue = arr[low];
+		
+		while (i <= gt) {
+			if (arr[i] > checkPointValue) {
+				// Swap with gt item
+				QuickSort.exchange(arr, i, gt--);
+			} else if (arr[i] < checkPointValue) {
+				// swap with lt item
+				QuickSort.exchange(arr, lt++, i++);
+			} else {
+				i++;
+			}
+		}
+		return lt;
 	}
 	
 }
