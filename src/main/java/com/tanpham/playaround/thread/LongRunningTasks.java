@@ -56,43 +56,20 @@ public class LongRunningTasks {
 //				e.printStackTrace();
 				throw new RuntimeException("Interrupted exception happens", e);
 			}
+//			finally {
+//				shutdownEverything();
+//			}
 //			return null;
 		}, timeoutValue, timeUnit, Collections.emptyList());
-		executorService.shutdown();
-		schedulerExecutor.shutdown();
-		controller.getTaskRunnerStarted().set(false);
 		return completableFuture;
-		
-//		final CompletableFuture<List<String>> cf = new CompletableFuture<List<String>>();
-//
-//	    Future<?> future = executorService.submit(() -> {
-//	        try {
-//	            cf.complete(createTasks(input));
-//	        } catch (Throwable ex) {
-//	            cf.completeExceptionally(ex);
-//	        }
-//	    });
-//
-//	    //schedule watcher
-//	    schedulerExecutor.schedule(() -> {
-//	        if (!cf.isDone()) {
-//	            cf.complete(Collections.emptyList());
-//	            future.cancel(true);
-//	            System.out.println("Cancel the executor service from the scheduler executor");
-//	        }
-//
-//	    }, timeoutValue, timeUnit);
-//
-//	    return cf;
-	    
-//		return CompletableFuture.supplyAsync(() -> createTasks(input), executorService);
 	}
 
 	private List<String> createTasks(List<String> inputList) throws InterruptedException {
 		List<String> finishedList = new ArrayList<>();
 		for (String string : inputList) {
 //			try {
-				Thread.sleep(50);
+//				Thread.sleep(10);
+				Thread.sleep(100);
 //			} catch (InterruptedException e) {
 ////				e.printStackTrace();
 //				e.printStackTrace();
@@ -101,7 +78,8 @@ public class LongRunningTasks {
 			controller.getTaskStorage().add(string);
 			finishedList.add(string);
 		}
-		System.out.println("Finish the parallel thread with result: " + finishedList);
+		System.out.println("Finish the parallel thread with");
+		shutdownEverything();
 		return finishedList;
 	}
 	
@@ -126,15 +104,28 @@ public class LongRunningTasks {
 		schedulerExecutor.schedule(() -> {
 			System.out.println("TIMEOUT HAPPENS");
 			if (!cf.isDone()) {
-				System.out.println("Runner is NOT finished");
+				System.out.println("Runner is NOT finished but faces timeout exception");
 				cf.complete(defaultValue);
 				future.cancel(true);
 			} else {
 				System.out.println("Runner is finished");
 			}
+			
+			shutdownEverything();
 		}, timeoutValue, timeUnit);
 
 		return cf;
+	}
+	
+	private void shutdownEverything() {
+		executorService.shutdown();
+		// schedulerExecutor.shutdown just works if timeout happens first
+		// if task runner finishes before the timeout, then the schedulerExecutor.showdown will wait to the timeout time happened
+		// because the schedulerExecutor for timeout is still running
+		// In this case, we can change to shutdownNow without any side-effect to the current business
+//		schedulerExecutor.shutdown();
+		schedulerExecutor.shutdownNow();
+		controller.getTaskRunnerStarted().getAndSet(false);
 	}
 
 }

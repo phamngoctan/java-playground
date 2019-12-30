@@ -1,7 +1,6 @@
 package com.tanpham.playaround.thread;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
@@ -41,13 +40,13 @@ public class Controller {
 		if (isTaskRunnerStarted.get()) {
 			throw new Exception("Please wait for the current creating task runner finished or timeout");
 		}
-		isTaskRunnerStarted.set(true);
-		LongRunningTasks longRunningTaskRunner = new LongRunningTasks(this, 3, TimeUnit.SECONDS);
-		longRunningTaskCreatorFuture = longRunningTaskRunner.performTaskCreating(input)
-				;
+		isTaskRunnerStarted.getAndSet(true);
+		LongRunningTasks longRunningTaskRunner = new LongRunningTasks(this, 10, TimeUnit.SECONDS);
+		longRunningTaskCreatorFuture = longRunningTaskRunner.performTaskCreating(input);
 	}
 	
 	public boolean isTaskRunnerFinished() {
+		System.out.println("Is long running task finished? " + (isTaskRunnerStarted.get() == false));
 		return isTaskRunnerStarted.get() == false;
 	}
 	
@@ -61,10 +60,7 @@ public class Controller {
 	
 	// No need this method, it already configures the timeout internally
 	public List<String> getLongRunningTaskWithTimeout() throws InterruptedException, ExecutionException, TimeoutException {
-		return longRunningTaskCreatorFuture.exceptionally(ex -> {
-			ex.printStackTrace();
-			return Collections.emptyList();
-		}).get();
+		return longRunningTaskCreatorFuture.get();
 //		return longRunningTaskCreatorFuture.get(2, TimeUnit.SECONDS);
 	}
 	
