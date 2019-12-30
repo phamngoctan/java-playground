@@ -147,11 +147,6 @@ public class MaxHeap<T extends Comparable<T>> {
 		return size == 0;
 	}
 	
-	public void extractMax(T value) {
-		// TODO: implement the deletion
-		// Special case: delete the root, swap with the last leaf
-	}
-	
 	/**
 	 * Assume that the current heap is heapified. Just simply return first item of the heap.
 	 * @return
@@ -164,6 +159,7 @@ public class MaxHeap<T extends Comparable<T>> {
 		return arr[0];
 	}
 	
+	// Special case: delete the root, swap with the last leaf
 	public T extractMax() {
 		if (size == 0) {
 			return null;

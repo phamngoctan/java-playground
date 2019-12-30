@@ -138,7 +138,9 @@ n log n. But even we can find the correct position, we also have to shift the ar
 ### Quick sort
 The idea to implement it is that: for every j (partition point), every item in the left should be smaller than the arr[j], every item in the right should be bigger than the arr[j]. The most important method should be the partition(...) method.
 
- 
+This repo has two implementations of QuickSort:
+ - One without supporting duplicate keys handling
+ - One with supporting duplicate keys handling
 
 # Multi-threads
 ## Sleep

@@ -45,7 +45,6 @@ public class MyStack<E> {
 	}
 
 	public void push(E value) {
-		// TODO Auto-generated method stub
 		arr[size] = value;
 		size++;
 	}
