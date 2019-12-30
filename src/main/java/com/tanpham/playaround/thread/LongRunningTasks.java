@@ -49,15 +49,19 @@ public class LongRunningTasks {
 	}
 
 	public CompletableFuture<List<String>> performTaskCreating(List<String> input) {
-		return supplyAsync(() -> {
+		CompletableFuture<List<String>> completableFuture = supplyAsync(() -> {
 			try {
 				return createTasks(input);
 			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+//				e.printStackTrace();
+				throw new RuntimeException("Interrupted exception happens", e);
 			}
-			return null;
+//			return null;
 		}, timeoutValue, timeUnit, Collections.emptyList());
+		executorService.shutdown();
+		schedulerExecutor.shutdown();
+		controller.getTaskRunnerStarted().set(false);
+		return completableFuture;
 		
 //		final CompletableFuture<List<String>> cf = new CompletableFuture<List<String>>();
 //
@@ -88,20 +92,18 @@ public class LongRunningTasks {
 		List<String> finishedList = new ArrayList<>();
 		for (String string : inputList) {
 //			try {
-				Thread.sleep(1000);
+				Thread.sleep(50);
 //			} catch (InterruptedException e) {
 ////				e.printStackTrace();
 //				e.printStackTrace();
 //				throw new RuntimeException("exception happens");
 //			}
-			controller.getResult().add(string);
+			controller.getTaskStorage().add(string);
 			finishedList.add(string);
 		}
 		System.out.println("Finish the parallel thread with result: " + finishedList);
-//		executor.shutdown();
 		return finishedList;
 	}
-	
 	
 	public <T> CompletableFuture<T> supplyAsync(final Supplier<T> supplier, long timeoutValue, TimeUnit timeUnit,
 	        T defaultValue) {
@@ -122,12 +124,14 @@ public class LongRunningTasks {
 
 		// schedule watcher
 		schedulerExecutor.schedule(() -> {
+			System.out.println("TIMEOUT HAPPENS");
 			if (!cf.isDone()) {
+				System.out.println("Runner is NOT finished");
 				cf.complete(defaultValue);
 				future.cancel(true);
+			} else {
+				System.out.println("Runner is finished");
 			}
-//			executorService.shutdown();
-//			schedulerExecutor.shutdown();
 		}, timeoutValue, timeUnit);
 
 		return cf;
