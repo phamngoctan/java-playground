@@ -58,6 +58,13 @@ Implement core binary trees
  - getTreeByPreOrder // self/left/right
  - getTreeByPostOrder // left/right/self
 
+For the traversal without using recursive approach, the implementation idea can be:
+ - First add the root to the Stack.
+ - Pop out an element from Stack and add its right and left children to stack.
+ - Pop out an element and print it and add its children.
+ - Repeat the above two steps until the Stack empty.
+ 
+
 ## Binary search tree
 Idea of deleting a Node, we separates it into three cases:
  - the deleting node is a leave, keep the previous node and just set its pointer to null

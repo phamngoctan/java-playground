@@ -129,4 +129,11 @@ public class BinaryTree<T> {
 		return result;
 	}
 	
+	/*
+	 * Root -> left -> right
+	 */
+	public String getTreeByPreOrderWithoutUsingRecursive() {
+		return null;
+	}
+	
 }
