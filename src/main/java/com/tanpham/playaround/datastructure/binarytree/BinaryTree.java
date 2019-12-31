@@ -134,6 +134,10 @@ public class BinaryTree<T> {
 	 * Root -> left -> right
 	 */
 	public String getTreeByPreOrderWithoutUsingRecursive() {
+		if (root == null) {
+			return null;
+		}
+		
 		Stack<TreeNode<T>> stack = new Stack<>();
 		stack.push(root);
 		
