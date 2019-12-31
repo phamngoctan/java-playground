@@ -46,4 +46,61 @@ public class BinaryTreeWithoutRecursiveTest {
 		assertThat(result, Matchers.equalTo("10 15 9"));
 	}
 	
+	/**
+	 *       10
+	 *     /    \
+	 *   15      9
+	 *         /   \
+	 *        5     16
+	 */
+	@Test
+	public void getTreeByPreOrderWithoutUsingRecursive__leftChildShorterThanRight() {
+		TreeNode<Integer> root = new TreeNode<>(10);
+		root.addLeftChild(15);
+		root.addRightChild(9)
+				.addLeftChild(5)
+				.goBackOneLevel()
+				.addRightChild(16);
+		binaryTree.setRoot(root);
+		
+		String result = binaryTree.getTreeByPreOrderWithoutUsingRecursive();
+		
+		assertThat(result, Matchers.equalTo("10 15 9 5 16"));
+	}
+	
+	/**
+	 *               10
+	 *         /            \
+	 *       15              9
+	 *    /      \         /   \
+	 *   6       8        5     16
+	 *         /   \
+	 *        1     3
+	 *       /
+	 *      2
+	 */ 
+	@Test
+	public void getTreeByPreOrderWithoutUsingRecursive__complicatedInput() {
+		TreeNode<Integer> root = new TreeNode<>(10);
+		root.addLeftChild(15)
+				.addLeftChild(6)
+				.goBackOneLevel()
+				.addRightChild(8)
+					.addLeftChild(1)
+						.addLeftChild(2)
+						.goBackOneLevel()
+					.goBackOneLevel()
+					.addRightChild(3);
+		
+		root.addRightChild(9)
+				.addLeftChild(5)
+				.goBackOneLevel()
+				.addRightChild(16);
+		binaryTree.setRoot(root);
+		
+		String result = binaryTree.getTreeByPreOrderWithoutUsingRecursive();
+		
+		assertThat(result, Matchers.equalTo("10 15 6 8 1 2 3 9 5 16"));
+	}
+	
 }

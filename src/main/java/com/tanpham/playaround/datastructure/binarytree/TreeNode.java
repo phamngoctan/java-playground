@@ -51,6 +51,7 @@ public class TreeNode<T> {
 		this.leftChild = new TreeNode<>();
 		leftChild.setValue(value);
 		leftChild.parent = this;
+
 		return this.leftChild;
 	}
 	
@@ -58,7 +59,12 @@ public class TreeNode<T> {
 		this.rightChild = new TreeNode<>();
 		rightChild.setValue(value);
 		rightChild.parent = this;
+		
 		return this.rightChild;
+	}
+	
+	public TreeNode<T> goBackOneLevel() {
+		return this.parent;
 	}
 
 }
