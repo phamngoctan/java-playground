@@ -140,9 +140,17 @@ public class BinaryTree<T> {
 		String preOrderTraversalResult = "";
 		while (!stack.empty()) {
 			TreeNode<T> item = stack.pop();
+			preOrderTraversalResult = preOrderTraversalResult + " " + item.getValue().toString();
+			if (item.getRightChild() != null) {
+				stack.push(item.getRightChild());
+			}
 			
+			if (item.getLeftChild() != null) {
+				stack.push(item.getLeftChild());
+			}
 		}
-		return preOrderTraversalResult;
+		
+		return preOrderTraversalResult.trim().replaceAll(" +", " ");
 	}
 	
 }
