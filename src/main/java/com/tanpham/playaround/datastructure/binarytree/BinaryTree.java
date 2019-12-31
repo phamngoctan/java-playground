@@ -2,6 +2,7 @@ package com.tanpham.playaround.datastructure.binarytree;
 
 import java.util.LinkedList;
 import java.util.Queue;
+import java.util.Stack;
 
 public class BinaryTree<T> {
 
@@ -127,6 +128,43 @@ public class BinaryTree<T> {
 		result = result + " " + node.getValue().toString();
 		
 		return result;
+	}
+	
+	/*
+	 * Root -> left -> right
+	 */
+	public String getTreeByPreOrderWithoutUsingRecursive() {
+		if (root == null) {
+			return null;
+		}
+		
+		Stack<TreeNode<T>> stack = new Stack<>();
+		stack.push(root);
+		
+		String preOrderTraversalResult = "";
+		while (!stack.empty()) {
+			TreeNode<T> item = stack.pop();
+			preOrderTraversalResult = preOrderTraversalResult + " " + item.getValue().toString();
+			if (item.getRightChild() != null) {
+				stack.push(item.getRightChild());
+			}
+			
+			if (item.getLeftChild() != null) {
+				stack.push(item.getLeftChild());
+			}
+		}
+		
+		return preOrderTraversalResult.trim().replaceAll(" +", " ");
+	}
+	
+	public String getTreeByInOrderWithoutUsingRecursive() {
+		if (root == null) {
+			return null;
+		}
+		
+		String inOrderTraversalResult = "";
+		
+		return inOrderTraversalResult;
 	}
 	
 }
