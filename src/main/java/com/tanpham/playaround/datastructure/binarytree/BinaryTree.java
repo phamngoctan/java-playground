@@ -157,4 +157,14 @@ public class BinaryTree<T> {
 		return preOrderTraversalResult.trim().replaceAll(" +", " ");
 	}
 	
+	public String getTreeByInOrderWithoutUsingRecursive() {
+		if (root == null) {
+			return null;
+		}
+		
+		String inOrderTraversalResult = "";
+		
+		return inOrderTraversalResult;
+	}
+	
 }

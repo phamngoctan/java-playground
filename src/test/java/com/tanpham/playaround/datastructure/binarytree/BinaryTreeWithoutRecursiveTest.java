@@ -103,4 +103,18 @@ public class BinaryTreeWithoutRecursiveTest {
 		assertThat(result, Matchers.equalTo("10 15 6 8 1 2 3 9 5 16"));
 	}
 	
+	@Test
+	public void getTreeByInOrderWithoutUsingRecursive__nullRoot() {
+		binaryTree.setRoot(null);
+		String result = binaryTree.getTreeByInOrderWithoutUsingRecursive();
+		assertThat(result, Matchers.equalTo(null));
+	}
+	
+	@Test
+	public void getTreeByInOrderWithoutUsingRecursive__onlyRootItem() {
+		binaryTree.setRoot(new TreeNode<>(10));
+		String result = binaryTree.getTreeByInOrderWithoutUsingRecursive();
+		assertThat(result, Matchers.equalTo("10"));
+	}
+	
 }
