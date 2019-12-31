@@ -2,6 +2,7 @@ package com.tanpham.playaround.datastructure.binarytree;
 
 import java.util.LinkedList;
 import java.util.Queue;
+import java.util.Stack;
 
 public class BinaryTree<T> {
 
@@ -133,7 +134,15 @@ public class BinaryTree<T> {
 	 * Root -> left -> right
 	 */
 	public String getTreeByPreOrderWithoutUsingRecursive() {
-		return null;
+		Stack<TreeNode<T>> stack = new Stack<>();
+		stack.push(root);
+		
+		String preOrderTraversalResult = "";
+		while (!stack.empty()) {
+			TreeNode<T> item = stack.pop();
+			
+		}
+		return preOrderTraversalResult;
 	}
 	
 }
