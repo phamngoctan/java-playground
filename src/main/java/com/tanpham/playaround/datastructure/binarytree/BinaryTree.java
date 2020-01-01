@@ -157,6 +157,9 @@ public class BinaryTree<T> {
 		return preOrderTraversalResult.trim().replaceAll(" +", " ");
 	}
 	
+	/*
+	 * Left Root Right
+	 */
 	public String getTreeByInOrderWithoutUsingRecursive() {
 		if (root == null) {
 			return null;
@@ -185,14 +188,44 @@ public class BinaryTree<T> {
 		}
 	}
 	
+	/*
+	 * Left Right Root
+	 */
 	// The same as InOrder, implement the PostOrder
 	public String getTreeByPostOrderTraversalWithoutUsingRecursive() {
 		if (root == null) {
 			return null;
 		}
+		
+		Stack<TreeNode<T>> stack = new Stack<>();
+		stack.push(root);
+		Stack<TreeNode<T>> stack2 = new Stack<>();
+//		travelToFarMostLeftChild(stack, root);
+		
 		String postOrderTraversalResult = "";
-		postOrderTraversalResult = root.getValue() + "";
-		return postOrderTraversalResult;
+		while (!stack.isEmpty()) {
+			TreeNode<T> node = stack.pop();
+			stack2.push(node);
+			if (node.getLeftChild() != null) {
+				stack.push(node.getLeftChild());
+			}
+			if (node.getRightChild() != null) {
+				stack.push(node.getRightChild());
+			}
+		}
+		
+		while (!stack2.isEmpty()) {
+			postOrderTraversalResult = postOrderTraversalResult + " " + stack2.pop().getValue();
+		}
+		return postOrderTraversalResult.trim().replaceAll(" +", " ");
+	}
+
+	protected void travelToFarMostRightChild(Stack<TreeNode<T>> stack, TreeNode<T> node) {
+		TreeNode<T> next = node;
+		while(next != null) {
+			stack.push(next);
+			next = next.getRightChild();
+		}
 	}
 	
 }
