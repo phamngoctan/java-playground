@@ -71,7 +71,7 @@ For the InOrder (Left Root Right) traversal without using recursive approach, th
     - pop out the item and print it. if it has right item, push it to the stack.
 
 For the PostOrder (Left Right Root) traversal without using recursive approach, the implementation idea can be:
- - 
+ - the idea is like the other one, one important point is that there is the marker for checking if the current node is checked. Next time go back to it, no need to check the right child anymore, otherwise, it will cause the infinitive loop.
 
 ## Binary search tree
 Idea of deleting a Node, we separates it into three cases:
