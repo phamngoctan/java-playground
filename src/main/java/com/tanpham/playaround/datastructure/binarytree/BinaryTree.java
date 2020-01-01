@@ -163,7 +163,7 @@ public class BinaryTree<T> {
 		}
 		
 		String inOrderTraversalResult = "";
-		
+		inOrderTraversalResult = inOrderTraversalResult + root.getValue();
 		return inOrderTraversalResult;
 	}
 	

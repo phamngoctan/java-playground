@@ -117,4 +117,34 @@ public class BinaryTreeWithoutRecursiveTest {
 		assertThat(result, Matchers.equalTo("10"));
 	}
 	
+	/**
+	 *               9
+	 *         /            \
+	 *       8               20
+	 *    /      \         
+	 *   5       15        
+	 *         /   \
+	 *        2     1
+	 *      
+	 */ 
+	@Test
+	public void getTreeByInOrderWithoutUsingRecursive__manyItems() {
+		TreeNode<Integer> root = new TreeNode<>(9);
+		root.addLeftChild(8)
+				.addLeftChild(5)
+				.goBackOneLevel()
+				.addRightChild(15)
+					.addLeftChild(2)
+					.goBackOneLevel()
+					.addRightChild(1)
+					.goBackOneLevel()
+				.goBackOneLevel()
+			.goBackOneLevel()
+			.addRightChild(20);
+		binaryTree.setRoot(root);
+		
+		String result = binaryTree.getTreeByInOrderWithoutUsingRecursive();
+		assertThat(result, Matchers.equalTo(""));
+	}
+	
 }
