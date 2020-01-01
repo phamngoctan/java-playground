@@ -188,15 +188,15 @@ public class BinaryTreeWithoutRecursiveTest {
 	}
 	
 	@Test
-	public void getTreeByPostOrderTraversalWithoutUsingRecursive__nullRoot() {
-		String result = binaryTree.getTreeByPostOrderTraversalWithoutUsingRecursive();
+	public void getTreeByPostOrderTraversalTwoStacksApproach__nullRoot() {
+		String result = binaryTree.getTreeByPostOrderTraversalTwoStacksApproach();
 		assertThat(result, Matchers.nullValue());
 	}
 	
 	@Test
-	public void getTreeByPostOrderTraversalWithoutUsingRecursive__onlyRoot() {
+	public void getTreeByPostOrderTraversalTwoStacksApproach__onlyRoot() {
 		binaryTree.setRoot(new TreeNode<Integer>(9));
-		String result = binaryTree.getTreeByPostOrderTraversalWithoutUsingRecursive();
+		String result = binaryTree.getTreeByPostOrderTraversalTwoStacksApproach();
 		assertThat(result, Matchers.equalTo("9"));
 	}
 	
@@ -206,14 +206,14 @@ public class BinaryTreeWithoutRecursiveTest {
 	 *  4   7
 	 */
 	@Test
-	public void getTreeByPostOrderTraversalWithoutUsingRecursive__twoLevels() {
+	public void getTreeByPostOrderTraversalTwoStacksApproach__twoLevels() {
 		TreeNode<Integer> root = new TreeNode<>(9);
 		root.addLeftChild(4)
 			.goBackOneLevel()
 			.addRightChild(7);
 		binaryTree.setRoot(root);
 		
-		String result = binaryTree.getTreeByPostOrderTraversalWithoutUsingRecursive();
+		String result = binaryTree.getTreeByPostOrderTraversalTwoStacksApproach();
 		assertThat(result, Matchers.equalTo("4 7 9"));
 	}
 	
@@ -228,7 +228,7 @@ public class BinaryTreeWithoutRecursiveTest {
 	 *      
 	 */ 
 	@Test
-	public void getTreeByPostOrderTraversalWithoutUsingRecursive__manyItems() {
+	public void getTreeByPostOrderTraversalTwoStacksApproach__manyItems() {
 		TreeNode<Integer> root = new TreeNode<>(9);
 		root.addLeftChild(8)
 				.addLeftChild(5)
@@ -243,7 +243,7 @@ public class BinaryTreeWithoutRecursiveTest {
 			.addRightChild(20);
 		binaryTree.setRoot(root);
 		
-		String result = binaryTree.getTreeByPostOrderTraversalWithoutUsingRecursive();
+		String result = binaryTree.getTreeByPostOrderTraversalTwoStacksApproach();
 		assertThat(result, Matchers.equalTo("20 1 2 15 5 8 9"));
 	}
 	

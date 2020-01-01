@@ -192,7 +192,9 @@ public class BinaryTree<T> {
 	 * Left Right Root
 	 */
 	// The same as InOrder, implement the PostOrder
-	public String getTreeByPostOrderTraversalWithoutUsingRecursive() {
+	// One important point is that this traversal needs to mark the already chcked.
+	// if the root is checked, we should not check it again, just print it out. 
+	public String getTreeByPostOrderTraversalTwoStacksApproach() {
 		if (root == null) {
 			return null;
 		}
@@ -220,12 +222,4 @@ public class BinaryTree<T> {
 		return postOrderTraversalResult.trim().replaceAll(" +", " ");
 	}
 
-	protected void travelToFarMostRightChild(Stack<TreeNode<T>> stack, TreeNode<T> node) {
-		TreeNode<T> next = node;
-		while(next != null) {
-			stack.push(next);
-			next = next.getRightChild();
-		}
-	}
-	
 }
