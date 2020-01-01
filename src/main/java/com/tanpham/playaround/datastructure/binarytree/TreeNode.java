@@ -67,4 +67,9 @@ public class TreeNode<T> {
 		return this.parent;
 	}
 
+	@Override
+	public String toString() {
+		return "TreeNode [value=" + value + "]";
+	}
+
 }
