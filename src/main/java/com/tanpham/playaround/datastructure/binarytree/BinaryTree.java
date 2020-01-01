@@ -185,6 +185,14 @@ public class BinaryTree<T> {
 		}
 	}
 	
-	
+	// The same as InOrder, implement the PostOrder
+	public String getTreeByPostOrderTraversalWithoutUsingRecursive() {
+		if (root == null) {
+			return null;
+		}
+		String postOrderTraversalResult = "";
+		postOrderTraversalResult = root.getValue() + "";
+		return postOrderTraversalResult;
+	}
 	
 }

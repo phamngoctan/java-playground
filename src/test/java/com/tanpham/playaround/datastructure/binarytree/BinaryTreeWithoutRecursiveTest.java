@@ -170,4 +170,17 @@ public class BinaryTreeWithoutRecursiveTest {
 		assertThat(stack.get(1).getValue(), Matchers.equalTo(8));
 		assertThat(stack.get(2).getValue(), Matchers.equalTo(5));
 	}
+	
+	@Test
+	public void getTreeByPostOrderTraversalWithoutUsingRecursive__nullRoot() {
+		String result = binaryTree.getTreeByPostOrderTraversalWithoutUsingRecursive();
+		assertThat(result, Matchers.nullValue());
+	}
+	
+	@Test
+	public void getTreeByPostOrderTraversalWithoutUsingRecursive__onlyRoot() {
+		binaryTree.setRoot(new TreeNode<Integer>(9));
+		String result = binaryTree.getTreeByPostOrderTraversalWithoutUsingRecursive();
+		assertThat(result, Matchers.equalTo("9"));
+	}
 }
