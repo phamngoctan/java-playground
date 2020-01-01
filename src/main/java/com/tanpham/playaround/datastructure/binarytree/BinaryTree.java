@@ -191,9 +191,6 @@ public class BinaryTree<T> {
 	/*
 	 * Left Right Root
 	 */
-	// The same as InOrder, implement the PostOrder
-	// One important point is that this traversal needs to mark the already chcked.
-	// if the root is checked, we should not check it again, just print it out. 
 	public String getTreeByPostOrderTraversalTwoStacksApproach() {
 		if (root == null) {
 			return null;
@@ -220,6 +217,49 @@ public class BinaryTree<T> {
 			postOrderTraversalResult = postOrderTraversalResult + " " + stack2.pop().getValue();
 		}
 		return postOrderTraversalResult.trim().replaceAll(" +", " ");
+	}
+	
+	// The same as InOrder, implement the PostOrder
+	// One important point is that this traversal needs to mark the already chcked.
+	// if the root is checked, we should not check it again, just print it out.
+	// USING ONLY ONE STACK
+	public String getTreeByPostOrderTraversalWithoutRecursive() {
+		Stack<TreeNode<T>> stack = new Stack<>();
+		travelToFarMostLeftChildWithRightChildAsMarker(stack, root);
+		
+		String postOrderTraversalResult = "";
+		while (!stack.isEmpty()) {
+			TreeNode<T> item = stack.pop();
+			if (item.getRightChild() != null && !stack.isEmpty()) {
+				TreeNode<T> possibleMatchedMarker = stack.pop();
+				if (item.getRightChild() == possibleMatchedMarker) {
+					stack.push(item);
+					travelToFarMostLeftChildWithRightChildAsMarker(stack, item.getRightChild());
+				} else {
+					// it is not a marker, so push it back to the stack
+					stack.push(possibleMatchedMarker);
+					postOrderTraversalResult = postOrderTraversalResult + " " + item.getValue();
+				}
+			} else {
+				postOrderTraversalResult = postOrderTraversalResult + " " + item.getValue();
+			}
+			
+		}
+		return postOrderTraversalResult.trim().replaceAll(" +", " ");
+	}
+
+	protected void travelToFarMostLeftChildWithRightChildAsMarker(Stack<TreeNode<T>> stack, TreeNode<T> node) {
+		TreeNode<T> next = node;
+		while (next != null) {
+			if (next.getRightChild() != null) {
+				// The idea to push the right child here is to
+				// mark if the root is visited or not.
+				// if it is checked, disable the marker by pop out the marker
+				stack.push(next.getRightChild());
+			}
+			stack.push(next);
+			next = next.getLeftChild();
+		}
 	}
 
 }
