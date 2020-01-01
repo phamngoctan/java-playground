@@ -162,9 +162,29 @@ public class BinaryTree<T> {
 			return null;
 		}
 		
+		Stack<TreeNode<T>> stack = new Stack<>();
+		travelToFarMostLeftChild(stack, root);
+		
 		String inOrderTraversalResult = "";
-		inOrderTraversalResult = inOrderTraversalResult + root.getValue();
-		return inOrderTraversalResult;
+		while (!stack.isEmpty()) {
+			TreeNode<T> item = stack.pop();
+			inOrderTraversalResult = inOrderTraversalResult + " " + item.getValue();
+			if (item.getRightChild() != null) {
+				travelToFarMostLeftChild(stack, item.getRightChild());
+			}
+		}
+		
+		return inOrderTraversalResult.trim().replaceAll(" +", " ");
 	}
+
+	protected void travelToFarMostLeftChild(Stack<TreeNode<T>> stack, TreeNode<T> node) {
+		TreeNode<T> next = node;
+		while (next != null) {
+			stack.push(next);
+			next = next.getLeftChild();
+		}
+	}
+	
+	
 	
 }

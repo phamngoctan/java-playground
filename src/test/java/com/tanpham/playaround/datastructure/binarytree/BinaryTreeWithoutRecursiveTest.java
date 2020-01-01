@@ -2,9 +2,11 @@ package com.tanpham.playaround.datastructure.binarytree;
 
 import static org.junit.Assert.assertThat;
 
+import java.util.Stack;
+
+import org.hamcrest.Matchers;
 import org.junit.Before;
 import org.junit.Test;
-import org.hamcrest.Matchers;
 
 public class BinaryTreeWithoutRecursiveTest {
 
@@ -144,7 +146,28 @@ public class BinaryTreeWithoutRecursiveTest {
 		binaryTree.setRoot(root);
 		
 		String result = binaryTree.getTreeByInOrderWithoutUsingRecursive();
-		assertThat(result, Matchers.equalTo(""));
+		assertThat(result, Matchers.equalTo("5 8 2 15 1 9 20"));
 	}
 	
+	@Test
+	public void travelToFarMostLeftChild() {
+		Stack<TreeNode<Integer>> stack = new Stack<>();
+		TreeNode<Integer> node = new TreeNode<>(9);
+		node.addLeftChild(8)
+				.addLeftChild(5)
+				.goBackOneLevel()
+				.addRightChild(15)
+					.addLeftChild(2)
+					.goBackOneLevel()
+					.addRightChild(1)
+					.goBackOneLevel()
+				.goBackOneLevel()
+			.goBackOneLevel()
+			.addRightChild(20);
+		binaryTree.travelToFarMostLeftChild(stack, node);
+		
+		assertThat(stack.get(0).getValue(), Matchers.equalTo(9));
+		assertThat(stack.get(1).getValue(), Matchers.equalTo(8));
+		assertThat(stack.get(2).getValue(), Matchers.equalTo(5));
+	}
 }
