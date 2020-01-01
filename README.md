@@ -58,12 +58,20 @@ Implement core binary trees
  - getTreeByPreOrder // self/left/right
  - getTreeByPostOrder // left/right/self
 
-For the traversal without using recursive approach, the implementation idea can be:
+For the PreOrder (Root Left Right) traversal without using recursive approach, the implementation idea can be:
  - First add the root to the Stack.
- - Pop out an element from Stack and add its right and left children to stack.
+ - Pop out an element from Stack and add its right and left children to stack. (Root is printed)
  - Pop out an element and print it and add its children.
  - Repeat the above two steps until the Stack empty.
- 
+
+For the InOrder (Left Root Right) traversal without using recursive approach, the implementation idea can be:
+ - pre-process: travel to the most far left child, on the way, add all the nodes to the stack
+ - while stack is not empty: 
+   
+    - pop out the item and print it. if it has right item, push it to the stack.
+
+For the PostOrder (Left Right Root) traversal without using recursive approach, the implementation idea can be:
+ - 
 
 ## Binary search tree
 Idea of deleting a Node, we separates it into three cases:
