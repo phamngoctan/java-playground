@@ -217,36 +217,6 @@ public class BinaryTreeWithoutRecursiveTest {
 		assertThat(result, Matchers.equalTo("4 7 9"));
 	}
 	
-	/**
-	 *               9
-	 *         /            \
-	 *       8               20
-	 *    /      \         
-	 *   5       15        
-	 *         /   \
-	 *        2     1
-	 *      
-	 */ 
-	@Test
-	public void getTreeByPostOrderTraversalTwoStacksApproach__manyItems() {
-		TreeNode<Integer> root = new TreeNode<>(9);
-		root.addLeftChild(8)
-				.addLeftChild(5)
-				.goBackOneLevel()
-				.addRightChild(15)
-					.addLeftChild(2)
-					.goBackOneLevel()
-					.addRightChild(1)
-					.goBackOneLevel()
-				.goBackOneLevel()
-			.goBackOneLevel()
-			.addRightChild(20);
-		binaryTree.setRoot(root);
-		
-		String result = binaryTree.getTreeByPostOrderTraversalTwoStacksApproach();
-		assertThat(result, Matchers.equalTo("20 1 2 15 5 8 9"));
-	}
-	
 	@Test
 	public void travelToFarMostLeftChildWithRightChildAsMarker__onlyOneNode() {
 		TreeNode<Integer> node = new TreeNode<>(4);
