@@ -19,14 +19,6 @@ public class VitalyAndString {
 			return NO_SUCH_STRING;
 		}
 		
-		if (string1.length() == 1) {
-			char potentialResult = (char) (string1.charAt(0) + 1);
-			if (potentialResult < string2.charAt(0)) {
-				return String.valueOf(potentialResult);
-			}
-			return NO_SUCH_STRING;
-		}
-		
 		int i = string1.length() - 1;
 		while (i >= 0) {
 			int diff = string2.charAt(i) - string1.charAt(i);
@@ -40,7 +32,6 @@ public class VitalyAndString {
 
 	public static String generateResultByIncreaseOneLastChar(String string1, String string2) {
 		char[] arr1 = string1.toCharArray();
-		char[] arr2 = string2.toCharArray();
 		boolean remember = true;
 		for (int i = arr1.length - 1; i >= 0 && remember; i--) {
 			if (arr1[i] == 'z') {
@@ -50,12 +41,13 @@ public class VitalyAndString {
 				arr1[i] = (char) (arr1[i] + 1);
 			}
 		}
-		String lastPart = String.valueOf(arr1);
-		if (lastPart.equals(String.valueOf(arr2))) {
+		
+		String updatedString = String.valueOf(arr1);
+		if (updatedString.equals(string2)) {
 			return NO_SUCH_STRING;
 		}
 		
-		return lastPart;
+		return updatedString;
 	}
 
 }
