@@ -1,4 +1,4 @@
-package com.tanpham.playaround.string;
+package com.tanpham.playaround.algorithm;
 
 import java.util.Scanner;
 
