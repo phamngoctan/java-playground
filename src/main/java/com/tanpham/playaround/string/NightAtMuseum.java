@@ -5,13 +5,10 @@ import java.util.Scanner;
 public class NightAtMuseum {
 
 	public static void main(String[] args) {
-//		Scanner sc = new Scanner(System.in);
-//		String s0 = sc.nextLine();
-//		
-//		System.out.println(calculateQuickestWay(s0));
-//		calculateWayFollowTheClock('z');
-		System.out.println(('z' - 'a'));
-		System.out.println((122 - 97));
+		Scanner sc = new Scanner(System.in);
+		String s0 = sc.nextLine();
+		sc.close();
+		System.out.println(calculateQuickestWay(s0));
 	}
 	
 	public static int calculateQuickestWay(String input) {
@@ -22,19 +19,24 @@ public class NightAtMuseum {
 		char[] charArray = input.toCharArray();
 		int quickestWay = 0;
 		int count = 0;
+		char root = 'a';
 		while (count < charArray.length) {
-			quickestWay += calculateQuickestWay(charArray[count++]);
+			quickestWay += calculateQuickestWay(root, charArray[count]);
+			root = charArray[count++];
 		}
 		return quickestWay;
 	}
 	
-	public static int calculateQuickestWay(char c) {
-		int clockWay = c - 96;
+	public static int calculateQuickestWay(char root, char c) {
+		int clockWay;
+		if (c > root) {
+			clockWay = c - root;
+		} else {
+			clockWay = root - c;
+		}
+		
 		int reverseClockWay = 26 - clockWay;
-		System.out.println(clockWay + "  " + reverseClockWay);
 		return clockWay <= 13 ? clockWay : reverseClockWay;
 	}
-	
-	
 	
 }

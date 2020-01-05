@@ -9,49 +9,49 @@ public class NightAtMuseumTest {
 	
 	@Test
 	public void calculateQuickestWay__char__a() {
-		int totalSteps = NightAtMuseum.calculateQuickestWay('a');
+		int totalSteps = NightAtMuseum.calculateQuickestWay('a', 'a');
 		assertThat(totalSteps, Matchers.equalTo(0));
 	}
 	
 	@Test
 	public void calculateQuickestWay__char__z() {
-		int totalSteps = NightAtMuseum.calculateQuickestWay('z');
+		int totalSteps = NightAtMuseum.calculateQuickestWay('a', 'z');
 		assertThat(totalSteps, Matchers.equalTo(1));
 	}
 	
 	@Test
 	public void calculateQuickestWay__char__y() {
-		int totalSteps = NightAtMuseum.calculateQuickestWay('y');
+		int totalSteps = NightAtMuseum.calculateQuickestWay('a', 'y');
 		assertThat(totalSteps, Matchers.equalTo(2));
 	}
 	
 	@Test
 	public void calculateQuickestWay__char_n() {
-		int totalSteps = NightAtMuseum.calculateQuickestWay('n');
+		int totalSteps = NightAtMuseum.calculateQuickestWay('a', 'n');
 		assertThat(totalSteps, Matchers.equalTo(13));
 	}
 	
 	@Test
 	public void calculateQuickestWay__char_before_n() {
-		int totalSteps = NightAtMuseum.calculateQuickestWay('m');
+		int totalSteps = NightAtMuseum.calculateQuickestWay('a', 'm');
 		assertThat(totalSteps, Matchers.equalTo(12));
 	}
 	
 	@Test
 	public void calculateQuickestWay__char_after_n() {
-		int totalSteps = NightAtMuseum.calculateQuickestWay('o');
+		int totalSteps = NightAtMuseum.calculateQuickestWay('a', 'o');
 		assertThat(totalSteps, Matchers.equalTo(12));
 	}
 	
 	@Test
 	public void calculateQuickestWay__char_e() {
-		assertThat(NightAtMuseum.calculateQuickestWay('e'), Matchers.equalTo(5));
+		assertThat(NightAtMuseum.calculateQuickestWay('z', 'e'), Matchers.equalTo(5));
 	}
 
-//	@Test
-//	public void calculateQuickestWay__char_u() {
-//		assertThat(NightAtMuseum.calculateQuickestWay('u'), Matchers.equalTo(10));
-//	}
+	@Test
+	public void calculateQuickestWay__char_u() {
+		assertThat(NightAtMuseum.calculateQuickestWay('e', 'u'), Matchers.equalTo(10));
+	}
 
 	@Test
 	public void calculateQuickestWay__string_zeus() {
