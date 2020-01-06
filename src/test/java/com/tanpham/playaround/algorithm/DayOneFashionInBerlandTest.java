@@ -6,13 +6,13 @@ import org.hamcrest.Matchers;
 import org.junit.Before;
 import org.junit.Test;
 
-public class FashionInBerlandTest {
+public class DayOneFashionInBerlandTest {
 
-	private FashionInBerland fashionInBerland;
+	private DayOneFashionInBerland fashionInBerland;
 	
 	@Before
 	public void init() {
-		fashionInBerland = new FashionInBerland();
+		fashionInBerland = new DayOneFashionInBerland();
 	}
 	
 //	@Test

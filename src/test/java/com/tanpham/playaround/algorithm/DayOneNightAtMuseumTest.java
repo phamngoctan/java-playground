@@ -5,57 +5,57 @@ import static org.junit.Assert.assertThat;
 import org.hamcrest.Matchers;
 import org.junit.Test;
 
-public class NightAtMuseumTest {
+public class DayOneNightAtMuseumTest {
 	
 	@Test
 	public void calculateQuickestWay__char__a() {
-		int totalSteps = NightAtMuseum.calculateQuickestWay('a', 'a');
+		int totalSteps = DayOneNightAtMuseum.calculateQuickestWay('a', 'a');
 		assertThat(totalSteps, Matchers.equalTo(0));
 	}
 	
 	@Test
 	public void calculateQuickestWay__char__z() {
-		int totalSteps = NightAtMuseum.calculateQuickestWay('a', 'z');
+		int totalSteps = DayOneNightAtMuseum.calculateQuickestWay('a', 'z');
 		assertThat(totalSteps, Matchers.equalTo(1));
 	}
 	
 	@Test
 	public void calculateQuickestWay__char__y() {
-		int totalSteps = NightAtMuseum.calculateQuickestWay('a', 'y');
+		int totalSteps = DayOneNightAtMuseum.calculateQuickestWay('a', 'y');
 		assertThat(totalSteps, Matchers.equalTo(2));
 	}
 	
 	@Test
 	public void calculateQuickestWay__char_n() {
-		int totalSteps = NightAtMuseum.calculateQuickestWay('a', 'n');
+		int totalSteps = DayOneNightAtMuseum.calculateQuickestWay('a', 'n');
 		assertThat(totalSteps, Matchers.equalTo(13));
 	}
 	
 	@Test
 	public void calculateQuickestWay__char_before_n() {
-		int totalSteps = NightAtMuseum.calculateQuickestWay('a', 'm');
+		int totalSteps = DayOneNightAtMuseum.calculateQuickestWay('a', 'm');
 		assertThat(totalSteps, Matchers.equalTo(12));
 	}
 	
 	@Test
 	public void calculateQuickestWay__char_after_n() {
-		int totalSteps = NightAtMuseum.calculateQuickestWay('a', 'o');
+		int totalSteps = DayOneNightAtMuseum.calculateQuickestWay('a', 'o');
 		assertThat(totalSteps, Matchers.equalTo(12));
 	}
 	
 	@Test
 	public void calculateQuickestWay__char_e() {
-		assertThat(NightAtMuseum.calculateQuickestWay('z', 'e'), Matchers.equalTo(5));
+		assertThat(DayOneNightAtMuseum.calculateQuickestWay('z', 'e'), Matchers.equalTo(5));
 	}
 
 	@Test
 	public void calculateQuickestWay__char_u() {
-		assertThat(NightAtMuseum.calculateQuickestWay('e', 'u'), Matchers.equalTo(10));
+		assertThat(DayOneNightAtMuseum.calculateQuickestWay('e', 'u'), Matchers.equalTo(10));
 	}
 
 	@Test
 	public void calculateQuickestWay__string_zeus() {
-		assertThat(NightAtMuseum.calculateQuickestWay("zeus"), Matchers.equalTo(18));
+		assertThat(DayOneNightAtMuseum.calculateQuickestWay("zeus"), Matchers.equalTo(18));
 	}
 	
 }
