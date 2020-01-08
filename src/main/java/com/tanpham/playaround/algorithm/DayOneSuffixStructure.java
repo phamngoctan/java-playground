@@ -71,7 +71,24 @@ public class DayOneSuffixStructure {
 		char[] arr1 = s1.toCharArray();
 		char[] arr2 = s2.toCharArray();
 		
+		if (isAutomaton(arr1, arr2)) {
+			return "automaton";
+		}
+		
 		return null;
+	}
+
+	private static boolean isAutomaton(char[] arr1, char[] arr2) {
+		int i = 0;
+		for (int j = 0; j < arr1.length; j++) {
+			if (arr1[j] != arr2[i]) {
+				i++;
+			}
+			if (i == arr2.length) {
+				return true;
+			}
+		}
+		return false;
 	}
 
 }
