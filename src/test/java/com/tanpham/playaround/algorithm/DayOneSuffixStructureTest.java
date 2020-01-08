@@ -8,10 +8,24 @@ import org.junit.Test;
 public class DayOneSuffixStructureTest {
 
 	@Test
+	public void myTestCase01__checkingAutomaton() {
+		String s1 = "automaton";
+		String s2 = "toman";
+		assertThat(DayOneSuffixStructure.getAnswer(s1, s2), Matchers.equalTo("automaton"));
+	}
+	
+	@Test
+	public void myTestCase02__checkingAutomaton() {
+		String s1 = "automaton";
+		String s2 = "an";
+		assertThat(DayOneSuffixStructure.getAnswer(s1, s2), Matchers.equalTo("automaton"));
+	}
+	
+	@Test
 	public void testCase01() {
-		String s1 = "automation";
+		String s1 = "automaton";
 		String s2 = "tomat";
-		assertThat(DayOneSuffixStructure.getAnswer(s1, s2), Matchers.equalTo("automation"));
+		assertThat(DayOneSuffixStructure.getAnswer(s1, s2), Matchers.equalTo("automaton"));
 	}
 
 	@Test

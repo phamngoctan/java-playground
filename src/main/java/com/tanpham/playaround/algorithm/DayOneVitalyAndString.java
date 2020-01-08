@@ -2,7 +2,7 @@ package com.tanpham.playaround.algorithm;
 
 import java.util.Scanner;
 
-public class VitalyAndString {
+public class DayOneVitalyAndString {
 
 	private static final String NO_SUCH_STRING = "No such string";
 
@@ -14,6 +14,16 @@ public class VitalyAndString {
 		System.out.println(findMiddleOne(s1, s2));
 	}
 	
+	/*
+	 * Coding idea:
+	 * for (length -> 0) {
+	 *   if two item is diff: increase to one of the first, break;
+	 * }
+	 * s == t : no such string
+	 * s != t: print s
+	 * 
+	 * super fast =));
+	 */
 	public static String findMiddleOne(String string1, String string2) {
 		if (string1 == null || string1.length() == 0) {
 			return NO_SUCH_STRING;
