@@ -67,6 +67,9 @@ public class DayOneSuffixStructure {
 	 *   else 
 	 *     -> "both"
 	 */
+	/*
+	 * automaton  ->  array  ->  both  -> need tree
+	 */
 	public static String getAnswer(String s1, String s2) {
 		char[] arr1 = s1.toCharArray();
 		char[] arr2 = s2.toCharArray();
@@ -75,7 +78,29 @@ public class DayOneSuffixStructure {
 			return "automaton";
 		}
 		
-		return null;
+		int[] countArr1 = new int[26];
+		int[] countArr2 = new int[26];
+		for (char item : arr1) {
+			countArr1[item - 'a'] += 1;
+		}
+		
+		for (char item : arr2) {
+			countArr2[item - 'a'] += 1;
+		}
+		
+		boolean isSuffixArray = true;
+		for (int i = 0; i < 26; i++) {
+			if (countArr2[i] > countArr1[i]) {
+				return "need tree";
+			}
+			if (countArr1[i] > countArr2[i]) {
+				isSuffixArray = false;
+			}
+		}
+		if (isSuffixArray) {
+			return "array";
+		}
+		return "both";
 	}
 
 	private static boolean isAutomaton(char[] arr1, char[] arr2) {

@@ -35,6 +35,7 @@ public class DayOneSuffixStructureTest {
 		assertThat(DayOneSuffixStructure.getAnswer(s1, s2), Matchers.equalTo("array"));
 	}
 	
+	//FIXME:
 	@Test
 	public void testCase03() {
 		String s1 = "both";
