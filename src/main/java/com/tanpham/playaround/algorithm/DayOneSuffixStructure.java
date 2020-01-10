@@ -106,7 +106,7 @@ public class DayOneSuffixStructure {
 	private static boolean isAutomaton(char[] arr1, char[] arr2) {
 		int i = 0;
 		for (int j = 0; j < arr1.length; j++) {
-			if (arr1[j] != arr2[i]) {
+			if (arr1[j] == arr2[i]) {
 				i++;
 			}
 			if (i == arr2.length) {
