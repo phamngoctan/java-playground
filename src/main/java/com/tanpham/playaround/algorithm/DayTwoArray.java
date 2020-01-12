@@ -1,7 +1,9 @@
 package com.tanpham.playaround.algorithm;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class DayTwoArray {
 	static class Range {
@@ -39,28 +41,18 @@ public class DayTwoArray {
 	 * 
 	 */
 	public static Range getPosition(int[] arr, int totalDiffValue) {
-		int duplicateCount = 0;
-		Set<Integer> items = new HashSet<>();
-		for (int i = 0; i < arr.length; i++) {
-			int j = 1;
-			while (j <= totalDiffValue) {
-				if (items.contains(arr[i + j])) {
-					duplicateCount++;
-					if (duplicateCount == 2) {
-						items.clear();
-						break;
-					}
-				} else {
-					items.add(arr[i + j]);
-				}
-				j++;
-			}
-			if (duplicateCount < 2) {
-				return new Range(i + 1, j + 1);
-			}
-			duplicateCount = 0;
+		Map<Integer, Integer> countByItem = new HashMap<>();
+		int i = 0;
+		while (i < arr.length && countByItem.size() < totalDiffValue) {
+			countByItem.putIfAbsent(arr[i], 0);
+			countByItem.put(arr[i], countByItem.get(arr[i]) + 1);
 		}
-		return new Range(-1, -1);
+		if (countByItem.size() >= totalDiffValue) {
+			// FIXME: please
+			return null;
+		} else {
+			return new Range(-1, -1);
+		}
 	}
 	
 }
