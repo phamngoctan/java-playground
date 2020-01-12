@@ -53,9 +53,6 @@ public class DayThreeSortTheArray {
 //		System.out.println(Arrays.stream(arr).mapToObj(String::valueOf).collect(Collectors.joining(", ")));
 		for (int i = 0; i < originalArr.length; i++) {
 			if (arr[i] != originalArr[i]) {
-				if (originalArr.length > 100) {
-					System.out.println("Pos " + i + ": " + originalArr[i] + " " + arr[i]);
-				}
 				if (pos1 == -1) {
 					pos1 = i;
 				} else {
