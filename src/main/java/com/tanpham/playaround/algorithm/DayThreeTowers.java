@@ -39,25 +39,26 @@ public class DayThreeTowers {
 		System.out.print(tower.height + " " + tower.total);
 	}
 	
-	//FIXME: correct the total value, it should represent for all possible built towers
+	// correct the total value, it should represent for all possible built towers
 	public static Tower getTower(int[] arr) {
 		Arrays.sort(arr);
 		int maxHeight = -1;
 		int curHeight = 1;
-		int total = 0;
+		int total = 1;
 		for (int i = arr.length - 1; i >= 1; i--) {
 			if (arr[i] == arr[i - 1]) {
 				curHeight++;
 			} else {
 				if (curHeight > maxHeight) {
 					maxHeight = curHeight;
-					total = arr[i];
 				}
+				curHeight = 1;
+				total++;
 			}
 		}
 		
 		if (maxHeight == -1) {
-			return new Tower(curHeight, arr[0]);
+			return new Tower(curHeight, 1);
 		}
 		return new Tower(maxHeight, total);
 	}
