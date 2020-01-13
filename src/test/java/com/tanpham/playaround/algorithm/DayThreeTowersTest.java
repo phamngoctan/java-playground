@@ -14,7 +14,7 @@ public class DayThreeTowersTest {
 		int[] arr = new int[] {7, 7, 7};
 		Tower tower = DayThreeTowers.getTower(arr);
 		assertThat(tower.getHeight(), Matchers.equalTo(3));
-		assertThat(tower.getTotal(), Matchers.equalTo(7));
+		assertThat(tower.getTotal(), Matchers.equalTo(1));
 	}
 	
 	@Test
@@ -30,7 +30,7 @@ public class DayThreeTowersTest {
 		int[] arr = new int[] {6, 5, 6, 7};
 		Tower tower = DayThreeTowers.getTower(arr);
 		assertThat(tower.getHeight(), Matchers.equalTo(2));
-		assertThat(tower.getTotal(), Matchers.equalTo(12));
+		assertThat(tower.getTotal(), Matchers.equalTo(3));
 	}
 	
 }

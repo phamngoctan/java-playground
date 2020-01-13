@@ -39,6 +39,7 @@ public class DayThreeTowers {
 		System.out.print(tower.height + " " + tower.total);
 	}
 	
+	//FIXME: correct the total value, it should represent for all possible built towers
 	public static Tower getTower(int[] arr) {
 		Arrays.sort(arr);
 		int maxHeight = -1;
