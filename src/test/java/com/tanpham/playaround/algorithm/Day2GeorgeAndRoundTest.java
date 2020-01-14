@@ -30,4 +30,12 @@ public class Day2GeorgeAndRoundTest {
 		int numberOfToBePreparedExercise = Day2GeorgeAndRound.getNumberOfToBePreparedExercise(arr, existedExercises);
 		assertThat(numberOfToBePreparedExercise, Matchers.equalTo(3));
 	}
+
+	@Test
+	public void testCase04() {
+		int[] arr = new int[] {30, 32, 34, 39, 42, 43, 45, 46, 47, 48, 52, 55, 56, 57, 58, 59, 60, 65, 67, 69};
+		int[] existedExercises = new int[] {2, 3, 4, 5, 8, 9, 14, 16, 18, 20, 24, 27, 29, 30, 34, 35, 36, 37, 40, 41, 42, 43, 44, 45, 46};
+		int numberOfToBePreparedExercise = Day2GeorgeAndRound.getNumberOfToBePreparedExercise(arr, existedExercises);
+		assertThat(numberOfToBePreparedExercise, Matchers.equalTo(12));
+	}
 }

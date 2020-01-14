@@ -2,6 +2,10 @@ package com.tanpham.playaround.algorithm;
 
 import java.util.Scanner;
 
+/*
+ * He can simplify any already prepared problem with complexity C to any positive integer complexity D,
+ * (C > D) by changing limits on the input data.
+ */
 public class Day2GeorgeAndRound {
 
 	public static void main(String[] args) {
@@ -25,18 +29,32 @@ public class Day2GeorgeAndRound {
 	}
 	
 	public static int getNumberOfToBePreparedExercise(int[] arr, int[] existedExercises) {
-		boolean[] fre = new boolean[(int)1e6 + 1];
-		for (int i = 0; i < existedExercises.length; i++) {
-			fre[existedExercises[i]] = true;
-		}
+//		boolean[] fre = new boolean[(int)1e6 + 1];
+//		for (int i = 0; i < existedExercises.length; i++) {
+//			fre[existedExercises[i]] = true;
+//		}
 		
-		int numberExercisesNeedToBePrepared = 0;
+//		int numberExercisesNeedToBePrepared = 0;
+//		for (int i = 0; i < arr.length; i++) {
+//			if (!fre[arr[i]]) {
+//				numberExercisesNeedToBePrepared++;
+//			}
+//		}
+		
+		int numberOfReusableExercises = 0;
+		int j = 0;
 		for (int i = 0; i < arr.length; i++) {
-			if (!fre[arr[i]]) {
-				numberExercisesNeedToBePrepared++;
+			while (j < existedExercises.length && existedExercises[j] < arr[i]) {
+				j++;
+			}
+			if (j < existedExercises.length) {
+				numberOfReusableExercises++;
+				j++;
+			} else {
+				break;
 			}
 		}
-		return numberExercisesNeedToBePrepared;
+		return arr.length - numberOfReusableExercises;
 	}
 
 }
