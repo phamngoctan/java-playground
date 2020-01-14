@@ -1,10 +1,12 @@
 package com.tanpham.playaround.algorithm;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.Scanner;
 
+/*
+ * In this exercise, we don't need to consider to remove from the last position. 
+ * Because we already stop at the first time we figure out the item that make the sub
+ * array fully contains K distinguished items
+ */
 public class DayTwoArray {
 	static class Range {
 		int from;
@@ -18,6 +20,19 @@ public class DayTwoArray {
 		public String toString() {
 			return "Range [from=" + from + ", to=" + to + "]";
 		}
+	}
+	
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
+		int length = sc.nextInt();
+		int distinguishedItem = sc.nextInt();
+		int[] arr = new int[length];
+		for (int i = 0; i < length; i++) {
+			arr[i] = sc.nextInt();
+		}
+		sc.close();
+		Range position = getPosition(arr, distinguishedItem);
+		System.out.println(position.from + " " + position.to);
 	}
 	
 	/*
@@ -41,16 +56,31 @@ public class DayTwoArray {
 	 * 
 	 */
 	public static Range getPosition(int[] arr, int totalDiffValue) {
-		Map<Integer, Integer> countByItem = new HashMap<>();
-		int i = 0;
-		while (i < arr.length && countByItem.size() < totalDiffValue) {
-			countByItem.putIfAbsent(arr[i], 0);
-			countByItem.put(arr[i], countByItem.get(arr[i]) + 1);
+		int[] frequencyArr = new int[100001];
+		int countDiffItems = 0;
+		int totalItems = 0;
+		for (int i = 0; i < arr.length; i++) {
+			if (frequencyArr[arr[i]] == 0) {
+				countDiffItems++;
+			}
+			frequencyArr[arr[i]] += 1;
+			totalItems++;
+			if (countDiffItems >= totalDiffValue) {
+				break;
+			}
 		}
-		if (countByItem.size() >= totalDiffValue) {
-			// FIXME: please
-			return null;
+		if (countDiffItems < totalDiffValue) {
+			return new Range(-1, -1);
 		} else {
+			for(int i = 0; i < frequencyArr.length; i++) {
+				if (frequencyArr[i] > 0) {
+					if (frequencyArr[i] > 1) {
+						return new Range(frequencyArr[i], totalItems);
+					} else {
+						return new Range(1, totalItems);
+					}
+				}
+			}
 			return new Range(-1, -1);
 		}
 	}
