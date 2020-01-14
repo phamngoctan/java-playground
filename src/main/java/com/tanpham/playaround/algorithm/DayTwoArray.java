@@ -69,20 +69,19 @@ public class DayTwoArray {
 				break;
 			}
 		}
+		
 		if (countDiffItems < totalDiffValue) {
 			return new Range(-1, -1);
-		} else {
-			for(int i = 0; i < frequencyArr.length; i++) {
-				if (frequencyArr[i] > 0) {
-					if (frequencyArr[i] > 1) {
-						return new Range(frequencyArr[i], totalItems);
-					} else {
-						return new Range(1, totalItems);
-					}
-				}
-			}
-			return new Range(-1, -1);
 		}
+		
+		for(int i = 0; i < frequencyArr.length; i++) {
+			if (frequencyArr[arr[i]] == 1) {
+				return new Range(i + 1, totalItems);
+			} else {
+				frequencyArr[arr[i]]--;
+			}
+		}
+		return new Range(-1, -1);
 	}
 	
 }

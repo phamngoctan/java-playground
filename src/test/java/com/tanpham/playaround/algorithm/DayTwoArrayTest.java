@@ -47,11 +47,12 @@ public class DayTwoArrayTest {
 	
 	@Test
 	public void testCase04() {
-		int[] arr = new int[] {2, 5, 6, 5, 2, 1, 7, 9, 7, 2, 5, 5, 2, 4, 7, 6, 2, 2, 8, 7, 7, 9, 8, 1, 9, 6, 10, 8, 8, 6, 10, 3, 3, 9, 1, 10, 5, 8, 1, 10, 7, 8, 4, 8, 6, 5, 1, 10, 2, 5};
+		int[] arr = new int[] {2, 5, 6, 5, 2, 1, 7, 9, 7, 2, 5, 5, 2, 4, 8};
 		int totalDiffValue = 7;
 		Range position = DayTwoArray.getPosition(arr, totalDiffValue);
-		assertThat(position.from, Matchers.equalTo(43));
-		assertThat(position.to, Matchers.equalTo(49));
+		System.out.println(position.from + " " + position.to);
+		assertThat(position.from, Matchers.equalTo(3));
+		assertThat(position.to, Matchers.equalTo(14));
 	}
 	
 }
