@@ -3,6 +3,10 @@ package com.tanpham.playaround.algorithm;
 import java.util.Arrays;
 import java.util.Scanner;
 
+/*
+ * Ahhhh, I thought that the expected output [l,r] is just two items, but it is a segment of items. =)) haizzzz
+ * 
+ */
 public class DayThreeSortTheArray {
 	
 	static class Range {
@@ -44,6 +48,15 @@ public class DayThreeSortTheArray {
 		}
 	}
 
+	/*
+	 * judging:
+	 * idea:
+	 * step 1: find the first position l, r (start, end)
+	 * step 2: reverse [l, r] in input arr
+	 * step 3: compare input arr vs sorted arr 
+	 * 
+	 * O(NlogN) the cost of sorting the input arr
+	 */
 	public static Range getPositionsIfExistThatKindOfArray(int[] arr) {
 		int[] originalArr = arr.clone();
 		Arrays.sort(arr);

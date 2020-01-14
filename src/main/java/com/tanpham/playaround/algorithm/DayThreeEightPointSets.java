@@ -38,6 +38,24 @@ public class DayThreeEightPointSets {
 		System.out.println(checkIfRespectablePointSets(arr) ? "respectable" : "ugly");
 	}
 	
+	
+	/*
+	 * idea:
+	 * sort points(x, y)
+	 * sort follow x
+	 *  for each x, we add it to the unique u_x
+	 * sort follow y
+	 *  for each y, we add it to the unique u_y
+	 * check size of u_x == 3 or not
+	 * check size of u_y == 3 or not
+	 * 
+	 * for 0 -> 2
+	 *   for 0 -> 2
+	 *     check ...
+	 * 
+	 * 8 log 8
+	 * 
+	 */
 	public static boolean checkIfRespectablePointSets(Point[] arr) {
 		Arrays.sort(arr, (o1, o2) -> {
 			if (o1.x > o2.x) {
