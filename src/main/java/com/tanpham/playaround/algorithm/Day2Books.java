@@ -1,6 +1,5 @@
 package com.tanpham.playaround.algorithm;
 
-import java.util.Arrays;
 import java.util.Scanner;
 
 public class Day2Books {
@@ -18,17 +17,20 @@ public class Day2Books {
 	}
 	
 	public static int getNumberOfCanBeReadBooks(int[] arr, int freeMinutes) {
-		Arrays.sort(arr);
-		int numberBooksCanBeRead = 0;
+		int maxBookCanRead = 0;
+		int numberBooksRead = 0;
+		int j = 0;
 		for (int i = 0; i < arr.length; i++) {
-			if (arr[i] < freeMinutes) {
-				numberBooksCanBeRead++;
-				freeMinutes -= arr[i];
-			} else {
-				break;
+			while (freeMinutes < arr[i]) {
+				freeMinutes += arr[j];
+				numberBooksRead--;
+				j++;
 			}
+			freeMinutes -= arr[i];
+			numberBooksRead++;
+			maxBookCanRead = Math.max(maxBookCanRead, numberBooksRead);
 		}
-		return numberBooksCanBeRead;
+		return maxBookCanRead;
 	}
 	
 }
