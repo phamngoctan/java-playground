@@ -157,6 +157,12 @@ This repo has two implementations of QuickSort:
  - One without supporting duplicate keys handling
  - One with supporting duplicate keys handling
 
+#Algorithms
+## Array exercises
+Notes: There are several ways to loop through two arrays (i, j):
+ - i, j = 0: we can loop through i using for, every i, use while to increase j. Every time i is changed, we maintain an smaller array (Day2Books). Time complexity will be O(2n) --> O(n)
+ - i, j = 0: we can use while (i < iLength && j < jLenght), we increase (i or j) or increase both of them (Day2Dress'em In Vests). Time complexity will be O(n*m)
+
 # Multi-threads
 Create one sidecar thread to proceed the data, one main thread to hold the result, one client to get the real-processed data, support the timeout also
 
