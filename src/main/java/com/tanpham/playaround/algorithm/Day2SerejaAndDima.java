@@ -1,0 +1,68 @@
+package com.tanpham.playaround.algorithm;
+
+import java.util.Scanner;
+
+public class Day2SerejaAndDima {
+
+	static class Pair {
+		private int first;
+		private int second;
+		public int getFirst() {
+			return first;
+		}
+		public void setFirst(int first) {
+			this.first = first;
+		}
+		public int getSecond() {
+			return second;
+		}
+		public void setSecond(int second) {
+			this.second = second;
+		}
+		public Pair(int first, int second) {
+			super();
+			this.first = first;
+			this.second = second;
+		}
+	}
+	
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
+		int length = sc.nextInt();
+		int[] arr = new int[length];
+		for (int i = 0; i < length; i++) {
+			arr[i] = sc.nextInt();
+		}
+		sc.close();
+		Pair pair = getTotal(arr);
+		System.out.println(pair.getFirst() + " " + pair.getSecond());
+	}
+	
+	public static Pair getTotal(int[] arr) {
+		int serejaCards = 0;
+		int dimaCards = 0;
+		
+		int i = 0;
+		int j = arr.length - 1;
+		boolean switcher = true;
+		while (i <= j) {
+			int higherValue = arr[j];
+			if (higherValue > arr[i]) {
+				j--;
+			} else {
+				higherValue = arr[i];
+				i++;
+			}
+			
+			if (switcher) {
+				serejaCards += higherValue;
+				switcher = false;
+			} else {
+				dimaCards += higherValue;
+				switcher = true;
+			}
+		}
+		return new Pair(serejaCards, dimaCards);
+	}
+	
+}
