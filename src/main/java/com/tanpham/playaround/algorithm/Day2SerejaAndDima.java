@@ -38,31 +38,50 @@ public class Day2SerejaAndDima {
 		System.out.println(pair.getFirst() + " " + pair.getSecond());
 	}
 	
+//	public static Pair getTotal(int[] arr) {
+//		int serejaCards = 0;
+//		int dimaCards = 0;
+//		
+//		int i = 0;
+//		int j = arr.length - 1;
+//		boolean switcher = true;
+//		while (i <= j) {
+//			int higherValue = arr[j];
+//			if (higherValue > arr[i]) {
+//				j--;
+//			} else {
+//				higherValue = arr[i];
+//				i++;
+//			}
+//			
+//			if (switcher) {
+//				serejaCards += higherValue;
+//				switcher = false;
+//			} else {
+//				dimaCards += higherValue;
+//				switcher = true;
+//			}
+//		}
+//		return new Pair(serejaCards, dimaCards);
+//	}
+	
 	public static Pair getTotal(int[] arr) {
-		int serejaCards = 0;
-		int dimaCards = 0;
+		int[] cardNum = new int[2];
 		
 		int i = 0;
 		int j = arr.length - 1;
-		boolean switcher = true;
+		int player = 0;
 		while (i <= j) {
-			int higherValue = arr[j];
-			if (higherValue > arr[i]) {
+			if (arr[j] > arr[i]) {
+				cardNum[player] += arr[j];
 				j--;
 			} else {
-				higherValue = arr[i];
+				cardNum[player] += arr[i];
 				i++;
 			}
-			
-			if (switcher) {
-				serejaCards += higherValue;
-				switcher = false;
-			} else {
-				dimaCards += higherValue;
-				switcher = true;
-			}
+			player = 1 - player;
 		}
-		return new Pair(serejaCards, dimaCards);
+		return new Pair(cardNum[0], cardNum[1]);
 	}
 	
 }
