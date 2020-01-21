@@ -158,10 +158,16 @@ This repo has two implementations of QuickSort:
  - One with supporting duplicate keys handling
 
 #Algorithms
+Idea to implement without using many variables in case there is a need to have a switcher. Each time, the switcher is turned on, add to A, next time, add to B and back to A...
+
+By using a flag with type integer, next, we change the state by (1 - flag). So the value of integer flag will be 0, 1, 0, 1, 0... For more information, check Day2SerejaAndDima class
+
 ## Array exercises
 Notes: There are several ways to loop through two arrays (i, j):
  - i, j = 0: we can loop through i using for, every i, use while to increase j. Every time i is changed, we maintain an smaller array (Day2Books). Time complexity will be O(2n) --> O(n)
  - i, j = 0: we can use while (i < iLength && j < jLenght), we increase (i or j) or increase both of them (Day2Dress'em In Vests). Time complexity will be O(n*m)
+ 
+Regarding the array exercises, beside using two pointers technique, there is another technique named "prefix sum array". This new technique is quite useful for handling the array with negative value. The two pointers cannot handle negative amount because it increases the pointers with the assumption that the value is increase each time i increasing.
 
 # Multi-threads
 Create one sidecar thread to proceed the data, one main thread to hold the result, one client to get the real-processed data, support the timeout also
@@ -224,3 +230,4 @@ Storing .pem file in database, to test it:
  - https://www.coursera.org/learn/algorithms-part1/lecture/vjvnC/quicksort
  - https://www.geeksforgeeks.org/thread-pools-java/
  - https://stackify.com/java-thread-pools/#wpautbox_about
+ - https://www.geeksforgeeks.org/prefix-sum-array-implementation-applications-competitive-programming/
