@@ -230,3 +230,4 @@ Storing .pem file in database, to test it:
  - https://www.coursera.org/learn/algorithms-part1/lecture/vjvnC/quicksort
  - https://www.geeksforgeeks.org/thread-pools-java/
  - https://stackify.com/java-thread-pools/#wpautbox_about
+ - https://www.geeksforgeeks.org/prefix-sum-array-implementation-applications-competitive-programming/
