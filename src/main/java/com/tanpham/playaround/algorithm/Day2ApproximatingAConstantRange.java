@@ -1,6 +1,6 @@
 package com.tanpham.playaround.algorithm;
 
-public class DayTwoApproximatingAConstantRange {
+public class Day2ApproximatingAConstantRange {
 
 	/*
 	 * Implementation idea: using two pointers technique
@@ -19,6 +19,12 @@ public class DayTwoApproximatingAConstantRange {
 	 * 
 	 */
 	public static int getMaxLength(int[] arr) {
+		int j = 0;
+		int maxIncreasedSubArray = 0;
+		int curLength = 0;
+		for (int i = 0; i < arr.length; i++) {
+			
+		}
 		return 0;
 	}
 
