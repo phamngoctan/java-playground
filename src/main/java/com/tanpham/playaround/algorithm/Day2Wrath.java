@@ -1,7 +1,20 @@
 package com.tanpham.playaround.algorithm;
 
-public class DayTwoWrath {
+import java.util.Scanner;
 
+public class Day2Wrath {
+
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
+		int length = sc.nextInt();
+		int[] arr = new int[length];
+		for (int i = 0; i < length; i++) {
+			arr[i] = sc.nextInt();
+		}
+		sc.close();
+		System.out.println(countAlivePeople(arr));
+	}
+	
 	/*
 	 * Implementation idea:
 	 * - ans = n - n_killed
@@ -34,15 +47,19 @@ public class DayTwoWrath {
 	 *     j = 5;
 	 *     
 	 */
+	// For the Math.min, we accept that lastPosKilled is negative.
+	// The function still works normally.
 	public static int countAlivePeople(int[] arr) {
 		int arrLength = arr.length;
 		int killedPeople = 0;
-		int lastPosKilled = arrLength - 1;
-		int j = 0;
-		for (int i = arrLength - 1; i >= 0; i-- ) {
-			
+		int lastPosKilled = Integer.MAX_VALUE;
+		for (int i = arrLength - 1; i >= 0; i--) {
+			if (i >= lastPosKilled) {
+				killedPeople++;
+			}
+			lastPosKilled = Math.min(i - arr[i], lastPosKilled);
 		}
-		return 0;
+		return arrLength - killedPeople;
 	}
 	
 }
