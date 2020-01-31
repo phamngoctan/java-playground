@@ -3,7 +3,7 @@ package com.tanpham.playaround.algorithm;
 import java.util.Scanner;
 import java.util.Stack;
 
-public class DayFourTransformTheExpression {
+public class Day4TransformTheExpression {
 
 	public static void main(String[] args) {
 		Scanner sc = new Scanner(System.in);
