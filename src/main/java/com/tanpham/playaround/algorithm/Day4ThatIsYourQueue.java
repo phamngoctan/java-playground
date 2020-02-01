@@ -52,22 +52,26 @@ public class Day4ThatIsYourQueue {
 				patientQueue.add(patientQueue.poll());
 			} else {
 				Integer patientNo = Integer.valueOf(command.substring(2));
-				int size = patientQueue.size();
-				// If we add something like this to the queue
-				// the queue will have patent like this 1 2 3 x 4 5 x
-				// This is not good, after rolling the whole queue, it should contain
-				// only one x
-				patientQueue.add(patientNo);
-				for (int j = 0; j < size; j++) {
-					Integer temp = patientQueue.poll();
-					// That's why we have the if here
-					if (!temp.equals(patientNo)) {
-						patientQueue.add(temp);
-					}
-				}
+				movePatientToFrontOfQueue(patientQueue, patientNo);
 			}
 		}
 		return result;
+	}
+
+	private static void movePatientToFrontOfQueue(Queue<Integer> patientQueue, Integer patientNo) {
+		int size = patientQueue.size();
+		// If we add something like this to the queue
+		// the queue will have patent like this 1 2 3 x 4 5 x
+		// This is not good, after rolling the whole queue, it should contain
+		// only one x
+		patientQueue.add(patientNo);
+		for (int j = 0; j < size; j++) {
+			Integer temp = patientQueue.poll();
+			// That's why we have the if here
+			if (!temp.equals(patientNo)) {
+				patientQueue.add(temp);
+			}
+		}
 	}
 	
 }
