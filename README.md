@@ -32,6 +32,9 @@ Reverse a linkedlist using two pointers approach
  - detectCircularDependency using two pointers, one pointer run at 1 node speed, another point run at 2 nodes speed. if the second pointer reach the first one, this linkedlist is circular dependency
 
 ## Queue
+Some more idea about the queue: some techniques can be used to move one newly-added item to the top of the queue while still keeps the order of the existed ones. 
+ - use a for loop with the size of queue, poll() and add() continuously
+
 ## Stack
 ## HashTable
 This implementation follows this tutorial https://dzone.com/articles/custom-hashmap-implementation-in-java  
