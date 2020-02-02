@@ -76,17 +76,6 @@ public class Day5BreadthFirstSearchShortestReachTest {
 	}
 	
 	@Test
-	public void testCase01() {
-		int totalNodes = 4;
-		List<List<Integer>> edges = new ArrayList<>();
-		edges.add(Arrays.asList(1, 2));
-		edges.add(Arrays.asList(1, 3));
-		int fromNode = 2;
-		List<Integer> result = Day5BreadthFirstSearchShortestReach.getDistance(totalNodes, edges, fromNode);
-		assertThat(result, Matchers.equalTo(new ArrayList<>(Arrays.asList(6, 6, -1))));
-	}
-	
-	@Test
 	public void testUtility__fromEdgesToGraph01() {
 		List<List<Integer>> edges = new ArrayList<>();
 		edges.add(Arrays.asList(1, 2));
@@ -97,10 +86,51 @@ public class Day5BreadthFirstSearchShortestReachTest {
 		assertThat(graph.get(3), Matchers.equalTo(new LinkedHashSet<>(Arrays.asList(1))));
 	}
 	
+	/*
+	 *     1
+	 *    / \     4
+	 *   2   3
+	 */
 	@Test
-	public void testPrintPath() {
+	public void testPrintPath__moreThanTwoNodes() {
 		List<Integer> path = new ArrayList<>(Arrays.asList(-1, 2, -1, 1, -1));
-		Day5BreadthFirstSearchShortestReach.printPath(path, 1, 3);
+		List<Integer> direction = Day5BreadthFirstSearchShortestReach.printPath(path, 2, 3);
+		assertThat(direction, Matchers.equalTo(new ArrayList<>(Arrays.asList(2, 1, 3))));
+	}
+	
+	/*
+	 *     1
+	 *    / \     4
+	 *   2   3
+	 */
+	@Test
+	public void testPrintPath__twoNodesConnectDirectly() {
+		List<Integer> path = new ArrayList<>(Arrays.asList(-1, 2, -1, 1, -1));
+		List<Integer> direction = Day5BreadthFirstSearchShortestReach.printPath(path, 1, 3);
+		assertThat(direction, Matchers.equalTo(new ArrayList<>(Arrays.asList(1, 3))));
+	}
+
+	/*
+	 *     1
+	 *    / \     4
+	 *   2   3
+	 */
+	@Test
+	public void testPrintPath__noConnection() {
+		List<Integer> path = new ArrayList<>(Arrays.asList(-1, 2, -1, 1, -1));
+		List<Integer> direction = Day5BreadthFirstSearchShortestReach.printPath(path, 1, 4);
+		assertThat(direction, Matchers.equalTo(new ArrayList<>()));
+	}
+	
+	@Test
+	public void testCase01() {
+		int totalNodes = 4;
+		List<List<Integer>> edges = new ArrayList<>();
+		edges.add(Arrays.asList(1, 2));
+		edges.add(Arrays.asList(1, 3));
+		int fromNode = 2;
+		List<Integer> result = Day5BreadthFirstSearchShortestReach.getDistance(totalNodes, edges, fromNode);
+		assertThat(result, Matchers.equalTo(new ArrayList<>(Arrays.asList(6, 6, -1))));
 	}
 	
 }

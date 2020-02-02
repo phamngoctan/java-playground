@@ -1,6 +1,7 @@
 package com.tanpham.playaround.algorithm;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.LinkedHashSet;
 import java.util.LinkedList;
 import java.util.List;
@@ -58,17 +59,30 @@ public class Day5BreadthFirstSearchShortestReach {
 		return graph;
 	}
 	
-	public static void printPath(List<Integer> path, int fromNode, int toNode) {
-		int[] arr = new int[Integer.MAX_VALUE];
-		int m = 0;
+	public static List<Integer> printPath(List<Integer> path, int fromNode, int toNode) {
 		if (fromNode == toNode) {
 			System.out.println(fromNode);
-			return;
+			return Collections.emptyList();
 		}
 		
 		if (path.get(toNode) == -1) {
 			System.out.println(String.format("No path from %s to %s", fromNode, toNode));
-			return;
+			return Collections.emptyList();
+		}
+		
+		List<Integer> direction = new ArrayList<>();
+		int m = 0;
+		while (true) {
+			direction.add(m++, toNode);
+			// switch the toNode to the target one until reach the fromNode
+			toNode = path.get(toNode);
+			if (fromNode == toNode) {
+				direction.add(m++, toNode);
+				Collections.reverse(direction);
+				return direction;
+			} else if (toNode == -1) {
+				return Collections.emptyList();
+			}
 		}
 	}
 	
