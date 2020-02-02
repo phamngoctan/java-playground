@@ -4,7 +4,7 @@ import java.util.Arrays;
 import java.util.Scanner;
 import java.util.Stack;
 
-public class DayFourStreetParade {
+public class Day4StreetParade {
 
 	public static void main(String[] args) {
 		Scanner sc = new Scanner(System.in);
