@@ -13,6 +13,68 @@ import org.junit.Test;
 
 public class Day5BreadthFirstSearchShortestReachTest {
 
+	/*
+	 *     1
+	 *    / \     4
+	 *   2   3
+	 */
+	@Test
+	public void myTestCase01__from2_shouldHaveOneConnectionTo1() {
+		int totalNodes = 4;
+		List<List<Integer>> edges = new ArrayList<>();
+		edges.add(Arrays.asList(1, 2));
+		edges.add(Arrays.asList(1, 3));
+		// from edge list to graph
+		//                    0     1      2    3   4
+		// mang rang cua --> [[], [2, 3], [1], [1], []]
+		List<Set<Integer>> graph = Day5BreadthFirstSearchShortestReach.fromEdgesToGraph(totalNodes, edges);
+		int fromNode = 2;
+		List<Integer> result = Day5BreadthFirstSearchShortestReach.getPath(totalNodes, graph, fromNode);
+		assertThat(result, Matchers.equalTo(new ArrayList<>(Arrays.asList(-1, 2, -1, 1, -1))));
+	}
+	
+	/*
+	 *     1
+	 *    / \     4
+	 *   2   3
+	 */
+	// There is no connection from node 0 to other nodes in the graph
+	// expect to have all elements in the path should be -1
+	@Test
+	public void myTestCase02() {
+		int totalNodes = 4;
+		List<List<Integer>> edges = new ArrayList<>();
+		edges.add(Arrays.asList(1, 2));
+		edges.add(Arrays.asList(1, 3));
+		// from edge list to graph
+		//                    0     1      2    3   4
+		// mang rang cua --> [[], [2, 3], [1], [1], []]
+		List<Set<Integer>> graph = Day5BreadthFirstSearchShortestReach.fromEdgesToGraph(totalNodes, edges);
+		int fromNode = 0;
+		List<Integer> result = Day5BreadthFirstSearchShortestReach.getPath(totalNodes, graph, fromNode);
+		assertThat(result, Matchers.equalTo(new ArrayList<>(Arrays.asList(-1, -1, -1, -1, -1))));
+	}
+	
+	/*
+	 *     1
+	 *    / \     4
+	 *   2   3
+	 */
+	@Test
+	public void myTestCase03__from1_shouldHaveTwoConnectionsTo2And3() {
+		int totalNodes = 4;
+		List<List<Integer>> edges = new ArrayList<>();
+		edges.add(Arrays.asList(1, 2));
+		edges.add(Arrays.asList(1, 3));
+		// from edge list to graph
+		//                    0     1      2    3   4
+		// mang rang cua --> [[], [2, 3], [1], [1], []]
+		List<Set<Integer>> graph = Day5BreadthFirstSearchShortestReach.fromEdgesToGraph(totalNodes, edges);
+		int fromNode = 1;
+		List<Integer> result = Day5BreadthFirstSearchShortestReach.getPath(totalNodes, graph, fromNode);
+		assertThat(result, Matchers.equalTo(new ArrayList<>(Arrays.asList(-1, -1, 1, 1, -1))));
+	}
+	
 	@Test
 	public void testCase01() {
 		int totalNodes = 4;
@@ -33,6 +95,12 @@ public class Day5BreadthFirstSearchShortestReachTest {
 		assertThat(graph.get(1), Matchers.equalTo(new LinkedHashSet<>(Arrays.asList(2, 3))));
 		assertThat(graph.get(2), Matchers.equalTo(new LinkedHashSet<>(Arrays.asList(1))));
 		assertThat(graph.get(3), Matchers.equalTo(new LinkedHashSet<>(Arrays.asList(1))));
+	}
+	
+	@Test
+	public void testPrintPath() {
+		List<Integer> path = new ArrayList<>(Arrays.asList(-1, 2, -1, 1, -1));
+		Day5BreadthFirstSearchShortestReach.printPath(path, 1, 3);
 	}
 	
 }
