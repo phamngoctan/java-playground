@@ -13,12 +13,23 @@ public class Day5BreadthFirstSearchShortestReach {
 	public static List<Integer> getDistance(int totalNodes, List<List<Integer>> edges, int fromNode) {
 		List<Set<Integer>> graph = fromEdgesToGraph(totalNodes, edges);
 		List<Integer> path = getPath(totalNodes, graph, fromNode);
-		// TODO: implement more
-		return null;
+		List<Integer> result = new ArrayList<>();
+		for (int i = 1; i <= totalNodes; i++) {
+			if (i == fromNode) {
+				continue;
+			}
+			List<Integer> shortestPathTo = printPath(path, fromNode, i);
+			if (shortestPathTo.isEmpty()) {
+				result.add(-1);
+			} else {
+				result.add((shortestPathTo.size() - 1) * 6);
+			}
+		}
+		return result;
 	}
 
 	public static List<Integer> getPath(int totalNodes, List<Set<Integer>> graph, int fromNode) {
-		System.out.println(graph);
+		//System.out.println(graph);
 		// prepare for single graph
 		Queue<Integer> queue = new LinkedList<>();
 		List<Integer> path = new ArrayList<>();
@@ -41,7 +52,7 @@ public class Day5BreadthFirstSearchShortestReach {
 			});
 		}
 		
-		System.out.println(path);
+		//System.out.println(path);
 		
 		return path;
 	}
@@ -61,12 +72,11 @@ public class Day5BreadthFirstSearchShortestReach {
 	
 	public static List<Integer> printPath(List<Integer> path, int fromNode, int toNode) {
 		if (fromNode == toNode) {
-			System.out.println(fromNode);
 			return Collections.emptyList();
 		}
 		
 		if (path.get(toNode) == -1) {
-			System.out.println(String.format("No path from %s to %s", fromNode, toNode));
+			//System.out.println(String.format("No path from %s to %s", fromNode, toNode));
 			return Collections.emptyList();
 		}
 		
