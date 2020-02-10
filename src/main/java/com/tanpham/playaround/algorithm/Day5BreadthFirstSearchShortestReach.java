@@ -1,14 +1,38 @@
 package com.tanpham.playaround.algorithm;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.LinkedHashSet;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
+import java.util.Scanner;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 public class Day5BreadthFirstSearchShortestReach {
+	
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
+		int numberOfQueries = sc.nextInt();
+		List<String> queriesDistances = new ArrayList<>();
+		for (int i = 0; i < numberOfQueries; i++) {
+			int totalNodes = sc.nextInt();
+			int totalEdges = sc.nextInt();
+			List<List<Integer>> edges = new ArrayList<>();
+			for (int j = 0; j < totalEdges; j++) {
+				edges.add(Arrays.asList(sc.nextInt(), sc.nextInt()));
+			}
+			List<Integer> distances = getDistance(totalNodes, edges, sc.nextInt());
+			queriesDistances.add(distances.stream().map(item -> item.toString()).collect(Collectors.joining(" ")));
+		}
+		
+		for (int i = 0; i < queriesDistances.size(); i++) {
+			System.out.println(queriesDistances.get(i));
+		}
+		sc.close();
+	}
 	
 	public static List<Integer> getDistance(int totalNodes, List<List<Integer>> edges, int fromNode) {
 		List<Set<Integer>> graph = fromEdgesToGraph(totalNodes, edges);
