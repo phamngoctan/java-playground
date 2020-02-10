@@ -165,6 +165,8 @@ Idea to implement without using many variables in case there is a need to have a
 
 By using a flag with type integer, next, we change the state by (1 - flag). So the value of integer flag will be 0, 1, 0, 1, 0... For more information, check Day2SerejaAndDima class
 
+BFS idea: applying for game AI, line 98, chess, minesweeper, toposort
+
 ## Array exercises
 Notes: There are several ways to loop through two arrays (i, j):
  - i, j = 0: we can loop through i using for, every i, use while to increase j. Every time i is changed, we maintain an smaller array (Day2Books). Time complexity will be O(2n) --> O(n)
