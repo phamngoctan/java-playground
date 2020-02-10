@@ -138,4 +138,19 @@ public class Day5BreadthFirstSearchShortestReachTest {
 		assertThat(result, Matchers.equalTo(new ArrayList<>(Arrays.asList(6, 6, -1))));
 	}
 	
+	/*
+	 *     2
+	 *      \     1
+	 *       3
+	 */
+	@Test
+	public void testCase02() {
+		int totalNodes = 3;
+		List<List<Integer>> edges = new ArrayList<>();
+		edges.add(Arrays.asList(2, 3));
+		int fromNode = 2;
+		List<Integer> result = Day5BreadthFirstSearchShortestReach.getDistance(totalNodes, edges, fromNode);
+		assertThat(result, Matchers.equalTo(new ArrayList<>(Arrays.asList(-1, 6))));
+	}
+	
 }
