@@ -1,7 +1,7 @@
 package com.tanpham.playaround.leetcode;
 
 public class L531JumpGame {
-
+	
 }
 
 /**
@@ -38,3 +38,5 @@ class Solution {
 		return last == nums.length;
 	}
 }
+
+
