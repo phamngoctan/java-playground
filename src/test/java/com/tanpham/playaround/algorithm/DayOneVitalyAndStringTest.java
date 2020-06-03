@@ -9,44 +9,44 @@ public class DayOneVitalyAndStringTest {
 
 	@Test
 	public void oneCharacterInput__oneGap() {
-		assertThat(DayOneVitalyAndString.findMiddleOne("a", "b"), Matchers.equalTo("No such string"));
+		assertThat(Day1VitalyAndString.findMiddleOne("a", "b"), Matchers.equalTo("No such string"));
 	}
 	
 	@Test
 	public void oneCharacterInput__twoGap() {
-		assertThat(DayOneVitalyAndString.findMiddleOne("a", "c"), Matchers.equalTo("b"));
+		assertThat(Day1VitalyAndString.findMiddleOne("a", "c"), Matchers.equalTo("b"));
 	}
 	
 	@Test
 	public void oneCharacterInput__oneGapWithRemember() {
-		assertThat(DayOneVitalyAndString.findMiddleOne("azzz", "baaa"), Matchers.equalTo("No such string"));
+		assertThat(Day1VitalyAndString.findMiddleOne("azzz", "baaa"), Matchers.equalTo("No such string"));
 	}
 	
 	@Test
 	public void testCase__1() {
-		assertThat(DayOneVitalyAndString.findMiddleOne("k", "m"), Matchers.equalTo("l"));
+		assertThat(Day1VitalyAndString.findMiddleOne("k", "m"), Matchers.equalTo("l"));
 	}
 	
 	@Test
 	public void testCase__2() {
-		assertThat(DayOneVitalyAndString.findMiddleOne("klmnopq", "klmpopq"), Matchers.equalTo("klmnopr"));
+		assertThat(Day1VitalyAndString.findMiddleOne("klmnopq", "klmpopq"), Matchers.equalTo("klmnopr"));
 	}
 	
 	@Test
 	public void testCase__4() {
-		assertThat(DayOneVitalyAndString.findMiddleOne("abaa", "acaa"), Matchers.equalTo("abab"));
+		assertThat(Day1VitalyAndString.findMiddleOne("abaa", "acaa"), Matchers.equalTo("abab"));
 	}
 	
 	@Test
 	public void testCase__7() {
-		assertThat(DayOneVitalyAndString.findMiddleOne("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaasssssssssssssssssssssssssssssssssssssscccccccccccceeeeeeeeeeeeaawwqe", 
+		assertThat(Day1VitalyAndString.findMiddleOne("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaasssssssssssssssssssssssssssssssssssssscccccccccccceeeeeeeeeeeeaawwqe", 
 				"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaassssssssssssssssssssssssssssssssssssssccccccccccccgeeeeeeeeeeeaawwq..."),
 					Matchers.equalTo("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaasssssssssssssssssssssssssssssssssssssscccccccccccceeeeeeeeeeeeaawwqf"));
 	}
 	
 	@Test
 	public void testCase__8() {
-		assertThat(DayOneVitalyAndString.findMiddleOne(
+		assertThat(Day1VitalyAndString.findMiddleOne(
 				"xxxxxxxxxxxxxxxxxyyyyyyyyyyybbbbbbbccccccccddddddddddeeeeeeellllllllllzzzzzzzz", 
 				"xxxxxxxxxxxxxxxxxyyyyyyyyyyybbbbbbbccccccccddddddddddeeeeeeelllllllllmzzzzzzzz"),
 					Matchers.equalTo(
@@ -55,7 +55,7 @@ public class DayOneVitalyAndStringTest {
 	
 	@Test
 	public void testCase__10() {
-		assertThat(DayOneVitalyAndString.findMiddleOne(
+		assertThat(Day1VitalyAndString.findMiddleOne(
 				"yzzz",
 				"zzzz"),
 				Matchers.equalTo(
@@ -64,7 +64,7 @@ public class DayOneVitalyAndStringTest {
 	
 	@Test
 	public void testCase__11() {
-		assertThat(DayOneVitalyAndString.findMiddleOne(
+		assertThat(Day1VitalyAndString.findMiddleOne(
 				"yy",
 				"zz"),
 				Matchers.equalTo(
@@ -73,12 +73,12 @@ public class DayOneVitalyAndStringTest {
 	
 	@Test
 	public void generateResultByIncreaseOneLastChar__az_char() {
-		assertThat(DayOneVitalyAndString.generateResultByIncreaseOneLastChar("az", "ca"), Matchers.equalTo("ba"));
+		assertThat(Day1VitalyAndString.generateResultByIncreaseOneLastChar("az", "ca"), Matchers.equalTo("ba"));
 	}
 	
 	@Test
 	public void generateResultByIncreaseOneLastChar__az_char_diffValueJustOne() {
-		assertThat(DayOneVitalyAndString.generateResultByIncreaseOneLastChar("az", "ba"), Matchers.equalTo("No such string"));
+		assertThat(Day1VitalyAndString.generateResultByIncreaseOneLastChar("az", "ba"), Matchers.equalTo("No such string"));
 	}
 	
 }

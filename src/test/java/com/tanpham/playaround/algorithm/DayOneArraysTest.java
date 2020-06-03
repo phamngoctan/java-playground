@@ -13,7 +13,7 @@ public class DayOneArraysTest {
 		int[] arr2 = new int[] {2, 6, 9, 11};
 		int num1 = 3;
 		int num2 = 4;
-		assertThat(DayOneArrays.check(arr1, arr2, num1, num2), Matchers.equalTo(false));
+		assertThat(Day1Arrays.check(arr1, arr2, num1, num2), Matchers.equalTo(false));
 	}
 
 	@Test
@@ -22,7 +22,7 @@ public class DayOneArraysTest {
 		int[] arr2 = new int[] {3, 4, 5};
 		int num1 = 3;
 		int num2 = 3;
-		assertThat(DayOneArrays.check(arr1, arr2, num1, num2), Matchers.equalTo(false));
+		assertThat(Day1Arrays.check(arr1, arr2, num1, num2), Matchers.equalTo(false));
 	}
 	
 	@Test
@@ -31,7 +31,7 @@ public class DayOneArraysTest {
 		int[] arr2 = new int[] {3, 4, 5};
 		int num1 = 2;
 		int num2 = 3;
-		assertThat(DayOneArrays.check(arr1, arr2, num1, num2), Matchers.equalTo(true));
+		assertThat(Day1Arrays.check(arr1, arr2, num1, num2), Matchers.equalTo(true));
 	}
 	
 	@Test
@@ -40,7 +40,7 @@ public class DayOneArraysTest {
 		int[] arr2 = new int[] {2, 2};
 		int num1 = 3;
 		int num2 = 1;
-		assertThat(DayOneArrays.check(arr1, arr2, num1, num2), Matchers.equalTo(true));
+		assertThat(Day1Arrays.check(arr1, arr2, num1, num2), Matchers.equalTo(true));
 	}
 	
 	@Test
@@ -49,7 +49,7 @@ public class DayOneArraysTest {
 		int[] arr2 = new int[] {6, 7, 8, 9};
 		int num1 = 3;
 		int num2 = 2;
-		assertThat(DayOneArrays.check(arr1, arr2, num1, num2), Matchers.equalTo(true));
+		assertThat(Day1Arrays.check(arr1, arr2, num1, num2), Matchers.equalTo(true));
 	}
 	
 //	@Test

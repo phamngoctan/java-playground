@@ -3,7 +3,7 @@ package com.tanpham.playaround.algorithm;
 import java.util.Scanner;
 import java.util.ArrayList;
  
-public class DayTwoArrayBetterThinking {
+public class Day2ArrayBetterThinking {
     static final int MAX = (int)1e5 + 5;
     static int fre[] = new int[MAX];
      

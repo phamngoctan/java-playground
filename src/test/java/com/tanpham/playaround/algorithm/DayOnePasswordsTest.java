@@ -12,7 +12,7 @@ public class DayOnePasswordsTest {
 		String[] arr = new String[] {"11", "22", "1", "2"};
 		int wrongTimesToWait = 2;
 		String password = "22";
-		Range range = DayOnePasswords.calculateRange(arr, password, wrongTimesToWait);
+		Range range = Day1Passwords.calculateRange(arr, password, wrongTimesToWait);
 		assertThat(range.getFrom(), Matchers.equalTo(8));
 		assertThat(range.getTo(), Matchers.equalTo(9));
 	}
@@ -22,7 +22,7 @@ public class DayOnePasswordsTest {
 		String[] arr = new String[] {"11", "22", "1", "2"};
 		int wrongTimesToWait = 1;
 		String password = "22";
-		Range range = DayOnePasswords.calculateRange(arr, password, wrongTimesToWait);
+		Range range = Day1Passwords.calculateRange(arr, password, wrongTimesToWait);
 		assertThat(range.getFrom(), Matchers.equalTo(13));
 		assertThat(range.getTo(), Matchers.equalTo(19));
 	}
@@ -32,7 +32,7 @@ public class DayOnePasswordsTest {
 		String[] arr = new String[] {"cba", "abc", "bb1", "abC", "ABC"};
 		int wrongTimesToWait = 2;
 		String password = "abc";
-		Range range = DayOnePasswords.calculateRange(arr, password, wrongTimesToWait);
+		Range range = Day1Passwords.calculateRange(arr, password, wrongTimesToWait);
 		assertThat(range.getFrom(), Matchers.equalTo(1));
 		assertThat(range.getTo(), Matchers.equalTo(15));
 	}
@@ -42,7 +42,7 @@ public class DayOnePasswordsTest {
 		String[] arr = new String[] {"11", "22", "1", "2"};
 		int wrongTimesToWait = 100;
 		String password = "22";
-		Range range = DayOnePasswords.calculateRange(arr, password, wrongTimesToWait);
+		Range range = Day1Passwords.calculateRange(arr, password, wrongTimesToWait);
 		assertThat(range.getFrom(), Matchers.equalTo(3));
 		assertThat(range.getTo(), Matchers.equalTo(4));
 	}
@@ -72,7 +72,7 @@ public class DayOnePasswordsTest {
 		};
 		int wrongTimesToWait = 5;
 		String password = "22";
-		Range range = DayOnePasswords.calculateRange(arr, password, wrongTimesToWait);
+		Range range = Day1Passwords.calculateRange(arr, password, wrongTimesToWait);
 		assertThat(range.getFrom(), Matchers.equalTo(3));
 		assertThat(range.getTo(), Matchers.equalTo(4));
 	}

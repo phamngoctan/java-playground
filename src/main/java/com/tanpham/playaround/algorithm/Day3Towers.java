@@ -3,7 +3,7 @@ package com.tanpham.playaround.algorithm;
 import java.util.Arrays;
 import java.util.Scanner;
 
-public class DayThreeTowers {
+public class Day3Towers {
 
 	static class Tower {
 		private int height;

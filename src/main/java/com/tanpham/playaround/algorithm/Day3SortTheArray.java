@@ -3,7 +3,7 @@ package com.tanpham.playaround.algorithm;
 import java.util.Arrays;
 import java.util.Scanner;
 
-public class DayThreeSortTheArray {
+public class Day3SortTheArray {
 	
 	static class Range {
 		private int from;

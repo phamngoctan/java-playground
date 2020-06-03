@@ -2,7 +2,7 @@ package com.tanpham.playaround.algorithm;
 
 import java.util.Scanner;
 
-public class DayOneVitalyAndString {
+public class Day1VitalyAndString {
 
 	private static final String NO_SUCH_STRING = "No such string";
 

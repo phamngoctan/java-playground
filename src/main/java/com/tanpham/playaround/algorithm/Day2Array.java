@@ -7,7 +7,7 @@ import java.util.Scanner;
  * Because we already stop at the first time we figure out the item that make the sub
  * array fully contains K distinguished items
  */
-public class DayTwoArray {
+public class Day2Array {
 	static class Range {
 		int from;
 		int to;

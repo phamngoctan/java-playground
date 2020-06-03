@@ -8,11 +8,11 @@ import org.junit.Test;
 
 public class DayOneFashionInBerlandTest {
 
-	private DayOneFashionInBerland fashionInBerland;
+	private Day1FashionInBerland fashionInBerland;
 	
 	@Before
 	public void init() {
-		fashionInBerland = new DayOneFashionInBerland();
+		fashionInBerland = new Day1FashionInBerland();
 	}
 	
 //	@Test

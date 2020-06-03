@@ -3,7 +3,7 @@ package com.tanpham.playaround.algorithm;
 import java.util.Arrays;
 import java.util.Scanner;
 
-public class DayThreeChores {
+public class Day3Chores {
 
 	public static void main(String[] args) {
 		Scanner sc = new Scanner(System.in);

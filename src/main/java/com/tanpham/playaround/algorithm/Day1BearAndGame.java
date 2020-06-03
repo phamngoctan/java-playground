@@ -2,7 +2,7 @@ package com.tanpham.playaround.algorithm;
 
 import java.util.Scanner;
 
-public class DayOneBearAndGame {
+public class Day1BearAndGame {
 
 	public static void main(String[] args) {
 		Scanner sc = new Scanner(System.in);

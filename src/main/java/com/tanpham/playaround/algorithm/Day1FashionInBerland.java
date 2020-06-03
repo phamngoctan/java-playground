@@ -2,7 +2,7 @@ package com.tanpham.playaround.algorithm;
 
 import java.util.Scanner;
 
-public class DayOneFashionInBerland {
+public class Day1FashionInBerland {
 
 	/*
 	 * public boolean isButtonFastened(int[] arr) { if (arr == null || arr.length ==
