@@ -8,7 +8,7 @@ import java.util.Scanner;
 import java.util.Stack;
 import java.util.TreeMap;
 
-public class Day6LakesInBerland {
+public class Day6LakesInBerland_GoodOne {
 	
 	static final int MAX = 50 + 1;
     static int[] dr = {0, 0, 1, -1};
