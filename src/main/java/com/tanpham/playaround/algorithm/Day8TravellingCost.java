@@ -5,6 +5,64 @@ import java.util.List;
 import java.util.PriorityQueue;
 import java.util.Scanner;
 
+/**
+ * Some test cases:
+ * 
+ * 8
+0 1 4
+0 3 8
+1 4 1
+1 2 2
+4 2 3
+2 5 3
+3 4 2
+500 300 2
+0
+4
+1
+4
+5
+7
+
+
+8
+0 1 4
+0 3 8
+1 4 1
+1 2 2
+4 2 3
+2 5 3
+3 4 2
+500 300 2
+0
+4
+500
+4
+5
+7
+
+
+8
+0 1 4
+0 3 8
+1 4 1
+1 2 2
+4 2 3
+2 5 3
+3 4 2
+500 300 2
+0
+4
+0
+4
+5
+7
+
+
+
+ * 
+ * 
+ */
 public class Day8TravellingCost {
 	
 	static class Node implements Comparable<Node> {
