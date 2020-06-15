@@ -75,7 +75,6 @@ public class Day8MiceAndMaze {
 		int time = sc.nextInt();
 		
 		graph = new ArrayList<>();
-		graph = new ArrayList<>();
 		for (int i = 0; i < V; i++) {
 			graph.add(new ArrayList<>());
 		}
@@ -120,7 +119,6 @@ public class Day8MiceAndMaze {
 		path = new int[V];
 		dist = new long[V];
 		for (int i = 0; i < V; i++) {
-			graph.add(new ArrayList<>());
 			path[i] = -1;
 			dist[i] = Integer.MAX_VALUE;
 		}
