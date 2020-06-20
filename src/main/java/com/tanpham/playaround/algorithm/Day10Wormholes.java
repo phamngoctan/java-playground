@@ -8,7 +8,7 @@ import java.util.Scanner;
 /**
  * Main idea: find the negative path cycle (chu trinh am)
  */
-public class Day9Wormholes {
+public class Day10Wormholes {
 
 	static class Edge {
 		public int source;
