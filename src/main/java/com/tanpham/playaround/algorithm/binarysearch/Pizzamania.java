@@ -6,6 +6,8 @@ import java.util.Scanner;
 /*
  * For this exercise, we can even use a hash to store the value and number of its appearance.
  * Then, we can instantly count the number of pair with have, complexity is O(n)
+ * 
+ * The current implementation time complexity is O(nlogn)
  */
 public class Pizzamania {
 
