@@ -64,11 +64,11 @@ public class Setup {
 			//mid = (left + right) / 2; // NONO: 20 years to be fixed, overflow possibly
 			mid = left + (right - left) / 2;
 			if (valueToBeChecked < arr[mid]) {
-				right = mid;
+				right = mid - 1;
 			} else if (valueToBeChecked == arr[mid]) {
 				return mid;
 			} else {
-				left = mid;
+				left = mid + 1;
 			}
 		}
 		return -1;
