@@ -3,7 +3,7 @@ package com.tanpham.playaround.algorithm.binarysearch;
 /**
  * NOTES:
  * - overflow when calculating mid
- * - binary search with first matched value
+ * - binary search with first matched value (https://thebittheories.com/the-curious-case-of-binary-search-the-famous-bug-that-remained-undetected-for-20-years-973e89fc212)
  * - binary search with last matched value
  * - lower bound
  * - upper bound
