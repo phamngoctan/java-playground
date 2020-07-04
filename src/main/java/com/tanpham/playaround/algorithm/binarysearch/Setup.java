@@ -56,6 +56,28 @@ public class Setup {
 			System.out.println("binarySearchSecondFirstMatched: Found at (should be 2) " + (binarySearchSecondFirstMatched + 1));
 		}
 		
+		int[] arrUpperBound = new int[]{1, 4, 5, 7, 7, 7, 7, 9};
+		int binarySearchUpperBound = binarySearchUpperBound(arrUpperBound, 0, arrUpperBound.length - 1, 7);
+		if (binarySearchUpperBound == -1) {
+			System.out.println("Not found!");
+		} else {
+			System.out.println("binarySearchSecondFirstMatched: Found at (should be 6) " + (binarySearchUpperBound + 1));
+		}
+		
+		int binarySearchUpperBound2 = binarySearchUpperBound(arrUpperBound, 0, arrUpperBound.length - 1, 8);
+		if (binarySearchUpperBound2 == -1) {
+			System.out.println("Not found!");
+		} else {
+			System.out.println("binarySearchSecondFirstMatched: Found at (should be 7) " + (binarySearchUpperBound2 + 1));
+		}
+		
+		int binarySearchUpperBound3 = binarySearchUpperBound(arrUpperBound, 0, arrUpperBound.length - 1, 6);
+		if (binarySearchUpperBound3 == -1) {
+			System.out.println("Not found!");
+		} else {
+			System.out.println("binarySearchSecondFirstMatched: Found at (should be 3) " + (binarySearchUpperBound3 + 1));
+		}
+		
 	}
 
 	private static int binarySearch(int[] arr, int left, int right, int valueToBeChecked) {
@@ -128,7 +150,7 @@ public class Setup {
 	}
 	
 	// NOT tested
-	private static int binarySearchSecondFirstMatched(int[] arr, int left, int right, int x ) {
+	private static int binarySearchSecondFirstMatched(int[] arr, int left, int right, int x) {
 		while (left <=  right) {
 			int mid = left + (right - left)/2;
 			if ((mid == right - 1
@@ -143,5 +165,50 @@ public class Setup {
 		}
 		return -1;
 	}
+	
+	private static int binarySearchUpperBound(int[] arr, int left, int right, int target) {
+		if (arr == null || arr.length == 0) {
+            return 0;
+        }
+        if (target < arr[0]) {
+            return -1;
+        }
+        
+        if (target >= arr[right]) {
+            return right;
+        }
+        
+        while (left < right - 1) {
+        	int mid = left + (right - left)/2;
+        	if (arr[mid] <= target) {
+        		left = mid;
+        	} else {
+        		right = mid - 1;
+        	}
+        }
+        return arr[right] <= target ? right : left;
+	}
+	
+	private static int binarySearchLowerBound(int[] arr, int left, int right, int target) {
+        if (arr == null || arr.length == 0) {
+            return 0;
+        }
+        if (target <= arr[0]) {
+            return 0;
+        }
+        if (target > arr[right]) {
+            return -1;
+        }
+        while (left  <  right) {
+            int m = left + (right - left ) / 2 ;
+
+            if (arr[m] >= target) {
+                right = m;
+            }else {
+                left = m + 1;
+            }
+        }
+        return right;
+    }
 	
 }
