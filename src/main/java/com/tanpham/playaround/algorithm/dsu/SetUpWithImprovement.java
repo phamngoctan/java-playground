@@ -1,5 +1,13 @@
 package com.tanpham.playaround.algorithm.dsu;
 
+
+/**
+ * Time complexity: mlogn
+ * M number of join
+ * n number of vertexes
+ * @author HP
+ *
+ */
 public class SetUpWithImprovement {
 	
 	private static final int MAX = 30000;

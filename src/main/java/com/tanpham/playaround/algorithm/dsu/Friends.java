@@ -70,7 +70,7 @@ public class Friends {
 		} else {
 			parent[up] = vp;
 			size[vp] += size[up];
-			ranks[up]++;
+			ranks[vp]++;
 		}
 	}
 	
