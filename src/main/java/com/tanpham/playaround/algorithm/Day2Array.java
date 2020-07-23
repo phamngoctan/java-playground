@@ -8,6 +8,38 @@ import java.util.Scanner;
  * array fully contains K distinguished items
  */
 public class Day2Array {
+	
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
+		int n = sc.nextInt();
+		int k = sc.nextInt();
+		int[] arr = new int[n];
+		for (int i = 0; i < n; i++) {
+			arr[i] = sc.nextInt();
+		}
+		
+		int[] freCount = new int[100005];
+		int distinct = 0;
+		int j = 0;
+		for (int i = 0; i < n; i++) {
+			if (freCount[arr[i]] == 0) {
+				distinct++;
+			}
+			freCount[arr[i]]++;
+			while (distinct == k && j <= i) {
+				if (freCount[arr[j]] > 1) {
+					freCount[arr[j]]--;
+				} else {
+					System.out.println((j + 1) + " " + (i + 1));
+					return;
+				}
+				j++;
+			}
+		}
+		System.out.println("-1 -1");
+		
+	}
+	
 	static class Range {
 		int from;
 		int to;
@@ -22,18 +54,18 @@ public class Day2Array {
 		}
 	}
 	
-	public static void main(String[] args) {
-		Scanner sc = new Scanner(System.in);
-		int length = sc.nextInt();
-		int distinguishedItem = sc.nextInt();
-		int[] arr = new int[length];
-		for (int i = 0; i < length; i++) {
-			arr[i] = sc.nextInt();
-		}
-		sc.close();
-		Range position = getPosition(arr, distinguishedItem);
-		System.out.println(position.from + " " + position.to);
-	}
+//	public static void main(String[] args) {
+//		Scanner sc = new Scanner(System.in);
+//		int length = sc.nextInt();
+//		int distinguishedItem = sc.nextInt();
+//		int[] arr = new int[length];
+//		for (int i = 0; i < length; i++) {
+//			arr[i] = sc.nextInt();
+//		}
+//		sc.close();
+//		Range position = getPosition(arr, distinguishedItem);
+//		System.out.println(position.from + " " + position.to);
+//	}
 	
 	/*
 	 * implementation idea:::
