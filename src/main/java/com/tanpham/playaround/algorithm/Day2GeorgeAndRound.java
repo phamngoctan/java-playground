@@ -7,26 +7,51 @@ import java.util.Scanner;
  * (C > D) by changing limits on the input data.
  */
 public class Day2GeorgeAndRound {
-
+	
 	public static void main(String[] args) {
 		Scanner sc = new Scanner(System.in);
-		int length = sc.nextInt();
-		int preparedOneLength = sc.nextInt();
-		int[] arr = new int[length];
-		int[] existedExercises = new int[preparedOneLength];
-		
-		for (int i = 0; i < length; i++) {
-			arr[i] = sc.nextInt();
+		int n = sc.nextInt();
+		int m = sc.nextInt();
+		int[] arrN = new int[n];
+		for (int i = 0; i < n; i++) {
+			arrN[i] = sc.nextInt();
 		}
 		
-		for (int i = 0; i < preparedOneLength; i++) {
-			existedExercises[i] = sc.nextInt();
+		int[] arrM = new int[m];
+		for (int i = 0; i < m; i++) {
+			arrM[i] = sc.nextInt();
 		}
 		
-		sc.close();
-		
-		System.out.println(getNumberOfToBePreparedExercise(arr, existedExercises));
+		int count = 0;
+		int j = 0;
+		for (int i = 0; i < m && j < n; i++) {
+			if (arrM[i] >= arrN[j]) {
+				count++;
+				j++;
+			}
+		}
+		System.out.println(n - count);
 	}
+
+//	public static void main(String[] args) {
+//		Scanner sc = new Scanner(System.in);
+//		int length = sc.nextInt();
+//		int preparedOneLength = sc.nextInt();
+//		int[] arr = new int[length];
+//		int[] existedExercises = new int[preparedOneLength];
+//		
+//		for (int i = 0; i < length; i++) {
+//			arr[i] = sc.nextInt();
+//		}
+//		
+//		for (int i = 0; i < preparedOneLength; i++) {
+//			existedExercises[i] = sc.nextInt();
+//		}
+//		
+//		sc.close();
+//		
+//		System.out.println(getNumberOfToBePreparedExercise(arr, existedExercises));
+//	}
 	
 	public static int getNumberOfToBePreparedExercise(int[] arr, int[] existedExercises) {
 //		boolean[] fre = new boolean[(int)1e6 + 1];
