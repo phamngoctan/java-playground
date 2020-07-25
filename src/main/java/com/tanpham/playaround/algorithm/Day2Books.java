@@ -16,15 +16,15 @@ public class Day2Books {
 		int maxBook = Integer.MIN_VALUE;
 		int cur = 0;
 		
+		int j = 0;
 		for (int i = 0; i < n; i++) {
-			int j = i;
 			while (cur <= t && j < n) {
 				cur += arrN[j];
 				j++;
 			}
-			maxBook = Math.max(maxBook, j - i);
+			// j - i - 1 in case the max books is an last sub-arr otherwise, the while should function normally
+			maxBook = Math.max(maxBook, cur <= t ? j - i : j - i - 1);
 			cur -= arrN[i];
-			i = j;
 		}
 		System.out.println(maxBook);
 	}
