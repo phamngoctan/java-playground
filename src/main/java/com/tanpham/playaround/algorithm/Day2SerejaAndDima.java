@@ -4,6 +4,30 @@ import java.util.Scanner;
 
 public class Day2SerejaAndDima {
 
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
+		int n = sc.nextInt();
+		int[] arrN = new int[n];
+		for (int i = 0; i < n; i++) {
+			arrN[i] = sc.nextInt();
+		}
+		int i = 0;
+		int j = n - 1;
+		int[] res = new int[2];
+		int player = 0;
+		while (i <= j) {
+			if (arrN[i] >= arrN[j]) {
+				res[player] += arrN[i];
+				i++;
+			} else {
+				res[player] += arrN[j];
+				j--;
+			}
+			player = 1 - player;
+		}
+		System.out.println(res[0] + " " + res[1]);
+	}
+	
 	static class Pair {
 		private int first;
 		private int second;
@@ -26,17 +50,17 @@ public class Day2SerejaAndDima {
 		}
 	}
 	
-	public static void main(String[] args) {
-		Scanner sc = new Scanner(System.in);
-		int length = sc.nextInt();
-		int[] arr = new int[length];
-		for (int i = 0; i < length; i++) {
-			arr[i] = sc.nextInt();
-		}
-		sc.close();
-		Pair pair = getTotal(arr);
-		System.out.println(pair.getFirst() + " " + pair.getSecond());
-	}
+//	public static void main(String[] args) {
+//		Scanner sc = new Scanner(System.in);
+//		int length = sc.nextInt();
+//		int[] arr = new int[length];
+//		for (int i = 0; i < length; i++) {
+//			arr[i] = sc.nextInt();
+//		}
+//		sc.close();
+//		Pair pair = getTotal(arr);
+//		System.out.println(pair.getFirst() + " " + pair.getSecond());
+//	}
 	
 //	public static Pair getTotal(int[] arr) {
 //		int serejaCards = 0;
