@@ -17,8 +17,13 @@ class ShortestPathInBinaryMatrix {
 		{-1,0}
 		};
 	
+	public static void main(String[] args) {
+		int[][] grid = new int[][] {{0,1,1}, {1,0,0}, {1,0,0}};
+		System.out.println(new ShortestPathInBinaryMatrix().shortestPathBinaryMatrix(grid));
+	}
+		
     public boolean shortestPathBinaryMatrix(int[][] grid) {
-		destination = new Pair(grid.length, grid[0].length);
+		destination = new Pair(grid.length - 1, grid[0].length - 1);
 		return BFS(grid, new Pair(0,0));
     }
 	
@@ -45,6 +50,8 @@ class ShortestPathInBinaryMatrix {
 				int newX = cur.x + direction[i][0];
 				int newY = cur.y + direction[i][1];
 				if (newX >= 0 
+					&& newX <= destination.x
+					&& newY >= 0
 					&& newY <= destination.y
 					&& !visited[newX][newY]
 					&& grid[newX][newY] == 0) {
