@@ -3,9 +3,9 @@ import java.util.Queue;
 import java.util.LinkedList;
 
 class ShortestPathInBinaryMatrix {
-	private int MAX = 105;
-	private boolean visited[][] = new boolean[MAX][MAX];
 	Pair destination;
+	
+	// eight directions sorted in clockwise order
 	int[][] direction = new int[][]{
 		{-1,-1},
 		{0,-1},
@@ -22,9 +22,12 @@ class ShortestPathInBinaryMatrix {
 		System.out.println(new ShortestPathInBinaryMatrix().shortestPathBinaryMatrix(grid));
 	}
 		
-    public boolean shortestPathBinaryMatrix(int[][] grid) {
+    public int shortestPathBinaryMatrix(int[][] grid) {
 		destination = new Pair(grid.length - 1, grid[0].length - 1);
-		return BFS(grid, new Pair(0,0));
+		if (grid[0][0] != 0 || grid[grid.length - 1][grid[0].length - 1] != 0) {
+			return -1;
+		}
+		return BFS(grid, new Pair(0,0), 0);
     }
 	
 	static class Pair {
@@ -36,16 +39,16 @@ class ShortestPathInBinaryMatrix {
 		}
 	}
 	
-	private boolean BFS(int[][] grid, Pair s) {
+	private int BFS(int[][] grid, Pair s, int length) {
 		Queue<Pair> q = new LinkedList<>();
 		q.add(s);
-		visited[s.x][s.y] = true;
+		grid[s.x][s.y]++;
 		while (!q.isEmpty()) {
 			Pair cur = q.poll();
 			if (cur.x == destination.x && cur.y == destination.y) {
-				return true;
+				return grid[cur.x][cur.y];
 			}
-			visited[cur.x][cur.y] = true;
+			
 			for (int i = 0; i < direction.length;i++) {
 				int newX = cur.x + direction[i][0];
 				int newY = cur.y + direction[i][1];
@@ -53,12 +56,12 @@ class ShortestPathInBinaryMatrix {
 					&& newX <= destination.x
 					&& newY >= 0
 					&& newY <= destination.y
-					&& !visited[newX][newY]
 					&& grid[newX][newY] == 0) {
+					grid[newX][newY] = grid[cur.x][cur.y] + 1;
 					q.add(new Pair(newX, newY));
 				}
 			}
 		}
-		return false;
+		return -1;
  	}
 }
