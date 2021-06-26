@@ -1,9 +1,16 @@
-# Domain Driven Development as the core idea used inside a rest client only project
+# Domain Driven Design as the core idea used inside a rest client only project
 Specification:
 
 - Using jakarta-ee API
 - Calling CoinGecko APi v3
 - Using Payara application server
+
+This project is inspired by this repo [https://github.com/Philipinho/CoinGecko-Java]
+
+## Prerequisite
+
+- Required Java 8 at least
+- Basic knowledge using Docker
 
 ## How to build the application
 
