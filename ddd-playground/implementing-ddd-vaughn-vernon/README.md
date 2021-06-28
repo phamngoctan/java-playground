@@ -1,0 +1,1 @@
+# Add a new sub path for noting everything when reading the Domain Driven Design - Vaughn Vernon
